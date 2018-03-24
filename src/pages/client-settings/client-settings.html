@@ -1,0 +1,45 @@
+<!--
+  Generated template for the ClientSettingsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu" style="color: pink;"></ion-icon>
+    </button>
+    <img src="assets/imgs/mei_navbar_logo.png">
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list mode="ios">
+    <ion-item>
+      <ion-label>Notifications</ion-label>
+      <ion-toggle checked="false" mode="ios"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Are you willing to travel?</ion-label>
+      <ion-toggle checked="false" mode="ios"></ion-toggle>
+    </ion-item>
+    <div class="settings-text">Travel distance:</div>
+    <ion-item>
+      <ion-range min="0" max="200" mode="md">
+      </ion-range>
+    </ion-item>
+    <ion-item>
+      <ion-row><ion-col class="">Info</ion-col> <ion-col class="info-text">Edit</ion-col></ion-row>
+      <ion-row><ion-col class="">Name</ion-col> <ion-col class="info-text">Laila E</ion-col></ion-row>
+      <ion-row><ion-col class="">Email</ion-col> <ion-col class="info-text">mei_user@gmail.com</ion-col></ion-row>
+      <ion-row><ion-col class="">Password</ion-col> <ion-col class="info-text">asdfghjhgfd</ion-col></ion-row>
+      <ion-row><ion-col class="">Phone</ion-col> <ion-col class="info-text">201-736-8110</ion-col></ion-row>
+      <ion-row><ion-col class="">Address</ion-col> <ion-col class="info-text">27 ZJFk Jersey City</ion-col></ion-row>
+    </ion-item>
+    <button ion-item mode="ios">Bank Info:</button>
+    <button ion-item mode="ios">Customer Service</button>
+    <button ion-item mode="ios">Terms & Conditions</button>
+    <button ion-item mode="ios">FAQ</button>
+  </ion-list>
+</ion-content>

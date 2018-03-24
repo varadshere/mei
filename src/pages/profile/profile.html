@@ -1,0 +1,112 @@
+<!--
+  Generated template for the ProfilePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Profile</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-row>
+    <div>
+      <div>
+        <img  style="" src="assets/imgs/profile.png">
+      </div>
+    </div>
+    <ion-col>
+      <ion-row>
+        <div class="profile-text-main">{{profileData.first_name}} {{profileData.last_name}}</div>
+      </ion-row>
+      <ion-row>
+        <div class="location-text-main">{{profileData.address}}</div>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  <div>
+    <ion-segment [(ngModel)]="profile"  mode="md">
+      <ion-segment-button value="SERVICES">
+        SERVICES
+      </ion-segment-button>
+      <ion-segment-button value="ABOUT">
+        ABOUT
+      </ion-segment-button>
+      <ion-segment-button value="FEED">
+        FEED
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div [ngSwitch]="profile">
+    <ion-list *ngSwitchCase="'SERVICES'">
+      <ion-list>
+        <div *ngFor="let d of profileData.services; let i=index" text-wrap [ngClass]="{active: isGroupShown(i)}" style="padding-bottom: 20px;">
+          <ion-row class="service-header" (click)="toggleGroup(i)">
+            <ion-col>
+              {{d.title}}
+            </ion-col>
+            <ion-col style="text-align: right;">
+              <ion-icon item-right [name]="isGroupShown(i) ? 'arrow-dropdown' : 'arrow-dropright'"></ion-icon>
+            </ion-col>
+          </ion-row>
+          <div *ngIf="isGroupShown(i)">
+            <div *ngFor="let l of d.list">
+              <ion-row (click)="selectService(l)" tappable>
+                <ion-col>
+                  <ion-icon class="icon-pad" [class.ion-selected]="l.booked" name="{{l.booked ? 'ios-checkmark' : 'ios-add'}}"></ion-icon>
+                </ion-col>
+                <ion-col col-10>
+                  <div>
+                    <div class="service-title">{{l.name}}</div>
+                    <div class="service-desc">
+                      {{l.description}}
+                    </div>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </div>
+          </div>
+        </div>
+      </ion-list>
+
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'ABOUT'">
+      <ion-row>
+        <ion-col>
+          <ion-list inset>
+
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'FEED'">
+      <ion-row>
+        <ion-col class="img-col">
+          <img src="assets/imgs/results1.png">
+        </ion-col>
+        <ion-col class="img-col">
+          <img src="assets/imgs/results2.png">
+        </ion-col>
+        <ion-col class="img-col">
+          <img src="assets/imgs/results3.png">
+        </ion-col>
+      </ion-row>
+    </ion-list>
+  </div>
+
+  <!--<ion-fab bottom center mode="md">-->
+    <!--&lt;!&ndash;<button ion-fab mode="md">Book Now</button>&ndash;&gt;-->
+    <!--<button ion-button class="book-button">Book Now</button>-->
+  <!--</ion-fab>-->
+  <div style="text-align: center; margin-top: 20px">
+    <button ion-button class="book-button" (click)="navigate()">Book Now</button>
+  </div>
+</ion-content>

@@ -1,0 +1,27 @@
+page-results {
+  .img-col{
+    padding: 0;
+  }
+
+  .time-badge{
+    //display: inline-block;
+    border-radius: 40px;
+    padding: 10px;
+    margin-right: 5px;
+    //margin-bottom: 10px;
+    border-style: solid;
+    border-color: rgba(253,134,140,0.35);
+    color: rgba(253,134,140,0.35);
+    line-height: 10px;
+  }
+
+  .time-select{
+    display: inline-flex;
+    margin-bottom: 10px;
+    padding-left: 5px;
+  }
+
+  .button-color{
+    color: #F9748F;
+  }
+}

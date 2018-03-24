@@ -1,0 +1,96 @@
+page-getstarted {
+  .main-text{
+    /* let’s get started! */
+
+    //position: absolute;
+   // width: 253px;
+   // height: 37px;
+    //left: 62px;
+    //top: 149px;
+    margin-top: 100px;
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: bold;
+    line-height: normal;
+    font-size: 32px;
+    text-align: center;
+
+    color: #FA6F7A;
+
+  }
+
+  .go-button{
+    /* GO */
+    margin-top: 50px;
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: bold;
+    line-height: normal;
+    font-size: 32px;
+    text-align: center;
+
+    color: #FA6F7A;
+
+  }
+
+  .location{
+
+    /* location */
+    height: 30px;
+    background: #F9748F;
+    border-radius: 30px;
+    /* Location */
+
+
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: normal;
+    line-height: normal;
+    font-size: 16px;
+
+    color: #FFFFFF;
+  }
+
+  .location-label{
+    padding: 5px;
+
+  }
+
+  .location-button{
+    margin-top: 50px;
+    width: 95%;
+    border-radius: 25px;
+    background-color: #F9748F;
+    //text-align: left;
+  }
+  .time-button{
+    width: 95%;
+    border-radius: 25px;
+    background-color: #F9748F;
+    //text-align: left;
+  }
+
+  .segment-ios .segment-button:first-of-type{
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+  }
+  .segment-ios .segment-button:last-of-type{
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+
+  .segment-ios .segment-button{
+    border-color: #F9748F;
+    color: #F9748F;
+  }
+
+  .segment-ios .segment-button.segment-activated{
+    background-color: #F9748F;
+  }
+
+  .bottom-imgs{
+    position: absolute;
+    bottom: 0;
+    margin: -3px;
+  }
+}

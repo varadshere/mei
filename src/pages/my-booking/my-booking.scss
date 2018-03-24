@@ -1,0 +1,153 @@
+page-my-booking {
+
+  .profile-frame{
+    margin-bottom: 20px;
+  }
+
+  .profile-text-main{
+    //padding-top: 10px;
+    font-size: 17px;
+    font-family: 'San Francisco',Helvetica,Arial,serif;
+    //color: #FFFFFF;
+    //text-align: center;
+  }
+
+  .location-text-main{
+    //padding-top: 10px;
+    font-size: 12px;
+    font-family: 'San Francisco',Helvetica,Arial,serif;
+    //color: #FFFFFF;
+    //text-align: center;
+  }
+
+  .time-select{
+    display: inline-flex;
+    margin-bottom: 10px;
+    padding-left: 5px;
+  }
+  .time-selected{
+    background-color: #F9748F !important;
+    color: white !important;
+  }
+
+  .time-badge{
+    //display: inline-block;
+    //background-color: white;
+    //border-radius: 40px;
+    //padding: 10px;
+    //margin-right: 5px;
+    ////margin-bottom: 10px;
+    //border-style: solid;
+    //border-color: rgba(253,134,140,0.35);
+    //color: rgba(253,134,140,0.35);
+    //line-height: 10px;
+    background-color: white;
+    height: 2.5rem;
+    border-radius: 15px;
+    color: rgba(253,134,140,0.35);
+  }
+
+  .time-scrollbar{
+    height: 70px;
+  }
+
+  //ion-scroll.scroll-x .scroll-content{
+  //  overflow-x: auto;
+  //}
+
+  [col-1] {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 8.33333%;
+    -ms-flex: 0 0 8.33333%;
+    flex: 0 0 14.285714285714286%;
+    width: 14.285714285714286%;
+    max-width: 14.285714285714286%;
+  }
+  .col {
+    text-align: center;
+    padding: 5px;
+  }
+  .last-month, .next-month {
+    color: #999999;
+    font-size: 90%;
+  }
+  .currentDate, .otherDate {
+    padding: 5px;
+  }
+  .currentDate {
+    font-weight: bold;
+    background: linear-gradient(227.74deg, #FE9A8B 0.2%, #FD868C 40.08%, #F9748F 97.82%);
+    color: white;
+    border-radius: 30px;
+  }
+  .calendar-header {
+    //background-color: #1a732d;
+    color: #bbbbb6;
+    font-size: 16px;
+    font-family: 'AppleSystemUIFont',Helvetica,Arial,serif;
+  }
+
+  .event-bullet {
+    margin: 2px auto;
+    height: 5px;
+    width: 5px;
+    background-color: green;
+    border-radius: 30px;
+  }
+  .selected-date {
+    font-weight: bold;
+    //background-color: #F9748F;
+    color: white;
+    border-radius: 30px;
+    background: linear-gradient(227.74deg, #FE9A8B 0.2%, #FD868C 40.08%, #F9748F 97.82%);
+  }
+  .unselected-date {
+    border: none;
+  }
+  .calendar-body {
+    .grid {
+      padding: 0;
+    }
+    .col:last-child {
+      border-right: none;
+    }
+    .calendar-weekday, .calendar-date {
+      text-align: center;
+      margin: 0;
+    }
+    .calendar-weekday {
+      font-weight: bold;
+      font-family: 'AppleSystemUIFont',Helvetica,Arial,serif;
+      //border-bottom: solid 1px #1a732d;
+      //background-color: #bbbbb6;
+      color: #bbbbb6;
+    }
+    .calendar-date {
+      //border-top: solid 1px #1a732d;
+      //border-bottom: solid 1px #1a732d;
+    }
+  }
+
+  .footer-img{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+  }
+
+  .next-btn{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(201, 76, 76, 0);
+  }
+
+  .ion-selected{
+    color: #F9748F;
+  }
+  .button-md.activated{
+    background-color: #F9748F;
+    color: white;
+  }
+}

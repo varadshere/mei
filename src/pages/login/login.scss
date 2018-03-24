@@ -1,0 +1,37 @@
+page-login {
+  ion-content {
+    //background-image: url('../../assets/imgs/login-bg1.png');
+    //background-repeat: no-repeat;
+
+    .login-button{
+      width: 200px;
+      height: 50px;
+      border-radius: 25px;
+      background-color: #F9748F;
+    }
+
+    .signup-text{
+      font-family: Ubuntu;
+      font-style: normal;
+      font-weight: 300;
+      line-height: normal;
+      font-size: 13px;
+      text-align: center;
+      color: rgba(105,111,123,1.0);
+    }
+
+    //.segment-md .segment-button.segment-activated {
+    //  border-color: #F9748F;
+    //  opacity: 1;
+    //}
+    //
+    //.segment-md .segment-button{
+    //  color: #F9748F;
+    //}
+    .button-md.activated{
+      background-color: #F9748F;
+    }
+
+
+  }
+}

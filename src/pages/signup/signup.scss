@@ -1,0 +1,66 @@
+page-signup {
+  .signup-button{
+    width: 200px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: #F9748F;
+  }
+
+  .day-button{
+    background-color: white;
+    height: 2.5rem;
+    border-radius: 15px;
+    color: rgba(253,134,140,0.35);
+  }
+
+  .weekday-badge{
+    display: inline-block;
+    border-radius: 20%;
+    padding: 3.5px;
+    margin-top: 10px;
+    border-style: solid;
+    border-color: rgba(253,134,140,0.35);
+    color: rgba(253,134,140,0.35);
+    line-height: 10px;
+  }
+
+  .mon-select{
+    background-color: #F9748F;
+    color: white;
+  }
+
+  .button-md.activated{
+    background-color: #F9748F;
+    color: white;
+  }
+
+  .invalid {
+    border: 1px solid #ea6153;
+  }
+
+  .q-text{
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+  .service-title{
+    font-size: 16.0px !important;
+    color: #696f7b;
+  }
+  .service-desc{
+    font-size: 12.0px;
+    color: #d4d4d4;
+  }
+
+  .service-header{
+    color: #696f7b;
+    font-size: 16.0px;
+  }
+
+  .icon-pad{
+    padding-left: 10px;
+    font-size: 25px;
+  }
+  .ion-selected{
+    color: #F9748F;
+  }
+}

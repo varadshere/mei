@@ -1,0 +1,48 @@
+page-sidemenu {
+  .sidemenu{
+    background-color: #F9748F;
+    //background-image: url("../../assets/imgs/sidemenu_lines.png");
+
+  }
+  .profile{
+    padding-top: 30px;
+    margin: auto;
+    width: 50%;
+  }
+
+  .avatar{
+    margin: auto;
+    width: 50%;
+  }
+
+  .profile-text{
+    padding-top: 10px;
+    font-size: 20px;
+    font-family: 'San Francisco',Helvetica,Arial,serif;
+    color: #FFFFFF;
+    text-align: center;
+  }
+
+  .sidemenu-lines{
+    margin-left: 50px;
+    position: absolute;
+    opacity: 0.28;
+    height: fit-content;
+    transform: scale(1.35);
+  }
+
+  .nav{
+    margin: auto;
+    width: 50%;
+    margin-top: 60%;
+  }
+
+  .nav-titles{
+    font-family: 'AppleSystemUIFont',Helvetica,Arial,serif;
+    font-size: 16.0px;
+    color: rgba(255,255,255,1.0);
+    text-align: center;
+    line-height: 18.0px;
+    margin-top: 30px;
+  }
+}

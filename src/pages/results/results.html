@@ -1,0 +1,74 @@
+<!--
+  Generated template for the ResultsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu" style="color: pink;"></ion-icon>
+    </button>
+    <img src="assets/imgs/mei_navbar_logo.png">
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+
+  <ion-card *ngFor="let profile of vendorList">
+
+    <ion-item (click)="openProfile(profile)" tappable>
+      <ion-avatar item-start>
+        <img src="assets/imgs/profile.png">
+      </ion-avatar>
+      <h2>{{profile.first_name}} {{profile.last_name}}</h2>
+      <p>{{profile.address}}</p>
+    </ion-item>
+    <div class="time-select">
+      <div class="time-badge">9:00</div>
+      <div class="time-badge">10:00</div>
+      <div class="time-badge">11:00</div>
+      <div class="time-badge">12:00</div>
+      <div class="time-badge">13:00</div>
+      <div class="time-badge">14:00</div>
+      <div class="time-badge">15:00</div>
+      <div class="time-badge">16:00</div>
+      <div class="time-badge">17:00</div>
+      <div class="time-badge">18:00</div>
+      <div class="time-badge">19:00</div>
+      <div class="time-badge">20:00</div>
+      <div class="time-badge">21:00</div>
+    </div>
+
+    <ion-row>
+      <ion-col class="img-col">
+        <img src="assets/imgs/results1.png">
+      </ion-col>
+      <ion-col class="img-col">
+        <img src="assets/imgs/results2.png">
+      </ion-col>
+      <ion-col class="img-col">
+        <img src="assets/imgs/results3.png">
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row>
+      <ion-col>
+        <button class="button-color" ion-button icon-left clear small>
+          <ion-icon name="thumbs-up"></ion-icon>
+          <div>12 Likes</div>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button (click)="navigate()" class="button-color" ion-button icon-left clear small float-right>
+          <ion-icon name="ios-bookmark-outline"></ion-icon>
+          <div>Book</div>
+        </button>
+      </ion-col>
+
+    </ion-row>
+
+  </ion-card>
+</ion-content>

@@ -1,0 +1,86 @@
+<!--
+  Generated template for the GetstartedPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<!--<ion-header>-->
+
+  <!--<ion-navbar>-->
+    <!--<ion-title>get Started</ion-title>-->
+  <!--</ion-navbar>-->
+
+<!--</ion-header>-->
+
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu" style="color: pink;"></ion-icon>
+    </button>
+    <img src="assets/imgs/mei_navbar_logo.png">
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div class="main-text">
+    let's get started!
+  </div>
+
+  <ion-list>
+    <!--<div class="location">-->
+      <!--<div class="location-label">Location</div>-->
+    <!--</div>-->
+    <div style="text-align: center">
+      <button ion-button class="location-button" (click)="navigateToGst()">Location</button>
+    </div>
+
+    <div padding>
+      <ion-segment [(ngModel)]="login"  mode="ios">
+        <ion-segment-button value="hair">
+          Hair
+        </ion-segment-button>
+        <ion-segment-button value="makeup">
+          Makeup
+        </ion-segment-button>
+        <ion-segment-button value="both">
+          Both
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+
+    <div style="text-align: center">
+      <button ion-button class="time-button" (click)="open()">Time</button>
+    </div>
+
+    <div class="go-button" (click)="navigate()" tappable>
+      GO
+    </div>
+
+  </ion-list>
+  <div class="bottom-imgs">
+    <img src="assets/imgs/gst1.png" style="position: absolute">
+    <img src="assets/imgs/gst2.png">
+  </div>
+
+</ion-content>
+
+
+<!--<ion-menu [content]="mycontent">-->
+
+  <!--<ion-content>-->
+    <!--<ion-list>-->
+      <!--<button ion-item menuClose (click)="openPage(homePage)">-->
+        <!--Home-->
+      <!--</button>-->
+      <!--<button ion-item menuClose (click)="openPage(catsPage)">-->
+        <!--Cats-->
+      <!--</button>-->
+      <!--<button ion-item menuClose (click)="openPage(dogsPage)">-->
+        <!--Dogs-->
+      <!--</button>-->
+    <!--</ion-list>-->
+  <!--</ion-content>-->
+
+<!--</ion-menu>-->
+
+<!--<ion-nav #mycontent [root]="rootPage"></ion-nav>-->

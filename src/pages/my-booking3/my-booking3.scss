@@ -1,0 +1,54 @@
+page-my-booking3 {
+  .profile-frame{
+    margin-bottom: 20px;
+  }
+
+  .profile-text-main{
+    //padding-top: 10px;
+    font-size: 17px;
+    font-family: 'San Francisco',Helvetica,Arial,serif;
+    //color: #FFFFFF;
+    //text-align: center;
+  }
+
+  .location-text-main{
+    //padding-top: 10px;
+    font-size: 12px;
+    font-family: 'San Francisco',Helvetica,Arial,serif;
+    //color: #FFFFFF;
+    //text-align: center;
+  }
+
+
+  .overview{
+    text-align: left;
+    color: #696f7b;
+  }
+  .total-value{
+    color: #f9748f;
+    text-align: right;
+  }
+  .checkout-text{
+    text-align: left;
+    color: #d4d4d4;
+  }
+  .checkout-value{
+    text-align: right;
+    color: #696f7b;
+  }
+
+  .footer-img{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+  }
+
+  .next-btn{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(201, 76, 76, 0);
+  }
+}

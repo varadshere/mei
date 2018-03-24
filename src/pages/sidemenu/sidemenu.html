@@ -1,0 +1,45 @@
+
+<ion-menu [content]="mycontent" type="reveal">
+
+  <ion-content class="sidemenu">
+    <img src=" assets/imgs/sidemenu_lines.png" class="sidemenu-lines">
+    <div class="profile">
+      <ion-avatar item-start class="avatar">
+        <img  style="margin: auto; width: 100%;" src="assets/imgs/profile.png">
+      </ion-avatar>
+      <div class="profile-text">Marty McFly</div>
+    </div>
+
+    <!--<ion-list>-->
+      <!--<button ion-item menuClose (click)="openPage('home')">-->
+        <!--Home-->
+      <!--</button>-->
+      <!--<button ion-item menuClose (click)="openPage('booking')">-->
+        <!--Bookings-->
+      <!--</button>-->
+      <!--<button ion-item menuClose (click)="openPage('settings')">-->
+        <!--Settings-->
+      <!--</button>-->
+    <!--</ion-list>-->
+    <div class="nav">
+      <!--<div class="nav-titles" (click)="openPage('home')">Home</div>-->
+      <div class="nav-titles">
+        <button ion-button clear small menuClose icon-start (click)="openPage('home')" style="color: white">
+          Home
+        </button>
+        <button ion-button clear small menuClose icon-start (click)="openPage('booking')" style="color: white">
+          Bookings
+        </button>
+        <button ion-button clear small menuClose icon-start (click)="openPage('settings')" style="color: white">
+          Settings
+        </button>
+      </div>
+      <!--<button ion-item menuClose (click)="openPage('booking')"> Book</button>-->
+
+      <!--<div class="nav-titles" (click)="openPage('settings')">Settings</div>-->
+    </div>
+  </ion-content>
+
+</ion-menu>
+
+<ion-nav #mycontent [root]="rootPage"></ion-nav>

@@ -1,0 +1,68 @@
+page-vendor-home {
+  .segment-ios .segment-button:first-of-type{
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+  }
+  .segment-ios .segment-button:last-of-type{
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+
+  .segment-ios .segment-button{
+    border-color: #F9748F;
+    color: #F9748F;
+  }
+
+  .segment-ios .segment-button.segment-activated{
+    background-color: #F9748F;
+  }
+
+  .number-text{
+    font-size: 28px;
+    text-align: center;
+    color: #F9748F;
+    width: 100%;
+  }
+  .number-rwo{
+    font-size: 12px;
+    text-align: center;
+    color: #D5D5D5;
+    width: 100%;
+  }
+
+  .row-border{
+    border-right: 1px solid #D5D5D5;
+  }
+
+  .service-title{
+    font-size: 16.0px !important;
+    color: #696f7b;
+  }
+  .service-desc{
+    font-size: 12.0px;
+    color: #d4d4d4;
+  }
+
+  .service-header{
+    color: #696f7b;
+    font-size: 16.0px;
+  }
+  .ion-selected{
+    color: #F9748F;
+  }
+  .icon-pad{
+    padding-left: 10px;
+    font-size: 25px;
+  }
+
+  .time-start{
+    font-size: 12px;
+    text-align: right;
+    color: #F78CA0;
+  }
+  .time-end{
+    font-size: 12px;
+    text-align: right;
+    color: #D5D5D5;
+  }
+}

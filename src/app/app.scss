@@ -14,3 +14,33 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+
+.segment-md .segment-button.segment-activated {
+  border-color: #F9748F;
+  opacity: 1;
+}
+
+.segment-md .segment-button{
+  color: #F9748F;
+}
+
+
+.text-input::-moz-placeholder {
+  color: #696f7b;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.text-input:-ms-input-placeholder {
+  color: #696f7b;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.text-input::-webkit-input-placeholder {
+  //text-indent: 0;
+  color: #696f7b;
+  font-size: 12px;
+  font-weight: bold;
+}

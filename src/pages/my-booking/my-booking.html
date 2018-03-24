@@ -1,0 +1,90 @@
+<!--
+  Generated template for the MyBookingPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>my-booking</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-row class="profile-frame">
+    <div>
+      <div>
+        <img  style="" src="assets/imgs/profile.png">
+      </div>
+    </div>
+    <ion-col>
+      <ion-row>
+        <div class="profile-text-main">Marty McFly</div>
+
+      </ion-row>
+      <ion-row>
+        <div class="location-text-main">Hope Valley, Adelaide</div>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+  <!--<ion-item>-->
+    <!--{{selectedDate}}-->
+  <!--</ion-item>-->
+  <div class="calendar-header">
+    <ion-row class="calendar-month">
+      <ion-col col-2 (click)="goToLastMonth()"><ion-icon name="arrow-back"></ion-icon></ion-col>
+      <ion-col col-8>{{currentMonth}} {{currentYear}}</ion-col>
+      <ion-col col-2 (click)="goToNextMonth()"><ion-icon name="arrow-forward"></ion-icon></ion-col>
+    </ion-row>
+  </div>
+  <div class="calendar-body">
+    <ion-grid>
+      <ion-row class="calendar-weekday">
+        <ion-col>Su</ion-col>
+        <ion-col>Mo</ion-col>
+        <ion-col>Tu</ion-col>
+        <ion-col>We</ion-col>
+        <ion-col>Th</ion-col>
+        <ion-col>Fr</ion-col>
+        <ion-col>Sa</ion-col>
+      </ion-row>
+      <ion-row class="calendar-date">
+        <ion-col col-1 *ngFor="let lastDay of daysInLastMonth" class="last-month" (click)="goToLastMonth()">{{lastDay}}</ion-col>
+        <ion-col col-1 *ngFor="let day of daysInThisMonth" (click)="selectDate(day)">
+          <span class="currentDate" *ngIf="currentDate === day.num;">{{day.num}}</span>
+          <span class="otherDate" *ngIf="currentDate !== day.num;" [class.selected-date]="day.isSelected">
+            {{day.num}}
+            <div class="event-bullet" *ngIf="checkEvent(day)"></div>
+          </span>
+        </ion-col>
+        <ion-col col-1 *ngFor="let nextDay of daysInNextMonth" class="next-month" (click)="goToNextMonth()">{{nextDay}}</ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <ion-scroll scrollX="true" class="time-scrollbar">
+    <div class="time-select">
+      <button class="time-badge" [class.time-selected]="timeObj._0900.selected" ion-button (click)="timeObj._0900.selected ? (timeObj._0900.selected = false) : (timeObj._0900.selected= true)" mode="md">09:00</button>
+      <button class="time-badge" [class.time-selected]="timeObj._1000.selected" ion-button (click)="timeObj._1000.selected ? (timeObj._1000.selected = false) : (timeObj._1000.selected= true)" mode="md">10:00</button>
+      <button class="time-badge" [class.time-selected]="timeObj._1100.selected" ion-button (click)="timeObj._1100.selected ? (timeObj._1100.selected = false) : (timeObj._1100.selected= true)" mode="md">11:00</button>
+      <button class="time-badge" [class.time-selected]="timeObj._1200.selected" ion-button (click)="timeObj._1200.selected ? (timeObj._1200.selected = false) : (timeObj._1200.selected= true)" mode="md">12:00</button>
+      <button class="time-badge" [class.time-selected]="timeObj._1300.selected" ion-button (click)="timeObj._1300.selected ? (timeObj._1300.selected = false) : (timeObj._1300.selected= true)" mode="md">13:00</button>
+      <button class="time-badge" [class.time-selected]="timeObj._1400.selected" ion-button (click)="timeObj._1400.selected ? (timeObj._1400.selected = false) : (timeObj._1400.selected= true)" mode="md">14:00</button>
+      <button class="time-badge" [class.time-selected]="timeObj._1500.selected" ion-button (click)="timeObj._1500.selected ? (timeObj._1500.selected = false) : (timeObj._1500.selected= true)" mode="md">15:00</button>
+      <button class="time-badge" [class.time-selected]="timeObj._1600.selected" ion-button (click)="timeObj._1600.selected ? (timeObj._1600.selected = false) : (timeObj._1600.selected= true)" mode="md">16:00</button>
+      <button class="time-badge" [class.time-selected]="timeObj._1700.selected" ion-button (click)="timeObj._1700.selected ? (timeObj._1700.selected = false) : (timeObj._1700.selected= true)" mode="md">17:00</button>
+      <button class="time-badge" [class.time-selected]="timeObj._1800.selected" ion-button (click)="timeObj._1800.selected ? (timeObj._1800.selected = false) : (timeObj._1800.selected= true)" mode="md">18:00</button>
+      <button class="time-badge" [class.time-selected]="timeObj._1900.selected" ion-button (click)="timeObj._1900.selected ? (timeObj._1900.selected = false) : (timeObj._1900.selected= true)" mode="md">19:00</button>
+      <button class="time-badge" [class.time-selected]="timeObj._2000.selected" ion-button (click)="timeObj._2000.selected ? (timeObj._2000.selected = false) : (timeObj._2000.selected= true)" mode="md">20:00</button>
+      <button class="time-badge" [class.time-selected]="timeObj._2100.selected" ion-button (click)="timeObj._2100.selected ? (timeObj._2100.selected = false) : (timeObj._2100.selected= true)" mode="md">21:00</button>
+      <!--<button class="time-badge" [class.time-selected]="timeObj._2200.selected" ion-button (click)="timeObj._2200.selected ? (timeObj._2200.selected = false) : (timeObj._2200.selected= true)" mode="md">22:00</button>-->
+    </div>
+  </ion-scroll>
+
+  <img class="footer-img" src="assets/imgs/mybooking1.png">
+  <img class="footer-img" src="assets/imgs/mybooking2.png">
+  <button class="next-btn" ion-button mode="md" (click)="navigate()">Next</button>
+</ion-content>

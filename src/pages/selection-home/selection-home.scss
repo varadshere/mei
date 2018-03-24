@@ -1,0 +1,18 @@
+page-selection-home {
+  ion-card {
+    position: relative;
+    text-align: center;
+    margin: 0 !important;
+    width: 100% !important;
+  }
+
+  .card-title {
+    position: absolute;
+    top: 36%;
+    font-size: 32px;
+    width: 100%;
+    //font-weight: bold;
+    color: white;
+    font-family: 'San Francisco',Helvetica,Arial,serif;
+  }
+}
