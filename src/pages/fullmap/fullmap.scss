@@ -1,0 +1,63 @@
+page-fullmap {
+    #map {
+        width: 100%;
+        height: 90%;
+      }
+
+      .button-bg{
+         
+          position: absolute;
+          z-index: 3;
+          width:20px;
+          height:20px;
+          top:20px;
+          left: 20px;
+
+      }
+      .close{
+         
+          font-weight: bold;
+          font-size: 30px;
+        position:absolute;
+        
+      }
+      .fade {
+        position: absolute;
+        bottom: 10%;
+    
+        display: block;
+      
+        width: 100%;
+        height: 10%;
+      
+        background-image: linear-gradient(to bottom, 
+            rgba(255, 255, 255, 0), 
+            rgba(255, 255, 255, 1)
+        100%);
+    }
+      .ub-medium{
+        @font-face {
+            font-family: Ub-Medium;
+            src: url(./assets/fonts/Ub-Medium.ttf);
+        }
+        font-family: 'Ub-Medium',sans-serif;
+    }
+    .dark-grey{
+        color:#696F7B;
+    }
+    .mei-color{
+        color:#F9748F;
+    }
+    .client-name{
+        font-size:14px;
+        line-height: 14px;
+        font-weight: 700;
+        
+    }
+    .client-address{
+        margin-top:2%;
+        font-size:10px;
+        line-height: 12px;
+        
+    }
+}
