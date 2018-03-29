@@ -1,0 +1,95 @@
+<!--
+  Generated template for the BookingDetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+      <ion-buttons left>
+          <ion-icon class="icon-left" color="mei" name="arrow-back"></ion-icon>
+        </ion-buttons>
+    <ion-title text-center class="ub-medium heading">Booking Details</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+<div (click)="openMap()" #map id="map"></div> 
+<div padding>
+
+  <div class="div1">
+
+      <div class="ub-medium dark-grey client-name">{{data.clientName}}</div> 
+
+      <div class="ub-medium light-grey client-address">{{data.clientAddress}}</div>
+
+  </div>
+  
+  <hr class="customhr">
+
+
+  <div class="div2 ub-regular">
+
+      <div class="floatLeft"> 
+
+        <img src="./assets/imgs/calendar.png" height="25px" width="25px">
+
+      </div>
+
+        <div class="floatLeft marginLeft dark-grey small-padding"> {{data.appoinmentDate}}</div>
+
+        <div class="fix"></div>
+
+      <div class="clockDiv">
+
+        <div class="floatLeft">
+
+        <img src="./assets/imgs/clock.png" height="25px" width="25px">
+
+        </div>
+
+        <div class="floatLeft marginLeft dark-grey small-padding">
+           {{data.appoinmentStartime}} - {{data.appoinmentEndTime}}
+          
+          
+        </div>
+
+    </div>
+        <div class="fix"></div>
+
+  </div>
+
+  <hr class="customhr">
+
+  <div class="div3 ub-medium">
+      <div class="floatLeft dark-grey font1"> Services</div>
+      <div class="floatRight font1 mei-color ">{{data.serviceTotal}}</div>
+      <div class="fix"></div>
+      <div class="bottom-spacer"></div>
+
+  <div class="service-list dark-grey ub-medium" *ngFor=" let item of data.services">
+  <div class="floatLeft ">{{item.quantity}} x {{item.serviceName}}</div>
+  <div class="floatRight">${{item.price}}</div>
+  <div class="fix"></div>
+  <div class="bottom-spacer2"></div>
+
+</div>
+
+  <div class="floatLeft light-grey">Commision & PP Fees ({{ data.commision.percentage }}%)</div>
+  <div *ngIf="data.commision.commisionWaive"class="floatRight strike light-grey">${{data.commision.percent_amt}}</div>
+  <div *ngIf="!data.commision.commisionWaive"class="floatRight light-grey">${{data.commision.percent_amt}}</div>
+  <div class="fix"></div>
+  <div class="bottom-spacer2"></div>
+  <div class="dark-grey floatLeft">Total Earned</div>
+  <div class="dark-grey floatRight">{{data.serviceTotal}}</div>
+  <div class="fix"></div>
+<hr class="customhr">
+<p text-center><button ion-button round class="disp-button ub-medium"> RAISE A DISPUTE</button></p>
+    </div>
+
+</div>
+</ion-content>

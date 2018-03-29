@@ -25,6 +25,9 @@ import {ClientSettingsPage} from "../pages/client-settings/client-settings";
 import {VendorHomePage} from "../pages/vendor-home/vendor-home";
 import {VendorSidemenuPage} from "../pages/vendor-sidemenu/vendor-sidemenu";
 import {ActivityPage} from "../pages/activity/activity";
+import { BookingDetailsPage } from '../pages/booking-details/booking-details';
+import { FullmapPage } from '../pages/fullmap/fullmap';
+
 
 @NgModule({
   declarations: [
@@ -44,7 +47,10 @@ import {ActivityPage} from "../pages/activity/activity";
     ClientSettingsPage,
     VendorHomePage,
     VendorSidemenuPage,
-    ActivityPage
+    ActivityPage,
+    BookingDetailsPage,
+    FullmapPage,
+ 
   ],
   imports: [
     NgCalendarModule,
@@ -70,7 +76,10 @@ import {ActivityPage} from "../pages/activity/activity";
     ClientSettingsPage,
     VendorHomePage,
     VendorSidemenuPage,
-    ActivityPage
+    ActivityPage,
+    BookingDetailsPage,
+    FullmapPage,
+
   ],
   providers: [
     StatusBar,

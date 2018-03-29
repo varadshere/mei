@@ -8,6 +8,7 @@ import {Subscription} from "rxjs";
 import {UtilsProvider} from "../../providers/utils/utils";
 import {SelectionHomePage} from "../selection-home/selection-home";
 import {ClientSettingsPage} from "../client-settings/client-settings";
+import { BookingDetailsPage } from '../booking-details/booking-details';
 
 /**
  * Generated class for the SidemenuPage page.
@@ -33,6 +34,9 @@ export class SidemenuPage {
     }
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
   }
+map(){
+  this.navCtrl.setRoot(BookingDetailsPage)
+}
 
   ionViewDidLoad() {
     let ref = this;
