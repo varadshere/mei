@@ -23,22 +23,11 @@ export class SidemenuPage {
 
   public rootPage: any = SelectionHomePage;
   private subscription: Subscription;
-  guidNo = null;
-
-   guid() {
-    function s4() {
-      return Math.floor((1 + Math.random()) * 0x10000)
-        .toString(16)
-        .substring(1);
-    }
-    return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
-  }
 
   ionViewDidLoad() {
     let ref = this;
-    this.guidNo = this.guid();
 
-    console.log('ionViewDidLoad SidemenuPage '+this.guid());
+    console.log('ionViewDidLoad SidemenuPage ');
 
     this.subscription = ref.utilsProvider.notifyObservable$.subscribe((res) => {
       console.log(res);
