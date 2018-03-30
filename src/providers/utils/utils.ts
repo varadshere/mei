@@ -17,7 +17,6 @@ export class UtilsProvider {
   page = '';
   serviceSelected = '';
   public notifyOther(data: any) {
-    debugger;
     if (data) {
       this.notify.next(data);
     }
@@ -118,6 +117,54 @@ export class UtilsProvider {
         resolve(data.result);
         // ref.applyHaversine(data, 'hp');
         // this.setDataToShow(data.outlets);
+        resolve(data);
+      }, error => {
+        console.log("ERROR");
+        console.log(error);
+        //reject("false");
+        resolve(false);
+      });
+    });
+  }
+
+  editClientSettings(dataToSend){
+    return new Promise((resolve, reject) => {
+      // let location = this.utils.getMapCenter();
+      let headers = new Headers();
+      headers.append('Content-Type','application/json');
+      headers.append('Access-Control-Allow-Origin' , '*');
+      headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+      let url = this.serverUrl + 'editClientSettings';
+      let body = JSON.stringify(dataToSend);
+      this.http.post(url, body, {headers: headers}).map(res => res.json()).subscribe(data => {
+        console.log("Save Settings");
+        console.log(data);
+        resolve(data.result);
+        // ref.applyHaversine(data, 'hp');
+        // this.setDataToShow(data.outlets);
+        resolve(data);
+      }, error => {
+        console.log("ERROR");
+        console.log(error);
+        //reject("false");
+        resolve(false);
+      });
+    });
+  }
+
+  getClientSettings(dataToSend){
+    return new Promise((resolve, reject) => {
+      // let location = this.utils.getMapCenter();
+      let headers = new Headers();
+      headers.append('Content-Type','application/json');
+      headers.append('Access-Control-Allow-Origin' , '*');
+      headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+      let url = this.serverUrl + 'getClientSettings';
+      let body = JSON.stringify(dataToSend);
+      this.http.post(url, body, {headers: headers}).map(res => res.json()).subscribe(data => {
+        console.log("Got Settings");
+        console.log(data);
+        resolve(data.result);
         resolve(data);
       }, error => {
         console.log("ERROR");

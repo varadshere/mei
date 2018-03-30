@@ -4,6 +4,7 @@ import {GetstartedPage} from "../getstarted/getstarted";
 import {SidemenuPage} from "../sidemenu/sidemenu";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UtilsProvider} from "../../providers/utils/utils";
+import {SelectionHomePage} from "../selection-home/selection-home";
 
 /**
  * Generated class for the SignupPage page.
@@ -317,6 +318,19 @@ export class SignupPage {
         "last_name": this.slideTwoForm.value.lname,
         "type": "client"
       };
+      let dataToSendEditClient = {
+        "username":this.slideTwoForm.value.email,
+        "email": this.slideTwoForm.value.email,
+        "notification" : true,
+        "travel": false,
+        "distance": 10,
+        "first_name": this.slideTwoForm.value.fname,
+        "last_name": this.slideTwoForm.value.lname,
+        "phone": "",
+        "address": "",
+        "bankName": "",
+        "cardNumber": ""
+      };
       let signupPromise  = this.utils.signUpService(dataToSend);
 
       let ref = this;
@@ -325,6 +339,16 @@ export class SignupPage {
           console.log("Signup Success!!");
           console.log(result);
           // ref.navCtrl.push(SidemenuPage);
+          let saveSettings = ref.utils.editClientSettings(dataToSendEditClient);
+          saveSettings.then(function (resp) {
+            if(resp){
+              console.log("Settings Saved !!");
+              console.log(resp);
+              ref.utils.setPage(SelectionHomePage);
+              // this.navCtrl.push(SelectionHomePage);
+              ref.navCtrl.push(SidemenuPage);
+            }
+          });
         }else{
           console.log(result);
           console.log("Signup Failed!!");
