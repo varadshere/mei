@@ -24,11 +24,12 @@ export class SidemenuPage {
 
   public rootPage: any = SelectionHomePage;
   private subscription: Subscription;
-
+  // profile = this.utilsProvider.profile;
   ionViewDidLoad() {
     let ref = this;
 
     console.log('ionViewDidLoad SidemenuPage ');
+    // console.log(this.profile);
 
     this.subscription = ref.utilsProvider.notifyObservable$.subscribe((res) => {
       console.log(res);

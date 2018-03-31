@@ -52,6 +52,7 @@ export class LoginPage {
     loginPromise.then(function (result: any) {
       if(result){
         ref.utilsProvider.setUserEmail(ref.client.email);
+        ref.utilsProvider.getProfile();
         ref.utilsProvider.setPage(SelectionHomePage);
         ref.navCtrl.push(SidemenuPage);
       }else{
@@ -69,6 +70,7 @@ export class LoginPage {
       if(result){
         // ref.navCtrl.push(SidemenuPage);
         ref.utilsProvider.setUserEmail(ref.vendor.email);
+        ref.utilsProvider.getProfile();
       }else{
         console.log("Wrong Creds");
       }

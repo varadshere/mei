@@ -27,23 +27,24 @@
   </div>
   <div [ngSwitch]="option" padding>
     <ion-list *ngSwitchCase="'CURRENT'">
-      <div *ngFor="let l of list2; let i=index" text-wrap>
-        <ion-row>
-          <ion-col col-3 align-items-center>
-            <!--<ion-icon class="icon-pad"></ion-icon>-->
-            <ion-row class="time-start">{{l.startTime}}</ion-row>
-            <ion-row class="time-end">{{l.date}}</ion-row>
-          </ion-col>
-          <ion-col col-9>
-            <div>
-              <div class="service-title">{{l.name}}</div>
-              <div class="service-desc">
-                {{l.desc}}
+
+        <div mode="ios" *ngFor="let l of list2; let i=index">
+          <ion-row>
+            <ion-col col-3 align-items-center>
+              <!--<ion-icon class="icon-pad"></ion-icon>-->
+              <ion-row class="time-start">{{l.startTime}}</ion-row>
+              <ion-row class="time-end">{{l.date}}</ion-row>
+            </ion-col>
+            <ion-col col-9>
+              <div>
+                <div class="service-title">{{l.name}}</div>
+                <div class="service-desc">
+                  {{l.desc}}
+                </div>
               </div>
-            </div>
-          </ion-col>
-        </ion-row>
-      </div>
+            </ion-col>
+          </ion-row>
+        </div>
     </ion-list>
     <ion-list *ngSwitchCase="'PAST'">
       Pasttttttttttt

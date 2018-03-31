@@ -10,13 +10,13 @@ import {Http, Headers} from '@angular/http';
 */
 @Injectable()
 export class UtilsProvider {
-
   private notify = new Subject<any>();
   notifyObservable$: any =  this.notify.asObservable();
   serverUrl  = 'http://18.216.123.109:5000/api/';
   page = '';
   serviceSelected = '';
-  email = ''
+  email = '';
+  private _profile: any = {};
   public notifyOther(data: any) {
     if (data) {
       this.notify.next(data);
@@ -25,6 +25,14 @@ export class UtilsProvider {
 
   constructor(public http: Http) {
     console.log('Hello UtilsProvider Provider');
+  }
+
+  get profile(): any {
+    return this._profile;
+  }
+
+  set profile(value: any) {
+    this._profile = value;
   }
 
   getPage(){
@@ -175,6 +183,36 @@ export class UtilsProvider {
         console.log(data);
         resolve(data.result);
         resolve(data);
+      }, error => {
+        console.log("ERROR");
+        console.log(error);
+        //reject("false");
+        resolve(false);
+      });
+    });
+  }
+
+  getProfile(){
+    let ref = this;
+    let dataToSend = {
+      "username":this.getUserEmail(),
+      "email": this.getUserEmail()
+    };
+    return new Promise((resolve, reject) => {
+      // let location = this.utils.getMapCenter();
+      let headers = new Headers();
+      headers.append('Content-Type','application/json');
+      headers.append('Access-Control-Allow-Origin' , '*');
+      headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+      let url = this.serverUrl + 'getProfile';
+      let body = JSON.stringify(dataToSend);
+      this.http.post(url, body, {headers: headers}).map(res => res.json()).subscribe(data => {
+        console.log("Got Profile");
+        console.log(data);
+        ref.profile = (data.result);
+        resolve(data.result);
+
+        // resolve(data);
       }, error => {
         console.log("ERROR");
         console.log(error);
