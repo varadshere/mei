@@ -5,14 +5,49 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>vendor-bookings</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu" style="color: pink;"></ion-icon>
+    </button>
+    <img src="assets/imgs/mei_navbar_logo.png">
   </ion-navbar>
-
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <div>
+    <ion-segment [(ngModel)]="option" mode="md">
+      <ion-segment-button value="CURRENT">
+        CURRENT
+      </ion-segment-button>
+      <ion-segment-button value="PAST">
+        PAST
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+  <div [ngSwitch]="option" padding>
+    <ion-list *ngSwitchCase="'CURRENT'">
+      <div *ngFor="let l of list2; let i=index" text-wrap>
+        <ion-row>
+          <ion-col col-3 align-items-center>
+            <!--<ion-icon class="icon-pad"></ion-icon>-->
+            <ion-row class="time-start">{{l.startTime}}</ion-row>
+            <ion-row class="time-end">{{l.date}}</ion-row>
+          </ion-col>
+          <ion-col col-9>
+            <div>
+              <div class="service-title">{{l.name}}</div>
+              <div class="service-desc">
+                {{l.desc}}
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-list>
+    <ion-list *ngSwitchCase="'PAST'">
+      Pasttttttttttt
+    </ion-list>
+  </div>
 
 </ion-content>

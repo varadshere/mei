@@ -1,19 +1,15 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the VendorBookingsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @Component({
   selector: 'page-vendor-bookings',
   templateUrl: 'vendor-bookings.html',
 })
 export class VendorBookingsPage {
 
+  option = 'CURRENT';
+  list: [{name: 'Samantha Pollock', desc: 'MAKEUP | 22 Hallet St, Adelaide', startTime: '10:00 AM', endTime: '11:00 AM'}, {name: 'Laila Lou', desc: 'HAIR &* MAKEUP | 17 Carbon St, Adelaide', startTime: '10:00 AM', endTime: '11:00 AM'}];
+  list2 = [{name: 'Samantha Pollock', desc: 'MAKEUP | 22 Hallet St, Adelaide', startTime: '10:00 AM', date: '15 Sept'}, {name: 'Laila Lou', desc: 'HAIR &* MAKEUP | 17 Carbon St, Adelaide', startTime: '10:00 AM', date: '11 Apr'}];
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 

@@ -18,6 +18,7 @@ export class VendorHomePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad VendorHomePage');
+    this.toggleGroup(0);
   }
 
   shownGroup = null;
