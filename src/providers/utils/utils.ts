@@ -16,6 +16,7 @@ export class UtilsProvider {
   serverUrl  = 'http://18.216.123.109:5000/api/';
   page = '';
   serviceSelected = '';
+  email = ''
   public notifyOther(data: any) {
     if (data) {
       this.notify.next(data);
@@ -42,7 +43,14 @@ export class UtilsProvider {
     this.serviceSelected = s;
   }
 
-  loginService(email, pwd){
+  setUserEmail(email){
+    this.email = email;
+  }
+  getUserEmail(){
+    return this.email
+  }
+
+  loginService(email, pwd, type){
    // let ref = this;
    console.log(email);
    console.log(pwd);
@@ -55,7 +63,8 @@ export class UtilsProvider {
       let url = this.serverUrl + 'loginCheck';
       let body = JSON.stringify({
         user_email: email,
-        password: pwd
+        password: pwd,
+        type: type
       });
       this.http.post(url, body, {headers: headers}).map(res => res.json()).subscribe(data => {
         console.log("login rep");

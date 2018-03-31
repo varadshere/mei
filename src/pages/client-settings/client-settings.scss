@@ -7,6 +7,13 @@ page-client-settings {
     margin-left: 15px;
   }
 
+  .save-button{
+    width: 150px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: #F9748F;
+  }
+
   .range-md .range-bar-active{
     background: #F9748F;
   }
@@ -23,5 +30,12 @@ page-client-settings {
     line-height: 16px;
     font-size: 16px;
     color: #696F7B;
+  }
+
+  .pink-text{
+    color: #F9748F;
+  }
+  .toggle-ios.toggle-checked .toggle-icon{
+    background-color: #F9748F;
   }
 }

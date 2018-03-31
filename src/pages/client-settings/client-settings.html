@@ -18,26 +18,51 @@
   <ion-list mode="ios">
     <ion-item>
       <ion-label>Notifications</ion-label>
-      <ion-toggle checked="false" mode="ios"></ion-toggle>
+      <ion-toggle [(ngModel)]="settings.notification" mode="ios"></ion-toggle>
     </ion-item>
     <ion-item>
       <ion-label>Are you willing to travel?</ion-label>
-      <ion-toggle checked="false" mode="ios"></ion-toggle>
+      <ion-toggle [(ngModel)]="settings.travel" mode="ios"></ion-toggle>
     </ion-item>
-    <div class="settings-text">Travel distance:</div>
+    <div class="settings-text">Travel distance: {{settings.distance}} KM</div>
     <ion-item>
-      <ion-range min="0" max="200" mode="md">
+      <ion-range [(ngModel)]="settings.distance" min="0" max="50" mode="md">
       </ion-range>
     </ion-item>
-    <ion-item>
-      <ion-row><ion-col class="">Info</ion-col> <ion-col class="info-text">Edit</ion-col></ion-row>
-      <ion-row><ion-col class="">Name</ion-col> <ion-col class="info-text">Laila E</ion-col></ion-row>
-      <ion-row><ion-col class="">Email</ion-col> <ion-col class="info-text">mei_user@gmail.com</ion-col></ion-row>
-      <ion-row><ion-col class="">Password</ion-col> <ion-col class="info-text">asdfghjhgfd</ion-col></ion-row>
-      <ion-row><ion-col class="">Phone</ion-col> <ion-col class="info-text">201-736-8110</ion-col></ion-row>
-      <ion-row><ion-col class="">Address</ion-col> <ion-col class="info-text">27 ZJFk Jersey City</ion-col></ion-row>
-    </ion-item>
-    <button ion-item mode="ios">Bank Info:</button>
+    <div *ngIf="!editMode">
+      <ion-item>
+        <ion-row><ion-col class="">Info</ion-col> <ion-col class="info-text pink-text" (click)="editToggle()">Edit</ion-col></ion-row>
+        <ion-row><ion-col class="">Name</ion-col> <ion-col class="info-text">{{settings.first_name}} {{settings.last_name}}</ion-col></ion-row>
+        <ion-row><ion-col class="">Email</ion-col> <ion-col class="info-text">{{email}}</ion-col></ion-row>
+        <!--<ion-row><ion-col class="">Password</ion-col> <ion-col class="info-text">asdfghjhgfd</ion-col></ion-row>-->
+        <ion-row><ion-col class="">Phone</ion-col> <ion-col class="info-text">{{settings.phone}}</ion-col></ion-row>
+        <ion-row><ion-col class="">Address</ion-col> <ion-col class="info-text">{{settings.address}}</ion-col></ion-row>
+      </ion-item>
+    </div>
+    <div *ngIf="editMode">
+      <ion-item mode="ios">
+        <ion-input type="text" placeholder="First Name" [(ngModel)]="settings.first_name"></ion-input>
+      </ion-item>
+      <ion-item mode="ios">
+        <ion-input type="text" placeholder="Last Name" [(ngModel)]="settings.last_name"></ion-input>
+      </ion-item>
+      <ion-item mode="ios">
+        <ion-input type="text" placeholder="phone" [(ngModel)]="settings.phone"></ion-input>
+      </ion-item>
+      <ion-item mode="ios">
+        <ion-input type="text" placeholder="Address" [(ngModel)]="settings.address"></ion-input>
+      </ion-item>
+      <div style="text-align: center">
+        <button ion-button class="save-button" (click)="saveProfile()">Save</button>
+      </div>
+
+    </div>
+    <button ion-item mode="ios">
+      Bank Info:
+      <div>
+        {{settings.bankName}} - {{settings.cardNumber}}
+      </div>
+    </button>
     <button ion-item mode="ios">Customer Service</button>
     <button ion-item mode="ios">Terms & Conditions</button>
     <button ion-item mode="ios">FAQ</button>

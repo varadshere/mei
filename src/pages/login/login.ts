@@ -46,31 +46,29 @@ export class LoginPage {
   clientLogin(){
     // this.utilsProvider.notifyOther("Profile");
 
-    let loginPromise  = this.utilsProvider.loginService(this.client.email, this.client.pwd);
+    let loginPromise  = this.utilsProvider.loginService(this.client.email, this.client.pwd, 'client');
 
     let ref = this;
     loginPromise.then(function (result: any) {
       if(result){
-        // ref.navCtrl.push(SidemenuPage);
+        ref.utilsProvider.setUserEmail(ref.client.email);
+        ref.utilsProvider.setPage(SelectionHomePage);
+        ref.navCtrl.push(SidemenuPage);
       }else{
         console.log("Wrong Creds");
       }
     });
-
-
-    this.utilsProvider.setPage(SelectionHomePage);
-    // this.navCtrl.push(SelectionHomePage);
-    this.navCtrl.push(SidemenuPage);
   }
 
   vendorLogin(){
     // this.utilsProvider.notifyOther("profile");
-    let loginPromise  = this.utilsProvider.loginService(this.vendor.email, this.vendor.pwd);
+    let loginPromise  = this.utilsProvider.loginService(this.vendor.email, this.vendor.pwd, 'vendor');
 
     let ref = this;
     loginPromise.then(function (result: any) {
       if(result){
         // ref.navCtrl.push(SidemenuPage);
+        ref.utilsProvider.setUserEmail(ref.vendor.email);
       }else{
         console.log("Wrong Creds");
       }

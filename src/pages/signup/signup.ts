@@ -5,6 +5,8 @@ import {SidemenuPage} from "../sidemenu/sidemenu";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UtilsProvider} from "../../providers/utils/utils";
 import {SelectionHomePage} from "../selection-home/selection-home";
+import {VendorHomePage} from "../vendor-home/vendor-home";
+import {VendorSidemenuPage} from "../vendor-sidemenu/vendor-sidemenu";
 
 /**
  * Generated class for the SignupPage page.
@@ -266,8 +268,9 @@ export class SignupPage {
             console.log("Signup Success!!");
             console.log(result);
             // ref.navCtrl.push(SidemenuPage);
-            ref.utils.setPage(GetstartedPage);
-            ref.navCtrl.push(SidemenuPage);
+            ref.utils.setUserEmail(ref.slideOneForm.value.email);
+            ref.utils.setPage(VendorHomePage);
+            ref.navCtrl.push(VendorSidemenuPage);
           }else{
             console.log(result);
             console.log("Signup Failed!!");
@@ -344,6 +347,7 @@ export class SignupPage {
             if(resp){
               console.log("Settings Saved !!");
               console.log(resp);
+              ref.utils.setUserEmail(ref.slideTwoForm.value.email);
               ref.utils.setPage(SelectionHomePage);
               // this.navCtrl.push(SelectionHomePage);
               ref.navCtrl.push(SidemenuPage);

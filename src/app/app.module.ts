@@ -27,6 +27,7 @@ import {VendorSidemenuPage} from "../pages/vendor-sidemenu/vendor-sidemenu";
 import {ActivityPage} from "../pages/activity/activity";
 import { BookingDetailsPage } from '../pages/booking-details/booking-details';
 import { FullmapPage } from '../pages/fullmap/fullmap';
+import {VendorBookingsPage} from "../pages/vendor-bookings/vendor-bookings";
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { FullmapPage } from '../pages/fullmap/fullmap';
     ActivityPage,
     BookingDetailsPage,
     FullmapPage,
- 
+    VendorBookingsPage
+
   ],
   imports: [
     NgCalendarModule,
@@ -79,6 +81,7 @@ import { FullmapPage } from '../pages/fullmap/fullmap';
     ActivityPage,
     BookingDetailsPage,
     FullmapPage,
+    VendorBookingsPage
 
   ],
   providers: [
