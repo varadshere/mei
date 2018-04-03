@@ -24,6 +24,7 @@ export class SidemenuPage {
 
   public rootPage: any = SelectionHomePage;
   private subscription: Subscription;
+<<<<<<< HEAD
   guidNo = null;
 
    guid() {
@@ -37,12 +38,13 @@ export class SidemenuPage {
 map(){
   this.navCtrl.setRoot(BookingDetailsPage)
 }
+=======
+>>>>>>> settings
 
   ionViewDidLoad() {
     let ref = this;
-    this.guidNo = this.guid();
 
-    console.log('ionViewDidLoad SidemenuPage '+this.guid());
+    console.log('ionViewDidLoad SidemenuPage ');
 
     this.subscription = ref.utilsProvider.notifyObservable$.subscribe((res) => {
       console.log(res);
