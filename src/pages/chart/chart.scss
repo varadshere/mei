@@ -1,0 +1,105 @@
+page-chart {
+
+    .floatRight{
+        float:right;
+    }
+    .floatLeft{
+        float: left;
+    }
+    .fix{
+        clear:  !important;
+    }
+
+
+    .ub-regular{
+        @font-face {
+            font-family: Ub-Regular;
+            src: url(./assets/fonts/Ub-Regular.ttf);
+        }
+        font-family: 'Ub-Regular',sans-serif;
+    }
+    .dark-grey{
+        color:#696F7B;
+    }
+    .light-grey{
+        color:#D5D5D5;
+    }
+.font-col1{
+    font-size:25px;
+    line-height:20px;
+    font-weight: 600;
+}
+.fontwt{
+    font-weight: 700;
+}
+.para-font{
+    font-size:14px;
+    line-height: 14px;
+    margin:5%;
+}
+.font-col2{
+    font-size: 10px;
+    line-height: 10px;
+}
+    .ub-medium{
+        @font-face {
+            font-family: Ub-Medium;
+            src: url(./assets/fonts/Ub-Medium.ttf);
+        }
+        font-family: 'Ub-Medium',sans-serif;
+    }
+    .list-title{
+        font-size: 14px;
+        line-height: 14px;
+        font-weight: 700;
+    }
+    .side-font{
+        font-size:14px;
+        line-height: 14px;
+    }
+    .side-font2{
+        font-size: 14px;
+        line-height: 16px;
+    }
+    .side-font3{
+        font-size:30px;
+        line-height: 35px;
+    }
+    .small-font{
+        font-size:40%;
+        margin:2px;
+        
+    }
+    .small-margin{
+        margin-top:5%;
+    }
+    .grey-border{
+        border-right: 1px solid #D5D5D5;
+    }
+    .list-item-font{
+        font-size: 10px;
+        line-height: 12px;
+    }
+    .mei-color{
+        color:#F9748F;
+    }
+    .price-font{
+        font-size:14px;
+        font-weight: 700;
+    }
+    .marginTop{
+        margin-top:3px;
+    }
+    .toolbar-title{
+        @font-face {
+            font-family: Ub-Medium;
+            src: url(./assets/fonts/Ub-Medium.ttf);
+        }
+        font-family: 'Ub-Medium',sans-serif;
+        font-size: 17px;
+        font-weight: normal !important;
+        color:#F9748F !important;
+     }
+}
+
+

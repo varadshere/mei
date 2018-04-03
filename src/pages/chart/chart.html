@@ -1,0 +1,232 @@
+<!--
+  Generated template for the ChartPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title text-center><img src="./assets/imgs/meiLogo.png" height="25px" width="80.83px"></ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <!--<ion-select [(ngModel)]="chartType" ionChange="onChange($event)">
+    <ion-option value="Month">Month</ion-option>
+    <ion-option value="Day">Day</ion-option>
+  </ion-select> -->
+
+  <div [ngSwitch]="chartType">
+
+    <div *ngSwitchCase="'Day'">
+      <div class="floatLeft mei-color ub-regular side-font2">Earned - Day of {{currentDay}}<br>
+        <div class="mei-color ub-medium side-font3">${{data2.totalForDay}}</div>
+        </div>
+ 
+    </div>
+    <div *ngSwitchCase="'Month'">
+      <div class="floatLeft mei-color ub-regular side-font2">Earned - Month of {{currentMonth}}<br>
+        <div class="mei-color ub-medium side-font3">${{data2.totalForMonth}}</div>
+        </div>
+  
+
+  </div>
+  <div *ngSwitchCase="'Year'">
+   
+    <div class="floatLeft mei-color ub-regular side-font2">Earned - Year of {{currentYear}}<br>
+      <div class="mei-color ub-medium side-font3">${{data2.totalForYear}}</div>
+      </div>
+     
+  
+  </div>
+  <div *ngSwitchCase="'Overall'">
+    <div class="floatLeft mei-color ub-regular side-font2">Earned - Overall <br>
+      <div class="mei-color ub-medium side-font3">${{data2.totalForOverall}}</div>
+      </div>
+     
+
+  </div>
+
+ 
+   <div (click)="changeChart()" class="floatRight light-grey ub-medium side-font">{{chartType}} <i class="fa fa-angle-down" aria-hidden="true"></i></div>
+   <div class="fix"></div>
+
+
+  <div id="Chart"></div>
+ 
+  </div>
+    <ion-segment [(ngModel)]="activity" mode="md">
+        <ion-segment-button value="act">
+          Activity
+        </ion-segment-button>
+        <ion-segment-button value="sum">
+          Summary
+        </ion-segment-button>
+      </ion-segment>
+
+
+
+      <div [ngSwitch]="activity">
+        <div *ngSwitchCase="'act'">
+          <div [ngSwitch]="chartType">
+
+            <div *ngSwitchCase="'Day'">
+                <ion-list>
+                    <ion-item *ngFor="let item of dayClient">
+                      <div class="floatLeft marginTop">
+                        <h3 class="ub-medium list-title dark-grey">{{item.clientName}} </h3>
+                          <div class="ub-regular light-grey list-item-font">{{item.service}} <i class="fa fa-circle small-font" aria-hidden="true"></i> {{item.date}}  </div>
+                        </div>
+                     <div class="floatRight ub-medium mei-color price-font marginTop">${{item.value}}</div>
+              
+                    </ion-item>
+    
+                 </ion-list>
+            </div>
+            <div *ngSwitchCase="'Month'">
+              <ion-list>
+                <ion-item *ngFor="let item of monthClient">
+                  <div class="floatLeft marginTop">
+                    <h3 class="ub-medium list-title dark-grey">{{item.clientName}} </h3>
+                      <div class="ub-regular light-grey list-item-font">{{item.service}} <i class="fa fa-circle small-font" aria-hidden="true"></i> {{item.date}}  </div>
+                    </div>
+                 <div class="floatRight ub-medium mei-color price-font marginTop">${{item.value}}</div>
+          
+                </ion-item>
+
+             </ion-list>
+          
+        
+          </div>
+          <div *ngSwitchCase="'Year'">
+           
+              <ion-list>
+                  <ion-item *ngFor="let item of yearClient">
+                    <div class="floatLeft marginTop">
+                      <h3 class="ub-medium list-title dark-grey">{{item.clientName}} </h3>
+                        <div class="ub-regular light-grey list-item-font">{{item.service}} <i class="fa fa-circle small-font" aria-hidden="true"></i> {{item.date}}  </div>
+                      </div>
+                   <div class="floatRight ub-medium mei-color price-font marginTop">${{item.value}}</div>
+            
+                  </ion-item>
+  
+               </ion-list>
+             
+          
+          </div>
+          <div *ngSwitchCase="'Overall'">
+              <ion-list>
+                  <ion-item *ngFor="let item of overallClient">
+                    <div class="floatLeft marginTop">
+                      <h3 class="ub-medium list-title dark-grey">{{item.clientName}} </h3>
+                        <div class="ub-regular light-grey list-item-font">{{item.service}} <i class="fa fa-circle small-font" aria-hidden="true"></i> {{item.date}}  </div>
+                      </div>
+                   <div class="floatRight ub-medium mei-color price-font marginTop">${{item.value}}</div>
+            
+                  </ion-item>
+  
+               </ion-list>
+        
+          </div>
+        
+         
+          
+         
+          </div>
+           
+          
+        </div>
+
+        <div *ngSwitchCase="'sum'">
+            <div [ngSwitch]="chartType">
+
+                <div *ngSwitchCase="'Day'">
+                  <ion-grid class="small-margin">
+                    <ion-row text-center>
+                      <ion-col class="grey-border ub-medium mei-color font-col1">${{data2.dayBreakup.hair}}<br>
+                       <span class="ub-medium light-grey font-col2">HAIR</span>
+ 
+                     </ion-col>
+                      <ion-col class="grey-border ub-medium mei-color font-col1">${{data2.dayBreakup.makeup}}<br>
+                       <span class="ub-medium light-grey font-col2"> MAKEUP</span>
+                     </ion-col>
+                      <ion-col class="ub-medium mei-color font-col1">${{data2.dayBreakup.nails}}<br> 
+                       <span class="ub-medium light-grey font-col2">NAILS </span>
+                     </ion-col>
+                    </ion-row>
+                  </ion-grid>
+               
+             <p class="para-font ub-medium dark-grey">So far in {{ currentDay }} you have earned <span class="mei-color fontwt">${{data2.totalForDay}}</span> for this day </p>
+             
+                </div>
+                <div *ngSwitchCase="'Month'">
+                 <ion-grid class="small-margin">
+                   <ion-row text-center>
+                     <ion-col class="grey-border ub-medium mei-color font-col1">${{data2.monthBreakup.hair}}<br>
+                      <span class="ub-medium light-grey font-col2">HAIR</span>
+
+                    </ion-col>
+                     <ion-col class="grey-border ub-medium mei-color font-col1">${{data2.monthBreakup.makeup}}<br>
+                      <span class="ub-medium light-grey font-col2"> MAKEUP</span>
+                    </ion-col>
+                     <ion-col class="ub-medium mei-color font-col1">${{data2.monthBreakup.nails}}<br> 
+                      <span class="ub-medium light-grey font-col2">NAILS </span>
+                    </ion-col>
+                   </ion-row>
+                 </ion-grid>
+              
+            <p class="para-font ub-medium dark-grey">So far in {{ currentMonth }} you have earned <span class="mei-color fontwt">${{data2.totalForMonth}}</span> for this month </p>
+              </div>
+              <div *ngSwitchCase="'Year'">
+               
+                <ion-grid class="small-margin">
+                  <ion-row text-center>
+                    <ion-col class="grey-border ub-medium mei-color font-col1">${{data2.yearBreakup.hair}}<br>
+                     <span class="ub-medium light-grey font-col2">HAIR</span>
+
+                   </ion-col>
+                    <ion-col class="grey-border ub-medium mei-color font-col1">${{data2.yearBreakup.makeup}}<br>
+                     <span class="ub-medium light-grey font-col2"> MAKEUP</span>
+                   </ion-col>
+                    <ion-col class="ub-medium mei-color font-col1">${{data2.yearBreakup.nails}}<br> 
+                     <span class="ub-medium light-grey font-col2">NAILS </span>
+                   </ion-col>
+                  </ion-row>
+                </ion-grid>
+             
+           <p class="para-font ub-medium dark-grey">So far in {{currentYear}} you have earned <span class="mei-color fontwt">${{data2.totalForOverall}}</span> for this year </p>
+                 
+              
+              </div>
+              <div *ngSwitchCase="'Overall'">
+                <ion-grid class="small-margin">
+                  <ion-row text-center>
+                    <ion-col class="grey-border ub-medium mei-color font-col1">${{data2.overallBreakup.hair}}<br>
+                     <span class="ub-medium light-grey font-col2">HAIR</span>
+
+                   </ion-col>
+                    <ion-col class="grey-border ub-medium mei-color font-col1">${{data2.overallBreakup.makeup}}<br>
+                     <span class="ub-medium light-grey font-col2"> MAKEUP</span>
+                   </ion-col>
+                    <ion-col class="ub-medium mei-color font-col1">${{data2.overallBreakup.nails}}<br> 
+                     <span class="ub-medium light-grey font-col2">NAILS </span>
+                   </ion-col>
+                  </ion-row>
+                </ion-grid>
+             
+           <p class="para-font ub-medium dark-grey">So far you have earned <span class="mei-color fontwt">${{data2.totalForOverall}}</span> </p>
+                 
+            
+              </div>
+            
+             
+               
+             
+              </div>
+
+      </div>
+</div>
+</ion-content>
