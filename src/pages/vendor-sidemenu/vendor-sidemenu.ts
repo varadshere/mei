@@ -4,6 +4,7 @@ import {GetstartedPage} from "../getstarted/getstarted";
 import {UtilsProvider} from "../../providers/utils/utils";
 import {VendorHomePage} from "../vendor-home/vendor-home";
 import {VendorBookingsPage} from "../vendor-bookings/vendor-bookings";
+import {VendorCalendarPage} from "../vendor-calendar/vendor-calendar";
 
 /**
  * Generated class for the VendorSidemenuPage page.
@@ -30,6 +31,8 @@ export class VendorSidemenuPage {
   openPage(page){
     if(page == 'activity'){
       this.rootPage = VendorBookingsPage;
+    }else if(page == 'calendar'){
+      this.rootPage = VendorCalendarPage;
     }
   }
 
