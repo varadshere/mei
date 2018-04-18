@@ -228,10 +228,19 @@ export class SignupPage {
     signUpVendor(){
 
       this.submitAttempt = true;
-
-      if(!this.slideOneForm.valid){
+      let selectedServices = this.getSelectedServices();
+      if(!(this.slideOneForm.valid && selectedServices.length > 0)){
           //this.signupSlider.slideTo(0);
-        console.log("FAIL!")
+        console.log("FAIL!");
+        console.log("selectedServices= "+selectedServices.length);
+        if(!this.slideOneForm.valid){
+          this.utils.presentAlert("Signup Failed", "Please Fill all the details!");
+          return;
+        }
+        if(selectedServices.length == 0){
+          this.utils.presentAlert("Signup Failed", "Please select at least One Service!");
+          return;
+        }
       }
       else {
           console.log("success!");
@@ -270,6 +279,7 @@ export class SignupPage {
             console.log(result);
             // ref.navCtrl.push(SidemenuPage);
             ref.utils.setUserEmail(ref.slideOneForm.value.email);
+            ref.utils.getProfile();
             ref.utils.setPage(VendorHomePage);
             ref.navCtrl.push(VendorSidemenuPage);
           }else{
@@ -278,6 +288,19 @@ export class SignupPage {
           }
         });
       }
+  }
+
+  getSelectedServices(){
+      let selServices = [];
+      this.services.forEach(d=>{
+        d.list.forEach(l=>{
+          if(l.selected){
+            selServices.push(l);
+          }
+        });
+      });
+
+      return selServices;
   }
 
   getDaysArr(){
@@ -350,6 +373,7 @@ export class SignupPage {
               console.log("Settings Saved !!");
               console.log(resp);
               ref.utils.setUserEmail(ref.slideTwoForm.value.email);
+              ref.utils.getProfile();
               ref.utils.setPage(SelectionHomePage);
               // this.navCtrl.push(SelectionHomePage);
               ref.navCtrl.push(SidemenuPage);

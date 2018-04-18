@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {MyBookingPage} from "../my-booking/my-booking";
+import {UtilsProvider} from "../../providers/utils/utils";
 
 /**
  * Generated class for the ProfilePage page.
@@ -16,8 +17,8 @@ export class ProfilePage {
 
   profile: string = "SERVICES";
   shownGroup = null;
-  profileData  = {};
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  profileData:any  = {};
+  constructor(public navCtrl: NavController, public navParams: NavParams, private utils: UtilsProvider) {
     this.profileData = navParams.get('profile');
   }
 
@@ -49,9 +50,28 @@ export class ProfilePage {
 
   navigate(){
     // this.navCtrl.push(MyBookingPage);
-    this.navCtrl.push(MyBookingPage, {
-      profile: this.profileData
+    let bServices = this.getBookedServices();
+    if(bServices.length > 0){
+      this.navCtrl.push(MyBookingPage, {
+        profile: this.profileData
+      });
+    }else {
+      this.utils.presentAlert("Booking Failed", "Please select at least One Service!");
+    }
+
+  }
+
+  getBookedServices(){
+    let bServices = [];
+    this.profileData.services.forEach(d=>{
+      d.list.forEach(l=>{
+        if(l.booked){
+          bServices.push(l);
+        }
+      });
     });
+
+    return bServices;
   }
 
 

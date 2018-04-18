@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Subject} from "rxjs";
 import {Http, Headers} from '@angular/http';
+import { AlertController } from 'ionic-angular';
 
 /*
   Generated class for the UtilsProvider provider.
@@ -23,7 +24,7 @@ export class UtilsProvider {
     }
   }
 
-  constructor(public http: Http) {
+  constructor(public http: Http, private alertCtrl: AlertController) {
     console.log('Hello UtilsProvider Provider');
   }
 
@@ -56,6 +57,16 @@ export class UtilsProvider {
   }
   getUserEmail(){
     return this.email
+  }
+
+  presentAlert(title, subtitle) {
+    let alert = this.alertCtrl.create({
+      title: title,
+      subTitle: subtitle,
+      buttons: ['Dismiss']
+    });
+    alert.setMode("ios");
+    alert.present();
   }
 
   loginService(email, pwd, type){
@@ -222,10 +233,10 @@ export class UtilsProvider {
     });
   }
 
-  getSlots(username){
+  getSlots(vendor){
     let ref = this;
     let dataToSend = {
-      "username": username
+      "username": vendor
     };
     return new Promise((resolve, reject) => {
       // let location = this.utils.getMapCenter();
@@ -233,10 +244,35 @@ export class UtilsProvider {
       headers.append('Content-Type','application/json');
       headers.append('Access-Control-Allow-Origin' , '*');
       headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
-      let url = this.serverUrl + 'getProfile';
+      let url = this.serverUrl + 'getSlots';
       let body = JSON.stringify(dataToSend);
       this.http.post(url, body, {headers: headers}).map(res => res.json()).subscribe(data => {
-        console.log("Got Profile");
+        console.log("Got Slots");
+        console.log(data);
+        ref.profile = (data.result);
+        resolve(data.result);
+
+        // resolve(data);
+      }, error => {
+        console.log("ERROR");
+        console.log(error);
+        //reject("false");
+        resolve(false);
+      });
+    });
+  }
+  boookVendor(dataToSend){
+    let ref = this;
+    return new Promise((resolve, reject) => {
+      // let location = this.utils.getMapCenter();
+      let headers = new Headers();
+      headers.append('Content-Type','application/json');
+      headers.append('Access-Control-Allow-Origin' , '*');
+      headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+      let url = this.serverUrl + 'bookVendor';
+      let body = JSON.stringify(dataToSend);
+      this.http.post(url, body, {headers: headers}).map(res => res.json()).subscribe(data => {
+        console.log("Booked Vendor");
         console.log(data);
         ref.profile = (data.result);
         resolve(data.result);

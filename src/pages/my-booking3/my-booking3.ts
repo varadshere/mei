@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {stringSplice} from "@ionic/app-scripts";
+import {UtilsProvider} from "../../providers/utils/utils";
+import {ResultsPage} from "../results/results";
+import {SidemenuPage} from "../sidemenu/sidemenu";
 
 /**
  * Generated class for the MyBooking3Page page.
@@ -22,7 +25,7 @@ export class MyBooking3Page {
   endTime:any;
   totalCost = 0;
   selectedServicesNames:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private utilsProvider: UtilsProvider) {
     this.profileData = navParams.get('profile');
     this.schedule = navParams.get('schedule');
     this.selectedDate = navParams.get('selectedDate');
@@ -50,5 +53,23 @@ export class MyBooking3Page {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MyBooking3Page');
+  }
+
+  book(){
+    let dataToSend = {
+      "username": this.utilsProvider.getUserEmail(),
+      "vendorname": this.profileData.username,
+      "date": "03/19/2018",
+      "time": "22:00",
+      "services": this.profileData.services
+    };
+    let bookVendorPromise  = this.utilsProvider.boookVendor(dataToSend);
+    let ref = this;
+    bookVendorPromise.then(function (result: any) {
+      ref.utilsProvider.presentAlert("Booking Confirmed", "Thank You!");
+      ref.utilsProvider.setPage(ResultsPage);
+      ref.utilsProvider.notifyOther('data');
+      ref.navCtrl.push(SidemenuPage); 
+    });
   }
 }

@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import * as moment from "moment";
 import {SidemenuPage} from "../sidemenu/sidemenu";
 import {MyBooking2Page} from "../my-booking2/my-booking2";
+import {UtilsProvider} from "../../providers/utils/utils";
 
 /**
  * Generated class for the MyBookingPage page.
@@ -80,8 +81,9 @@ export class MyBookingPage {
     }
   };
   totalCost = 0;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private utilsProvider: UtilsProvider) {
     this.profileData = navParams.get('profile');
+    this.getSlots();
     this.profileData.services.forEach(s => {
         s.list.forEach(d => {
           if(d.booked){
@@ -104,33 +106,33 @@ export class MyBookingPage {
 
     let thisDate1 = this.date.getFullYear()+"-"+(this.date.getMonth()+1)+"-"+this.date.getDay();
     this.selectedDate = moment(thisDate1, 'YYYY-MM-DD').format('DD MMMM YYYY');
-    this.gsDayNames = ['sun', 'mon', 'tue', 'wed', 'thur', 'fri', 'sat'];
-    this.slots =  {
-      "mon": [
-        {"time": "09:00"},
-        {"time": "10:00"},
-        {"time": "11:00"},
-        {"time": "12:00"},
-        {"time": "15:00"}
-      ],
-        "thur": [
-          {"time": "09:00"},
-          {"time": "13:00"},
-          {"time": "14:00"},
-          {"time": "15:00"}
-      ],
-        "tue": [
-          {"time": "09:00"},
-          {"time": "10:00"},
-          {"time": "11:00"},
-          {"time": "12:00"}
-      ],
-        "wed": [
-          {"time": "13:00"},
-          {"time": "16:00"},
-          {"time": "17:00"}
-      ]
-    };
+    this.gsDayNames = ['sun', 'mon', 'tue', 'wed', 'thurs', 'fri', 'sat'];
+    // this.slots =  {
+    //   "mon": [
+    //     {"time": "09:00"},
+    //     {"time": "10:00"},
+    //     {"time": "11:00"},
+    //     {"time": "12:00"},
+    //     {"time": "15:00"}
+    //   ],
+    //     "thur": [
+    //       {"time": "09:00"},
+    //       {"time": "13:00"},
+    //       {"time": "14:00"},
+    //       {"time": "15:00"}
+    //   ],
+    //     "tue": [
+    //       {"time": "09:00"},
+    //       {"time": "10:00"},
+    //       {"time": "11:00"},
+    //       {"time": "12:00"}
+    //   ],
+    //     "wed": [
+    //       {"time": "13:00"},
+    //       {"time": "16:00"},
+    //       {"time": "17:00"}
+    //   ]
+    // };
   }
 
   getDaysOfMonth() {
@@ -215,7 +217,7 @@ export class MyBookingPage {
     this.deSelectTime();
     let thisDate1 = this.date.getFullYear()+"-"+(this.date.getMonth()+1)+"-"+day.num;
     this.selectedDate = moment(thisDate1, 'YYYY-MM-DD').format('DD MMMM YYYY');
-    if(moment(thisDate1, 'YYYY-MM-DD') >= moment() ){
+    if(moment(thisDate1, 'YYYY-MM-DD').isSameOrAfter(moment(), 'day') ){
       //  this.calendar.currentDate = moment(thisDate1, 'YYYY-MM-DD').toDate();
       console.log(thisDate1);
       console.log("date");
@@ -258,14 +260,33 @@ export class MyBookingPage {
 
   navigate(){
     // this.navCtrl.push(MyBooking2Page);
-    this.navCtrl.push(MyBooking2Page, {
-      profile: this.profileData,
-      schedule: this.schedule,
-      selectedDate: this.selectedDate
-    });
+    let sSlots = this.getSelectedSlots();
+    if(sSlots.length > 0) {
+      this.navCtrl.push(MyBooking2Page, {
+        profile: this.profileData,
+        schedule: this.schedule,
+        selectedDate: this.selectedDate
+      });
+    }else {
+      this.utilsProvider.presentAlert("Booking Failed", "Please select Time!");
+    }
   }
   getSlots(){
+    let slotsPromise  = this.utilsProvider.getSlots(this.profileData.username);
+    let ref = this;
+    slotsPromise.then(function (result: any) {
+      ref.slots = result;
+    });
+  }
 
+  getSelectedSlots(){
+    let sSlots = [];
+    this.schedule.sch.forEach(d=>{
+      if(d.selected){
+        sSlots.push(d);
+      }
+    });
+    return sSlots;
   }
 
   swipeEvent(e){
