@@ -6,8 +6,8 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>signup</ion-title>
+  <ion-navbar mode="ios">
+    <ion-title text-center>SignUp</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -46,6 +46,9 @@
               </ion-item>
               <ion-item mode="ios">
                 <ion-input type="text" placeholder="Last Name" formControlName="lname" [class.invalid]="!slideTwoForm.controls.lname.valid && (slideTwoForm.controls.lname.dirty || submitTwoAttempt)" name="lname" required></ion-input>
+              </ion-item>
+              <ion-item mode="ios">
+                <ion-input type="text" placeholder="Address" formControlName="addr" [class.invalid]="!slideTwoForm.controls.addr.valid && (slideTwoForm.controls.addr.dirty || submitTwoAttempt)" name="addr" required></ion-input>
               </ion-item>
 
 
@@ -127,13 +130,20 @@
                 </ion-row>
                 <div *ngIf="isGroupShown(i)">
                   <div *ngFor="let l of d.list">
-                    <ion-row (click)="selectService(l)" tappable>
+                    <ion-row (click)="selectService(l)" align-items-center tappable>
                       <ion-col>
-                        <ion-icon class="icon-pad" [class.ion-selected]="l.selected" name="{{l.selected ? 'ios-checkmark' : 'ios-add'}}"></ion-icon>
+                        <ion-icon  [class.ion-selected]="l.selected" name="{{l.selected ? 'ios-checkmark' : 'ios-add'}}"></ion-icon>
                       </ion-col>
                       <ion-col col-10>
                         <div>
-                          <div class="service-title">{{l.name}}</div>
+                          <ion-row align-items-center>
+                            <ion-col col-8>
+                              <div class="service-title">{{l.name}}</div>
+                            </ion-col>
+                            <ion-col col-4>
+                              <ion-row align-items-center>$<ion-input type="text" [(ngModel)]="l.cost" placeholder="Cost" required></ion-input></ion-row>
+                            </ion-col>
+                          </ion-row>
                           <div class="service-desc">
                             {{l.desc}}
                           </div>

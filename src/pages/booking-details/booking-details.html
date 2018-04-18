@@ -7,10 +7,10 @@
 <ion-header>
 
   <ion-navbar>
-      <ion-buttons left>
-          <ion-icon class="icon-left" color="mei" name="arrow-back"></ion-icon>
-        </ion-buttons>
-    <ion-title text-center class="ub-medium heading">Booking Details</ion-title>
+      <!--<ion-buttons left>-->
+          <!--<ion-icon class="icon-left" color="mei" name="arrow-back"></ion-icon>-->
+        <!--</ion-buttons>-->
+    <ion-title text-center>Booking Details</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -18,23 +18,23 @@
 
 <ion-content>
 
-<div (click)="openMap()" #map id="map"></div> 
+<div (click)="openMap()" #map id="map"></div>
 <div padding>
 
   <div class="div1">
 
-      <div class="ub-medium dark-grey client-name">{{data.clientName}}</div> 
+      <div class="ub-medium dark-grey client-name">{{data.clientName}}</div>
 
       <div class="ub-medium light-grey client-address">{{data.clientAddress}}</div>
 
   </div>
-  
+
   <hr class="customhr">
 
 
   <div class="div2 ub-regular">
 
-      <div class="floatLeft"> 
+      <div class="floatLeft">
 
         <img src="./assets/imgs/calendar.png" height="25px" width="25px">
 
@@ -54,8 +54,8 @@
 
         <div class="floatLeft marginLeft dark-grey small-padding">
            {{data.appoinmentStartime}} - {{data.appoinmentEndTime}}
-          
-          
+
+
         </div>
 
     </div>

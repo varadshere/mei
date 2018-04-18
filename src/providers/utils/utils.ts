@@ -169,14 +169,14 @@ export class UtilsProvider {
     });
   }
 
-  getClientSettings(dataToSend){
+  getSettings(dataToSend){
     return new Promise((resolve, reject) => {
       // let location = this.utils.getMapCenter();
       let headers = new Headers();
       headers.append('Content-Type','application/json');
       headers.append('Access-Control-Allow-Origin' , '*');
       headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
-      let url = this.serverUrl + 'getClientSettings';
+      let url = this.serverUrl + 'getSettings';
       let body = JSON.stringify(dataToSend);
       this.http.post(url, body, {headers: headers}).map(res => res.json()).subscribe(data => {
         console.log("Got Settings");
@@ -197,6 +197,35 @@ export class UtilsProvider {
     let dataToSend = {
       "username":this.getUserEmail(),
       "email": this.getUserEmail()
+    };
+    return new Promise((resolve, reject) => {
+      // let location = this.utils.getMapCenter();
+      let headers = new Headers();
+      headers.append('Content-Type','application/json');
+      headers.append('Access-Control-Allow-Origin' , '*');
+      headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+      let url = this.serverUrl + 'getProfile';
+      let body = JSON.stringify(dataToSend);
+      this.http.post(url, body, {headers: headers}).map(res => res.json()).subscribe(data => {
+        console.log("Got Profile");
+        console.log(data);
+        ref.profile = (data.result);
+        resolve(data.result);
+
+        // resolve(data);
+      }, error => {
+        console.log("ERROR");
+        console.log(error);
+        //reject("false");
+        resolve(false);
+      });
+    });
+  }
+
+  getSlots(username){
+    let ref = this;
+    let dataToSend = {
+      "username": username
     };
     return new Promise((resolve, reject) => {
       // let location = this.utils.getMapCenter();

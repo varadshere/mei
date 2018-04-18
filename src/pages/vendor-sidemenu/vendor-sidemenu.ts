@@ -5,6 +5,8 @@ import {UtilsProvider} from "../../providers/utils/utils";
 import {VendorHomePage} from "../vendor-home/vendor-home";
 import {VendorBookingsPage} from "../vendor-bookings/vendor-bookings";
 import {VendorCalendarPage} from "../vendor-calendar/vendor-calendar";
+import {VendorSettingsPage} from "../vendor-settings/vendor-settings";
+import {ChartPage} from "../chart/chart";
 
 /**
  * Generated class for the VendorSidemenuPage page.
@@ -33,6 +35,10 @@ export class VendorSidemenuPage {
       this.rootPage = VendorBookingsPage;
     }else if(page == 'calendar'){
       this.rootPage = VendorCalendarPage;
+    }else if(page == 'settings'){
+      this.rootPage = VendorSettingsPage;
+    }else if(page == 'wallet'){
+      this.rootPage = ChartPage;
     }
   }
 

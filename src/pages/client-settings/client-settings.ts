@@ -37,7 +37,7 @@ email: string
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ClientSettingsPage');
-    this.getClientSettings();
+    this.getSettings();
 
   }
 
@@ -52,13 +52,14 @@ email: string
     });
   }
 
-  getClientSettings(){
+  getSettings(){
     let ref = this;
     let dts = {
       "username": this.utilsProvider.getUserEmail(),
-      "email": this.utilsProvider.getUserEmail()
+      "email": this.utilsProvider.getUserEmail(),
+      "type": "client"
     };
-    let getSettings = this.utilsProvider.getClientSettings(dts);
+    let getSettings = this.utilsProvider.getSettings(dts);
 
     getSettings.then(function (data:any) {
       if(data)

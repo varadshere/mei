@@ -29,7 +29,7 @@
     <ion-list *ngSwitchCase="'CURRENT'">
 
         <div mode="ios" *ngFor="let l of list2; let i=index">
-          <ion-row>
+          <ion-row (click)="navigate()">
             <ion-col col-3 align-items-center>
               <!--<ion-icon class="icon-pad"></ion-icon>-->
               <ion-row class="time-start">{{l.startTime}}</ion-row>

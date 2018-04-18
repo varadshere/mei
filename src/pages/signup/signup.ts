@@ -60,9 +60,9 @@ export class SignupPage {
     submitTwoAttempt = false;
 
     services = [
-      { title: "HAIR", list: [{name: 'Up-do', selected: false, desc: 'Sweep up your hair in a range of ways including an assortment of ponytails, braids and more'}, {name: 'Event Trial', selected: false, desc: 'Sweep up your hair in a range of ways including an assortment of ponytails, braids and more'}, {name: 'Hairstyling', selected: false, desc: 'Test-run a hair look and style before your big event'}, {name: 'Blow Wave', selected: false, desc: 'Hair straightening, waving, crimping and more'}] },
-      { title: "MAKEUP", list: [{name: 'Up-do', selected: false, desc: 'Sweep up your hair in a range of ways including an assortment of ponytails, braids and more'}, {name: 'Event Trial', selected: false, desc: 'Sweep up your hair in a range of ways including an assortment of ponytails, braids and more'}, {name: 'Hairstyling', selected: false, desc: 'Sweep up your hair in a range of ways including an assortment of ponytails, braids and more'}, {name: 'Blow Wave', selected: false, desc: 'Test-run a hair look and style before your big event'}]  },
-      { title: "NAILS", list: [{name: 'Up-do', selected: false, desc: 'Sweep up'}, {name: 'Event Trial', selected: false, desc: 'braids and more'}, {name: 'Hairstyling', selected: false, desc: 'abcd'}, {name: 'Blow Wave', selected: false, desc: 'Hair straightening'}] },
+      { title: "HAIR", list: [{name: 'Up-do', selected: false, desc: 'Sweep up your hair in a range of ways including an assortment of ponytails, braids and more', cost: "0"}, {name: 'Event Trial', selected: false, desc: 'Sweep up your hair in a range of ways including an assortment of ponytails, braids and more', cost: "0"}, {name: 'Hairstyling', selected: false, desc: 'Test-run a hair look and style before your big event', cost: "0"}, {name: 'Blow Wave', selected: false, desc: 'Hair straightening, waving, crimping and more', cost: "0"}] },
+      { title: "MAKEUP", list: [{name: 'Up-do', selected: false, desc: 'Sweep up your hair in a range of ways including an assortment of ponytails, braids and more', cost: "0"}, {name: 'Event Trial', selected: false, desc: 'Sweep up your hair in a range of ways including an assortment of ponytails, braids and more', cost: "0"}, {name: 'Hairstyling', selected: false, desc: 'Sweep up your hair in a range of ways including an assortment of ponytails, braids and more', cost: "0"}, {name: 'Blow Wave', selected: false, desc: 'Test-run a hair look and style before your big event', cost: "0"}]  },
+      { title: "NAILS", list: [{name: 'Up-do', selected: false, desc: 'Sweep up', cost: "0"}, {name: 'Event Trial', selected: false, desc: 'braids and more', cost: "0"}, {name: 'Hairstyling', selected: false, desc: 'abcd', cost: "0"}, {name: 'Blow Wave', selected: false, desc: 'Hair straightening', cost: "0"}] },
     ];
 
     // s = [
@@ -149,7 +149,8 @@ export class SignupPage {
         fname: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
         lname: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
         pwd: ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(12), Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,12}$')])],
-        cnfPwd: ['', Validators.required]
+        cnfPwd: ['', Validators.required],
+        addr: ['', Validators.required]
       },{validator: this.matchingPasswords('pwd', 'cnfPwd')});
     }
 
@@ -280,27 +281,27 @@ export class SignupPage {
   }
 
   getDaysArr(){
-    let daysArr = '';
+    let daysArr = [];
     if(this.day.mon.selected){
-      daysArr = daysArr + 'mon,';
+      daysArr.push('mon');
     }
     if(this.day.tue.selected){
-      daysArr = daysArr + 'tue,';
+      daysArr.push('tue');
     }
     if(this.day.wed.selected){
-      daysArr = daysArr + 'wed,';
+      daysArr.push('wed');
     }
     if(this.day.thu.selected){
-      daysArr = daysArr + 'thu,';
+      daysArr.push('thurs');
     }
     if(this.day.fri.selected){
-      daysArr = daysArr + 'fri,';
+      daysArr.push('fri');
     }
     if(this.day.sat.selected){
-      daysArr = daysArr + 'sat,';
+      daysArr.push('sat');
     }
     if(this.day.sun.selected){
-      daysArr = daysArr + 'sun,';
+      daysArr.push('sun');
     }
 
     return daysArr;
@@ -311,7 +312,7 @@ export class SignupPage {
 
     if(!this.slideTwoForm.valid){
       //this.signupSlider.slideTo(0);
-      console.log("FAIL!")
+      console.log("Validation FAIL!")
     }else {
       let dataToSend = {
         "username":this.slideTwoForm.value.email,
@@ -319,6 +320,7 @@ export class SignupPage {
         "password": this.slideTwoForm.value.pwd,
         "first_name": this.slideTwoForm.value.fname,
         "last_name": this.slideTwoForm.value.lname,
+        "address": this.slideTwoForm.value.addr,
         "type": "client"
       };
       let dataToSendEditClient = {

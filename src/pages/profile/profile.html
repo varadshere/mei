@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Profile</ion-title>
+    <ion-title text-center>Profile</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -48,7 +48,7 @@
       <ion-list>
         <div *ngFor="let d of profileData.services; let i=index" text-wrap [ngClass]="{active: isGroupShown(i)}" style="padding-bottom: 20px;">
           <ion-row class="service-header" (click)="toggleGroup(i)">
-            <ion-col>
+            <ion-col text-uppercase>
               {{d.title}}
             </ion-col>
             <ion-col style="text-align: right;">
@@ -63,7 +63,14 @@
                 </ion-col>
                 <ion-col col-10>
                   <div>
-                    <div class="service-title">{{l.name}}</div>
+                    <ion-row align-items-center>
+                      <ion-col col-8>
+                        <div class="service-title">{{l.name}}</div>
+                      </ion-col>
+                      <ion-col col-4>
+                        <ion-row align-items-center>$ {{l.cost}}</ion-row>
+                      </ion-col>
+                    </ion-row>
                     <div class="service-desc">
                       {{l.description}}
                     </div>

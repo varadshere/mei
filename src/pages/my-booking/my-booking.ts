@@ -30,6 +30,14 @@ export class MyBookingPage {
   selectedEvent: any;
   isSelected: any;
 
+
+  schedule = {
+    sch: []
+  }; //string[];
+  gsDayNames: string[];
+  slots: any;
+  profileData:any = {};
+  bookedServices = 0;
   timeObj = {
     _0900: {
       selected : false
@@ -71,8 +79,17 @@ export class MyBookingPage {
       selected : false
     }
   };
-
+  totalCost = 0;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.profileData = navParams.get('profile');
+    this.profileData.services.forEach(s => {
+        s.list.forEach(d => {
+          if(d.booked){
+            this.bookedServices++;
+             this.totalCost = this.totalCost + parseInt(d.cost);
+          }
+        });
+    });
   }
 
   ionViewDidLoad() {
@@ -87,6 +104,33 @@ export class MyBookingPage {
 
     let thisDate1 = this.date.getFullYear()+"-"+(this.date.getMonth()+1)+"-"+this.date.getDay();
     this.selectedDate = moment(thisDate1, 'YYYY-MM-DD').format('DD MMMM YYYY');
+    this.gsDayNames = ['sun', 'mon', 'tue', 'wed', 'thur', 'fri', 'sat'];
+    this.slots =  {
+      "mon": [
+        {"time": "09:00"},
+        {"time": "10:00"},
+        {"time": "11:00"},
+        {"time": "12:00"},
+        {"time": "15:00"}
+      ],
+        "thur": [
+          {"time": "09:00"},
+          {"time": "13:00"},
+          {"time": "14:00"},
+          {"time": "15:00"}
+      ],
+        "tue": [
+          {"time": "09:00"},
+          {"time": "10:00"},
+          {"time": "11:00"},
+          {"time": "12:00"}
+      ],
+        "wed": [
+          {"time": "13:00"},
+          {"time": "16:00"},
+          {"time": "17:00"}
+      ]
+    };
   }
 
   getDaysOfMonth() {
@@ -109,7 +153,10 @@ export class MyBookingPage {
 
     var thisNumOfDays = new Date(this.date.getFullYear(), this.date.getMonth()+1, 0).getDate();
     for (var j = 0; j < thisNumOfDays; j++) {
-      let dayObj = {num: j+1};
+      let dayObj = {
+        num: ("0" + (j+1)).slice(-2),
+        date: new Date(this.date.getFullYear(), this.date.getMonth(), j+1)
+      };
       this.daysInThisMonth.push(dayObj);
     }
 
@@ -165,18 +212,32 @@ export class MyBookingPage {
   }
 
   selectDate(day) {
+    this.deSelectTime();
     let thisDate1 = this.date.getFullYear()+"-"+(this.date.getMonth()+1)+"-"+day.num;
     this.selectedDate = moment(thisDate1, 'YYYY-MM-DD').format('DD MMMM YYYY');
-    //  this.calendar.currentDate = moment(thisDate1, 'YYYY-MM-DD').toDate();
-    console.log(thisDate1);
-    console.log("date");
-    // this.isSelected = false;
-    if(day.isSelected){
-      day.isSelected = false;
-    }else {
-      this.deSelectOther();
-      day.isSelected = true;
+    if(moment(thisDate1, 'YYYY-MM-DD') >= moment() ){
+      //  this.calendar.currentDate = moment(thisDate1, 'YYYY-MM-DD').toDate();
+      console.log(thisDate1);
+      console.log("date");
+      // this.isSelected = false;
+      if(day.isSelected){
+        day.isSelected = false;
+      }else {
+        this.deSelectOther();
+        day.isSelected = true;
+      }
+
+      let weekDay  = this.gsDayNames[day.date.getDay()];
+      if(this.slots[weekDay]){
+        let schedule = this.slots[weekDay];
+        day.schedule = schedule;
+        this.schedule.sch = schedule;
+      }else {
+        this.schedule.sch = [];
+      }
     }
+
+    //this.selectedDay = day;
     // this.selectedEvent = new Array();
     // var thisDate1 = this.date.getFullYear()+"-"+(this.date.getMonth()+1)+"-"+day+" 00:00:00";
     // var thisDate2 = this.date.getFullYear()+"-"+(this.date.getMonth()+1)+"-"+day+" 23:59:59";
@@ -196,6 +257,40 @@ export class MyBookingPage {
   }
 
   navigate(){
-      this.navCtrl.push(MyBooking2Page);
+    // this.navCtrl.push(MyBooking2Page);
+    this.navCtrl.push(MyBooking2Page, {
+      profile: this.profileData,
+      schedule: this.schedule,
+      selectedDate: this.selectedDate
+    });
   }
+  getSlots(){
+
+  }
+
+  swipeEvent(e){
+    console.log(e);
+  }
+
+  timeSelect(s){
+    this.deSelectTime();
+    this.schedule.sch.forEach((d, i) =>{
+        if(d.time == s.time){
+          for(let j = 0; j < this.bookedServices; j++){
+            if((j + i) < this.schedule.sch.length){
+              this.schedule.sch[j + i].selected = true;
+            }
+          }
+        }
+    });
+    // s.selected ? (s.selected = false) : (s.selected = true);
+
+  }
+
+  deSelectTime(){
+    this.schedule.sch.forEach((d, i) =>{
+      d.selected = false;
+    });
+  }
+
 }

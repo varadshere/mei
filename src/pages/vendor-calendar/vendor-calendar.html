@@ -22,7 +22,7 @@
       <ion-col col-2 (click)="goToNextMonth()"><ion-icon name="arrow-forward"></ion-icon></ion-col>
     </ion-row>
   </div>
-  <div class="calendar-body">
+  <div class="calendar-body" (swipe)="swipeEvent($event)">
     <ion-grid>
       <ion-row class="calendar-weekday">
         <ion-col>Su</ion-col>

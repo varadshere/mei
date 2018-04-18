@@ -205,4 +205,16 @@ export class VendorCalendarPage {
     });
   }
 
+  swipeEvent($e){
+    if($e.offsetDirection == 4){
+      // Swiped right, for example:
+      // this.week.prevWeek();
+      this.goToLastMonth();
+    } else if($e.offsetDirection == 2){
+      // Swiped left, for example:
+      // this.week.nextWeek();
+      this.goToNextMonth();
+    }
+  }
+
 }

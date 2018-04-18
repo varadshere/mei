@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>my-booking3</ion-title>
+    <ion-title text-center>My Booking</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -23,11 +23,11 @@
     </div>
     <ion-col>
       <ion-row>
-        <div class="profile-text-main">Marty McFly</div>
+        <div class="profile-text-main">{{profileData.first_name}} {{profileData.last_name}}</div>
 
       </ion-row>
       <ion-row>
-        <div class="location-text-main">Hope Valley, Adelaide</div>
+        <div class="location-text-main">{{profileData.address}}</div>
       </ion-row>
     </ion-col>
   </ion-row>
@@ -41,7 +41,7 @@
         Date
       </ion-col>
       <ion-col class="checkout-value">
-        6 Sept 2017
+        {{selectedDate}}
       </ion-col>
     </ion-row>
 
@@ -50,7 +50,7 @@
         Time
       </ion-col>
       <ion-col class="checkout-value">
-        12:00 - 02:30PM
+       {{startTime}} {{endTime}}
       </ion-col>
     </ion-row>
 
@@ -59,7 +59,9 @@
         Items
       </ion-col>
       <ion-col class="checkout-value">
-        1xEvent Trial
+        <ion-row *ngFor="let d of selectedServicesNames" style="justify-content: flex-end">
+          1x{{d}}
+        </ion-row>
       </ion-col>
     </ion-row>
 
@@ -68,8 +70,7 @@
         Address
       </ion-col>
       <ion-col class="checkout-value">
-        11 Charlotte Place
-        Adelaide, SA 5000
+        {{profileData.address}}
       </ion-col>
     </ion-row>
 
@@ -87,7 +88,7 @@
         Total
       </ion-col>
       <ion-col class="total-value">
-        $175
+        ${{totalCost}}
       </ion-col>
     </ion-row>
   </div>

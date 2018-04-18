@@ -15,7 +15,13 @@ import {MyBooking3Page} from "../my-booking3/my-booking3";
 })
 export class MyBooking2Page {
 
+  profileData: any = {};
+  schedule: any = {};
+  selectedDate:any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.profileData = navParams.get('profile');
+    this.schedule = navParams.get('schedule');
+    this.selectedDate = navParams.get('selectedDate');
   }
 
   ionViewDidLoad() {
@@ -23,6 +29,12 @@ export class MyBooking2Page {
   }
 
   navigate(){
-    this.navCtrl.push(MyBooking3Page);
+    // this.navCtrl.push(MyBooking3Page);
+    this.navCtrl.push(MyBooking3Page, {
+      profile: this.profileData,
+      slots: this.schedule,
+      selectedDate: this.selectedDate,
+      schedule:  this.schedule
+    });
   }
 }

@@ -48,7 +48,10 @@ export class ProfilePage {
   }
 
   navigate(){
-    this.navCtrl.push(MyBookingPage);
+    // this.navCtrl.push(MyBookingPage);
+    this.navCtrl.push(MyBookingPage, {
+      profile: this.profileData
+    });
   }
 
 

@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>my-booking</ion-title>
+    <ion-title text-center>My Booking</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -22,11 +22,11 @@
     </div>
     <ion-col>
       <ion-row>
-        <div class="profile-text-main">Marty McFly</div>
+        <div class="profile-text-main">{{profileData.first_name}} {{profileData.last_name}}</div>
 
       </ion-row>
       <ion-row>
-        <div class="location-text-main">Hope Valley, Adelaide</div>
+        <div class="location-text-main">{{profileData.address}}</div>
       </ion-row>
     </ion-col>
   </ion-row>
@@ -44,13 +44,13 @@
   <div class="calendar-body">
     <ion-grid>
       <ion-row class="calendar-weekday">
-        <ion-col>Su</ion-col>
-        <ion-col>Mo</ion-col>
-        <ion-col>Tu</ion-col>
-        <ion-col>We</ion-col>
-        <ion-col>Th</ion-col>
-        <ion-col>Fr</ion-col>
-        <ion-col>Sa</ion-col>
+        <ion-col>S</ion-col>
+        <ion-col>M</ion-col>
+        <ion-col>T</ion-col>
+        <ion-col>W</ion-col>
+        <ion-col>T</ion-col>
+        <ion-col>F</ion-col>
+        <ion-col>S</ion-col>
       </ion-row>
       <ion-row class="calendar-date">
         <ion-col col-1 *ngFor="let lastDay of daysInLastMonth" class="last-month" (click)="goToLastMonth()">{{lastDay}}</ion-col>
@@ -67,20 +67,9 @@
   </div>
   <ion-scroll scrollX="true" class="time-scrollbar">
     <div class="time-select">
-      <button class="time-badge" [class.time-selected]="timeObj._0900.selected" ion-button (click)="timeObj._0900.selected ? (timeObj._0900.selected = false) : (timeObj._0900.selected= true)" mode="md">09:00</button>
-      <button class="time-badge" [class.time-selected]="timeObj._1000.selected" ion-button (click)="timeObj._1000.selected ? (timeObj._1000.selected = false) : (timeObj._1000.selected= true)" mode="md">10:00</button>
-      <button class="time-badge" [class.time-selected]="timeObj._1100.selected" ion-button (click)="timeObj._1100.selected ? (timeObj._1100.selected = false) : (timeObj._1100.selected= true)" mode="md">11:00</button>
-      <button class="time-badge" [class.time-selected]="timeObj._1200.selected" ion-button (click)="timeObj._1200.selected ? (timeObj._1200.selected = false) : (timeObj._1200.selected= true)" mode="md">12:00</button>
-      <button class="time-badge" [class.time-selected]="timeObj._1300.selected" ion-button (click)="timeObj._1300.selected ? (timeObj._1300.selected = false) : (timeObj._1300.selected= true)" mode="md">13:00</button>
-      <button class="time-badge" [class.time-selected]="timeObj._1400.selected" ion-button (click)="timeObj._1400.selected ? (timeObj._1400.selected = false) : (timeObj._1400.selected= true)" mode="md">14:00</button>
-      <button class="time-badge" [class.time-selected]="timeObj._1500.selected" ion-button (click)="timeObj._1500.selected ? (timeObj._1500.selected = false) : (timeObj._1500.selected= true)" mode="md">15:00</button>
-      <button class="time-badge" [class.time-selected]="timeObj._1600.selected" ion-button (click)="timeObj._1600.selected ? (timeObj._1600.selected = false) : (timeObj._1600.selected= true)" mode="md">16:00</button>
-      <button class="time-badge" [class.time-selected]="timeObj._1700.selected" ion-button (click)="timeObj._1700.selected ? (timeObj._1700.selected = false) : (timeObj._1700.selected= true)" mode="md">17:00</button>
-      <button class="time-badge" [class.time-selected]="timeObj._1800.selected" ion-button (click)="timeObj._1800.selected ? (timeObj._1800.selected = false) : (timeObj._1800.selected= true)" mode="md">18:00</button>
-      <button class="time-badge" [class.time-selected]="timeObj._1900.selected" ion-button (click)="timeObj._1900.selected ? (timeObj._1900.selected = false) : (timeObj._1900.selected= true)" mode="md">19:00</button>
-      <button class="time-badge" [class.time-selected]="timeObj._2000.selected" ion-button (click)="timeObj._2000.selected ? (timeObj._2000.selected = false) : (timeObj._2000.selected= true)" mode="md">20:00</button>
-      <button class="time-badge" [class.time-selected]="timeObj._2100.selected" ion-button (click)="timeObj._2100.selected ? (timeObj._2100.selected = false) : (timeObj._2100.selected= true)" mode="md">21:00</button>
-      <!--<button class="time-badge" [class.time-selected]="timeObj._2200.selected" ion-button (click)="timeObj._2200.selected ? (timeObj._2200.selected = false) : (timeObj._2200.selected= true)" mode="md">22:00</button>-->
+      <div *ngFor="let s of schedule.sch">
+        <button class="time-badge" [class.time-selected]="s.selected" (click)="timeSelect(s)" ion-button mode="md">{{s.time}}</button>
+      </div>
     </div>
   </ion-scroll>
 
