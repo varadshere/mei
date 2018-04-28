@@ -15,7 +15,7 @@
 
 <ion-content padding>
   <div padding>
-    <ion-segment mode="ios">
+    <ion-segment mode="ios" [(ngModel)]="filter" (ionChange)="tabChanged($event)">
       <ion-segment-button value="today">
         Today
       </ion-segment-button>
@@ -30,7 +30,7 @@
   <ion-row>
     <ion-col>
       <ion-row class="row-border">
-        <div class="number-text">3</div>
+        <div class="number-text">{{summeryData.booking_count}}</div>
       </ion-row>
       <ion-row>
         <div class="number-rwo">
@@ -40,7 +40,7 @@
     </ion-col>
     <ion-col>
       <ion-row class="row-border">
-        <div class="number-text">$310</div>
+        <div class="number-text">${{summeryData.earnings}}</div>
       </ion-row>
       <ion-row>
         <div class="number-rwo">
@@ -50,7 +50,7 @@
     </ion-col>
     <ion-col>
       <ion-row>
-        <div class="number-text">5.5</div>
+        <div class="number-text">{{summeryData.hours}}</div>
       </ion-row>
       <ion-row>
         <div class="number-rwo">
@@ -63,7 +63,7 @@
   <ion-item-divider></ion-item-divider>
 
   <ion-list>
-    <div *ngFor="let d of services; let i=index" text-wrap [ngClass]="{active: isGroupShown(i)}" style="padding-bottom: 20px;">
+    <div *ngFor="let d of summeryData.bookings; let i=index" text-wrap [ngClass]="{active: isGroupShown(i)}" style="padding-bottom: 20px;">
       <ion-row class="service-header" (click)="toggleGroup(i)">
         <ion-col>
           {{d.title}}
@@ -84,7 +84,7 @@
               <div>
                 <div class="service-title">{{l.name}}</div>
                 <div class="service-desc">
-                  {{l.desc}}
+                  {{l.service_name}} | {{l.client_address}}
                 </div>
               </div>
             </ion-col>

@@ -107,32 +107,6 @@ export class MyBookingPage {
     let thisDate1 = this.date.getFullYear()+"-"+(this.date.getMonth()+1)+"-"+this.date.getDay();
     this.selectedDate = moment(thisDate1, 'YYYY-MM-DD').format('DD MMMM YYYY');
     this.gsDayNames = ['sun', 'mon', 'tue', 'wed', 'thurs', 'fri', 'sat'];
-    // this.slots =  {
-    //   "mon": [
-    //     {"time": "09:00"},
-    //     {"time": "10:00"},
-    //     {"time": "11:00"},
-    //     {"time": "12:00"},
-    //     {"time": "15:00"}
-    //   ],
-    //     "thur": [
-    //       {"time": "09:00"},
-    //       {"time": "13:00"},
-    //       {"time": "14:00"},
-    //       {"time": "15:00"}
-    //   ],
-    //     "tue": [
-    //       {"time": "09:00"},
-    //       {"time": "10:00"},
-    //       {"time": "11:00"},
-    //       {"time": "12:00"}
-    //   ],
-    //     "wed": [
-    //       {"time": "13:00"},
-    //       {"time": "16:00"},
-    //       {"time": "17:00"}
-    //   ]
-    // };
   }
 
   getDaysOfMonth() {
@@ -230,13 +204,23 @@ export class MyBookingPage {
       }
 
       let weekDay  = this.gsDayNames[day.date.getDay()];
-      if(this.slots[weekDay]){
-        let schedule = this.slots[weekDay];
-        day.schedule = schedule;
-        this.schedule.sch = schedule;
-      }else {
-        this.schedule.sch = [];
-      }
+      let data = {
+        "username": this.profileData.username,
+        "date": moment(thisDate1, 'YYYY-MM-DD').format('MM/DD/YYYY'),
+        "week_day":weekDay
+      };
+      let ref = this;
+      let slotsbyday = this.utilsProvider.getSlotsByDay(data);
+      slotsbyday.then((result:any)=>{
+          ref.schedule.sch = result;
+      });
+      // if(this.slots[weekDay]){
+      //   let schedule = this.slots[weekDay];
+      //   day.schedule = schedule;
+      //   this.schedule.sch = schedule;
+      // }else {
+      //   this.schedule.sch = [];
+      // }
     }
 
     //this.selectedDay = day;
@@ -251,7 +235,9 @@ export class MyBookingPage {
     //   }
     // });
   }
+  getSlotsByDay(data){
 
+  }
   deSelectOther(){
     this.daysInThisMonth.forEach(function (day) {
       day.isSelected = false;

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Subject} from "rxjs";
-import {Http, Headers} from '@angular/http';
+import {Http, Headers, Response} from '@angular/http';
 import { AlertController } from 'ionic-angular';
 
 /*
@@ -59,6 +59,8 @@ export class UtilsProvider {
     return this.email
   }
 
+
+
   presentAlert(title, subtitle) {
     let alert = this.alertCtrl.create({
       title: title,
@@ -67,6 +69,12 @@ export class UtilsProvider {
     });
     alert.setMode("ios");
     alert.present();
+  }
+
+  getInstagramUserInfo(response) {
+    //GET USER PHOTOS
+    return this.http.get('https://api.instagram.com/v1/users/self/media/recent?access_token=' + response.access_token + '&count=5')
+      .map((res:Response) => res.json());
   }
 
   loginService(email, pwd, type){
@@ -261,6 +269,32 @@ export class UtilsProvider {
       });
     });
   }
+
+  getSlotsByDay(dataToSend){
+    let ref = this;
+    return new Promise((resolve, reject) => {
+      // let location = this.utils.getMapCenter();
+      let headers = new Headers();
+      headers.append('Content-Type','application/json');
+      headers.append('Access-Control-Allow-Origin' , '*');
+      headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+      let url = this.serverUrl + 'getSlotsByDay';
+      let body = JSON.stringify(dataToSend);
+      this.http.post(url, body, {headers: headers}).map(res => res.json()).subscribe(data => {
+        console.log("Got SlotsByDay");
+        console.log(data);
+        ref.profile = (data.result);
+        resolve(data.result);
+
+        // resolve(data);
+      }, error => {
+        console.log("ERROR");
+        console.log(error);
+        //reject("false");
+        resolve(false);
+      });
+    });
+  }
   boookVendor(dataToSend){
     let ref = this;
     return new Promise((resolve, reject) => {
@@ -277,6 +311,56 @@ export class UtilsProvider {
         ref.profile = (data.result);
         resolve(data.result);
 
+        // resolve(data);
+      }, error => {
+        console.log("ERROR");
+        console.log(error);
+        //reject("false");
+        resolve(false);
+      });
+    });
+  }
+  getSummery(dataToSend){
+    let ref = this;
+    return new Promise((resolve, reject) => {
+      // let location = this.utils.getMapCenter();
+      let headers = new Headers();
+      headers.append('Content-Type','application/json');
+      headers.append('Access-Control-Allow-Origin' , '*');
+      headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+      let url = this.serverUrl + 'getBookingsSummery';
+      let body = JSON.stringify(dataToSend);
+      this.http.post(url, body, {headers: headers}).map(res => res.json()).subscribe(data => {
+        console.log("got BookingsSummery");
+        console.log(data);
+        ref.profile = (data.result);
+        resolve(data.result);
+
+        // resolve(data);
+      }, error => {
+        console.log("ERROR");
+        console.log(error);
+        //reject("false");
+        resolve(false);
+      });
+    });
+  }
+
+  getBookings(dataToSend){
+    let ref = this;
+    return new Promise((resolve, reject) => {
+      // let location = this.utils.getMapCenter();
+      let headers = new Headers();
+      headers.append('Content-Type','application/json');
+      headers.append('Access-Control-Allow-Origin' , '*');
+      headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+      let url = this.serverUrl + 'getBookings';
+      let body = JSON.stringify(dataToSend);
+      this.http.post(url, body, {headers: headers}).map(res => res.json()).subscribe(data => {
+        console.log("got Bookings");
+        console.log(data);
+        ref.profile = (data.result);
+        resolve(data.result);
         // resolve(data);
       }, error => {
         console.log("ERROR");

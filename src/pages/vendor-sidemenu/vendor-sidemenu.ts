@@ -31,7 +31,9 @@ export class VendorSidemenuPage {
   }
 
   openPage(page){
-    if(page == 'activity'){
+    if(page == 'home'){
+      this.rootPage = VendorHomePage;
+    }else if(page == 'activity'){
       this.rootPage = VendorBookingsPage;
     }else if(page == 'calendar'){
       this.rootPage = VendorCalendarPage;

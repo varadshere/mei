@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {UtilsProvider} from "../../providers/utils/utils";
+import {sum} from "d3-array";
 
 /**
  * Generated class for the VendorHomePage page.
@@ -13,7 +15,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class VendorHomePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  filterValue: any;
+  filter= 'today';
+  summeryData = {};
+  constructor(public navCtrl: NavController, public navParams: NavParams, private utilsProvider: UtilsProvider) {
+    this.getSummery(this.filter);
   }
 
   ionViewDidLoad() {
@@ -39,6 +45,26 @@ export class VendorHomePage {
     }else{
       l.selected = true;
     }
+  }
+
+  tabChanged(e){
+    this.filterValue = e._value;
+    console.log(this.filterValue);
+    this.getSummery(this.filterValue);
+  }
+
+  getSummery(filter){
+    let dataToSend = {
+      "filter": filter,
+      "vendor_username": this.utilsProvider.getUserEmail()
+    };
+    let summeryPromise = this.utilsProvider.getSummery(dataToSend);
+    let ref = this;
+    summeryPromise.then(function (result: any) {
+      if(result){
+        ref.summeryData = result;
+      }
+    })
   }
 
   services = [

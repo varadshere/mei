@@ -3,7 +3,18 @@ page-signup {
     width: 200px;
     height: 50px;
     border-radius: 25px;
-    background-color: #F9748F;
+    background: linear-gradient(257.2deg, #FE9A8B 39.32%, #FD868C 80.81%, #F9748F 140.89%);
+  }
+
+  .insta-button{
+    width: 300px;
+    height: 35px;
+    border-radius: 25px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 14px;
+    font-size: 12px;
+    background: linear-gradient(264.41deg, #FF9455 43.33%, #F35369 92.23%, #B74E9C 145.3%);
   }
 
   .day-button{
@@ -62,6 +73,13 @@ page-signup {
   }
   .ion-selected{
     color: #F9748F;
+  }
+
+  .img-col{
+    padding: 0;
+  }
+  .img-col img{
+    height: 125px;
   }
 
 }

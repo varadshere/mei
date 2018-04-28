@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import * as moment from "moment";
+import {UtilsProvider} from "../../providers/utils/utils";
 
 @Component({
   selector: 'page-vendor-calendar',
@@ -25,22 +26,39 @@ export class VendorCalendarPage {
     console.log(this.event.startTime);
   }
 
-  addEvent() {
+  // addEvent() {
+  //   let eventData = {
+  //     startTime: new Date(),
+  //     endTime: new Date(),
+  //     title:'Test Title'
+  //   };
+  //   eventData.startTime = new Date(this.event.startTime);
+  //   eventData.endTime = new Date(this.event.endTime);
+  //
+  //   let events = this.eventSource;
+  //
+  //   events.push(eventData);
+  //   this.eventSource = [];
+  //   setTimeout(() => {
+  //     this.eventSource = events;
+  //   });
+  //   //this.eventSource = events;
+  // }
+
+  addEvent(startTime, endTime, service_name, client_address, date, name) {
     let eventData = {
-      startTime: new Date(),
-      endTime: new Date(),
-      title:'Test Title'
+      startTime: startTime,
+      endTime: endTime,
+      title: name + ' | ' +service_name + ' | ' + client_address
     };
-    eventData.startTime = new Date(this.event.startTime);
-    eventData.endTime = new Date(this.event.endTime);
+    eventData.startTime = moment((date + ' ' + startTime), 'YYYY-MM-DD HH:mm').toDate();//new Date(this.event.startTime);
+    eventData.endTime = moment((date + ' ' + endTime), 'YYYY-MM-DD HH:mm').toDate();//new Date(this.event.endTime);
+    //
+    // let events = this.eventSource;
+    //
+    // events.push(eventData);
 
-    let events = this.eventSource;
-
-    events.push(eventData);
-    this.eventSource = [];
-    setTimeout(() => {
-      this.eventSource = events;
-    });
+    return eventData;
     //this.eventSource = events;
   }
 
@@ -82,7 +100,7 @@ export class VendorCalendarPage {
   isSelected: any;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private utilsProvider: UtilsProvider) {
   }
 
   ionViewDidLoad() {
@@ -95,8 +113,8 @@ export class VendorCalendarPage {
     this.getDaysOfMonth();
     this.loadEventThisMonth();
 
-    let thisDate1 = this.date.getFullYear()+"-"+(this.date.getMonth()+1)+"-"+this.date.getDay();
-    this.selectedDate = moment(thisDate1, 'YYYY-MM-DD').format('DD MMMM YYYY');
+    // let thisDate1 = this.date.getFullYear()+"-"+(this.date.getMonth()+1)+"-"+this.date.getDay();
+    this.selectedDate = moment().format('DD MMMM YYYY');
   }
 
   getDaysOfMonth() {
@@ -150,16 +168,6 @@ export class VendorCalendarPage {
     this.eventList = new Array();
     var startDate = new Date(this.date.getFullYear(), this.date.getMonth(), 1);
     var endDate = new Date(this.date.getFullYear(), this.date.getMonth()+1, 0);
-    // this.calendar.listEventsInRange(startDate, endDate).then(
-    //   (msg) => {
-    //     msg.forEach(item => {
-    //       this.eventList.push(item);
-    //     });
-    //   },
-    //   (err) => {
-    //     console.log(err);
-    //   }
-    // );
   }
 
   checkEvent(day) {
@@ -187,16 +195,7 @@ export class VendorCalendarPage {
       this.deSelectOther();
       day.isSelected = true;
     }
-    // this.selectedEvent = new Array();
-    // var thisDate1 = this.date.getFullYear()+"-"+(this.date.getMonth()+1)+"-"+day+" 00:00:00";
-    // var thisDate2 = this.date.getFullYear()+"-"+(this.date.getMonth()+1)+"-"+day+" 23:59:59";
-    // this.eventList.forEach(event => {
-    //   if(((event.startDate >= thisDate1) && (event.startDate <= thisDate2)) || ((event.endDate >= thisDate1) && (event.endDate <= thisDate2))) {
-    //     this.isSelected = true;
-    //     day.isSelected = true;
-    //     this.selectedEvent.push(event);
-    //   }
-    // });
+    this.getEvents(thisDate1);
   }
 
   deSelectOther(){
@@ -216,5 +215,28 @@ export class VendorCalendarPage {
       this.goToNextMonth();
     }
   }
+  getEvents(date){
+    let dataToSend = {
+      "filter": moment(date, 'YYYY-MM-DD').format('MM/DD/YYYY'),//"04/28/2018",
+      "vendor_username": this.utilsProvider.getUserEmail()
+    };
+    let ref = this;
+    let eventsPromise = this.utilsProvider.getSummery(dataToSend);
+    eventsPromise.then((results:any)=>{
+      if(results.bookings){
+        let events = [];
+        results.bookings.forEach(bookings =>{
+          bookings.list.forEach(d =>{
+            let ev = this.addEvent(d.startTime, d.endTime, d.service_name, d.client_address, date, d.name);
+            events.push(ev);
+          });
+        });
 
+        this.eventSource = [];
+        setTimeout(() => {
+          this.eventSource = events;
+        });
+      }
+    });
+  }
 }

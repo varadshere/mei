@@ -68,15 +68,15 @@ export class LoginPage {
     let ref = this;
     loginPromise.then(function (result: any) {
       if(result){
-        // ref.navCtrl.push(SidemenuPage);
         ref.utilsProvider.setUserEmail(ref.vendor.email);
         ref.utilsProvider.getProfile();
+        ref.utilsProvider.setPage(VendorHomePage);
+        ref.navCtrl.push(VendorSidemenuPage);
       }else{
         console.log("Wrong Creds");
       }
     });
-    this.utilsProvider.setPage(VendorHomePage);
-    ref.navCtrl.push(VendorSidemenuPage);
+
   }
 
 }

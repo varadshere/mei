@@ -23,9 +23,9 @@
 
   <div class="div1">
 
-      <div class="ub-medium dark-grey client-name">{{data.clientName}}</div>
+      <div class="ub-medium dark-grey client-name">{{bookingData.name}}</div>
 
-      <div class="ub-medium light-grey client-address">{{data.clientAddress}}</div>
+      <div class="ub-medium light-grey client-address">{{bookingData.address}}</div>
 
   </div>
 
@@ -33,45 +33,31 @@
 
 
   <div class="div2 ub-regular">
-
       <div class="floatLeft">
-
         <img src="./assets/imgs/calendar.png" height="25px" width="25px">
-
       </div>
-
-        <div class="floatLeft marginLeft dark-grey small-padding"> {{data.appoinmentDate}}</div>
-
+        <div class="floatLeft marginLeft dark-grey small-padding"> {{bookingData.date}}</div>
         <div class="fix"></div>
-
       <div class="clockDiv">
-
         <div class="floatLeft">
-
         <img src="./assets/imgs/clock.png" height="25px" width="25px">
-
         </div>
-
         <div class="floatLeft marginLeft dark-grey small-padding">
-           {{data.appoinmentStartime}} - {{data.appoinmentEndTime}}
-
-
+           {{bookingData.startTime}} - {{bookingData.endTime}}
         </div>
-
     </div>
         <div class="fix"></div>
-
   </div>
 
   <hr class="customhr">
 
   <div class="div3 ub-medium">
       <div class="floatLeft dark-grey font1"> Services</div>
-      <div class="floatRight font1 mei-color ">{{data.serviceTotal}}</div>
+      <div class="floatRight font1 mei-color ">{{bookingData.serviceTotal}}</div>
       <div class="fix"></div>
       <div class="bottom-spacer"></div>
 
-  <div class="service-list dark-grey ub-medium" *ngFor=" let item of data.services">
+  <div class="service-list dark-grey ub-medium" *ngFor=" let item of bookingData.services">
   <div class="floatLeft ">{{item.quantity}} x {{item.serviceName}}</div>
   <div class="floatRight">${{item.price}}</div>
   <div class="fix"></div>
@@ -89,7 +75,7 @@
   <div class="fix"></div>
 <hr class="customhr">
 <p text-center><button ion-button round class="disp-button ub-medium"> RAISE A DISPUTE</button></p>
-    </div>
+  </div>
 
 </div>
 </ion-content>

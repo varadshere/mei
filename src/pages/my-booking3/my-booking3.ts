@@ -4,6 +4,7 @@ import {stringSplice} from "@ionic/app-scripts";
 import {UtilsProvider} from "../../providers/utils/utils";
 import {ResultsPage} from "../results/results";
 import {SidemenuPage} from "../sidemenu/sidemenu";
+import * as moment from "moment";
 
 /**
  * Generated class for the MyBooking3Page page.
@@ -54,13 +55,21 @@ export class MyBooking3Page {
   ionViewDidLoad() {
     console.log('ionViewDidLoad MyBooking3Page');
   }
+  getSlots(sch){
 
+  }
   book(){
+    let slots= [];
+    this.schedule.sch.forEach(d =>{
+      if(d.selected){
+        slots.push(d.time);
+      }
+    });
     let dataToSend = {
       "username": this.utilsProvider.getUserEmail(),
-      "vendorname": this.profileData.username,
-      "date": "03/19/2018",
-      "time": "22:00",
+      "vendor_username": this.profileData.username,
+      "date": moment(this.selectedDate, 'DD MMMM YYYY').format('MM/DD/YYYY'),
+      "time": slots,
       "services": this.profileData.services
     };
     let bookVendorPromise  = this.utilsProvider.boookVendor(dataToSend);
@@ -69,7 +78,7 @@ export class MyBooking3Page {
       ref.utilsProvider.presentAlert("Booking Confirmed", "Thank You!");
       ref.utilsProvider.setPage(ResultsPage);
       ref.utilsProvider.notifyOther('data');
-      ref.navCtrl.push(SidemenuPage); 
+      ref.navCtrl.push(SidemenuPage);
     });
   }
 }

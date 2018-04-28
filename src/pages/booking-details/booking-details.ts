@@ -17,7 +17,7 @@ declare var google;
 })
 export class BookingDetailsPage {
   @ViewChild('map') mapElement: ElementRef;
- 
+
   map: any;
   latLng:any;
   modalObj:any;
@@ -31,27 +31,22 @@ export class BookingDetailsPage {
     appoinmentStartime:"12:30 PM",
     appoinmentEndTime:"2:00 PM",
     serviceTotal:"$155",
- 
+
     services:[{serviceName:"Hairstyling",quantity:1,price:70},
     {serviceName:"Blow Wave",quantity:1,price:20},
     {serviceName:"Full Face Application",quantity:1,price:65}
     ],
     commision:{percentage:15, percent_amt:23.25, commisionWaive:true}
-
-
-
   };
 
-
-
+  bookingData: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController) {
+    this.bookingData = navParams.get('bookingData');
   }
 
   ionViewDidLoad(){
     this.loadLatLng();
-    
-    
   }
 
 loadLatLng(){
@@ -59,13 +54,13 @@ loadLatLng(){
     this.latLng=new google.maps.LatLng(result.lat,result.lng);
     this.loadMap(this.latLng);
     this.createmodalobj();
-  console.log("LATLNGGGGGG",JSON.stringify(this.latLng))
+  // console.log("LATLNGGGGGG",JSON.stringify(this.latLng))
  })
- 
+
 }
 
   getlatlng(address){
-    
+
     var promise=new Promise((resolve,reject)=>{
     var geocoder = new google.maps.Geocoder();
     geocoder.geocode( { 'address': address}, function(results, status){
@@ -75,15 +70,15 @@ loadLatLng(){
         var longitude = results[0].geometry.location.lng();
        // console.log(JSON.stringify(results[0].geometry.location))
        resolve({lat:latitude,lng:longitude});
-       
-      } 
+
+      }
     });
   })
-    return promise; 
+    return promise;
   }
 
-  
-  
+
+
   createmodalobj(){
   this.modalObj={latlong:this.latLng, clientName:this.data.clientName, clientAddress:this.data.clientAddress};
   };
@@ -93,7 +88,7 @@ openMap(){
   Modal.present();
 }
   loadMap(latLng){
-    
+
     console.log("THIS>LATLANG",JSON.stringify(this.latLng))
     let mapOptions = {
       center: latLng,
@@ -261,19 +256,19 @@ openMap(){
       ],
       mapTypeId: google.maps.MapTypeId.ROADMAP
     }
- 
+
     let marker2 = new google.maps.Marker({
       map: this.map,
       position: latLng,
       icon:this.marker
     });
-   
-    
+
+
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
     marker2.setMap(this.map);
-   
-   
-   
+
+
+
   }
 
 }

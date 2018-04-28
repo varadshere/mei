@@ -164,10 +164,22 @@
               <ion-input type="text" placeholder="Bio" name="bio"></ion-input>
             </ion-item>
 
+            <ion-list>
+              <ion-row>
+                <ion-col col-4 class="img-col" *ngFor="let data of instaApiResp;">
+                  <img src="{{data.images.low_resolution.url}}">
+                </ion-col>
+              </ion-row>
+            </ion-list>
+            <div style="text-align: center; margin-top: 20px">
+              <button ion-button icon-start class="insta-button" (click)="instainit()">
+                <ion-icon name="logo-instagram"></ion-icon>
+                Connect to Instagram
+              </button>
+            </div>
             <div style="text-align: center; margin-top: 20px">
               <button ion-button class="signup-button" (click)="signUpVendor()">Signup</button>
             </div>
-
 
           </ion-list>
         </ion-col>

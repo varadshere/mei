@@ -8,6 +8,8 @@ import {SelectionHomePage} from "../selection-home/selection-home";
 import {VendorHomePage} from "../vendor-home/vendor-home";
 import {VendorSidemenuPage} from "../vendor-sidemenu/vendor-sidemenu";
 
+import { Instagram } from "ng2-cordova-oauth/core";
+import { OauthCordova } from 'ng2-cordova-oauth/platform/cordova';
 /**
  * Generated class for the SignupPage page.
  *
@@ -132,6 +134,27 @@ export class SignupPage {
     // ];
     shownGroup = null;
 
+    private oauth: OauthCordova = new OauthCordova();
+    private instaApiResp;
+    private instagramProvider: Instagram = new Instagram({
+      clientId: "0dfd7794e4b64da79d728825bc76a572",      // Register you client id from https://www.instagram.com/developer/
+      redirectUri: 'http://localhost',  // Let is be localhost for Mobile Apps
+      responseType: 'token',   // Use token only
+      appScope: ['basic','public_content']
+
+      /*
+      appScope options are
+
+      basic - to read a user’s profile info and media
+      public_content - to read any public profile info and media on a user’s behalf
+      follower_list - to read the list of followers and followed-by users
+      comments - to post and delete comments on a user’s behalf
+      relationships - to follow and unfollow accounts on a user’s behalf
+      likes - to like and unlike media on a user’s behalf
+
+      */
+    });
+
     constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, private utils: UtilsProvider) {
       this.slideOneForm = formBuilder.group({
         email: ['', Validators.compose([Validators.maxLength(30), Validators.pattern(SignupPage.EMAIL_REGEX), Validators.required])],
@@ -152,6 +175,23 @@ export class SignupPage {
         cnfPwd: ['', Validators.required],
         addr: ['', Validators.required]
       },{validator: this.matchingPasswords('pwd', 'cnfPwd')});
+
+      this.instaApiResp = [];
+    }
+
+    instainit(){
+      this.oauth.logInVia(this.instagramProvider).then((success) => {
+
+        console.log(JSON.stringify(success));
+
+        /* Returns User uploaded Photos */
+        this.utils.getInstagramUserInfo(success).subscribe(response => {
+          this.instaApiResp=response.data;
+          console.log(response.data);
+        });
+      }, (error) => {
+        console.log(JSON.stringify(error));
+      });
     }
 
     toggleGroup(group) {

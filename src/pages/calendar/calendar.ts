@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import * as moment from 'moment';
+import {UtilsProvider} from "../../providers/utils/utils";
 
 /**
  * Generated class for the CalendarPage page.
@@ -32,14 +33,14 @@ export class CalendarPage {
     console.log(this.event.startTime);
   }
 
-  addEvent() {
+  addEvent(startTime, endTime, service_name, client_address, date) {
     let eventData = {
-      startTime: new Date(),
-      endTime: new Date(),
-      title:'Test Title'
+      startTime: startTime,
+      endTime: endTime,
+      title: service_name + ' | ' + client_address
     };
-    eventData.startTime = new Date(this.event.startTime);
-    eventData.endTime = new Date(this.event.endTime);
+    eventData.startTime = moment((date + ' ' + startTime), 'YYYY-MM-DD HH:mm');//new Date(this.event.startTime);
+    eventData.endTime = moment((date + ' ' + endTime), 'YYYY-MM-DD HH:mm');//new Date(this.event.endTime);
 
     let events = this.eventSource;
 
@@ -89,7 +90,7 @@ export class CalendarPage {
   isSelected: any;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private utilsProvider: UtilsProvider) {
   }
 
   ionViewDidLoad() {
@@ -194,16 +195,6 @@ export class CalendarPage {
       this.deSelectOther();
       day.isSelected = true;
     }
-    // this.selectedEvent = new Array();
-    // var thisDate1 = this.date.getFullYear()+"-"+(this.date.getMonth()+1)+"-"+day+" 00:00:00";
-    // var thisDate2 = this.date.getFullYear()+"-"+(this.date.getMonth()+1)+"-"+day+" 23:59:59";
-    // this.eventList.forEach(event => {
-    //   if(((event.startDate >= thisDate1) && (event.startDate <= thisDate2)) || ((event.endDate >= thisDate1) && (event.endDate <= thisDate2))) {
-    //     this.isSelected = true;
-    //     day.isSelected = true;
-    //     this.selectedEvent.push(event);
-    //   }
-    // });
   }
 
   deSelectOther(){

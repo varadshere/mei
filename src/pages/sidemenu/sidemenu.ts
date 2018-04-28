@@ -9,6 +9,7 @@ import {UtilsProvider} from "../../providers/utils/utils";
 import {SelectionHomePage} from "../selection-home/selection-home";
 import {ClientSettingsPage} from "../client-settings/client-settings";
 import { BookingDetailsPage } from '../booking-details/booking-details';
+import {ClientBookingsPage} from "../client-bookings/client-bookings";
 
 /**
  * Generated class for the SidemenuPage page.
@@ -48,13 +49,10 @@ export class SidemenuPage {
     if(param == 'home'){
       this.rootPage = SelectionHomePage;
     }else if(param == 'booking'){
-      //rootPage = LoginPage;
-      this.rootPage = ResultsPage;
+      this.rootPage = ClientBookingsPage;
     }else if(param == 'profile'){
-      //rootPage = LoginPage;
       this.rootPage = ProfilePage;
     }else if(param == 'settings'){
-      //rootPage = Login Page;
       this.rootPage = ClientSettingsPage;
     }else if(param == 'map'){
       this.rootPage = BookingDetailsPage;
