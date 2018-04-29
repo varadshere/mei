@@ -25,6 +25,13 @@ export class SidemenuPage {
 
   public rootPage: any = SelectionHomePage;
   private subscription: Subscription;
+  private selectedItem: number = -1;
+  private menuItems = [
+    {name:'HOME'},
+    {name:'BOOKINGS'},
+    {name:'SETTINGS'}
+    // {name:'SETTINGS', active:false},
+  ];
   // profile = this.utilsProvider.profile;
   ionViewDidLoad() {
     let ref = this;
@@ -45,16 +52,17 @@ export class SidemenuPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public utilsProvider: UtilsProvider) {
   }
 
-  openPage(param){
-    if(param == 'home'){
+  openPage(param, i){
+    this.selectedItem = i;
+    if(param == 'HOME'){
       this.rootPage = SelectionHomePage;
-    }else if(param == 'booking'){
+    }else if(param == 'BOOKINGS'){
       this.rootPage = ClientBookingsPage;
-    }else if(param == 'profile'){
+    }else if(param == 'PROFILE'){
       this.rootPage = ProfilePage;
-    }else if(param == 'settings'){
+    }else if(param == 'SETTINGS'){
       this.rootPage = ClientSettingsPage;
-    }else if(param == 'map'){
+    }else if(param == 'MAP'){
       this.rootPage = BookingDetailsPage;
     }
   }

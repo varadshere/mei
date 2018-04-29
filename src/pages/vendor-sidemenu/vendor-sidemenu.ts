@@ -22,6 +22,15 @@ import {ChartPage} from "../chart/chart";
 export class VendorSidemenuPage {
 
   public rootPage: any = VendorHomePage;
+  private selectedItem: number = -1;
+  private menuItems = [
+    {name:'HOME'},
+    {name:'CALENDAR'},
+    {name:'ACTIVITY'},
+    {name:'DIGITAL WALLET'},
+    {name:'SETTINGS'}
+    // {name:'SETTINGS', active:false},
+  ];
   constructor(public navCtrl: NavController, public navParams: NavParams, public utilsProvider: UtilsProvider) {
   }
 
@@ -31,15 +40,15 @@ export class VendorSidemenuPage {
   }
 
   openPage(page){
-    if(page == 'home'){
+    if(page == 'HOME'){
       this.rootPage = VendorHomePage;
-    }else if(page == 'activity'){
+    }else if(page == 'ACTIVITY'){
       this.rootPage = VendorBookingsPage;
-    }else if(page == 'calendar'){
+    }else if(page == 'CALENDAR'){
       this.rootPage = VendorCalendarPage;
-    }else if(page == 'settings'){
+    }else if(page == 'SETTINGS'){
       this.rootPage = VendorSettingsPage;
-    }else if(page == 'wallet'){
+    }else if(page == 'DIGITAL WALLET'){
       this.rootPage = ChartPage;
     }
   }

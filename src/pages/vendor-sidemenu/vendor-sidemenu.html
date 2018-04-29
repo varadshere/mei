@@ -24,22 +24,27 @@
     <div class="nav">
       <!--<div class="nav-titles" (click)="openPage('home')">Home</div>-->
       <div class="nav-titles">
-        <button ion-button clear small menuClose icon-start (click)="openPage('home')" style="color: white">
-          Home
-        </button>
-        <button ion-button clear small menuClose icon-start (click)="openPage('calendar')" style="color: white">
-          Calendar
-        </button>
-        <button ion-button clear small menuClose icon-start (click)="openPage('activity')" style="color: white">
-          Activity
-        </button>
-        <button ion-button clear small menuClose icon-start (click)="openPage('wallet')" style="color: white">
-          Digital Wallet
-        </button>
-        <button ion-button clear small menuClose icon-start (click)="openPage('settings')" style="color: white">
-          Settings
+        <button *ngFor="let item of menuItems;let i=index" ion-button clear small menuClose icon-start (click)="openPage(item.name, i)" class="button-text-sidemenu" [class.button-selected]="selectedItem == i">
+          {{item.name}}
         </button>
       </div>
+      <!--<div class="nav-titles">-->
+        <!--<button ion-button clear small menuClose icon-start (click)="openPage('home')" class="button-text-sidemenu">-->
+          <!--Home-->
+        <!--</button>-->
+        <!--<button ion-button clear small menuClose icon-start (click)="openPage('calendar')" class="button-text-sidemenu">-->
+          <!--Calendar-->
+        <!--</button>-->
+        <!--<button ion-button clear small menuClose icon-start (click)="openPage('activity')" class="button-text-sidemenu">-->
+          <!--Activity-->
+        <!--</button>-->
+        <!--<button ion-button clear small menuClose icon-start (click)="openPage('wallet')" class="button-text-sidemenu">-->
+          <!--Digital Wallet-->
+        <!--</button>-->
+        <!--<button ion-button clear small menuClose icon-start (click)="openPage('settings')" class="button-text-sidemenu">-->
+          <!--Settings-->
+        <!--</button>-->
+      <!--</div>-->
       <!--<button ion-item menuClose (click)="openPage('booking')"> Book</button>-->
 
       <!--<div class="nav-titles" (click)="openPage('settings')">Settings</div>-->

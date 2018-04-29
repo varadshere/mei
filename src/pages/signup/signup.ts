@@ -67,71 +67,6 @@ export class SignupPage {
       { title: "NAILS", list: [{name: 'Up-do', selected: false, desc: 'Sweep up', cost: "0"}, {name: 'Event Trial', selected: false, desc: 'braids and more', cost: "0"}, {name: 'Hairstyling', selected: false, desc: 'abcd', cost: "0"}, {name: 'Blow Wave', selected: false, desc: 'Hair straightening', cost: "0"}] },
     ];
 
-    // s = [
-    //   {
-    //     "title":"hair",
-    //     "list":[
-    //       {
-    //         "name":"Up-do",
-    //         "selected":"true"
-    //       },
-    //       {
-    //         "name":"Event Trial",
-    //         "selected":"false"
-    //       },
-    //       {
-    //         "name":"Hairstyling",
-    //         "selected":"false"
-    //       },
-    //       {
-    //         "name":"Blow Wave",
-    //         "selected":"false"
-    //       }
-    //     ]
-    //   },
-    //   {
-    //     "title":"makeup",
-    //     "list":[
-    //       {
-    //         "name":"Up-do",
-    //         "selected":"false"
-    //       },
-    //       {
-    //         "name":"Event Trial",
-    //         "selected":"true"
-    //       },
-    //       {
-    //         "name":"Hairstyling",
-    //         "selected":"false"
-    //       },
-    //       {
-    //         "name":"Blow Wave",
-    //         "selected":"false"
-    //       }
-    //     ]
-    //   },
-    //   {
-    //     "title":"nails",
-    //     "list":[
-    //       {
-    //         "name":"Up-do",
-    //         "selected":"false"
-    //       },
-    //       {
-    //         "name":"Event Trial",
-    //         "selected":"false"
-    //       },
-    //       {
-    //         "name":"Hairstyling",
-    //         "selected":"true"
-    //       },
-    //       {
-    //         "name":"Blow Wave",
-    //         "selected":"true"
-    //       }
-    //     ]
-    //   }
-    // ];
     shownGroup = null;
 
     private oauth: OauthCordova = new OauthCordova();
@@ -221,13 +156,11 @@ export class SignupPage {
           "not a number": true
         };
       }
-
       if (control.value > 70){
         return {
           "not realistic": true
         };
       }
-
       return null;
     }
 

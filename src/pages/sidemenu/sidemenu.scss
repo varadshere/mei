@@ -1,7 +1,9 @@
 page-sidemenu {
   .sidemenu{
-    background-color: #F9748F;
+    //background-color: #F9748F;
     //background-image: url("../../assets/imgs/sidemenu_lines.png");
+    background: url(../../assets/imgs/sidemenu_bg.png);
+    background-size: cover;
 
   }
   .profile{
@@ -12,7 +14,7 @@ page-sidemenu {
 
   .avatar{
     margin: auto;
-    width: 50%;
+    width: 75%;
   }
 
   .profile-text{
@@ -24,7 +26,7 @@ page-sidemenu {
   }
 
   .sidemenu-lines{
-    margin-left: 50px;
+    margin-left: 0;
     position: absolute;
     opacity: 0.28;
     height: fit-content;
@@ -38,11 +40,30 @@ page-sidemenu {
   }
 
   .nav-titles{
-    font-family: 'AppleSystemUIFont',Helvetica,Arial,serif;
-    font-size: 16.0px;
-    color: rgba(255,255,255,1.0);
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: normal;
+    line-height: normal;
+    font-size: 16px;
+
+    color: #FFFFFF;
+    mix-blend-mode: normal;
+    //opacity: 0.45;
     text-align: center;
-    line-height: 18.0px;
+    //line-height: 18.0px;
     margin-top: 30px;
+  }
+
+  .button-text-sidemenu{
+    color: #FFFFFF;
+    margin-bottom: 25px;
+    opacity: 0.24;
+  }
+
+  .button-selected{
+    opacity: 1;
+  }
+  .button-not-selected{
+
   }
 }

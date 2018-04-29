@@ -2,7 +2,7 @@
 <ion-menu [content]="mycontent" type="reveal">
 
   <ion-content class="sidemenu">
-    <img src=" assets/imgs/sidemenu_lines.png" class="sidemenu-lines">
+    <!--<img src=" assets/imgs/sidemenu_bg.png" class="sidemenu-lines">-->
     <div class="profile">
       <ion-avatar item-start class="avatar">
         <img  style="margin: auto; width: 100%;" src="assets/imgs/profile.png">
@@ -24,19 +24,9 @@
     <div class="nav">
       <!--<div class="nav-titles" (click)="openPage('home')">Home</div>-->
       <div class="nav-titles">
-        <button ion-button clear small menuClose icon-start (click)="openPage('home')" style="color: white">
-          Home
+        <button *ngFor="let item of menuItems;let i=index" ion-button clear small menuClose icon-start (click)="openPage(item.name, i)" class="button-text-sidemenu" [class.button-selected]="selectedItem == i">
+          {{item.name}}
         </button>
-        <button ion-button clear small menuClose icon-start (click)="openPage('booking')" style="color: white">
-          Bookings
-        </button>
-        <button ion-button clear small menuClose icon-start (click)="openPage('settings')" style="color: white">
-          Settings
-        </button>
-        <button ion-button clear small menuClose icon-start (click)="openPage('map')" style="color: white">
-          Map
-        </button>
-
       </div>
       <!--<button ion-item menuClose (click)="openPage('booking')"> Book</button>-->
 
