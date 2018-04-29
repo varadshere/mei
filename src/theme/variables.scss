@@ -42,12 +42,17 @@ $colors: (
   mei:  #F9748F
 );
 
-$ub-regular{
-  @font-face {
-    font-family: Ub-Regular;
-    src: url(./assets/fonts/Ub-Regular.ttf);
-  }
+//$ub-regular{
+//  @font-face {
+//    font-family: Ub-Regular;
+//    src: url(./assets/fonts/Ub-Regular.ttf);
+//  }
+//  font-family: 'Ub-Regular',sans-serif;
+//}
+
+@font-face {
   font-family: 'Ub-Regular',sans-serif;
+  src: url(../assets/fonts/Ub-Regular.ttf) format("ttf");
 }
 
 
