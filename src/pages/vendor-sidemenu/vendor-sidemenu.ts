@@ -22,7 +22,7 @@ import {ChartPage} from "../chart/chart";
 export class VendorSidemenuPage {
 
   public rootPage: any = VendorHomePage;
-  private selectedItem: number = -1;
+  private selectedItem: number = 0;
   private menuItems = [
     {name:'HOME'},
     {name:'CALENDAR'},
@@ -39,7 +39,8 @@ export class VendorSidemenuPage {
     console.log('ionViewDidLoad VendorSidemenuPage');
   }
 
-  openPage(page){
+  openPage(page, i){
+    this.selectedItem = i;
     if(page == 'HOME'){
       this.rootPage = VendorHomePage;
     }else if(page == 'ACTIVITY'){

@@ -25,7 +25,7 @@ export class SidemenuPage {
 
   public rootPage: any = SelectionHomePage;
   private subscription: Subscription;
-  private selectedItem: number = -1;
+  private selectedItem: number = 0;
   private menuItems = [
     {name:'HOME'},
     {name:'BOOKINGS'},
