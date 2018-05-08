@@ -20,7 +20,7 @@
 
     <ion-item (click)="openProfile(profile)" tappable>
       <ion-avatar item-start>
-        <img src="assets/imgs/profile.png">
+        <img src="{{profile.profile_pic ? profile.profile_pic : 'assets/imgs/profile.png'}}">
       </ion-avatar>
       <h2>{{profile.first_name}} {{profile.last_name}}</h2>
       <p>{{profile.address}}</p>

@@ -18,8 +18,10 @@ export class ProfilePage {
   profile: string = "SERVICES";
   shownGroup = null;
   profileData:any  = {};
+  instaImgs: any = [];
   constructor(public navCtrl: NavController, public navParams: NavParams, private utils: UtilsProvider) {
     this.profileData = navParams.get('profile');
+    this.getInstaImgs(this.profileData.username);
   }
 
   ionViewDidLoad() {
@@ -27,6 +29,14 @@ export class ProfilePage {
     this.toggleGroup(0);
   }
 
+  getInstaImgs(username){
+    this.utils.getInstaImgs(username).then((d:any)=>{
+      console.log("GetInsta Imgs in Profile");
+      if(d && typeof d !=='string' && d.length){
+        this.instaImgs = d;
+      }
+    });
+  }
   toggleGroup(group) {
     if (this.isGroupShown(group)) {
       this.shownGroup = null;

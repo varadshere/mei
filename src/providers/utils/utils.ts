@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Subject} from "rxjs";
 import {Http, Headers, Response} from '@angular/http';
-import { AlertController } from 'ionic-angular';
+import {AlertController, LoadingController} from 'ionic-angular';
 
 /*
   Generated class for the UtilsProvider provider.
@@ -24,7 +24,7 @@ export class UtilsProvider {
     }
   }
 
-  constructor(public http: Http, private alertCtrl: AlertController) {
+  constructor(public http: Http, private alertCtrl: AlertController, private loadingCtrl: LoadingController) {
     console.log('Hello UtilsProvider Provider');
   }
 
@@ -70,17 +70,92 @@ export class UtilsProvider {
     alert.setMode("ios");
     alert.present();
   }
+  getloadingAlert() {
+    let loading = this.loadingCtrl.create({
+      content: 'Loading, Please Wait...'
+    });
+    // loading.setMode("ios");
+    return loading;
+  }
 
   getInstagramUserInfo(response) {
     //GET USER PHOTOS
-    return this.http.get('https://api.instagram.com/v1/users/self/media/recent?access_token=' + response.access_token + '&count=5')
+    return this.http.get('https://api.instagram.com/v1/users/self/media/recent?access_token=' + response.access_token + '&count=10')
       .map((res:Response) => res.json());
+  }
+
+  createInstaImgs(data, username){
+    let dataToSend = {
+      "method": "create",
+      "username": username,
+      "response": data
+    };
+    let loading = this.getloadingAlert();
+    loading.present();
+    return new Promise((resolve, reject) => {
+      // let location = this.utils.getMapCenter();
+      let headers = new Headers();
+      headers.append('Content-Type','application/json');
+      headers.append('Access-Control-Allow-Origin' , '*');
+      headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+      let url = this.serverUrl + 'getInsta';
+      let body = JSON.stringify(dataToSend);
+      this.http.post(url, body, {headers: headers}).map(res => res.json()).timeout(3000).subscribe(data => {
+        console.log("insta create");
+        console.log(data);
+        loading.dismissAll();
+        resolve(data.result);
+        // ref.applyHaversine(data, 'hp');
+        // this.setDataToShow(data.outlets);
+        // resolve(data);
+      }, error => {
+        console.log("ERROR");
+        console.log(error);
+        //reject("false");
+        loading.dismissAll();
+        resolve(false);
+      });
+    });
+  }
+  getInstaImgs(username){
+    let dataToSend = {
+      "method": "read",
+      "username": username
+    };
+    let loading = this.getloadingAlert();
+    loading.present();
+    return new Promise((resolve, reject) => {
+      // let location = this.utils.getMapCenter();
+      let headers = new Headers();
+      headers.append('Content-Type','application/json');
+      headers.append('Access-Control-Allow-Origin' , '*');
+      headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+      let url = this.serverUrl + 'getInsta';
+      let body = JSON.stringify(dataToSend);
+      this.http.post(url, body, {headers: headers}).map(res => res.json()).timeout(3000).subscribe(data => {
+        console.log("insta create");
+        console.log(data);
+        loading.dismissAll();
+        resolve(data.result);
+        // ref.applyHaversine(data, 'hp');
+        // this.setDataToShow(data.outlets);
+        // resolve(data);
+      }, error => {
+        console.log("ERROR");
+        console.log(error);
+        //reject("false");
+        loading.dismissAll();
+        resolve(false);
+      });
+    });
   }
 
   loginService(email, pwd, type){
    // let ref = this;
    console.log(email);
    console.log(pwd);
+   let loading = this.getloadingAlert();
+   loading.present();
     return new Promise((resolve, reject) => {
      // let location = this.utils.getMapCenter();
       let headers = new Headers();
@@ -93,23 +168,27 @@ export class UtilsProvider {
         password: pwd,
         type: type
       });
-      this.http.post(url, body, {headers: headers}).map(res => res.json()).subscribe(data => {
+      this.http.post(url, body, {headers: headers}).map(res => res.json()).timeout(3000).subscribe(data => {
         console.log("login rep");
         console.log(data);
+        loading.dismissAll();
         resolve(data.result);
         // ref.applyHaversine(data, 'hp');
         // this.setDataToShow(data.outlets);
-        resolve(data);
+        // resolve(data);
       }, error => {
         console.log("ERROR");
         console.log(error);
         //reject("false");
+        loading.dismissAll();
         resolve(false);
       });
     });
   }
   signUpService(dataToSend){
    // let ref = this;
+    let loading = this.getloadingAlert();
+    loading.present();
     return new Promise((resolve, reject) => {
      // let location = this.utils.getMapCenter();
       let headers = new Headers();
@@ -118,17 +197,19 @@ export class UtilsProvider {
       headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
       let url = this.serverUrl + 'signup';
       let body = JSON.stringify(dataToSend);
-      this.http.post(url, body, {headers: headers}).map(res => res.json()).subscribe(data => {
+      this.http.post(url, body, {headers: headers}).map(res => res.json()).timeout(3000).subscribe(data => {
         console.log("signUp rep");
         console.log(data);
+        loading.dismissAll();
         resolve(data.result);
         // ref.applyHaversine(data, 'hp');
         // this.setDataToShow(data.outlets);
-        resolve(data);
+        // resolve(data);
       }, error => {
         console.log("ERROR");
         console.log(error);
         //reject("false");
+        loading.dismissAll();
         resolve(false);
       });
     });
@@ -139,6 +220,8 @@ export class UtilsProvider {
     let dataToSend = {
       "service": this.getServiceSelection()
     };
+    let loading = this.getloadingAlert();
+    loading.present();
     return new Promise((resolve, reject) => {
      // let location = this.utils.getMapCenter();
       let headers = new Headers();
@@ -147,23 +230,27 @@ export class UtilsProvider {
       headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
       let url = this.serverUrl + 'getVendorList';
       let body = JSON.stringify(dataToSend);
-      this.http.post(url, body, {headers: headers}).map(res => res.json()).subscribe(data => {
+      this.http.post(url, body, {headers: headers}).map(res => res.json()).timeout(3000).subscribe(data => {
         console.log("signUp rep");
         console.log(data);
+        loading.dismissAll();
         resolve(data.result);
         // ref.applyHaversine(data, 'hp');
         // this.setDataToShow(data.outlets);
-        resolve(data);
+        // resolve(data);
       }, error => {
         console.log("ERROR");
         console.log(error);
         //reject("false");
+        loading.dismissAll();
         resolve(false);
       });
     });
   }
 
   editClientSettings(dataToSend){
+    let loading = this.getloadingAlert();
+    loading.present();
     return new Promise((resolve, reject) => {
       // let location = this.utils.getMapCenter();
       let headers = new Headers();
@@ -172,23 +259,27 @@ export class UtilsProvider {
       headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
       let url = this.serverUrl + 'editClientSettings';
       let body = JSON.stringify(dataToSend);
-      this.http.post(url, body, {headers: headers}).map(res => res.json()).subscribe(data => {
+      this.http.post(url, body, {headers: headers}).map(res => res.json()).timeout(3000).subscribe(data => {
         console.log("Save Settings");
         console.log(data);
         resolve(data.result);
+        loading.dismissAll();
         // ref.applyHaversine(data, 'hp');
         // this.setDataToShow(data.outlets);
-        resolve(data);
+        // resolve(data);
       }, error => {
         console.log("ERROR");
         console.log(error);
         //reject("false");
+        loading.dismissAll();
         resolve(false);
       });
     });
   }
 
   getSettings(dataToSend){
+    let loading = this.getloadingAlert();
+    loading.present();
     return new Promise((resolve, reject) => {
       // let location = this.utils.getMapCenter();
       let headers = new Headers();
@@ -197,15 +288,17 @@ export class UtilsProvider {
       headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
       let url = this.serverUrl + 'getSettings';
       let body = JSON.stringify(dataToSend);
-      this.http.post(url, body, {headers: headers}).map(res => res.json()).subscribe(data => {
+      this.http.post(url, body, {headers: headers}).map(res => res.json()).timeout(3000).subscribe(data => {
         console.log("Got Settings");
         console.log(data);
+        loading.dismissAll();
         resolve(data.result);
-        resolve(data);
+        // resolve(data);
       }, error => {
         console.log("ERROR");
         console.log(error);
         //reject("false");
+        loading.dismissAll();
         resolve(false);
       });
     });
@@ -217,6 +310,8 @@ export class UtilsProvider {
       "username":this.getUserEmail(),
       "email": this.getUserEmail()
     };
+    let loading = this.getloadingAlert();
+    loading.present();
     return new Promise((resolve, reject) => {
       // let location = this.utils.getMapCenter();
       let headers = new Headers();
@@ -225,10 +320,11 @@ export class UtilsProvider {
       headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
       let url = this.serverUrl + 'getProfile';
       let body = JSON.stringify(dataToSend);
-      this.http.post(url, body, {headers: headers}).map(res => res.json()).subscribe(data => {
+      this.http.post(url, body, {headers: headers}).map(res => res.json()).timeout(3000).subscribe(data => {
         console.log("Got Profile");
         console.log(data);
         ref.profile = (data.result);
+        loading.dismissAll();
         resolve(data.result);
 
         // resolve(data);
@@ -236,6 +332,7 @@ export class UtilsProvider {
         console.log("ERROR");
         console.log(error);
         //reject("false");
+        loading.dismissAll();
         resolve(false);
       });
     });
@@ -246,6 +343,8 @@ export class UtilsProvider {
     let dataToSend = {
       "username": vendor
     };
+    let loading = this.getloadingAlert();
+    loading.present();
     return new Promise((resolve, reject) => {
       // let location = this.utils.getMapCenter();
       let headers = new Headers();
@@ -254,10 +353,11 @@ export class UtilsProvider {
       headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
       let url = this.serverUrl + 'getSlots';
       let body = JSON.stringify(dataToSend);
-      this.http.post(url, body, {headers: headers}).map(res => res.json()).subscribe(data => {
+      this.http.post(url, body, {headers: headers}).map(res => res.json()).timeout(3000).subscribe(data => {
         console.log("Got Slots");
         console.log(data);
         ref.profile = (data.result);
+        loading.dismissAll();
         resolve(data.result);
 
         // resolve(data);
@@ -265,6 +365,7 @@ export class UtilsProvider {
         console.log("ERROR");
         console.log(error);
         //reject("false");
+        loading.dismissAll();
         resolve(false);
       });
     });
@@ -272,6 +373,8 @@ export class UtilsProvider {
 
   getSlotsByDay(dataToSend){
     let ref = this;
+    let loading = this.getloadingAlert();
+    loading.present();
     return new Promise((resolve, reject) => {
       // let location = this.utils.getMapCenter();
       let headers = new Headers();
@@ -280,10 +383,11 @@ export class UtilsProvider {
       headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
       let url = this.serverUrl + 'getSlotsByDay';
       let body = JSON.stringify(dataToSend);
-      this.http.post(url, body, {headers: headers}).map(res => res.json()).subscribe(data => {
+      this.http.post(url, body, {headers: headers}).map(res => res.json()).timeout(3000).subscribe(data => {
         console.log("Got SlotsByDay");
         console.log(data);
         ref.profile = (data.result);
+        loading.dismissAll();
         resolve(data.result);
 
         // resolve(data);
@@ -291,12 +395,15 @@ export class UtilsProvider {
         console.log("ERROR");
         console.log(error);
         //reject("false");
+        loading.dismissAll();
         resolve(false);
       });
     });
   }
   boookVendor(dataToSend){
     let ref = this;
+    let loading = this.getloadingAlert();
+    loading.present();
     return new Promise((resolve, reject) => {
       // let location = this.utils.getMapCenter();
       let headers = new Headers();
@@ -305,10 +412,11 @@ export class UtilsProvider {
       headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
       let url = this.serverUrl + 'bookVendor';
       let body = JSON.stringify(dataToSend);
-      this.http.post(url, body, {headers: headers}).map(res => res.json()).subscribe(data => {
+      this.http.post(url, body, {headers: headers}).map(res => res.json()).timeout(3000).subscribe(data => {
         console.log("Booked Vendor");
         console.log(data);
         ref.profile = (data.result);
+        loading.dismissAll();
         resolve(data.result);
 
         // resolve(data);
@@ -316,12 +424,15 @@ export class UtilsProvider {
         console.log("ERROR");
         console.log(error);
         //reject("false");
+        loading.dismissAll();
         resolve(false);
       });
     });
   }
   getSummery(dataToSend){
     let ref = this;
+    let loading = this.getloadingAlert();
+    loading.present();
     return new Promise((resolve, reject) => {
       // let location = this.utils.getMapCenter();
       let headers = new Headers();
@@ -330,10 +441,11 @@ export class UtilsProvider {
       headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
       let url = this.serverUrl + 'getBookingsSummery';
       let body = JSON.stringify(dataToSend);
-      this.http.post(url, body, {headers: headers}).map(res => res.json()).subscribe(data => {
+      this.http.post(url, body, {headers: headers}).map(res => res.json()).timeout(3000).subscribe(data => {
         console.log("got BookingsSummery");
         console.log(data);
         ref.profile = (data.result);
+        loading.dismissAll();
         resolve(data.result);
 
         // resolve(data);
@@ -348,6 +460,8 @@ export class UtilsProvider {
 
   getBookings(dataToSend){
     let ref = this;
+    let loading = this.getloadingAlert();
+    loading.present();
     return new Promise((resolve, reject) => {
       // let location = this.utils.getMapCenter();
       let headers = new Headers();
@@ -356,16 +470,18 @@ export class UtilsProvider {
       headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
       let url = this.serverUrl + 'getBookings';
       let body = JSON.stringify(dataToSend);
-      this.http.post(url, body, {headers: headers}).map(res => res.json()).subscribe(data => {
+      this.http.post(url, body, {headers: headers}).map(res => res.json()).timeout(3000).subscribe(data => {
         console.log("got Bookings");
         console.log(data);
         ref.profile = (data.result);
+        loading.dismissAll();
         resolve(data.result);
         // resolve(data);
       }, error => {
         console.log("ERROR");
         console.log(error);
         //reject("false");
+        loading.dismissAll();
         resolve(false);
       });
     });

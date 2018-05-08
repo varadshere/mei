@@ -251,10 +251,23 @@ export class SignupPage {
             console.log("Signup Success!!");
             console.log(result);
             // ref.navCtrl.push(SidemenuPage);
-            ref.utils.setUserEmail(ref.slideOneForm.value.email);
-            ref.utils.getProfile();
-            ref.utils.setPage(VendorHomePage);
-            ref.navCtrl.push(VendorSidemenuPage);
+            if(ref.instaApiResp && ref.instaApiResp.length > 0){
+              ref.utils.createInstaImgs(ref.instaApiResp, ref.slideOneForm.value.email).then(d =>{
+                if(d){
+                  ref.utils.setUserEmail(ref.slideOneForm.value.email);
+                  ref.utils.getProfile();
+                  ref.utils.setPage(VendorHomePage);
+                  ref.navCtrl.push(VendorSidemenuPage);
+                }
+
+              });
+            }else {
+              ref.utils.setUserEmail(ref.slideOneForm.value.email);
+              ref.utils.getProfile();
+              ref.utils.setPage(VendorHomePage);
+              ref.navCtrl.push(VendorSidemenuPage);
+            }
+
           }else{
             console.log(result);
             console.log("Signup Failed!!");

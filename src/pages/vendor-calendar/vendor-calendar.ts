@@ -137,7 +137,7 @@ export class VendorCalendarPage {
 
     var thisNumOfDays = new Date(this.date.getFullYear(), this.date.getMonth()+1, 0).getDate();
     for (var j = 0; j < thisNumOfDays; j++) {
-      let dayObj = {num: j+1};
+      let dayObj = {num: ("0" + (j+1)).slice(-2)};
       this.daysInThisMonth.push(dayObj);
     }
 

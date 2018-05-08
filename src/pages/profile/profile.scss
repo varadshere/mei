@@ -14,10 +14,16 @@ page-profile {
     //text-align: center;
   }
 
+  .profile-img{
+    border-radius: 40px;
+  }
+
   .img-col{
     padding: 0;
   }
-
+  .img-col img{
+    height: 125px;
+  }
 
   .service-title{
     font-size: 16.0px !important;

@@ -210,8 +210,10 @@ export class MyBookingPage {
         "week_day":weekDay
       };
       let ref = this;
+      ref.schedule.sch = [];
       let slotsbyday = this.utilsProvider.getSlotsByDay(data);
       slotsbyday.then((result:any)=>{
+          if(result)
           ref.schedule.sch = result;
       });
       // if(this.slots[weekDay]){
