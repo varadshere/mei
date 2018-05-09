@@ -41,7 +41,7 @@
       <div class="time-badge">21:00</div>
     </div>
 
-    <ion-row>
+    <ion-row *ngIf="profile.insta_link.length == 0">
       <ion-col class="img-col">
         <img src="assets/imgs/results1.png">
       </ion-col>
@@ -50,6 +50,11 @@
       </ion-col>
       <ion-col class="img-col">
         <img src="assets/imgs/results3.png">
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="profile.insta_link.length > 0">
+      <ion-col col-4 class="img-col" *ngFor="let img of profile.insta_link">
+        <img src="{{img}}">
       </ion-col>
     </ion-row>
 
