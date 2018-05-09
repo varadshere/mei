@@ -71,12 +71,12 @@
 
             <ion-item mode="ios">
               <ion-label> <ion-icon name="ios-person-outline"></ion-icon></ion-label>
-              <ion-input [(ngModel)]="client.email" type="text" placeholder="Email" name="email" required></ion-input>
+              <ion-input [(ngModel)]="client.email" type="text" placeholder="Email" name="email" required style="color: #FFFFFF"></ion-input>
             </ion-item>
 
             <ion-item mode="ios">
               <ion-label> <ion-icon name="ios-unlock-outline"></ion-icon></ion-label>
-              <ion-input [(ngModel)]="client.pwd" type="password" placeholder="Password" name="password" required></ion-input>
+              <ion-input [(ngModel)]="client.pwd" type="password" placeholder="Password" name="password" required style="color: #FFFFFF"></ion-input>
             </ion-item>
 
             <div style="text-align: center; margin-top: 20px">
@@ -96,12 +96,12 @@
 
             <ion-item mode="ios">
               <ion-label> <ion-icon name="ios-person-outline"></ion-icon></ion-label>
-              <ion-input [(ngModel)]="vendor.email"  type="text" placeholder="Email" name="email" required></ion-input>
+              <ion-input [(ngModel)]="vendor.email"  type="text" placeholder="Email" name="email" required style="color: #FFFFFF"></ion-input>
             </ion-item>
 
             <ion-item mode="ios">
               <ion-label> <ion-icon name="ios-unlock-outline"></ion-icon></ion-label>
-              <ion-input [(ngModel)]="vendor.pwd"  type="password" placeholder="Password" name="password" required></ion-input>
+              <ion-input [(ngModel)]="vendor.pwd"  type="password" placeholder="Password" name="password" required style="color: #FFFFFF"></ion-input>
             </ion-item>
             <div style="text-align: center; margin-top: 20px">
               <button ion-button class="login-button" (click)="vendorLogin()">Login</button>
@@ -114,8 +114,8 @@
     </ion-list>
   </div>
 
-  <div class="signup-text">
-    Don’t have an account?  <a style="color: #FFFFFF; opacity: 1;" (click)="navigateToSignup()">Sign Up</a>
+  <div class="signup-text" (click)="navigateToSignup()">
+    Don’t have an account?  <a style="color: #FFFFFF; opacity: 1;">Sign up here</a>
   </div>
 
 </ion-content>

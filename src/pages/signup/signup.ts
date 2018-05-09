@@ -60,7 +60,7 @@ export class SignupPage {
     slideTwoForm: FormGroup;
     submitAttempt = false;
     submitTwoAttempt = false;
-
+    hideInsta: boolean = false;
     services = [
       { title: "HAIR", list: [{name: 'Up-do', selected: false, desc: 'Sweep up your hair in a range of ways including an assortment of ponytails, braids and more', cost: "0"}, {name: 'Event Trial', selected: false, desc: 'Sweep up your hair in a range of ways including an assortment of ponytails, braids and more', cost: "0"}, {name: 'Hairstyling', selected: false, desc: 'Test-run a hair look and style before your big event', cost: "0"}, {name: 'Blow Wave', selected: false, desc: 'Hair straightening, waving, crimping and more', cost: "0"}] },
       { title: "MAKEUP", list: [{name: 'Up-do', selected: false, desc: 'Sweep up your hair in a range of ways including an assortment of ponytails, braids and more', cost: "0"}, {name: 'Event Trial', selected: false, desc: 'Sweep up your hair in a range of ways including an assortment of ponytails, braids and more', cost: "0"}, {name: 'Hairstyling', selected: false, desc: 'Sweep up your hair in a range of ways including an assortment of ponytails, braids and more', cost: "0"}, {name: 'Blow Wave', selected: false, desc: 'Test-run a hair look and style before your big event', cost: "0"}]  },
@@ -72,7 +72,7 @@ export class SignupPage {
     private oauth: OauthCordova = new OauthCordova();
     private instaApiResp;
     private instagramProvider: Instagram = new Instagram({
-      clientId: "0dfd7794e4b64da79d728825bc76a572",      // Register you client id from https://www.instagram.com/developer/
+      clientId: "7bec163120c34423a9c2f4332d97e3e4",      // Register you client id from https://www.instagram.com/developer/
       redirectUri: 'http://localhost',  // Let is be localhost for Mobile Apps
       responseType: 'token',   // Use token only
       appScope: ['basic','public_content']
@@ -115,12 +115,14 @@ export class SignupPage {
     }
 
     instainit(){
+      this.hideInsta = false;
       this.oauth.logInVia(this.instagramProvider).then((success) => {
 
         console.log(JSON.stringify(success));
 
         /* Returns User uploaded Photos */
         this.utils.getInstagramUserInfo(success).subscribe(response => {
+          this.hideInsta = true;
           this.instaApiResp=response.data;
           console.log(response.data);
         });
