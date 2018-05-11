@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar mode="ios">
-    <ion-title text-center>SignUp</ion-title>
+    <ion-title text-center>Sign up</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -33,27 +33,31 @@
               <ion-item mode="ios">
                 <ion-input type="text" placeholder="Email" formControlName="email" [class.invalid]="!slideTwoForm.controls.email.valid && (slideTwoForm.controls.email.dirty || submitTwoAttempt)" name="email" required></ion-input>
               </ion-item>
-
+              <p class="form-error-text" *ngIf="!slideTwoForm.controls.email.valid && (slideTwoForm.controls.email.dirty || submitTwoAttempt)">Please enter a valid Email.</p>
               <ion-item mode="ios">
                 <ion-input type="password" placeholder="Password" formControlName="pwd" [class.invalid]="!slideTwoForm.controls.pwd.valid && (slideTwoForm.controls.pwd.dirty || submitTwoAttempt)" name="password" required></ion-input>
               </ion-item>
-
+              <p class="form-error-text" *ngIf="!slideTwoForm.controls.pwd.valid && (slideTwoForm.controls.pwd.dirty || submitTwoAttempt)">Password requires number, capital letter and 6 characters.</p>
               <ion-item mode="ios">
                 <ion-input type="password" placeholder="Confirm Password" formControlName="cnfPwd" [class.invalid]="!slideTwoForm.controls.cnfPwd.valid && (slideTwoForm.controls.cnfPwd.dirty || submitTwoAttempt)" name="cfpassword" required></ion-input>
               </ion-item>
+              <p class="form-error-text" *ngIf="!slideTwoForm.controls.cnfPwd.valid && (slideTwoForm.controls.cnfPwd.dirty || submitTwoAttempt)">Your password and confirmation password do not match.</p>
               <ion-item mode="ios">
                 <ion-input type="text" placeholder="First Name" formControlName="fname" [class.invalid]="!slideTwoForm.controls.fname.valid && (slideTwoForm.controls.fname.dirty || submitTwoAttempt)" name="fname" required></ion-input>
               </ion-item>
+              <p class="form-error-text" *ngIf="!slideTwoForm.controls.fname.valid && (slideTwoForm.controls.fname.dirty || submitTwoAttempt)">Name can not have numbers or special characters.</p>
               <ion-item mode="ios">
                 <ion-input type="text" placeholder="Last Name" formControlName="lname" [class.invalid]="!slideTwoForm.controls.lname.valid && (slideTwoForm.controls.lname.dirty || submitTwoAttempt)" name="lname" required></ion-input>
               </ion-item>
+              <p class="form-error-text" *ngIf="!slideTwoForm.controls.lname.valid && (slideTwoForm.controls.lname.dirty || submitTwoAttempt)">Last Name can not have numbers or special characters.</p>
               <ion-item mode="ios">
                 <ion-input type="text" placeholder="Address" formControlName="addr" [class.invalid]="!slideTwoForm.controls.addr.valid && (slideTwoForm.controls.addr.dirty || submitTwoAttempt)" name="addr" required></ion-input>
               </ion-item>
+              <p class="form-error-text" *ngIf="!slideTwoForm.controls.addr.valid && (slideTwoForm.controls.addr.dirty || submitTwoAttempt)">Please enter a valid address.</p>
 
 
               <div style="text-align: center; margin-top: 20px">
-                <button ion-button class="signup-button" (click)="signUpClient()">Signup</button>
+                <button ion-button class="signup-button" (click)="signUpClient()">Sign up</button>
               </div>
             </form>
           </ion-list>
@@ -65,36 +69,41 @@
     <ion-list *ngSwitchCase="'FREELANCER'">
       <ion-row>
         <ion-col>
-            <p *ngIf="submitAttempt" style="color: #ea6153;">Please fill out all details accurately.</p>
+            <!--<p *ngIf="submitAttempt" style="color: #ea6153;">Please fill out all details accurately.</p>-->
           <ion-list inset>
             <form [formGroup]="slideOneForm">
               <ion-item mode="ios">
-                <!-- <p *ngIf="!slideOneForm.controls.email.valid">Please enter a valid name.</p> -->
                 <ion-input formControlName="email" [class.invalid]="!slideOneForm.controls.email.valid && (slideOneForm.controls.email.dirty || submitAttempt)" type="text" placeholder="Email" name="email" required></ion-input>
               </ion-item>
-
+              <p class="form-error-text" *ngIf="!slideOneForm.controls.email.valid && (slideOneForm.controls.email.dirty || submitAttempt)">Please enter a valid Email.</p>
               <ion-item mode="ios">
                 <ion-input type="password" formControlName="pwd" [class.invalid]="!slideOneForm.controls.pwd.valid && (slideOneForm.controls.pwd.dirty || submitAttempt)" placeholder="Password" name="password" required></ion-input>
               </ion-item>
-
+              <p class="form-error-text" *ngIf="!slideOneForm.controls.pwd.valid && (slideOneForm.controls.pwd.dirty || submitAttempt)">Password requires number, capital letter and 6 characters.</p>
               <ion-item mode="ios">
                 <ion-input type="password" formControlName="cnfPwd" [class.invalid]="!slideOneForm.controls.cnfPwd.valid && (slideOneForm.controls.cnfPwd.dirty || submitAttempt)" placeholder="Confirm Password" name="cfpassword" required></ion-input>
               </ion-item>
+              <p class="form-error-text" *ngIf="!slideOneForm.controls.cnfPwd.valid && (slideOneForm.controls.cnfPwd.dirty || submitAttempt)">Your password and confirmation password do not match.</p>
               <ion-item mode="ios">
                 <ion-input type="text" formControlName="fname" [class.invalid]="!slideOneForm.controls.fname.valid && (slideOneForm.controls.fname.dirty || submitAttempt)" placeholder="First Name" name="fname" required></ion-input>
               </ion-item>
+              <p class="form-error-text" *ngIf="!slideOneForm.controls.fname.valid && (slideOneForm.controls.fname.dirty || submitAttempt)">Name can not have numbers or special characters.</p>
               <ion-item mode="ios">
                 <ion-input type="text"  formControlName="lname" [class.invalid]="!slideOneForm.controls.lname.valid && (slideOneForm.controls.lname.dirty || submitAttempt)" placeholder="Last Name" name="lname" required></ion-input>
               </ion-item>
+              <p class="form-error-text" *ngIf="!slideOneForm.controls.lname.valid && (slideOneForm.controls.lname.dirty || submitAttempt)">Last Name can not have numbers or special characters.</p>
               <ion-item mode="ios">
                 <ion-input type="text" formControlName="exp" [class.invalid]="!slideOneForm.controls.exp.valid && (slideOneForm.controls.exp.dirty || submitAttempt)"  placeholder="Years Experience" name="ye" required></ion-input>
               </ion-item>
+              <p class="form-error-text" *ngIf="!slideOneForm.controls.exp.valid && (slideOneForm.controls.exp.dirty || submitAttempt)">Experice only accepts numbers.</p>
               <ion-item mode="ios">
                 <ion-input type="text" formControlName="addr" [class.invalid]="!slideOneForm.controls.addr.valid && (slideOneForm.controls.addr.dirty || submitAttempt)" placeholder="Address" name="addr" required></ion-input>
               </ion-item>
+              <p class="form-error-text" *ngIf="!slideOneForm.controls.addr.valid && (slideOneForm.controls.addr.dirty || submitAttempt)">Please enter a valid address.</p>
               <ion-item mode="ios">
                 <ion-input type="text" formControlName="lic" [class.invalid]="!slideOneForm.controls.lic.valid && (slideOneForm.controls.lic.dirty || submitAttempt)" placeholder="Licenses" name="licesses" required></ion-input>
               </ion-item>
+              <p class="form-error-text" *ngIf="!slideOneForm.controls.lic.valid && (slideOneForm.controls.lic.dirty || submitAttempt)">Licenses can not be empty.</p>
             </form>
             <!-- <div class="weekday-badge">MON</div>
             <div class="weekday-badge">TUES</div>

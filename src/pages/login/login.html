@@ -70,12 +70,12 @@
           <ion-list inset>
 
             <ion-item mode="ios">
-              <ion-label> <ion-icon name="ios-person-outline"></ion-icon></ion-label>
+              <ion-label> <ion-icon name="ios-person-outline" style="color: #FFFFFF;"></ion-icon></ion-label>
               <ion-input [(ngModel)]="client.email" type="text" placeholder="Email" name="email" required style="color: #FFFFFF"></ion-input>
             </ion-item>
 
             <ion-item mode="ios">
-              <ion-label> <ion-icon name="ios-unlock-outline"></ion-icon></ion-label>
+              <ion-label> <ion-icon name="ios-unlock-outline" style="color: #FFFFFF;"></ion-icon></ion-label>
               <ion-input [(ngModel)]="client.pwd" type="password" placeholder="Password" name="password" required style="color: #FFFFFF"></ion-input>
             </ion-item>
 
@@ -95,12 +95,12 @@
           <ion-list inset>
 
             <ion-item mode="ios">
-              <ion-label> <ion-icon name="ios-person-outline"></ion-icon></ion-label>
+              <ion-label> <ion-icon name="ios-person-outline" style="color: #FFFFFF;"></ion-icon></ion-label>
               <ion-input [(ngModel)]="vendor.email"  type="text" placeholder="Email" name="email" required style="color: #FFFFFF"></ion-input>
             </ion-item>
 
             <ion-item mode="ios">
-              <ion-label> <ion-icon name="ios-unlock-outline"></ion-icon></ion-label>
+              <ion-label> <ion-icon name="ios-unlock-outline" style="color: #FFFFFF;"></ion-icon></ion-label>
               <ion-input [(ngModel)]="vendor.pwd"  type="password" placeholder="Password" name="password" required style="color: #FFFFFF"></ion-input>
             </ion-item>
             <div style="text-align: center; margin-top: 20px">
@@ -115,7 +115,7 @@
   </div>
 
   <div class="signup-text" (click)="navigateToSignup()">
-    Don’t have an account?  <a style="color: #FFFFFF; opacity: 1;">Sign up here</a>
+    <span>Don’t have an account?</span>  <a style="color: #FFFFFF; opacity: 1; font-weight: bold;">Sign up here</a>
   </div>
 
 </ion-content>

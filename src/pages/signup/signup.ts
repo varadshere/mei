@@ -167,14 +167,15 @@ export class SignupPage {
     }
 
     matchingPasswords(passwordKey: string, confirmPasswordKey: string) {
-      return (group: FormGroup): {[key: string]: any} => {
+      return (group: FormGroup) => {
         let password = group.controls[passwordKey];
         let confirmPassword = group.controls[confirmPasswordKey];
 
         if (password.value !== confirmPassword.value) {
-          return {
-            mismatchedPasswords: true
-          };
+          // return {
+          // mismatchedPasswords: true
+          // };
+          return confirmPassword.setErrors({notEquivalent: true});
         }
       }
     }
@@ -206,7 +207,7 @@ export class SignupPage {
       let selectedServices = this.getSelectedServices();
       if(!(this.slideOneForm.valid && selectedServices.length > 0)){
           //this.signupSlider.slideTo(0);
-        console.log("FAIL!");
+        console.log("validation FAIL!");
         console.log("selectedServices= "+selectedServices.length);
         if(!this.slideOneForm.valid){
           this.utils.presentAlert("Signup Failed", "Please Fill all the details!");
@@ -323,6 +324,7 @@ export class SignupPage {
 
     if(!this.slideTwoForm.valid){
       //this.signupSlider.slideTo(0);
+      this.utils.presentAlert("Signup Failed", "Please Fill all the details!");
       console.log("Validation FAIL!")
     }else {
       let dataToSend = {

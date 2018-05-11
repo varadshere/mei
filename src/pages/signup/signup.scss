@@ -46,7 +46,7 @@ page-signup {
   }
 
   .invalid {
-    border: 0.1px solid #ffaba3;
+    border: 0.1px solid #ffffff;
   }
 
   .q-text{
@@ -81,5 +81,15 @@ page-signup {
   .img-col img{
     height: 125px;
   }
+  .form-error-text{
+    margin-top: 4px;
+    margin-bottom: 4px;
+    color: #f97d5c;
+    font-size: 11px;
+    //padding-left: 16px;
+  }
 
+  .item-ios{
+    padding-left: 0;
+  }
 }
