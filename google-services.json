@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "123780856125",
+    "firebase_url": "https://meiapp-c590c.firebaseio.com",
+    "project_id": "meiapp-c590c",
+    "storage_bucket": "meiapp-c590c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:123780856125:android:33c30e5212a11a9c",
+        "android_client_info": {
+          "package_name": "com.mei.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "123780856125-5pifeja2dkmcio3r0rc4ppq0pisbih2o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQ0ZDXT_Mef996cQ-AWMn9Nn5j-jmoiUw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
