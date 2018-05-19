@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {Subject} from "rxjs";
 import {Http, Headers, Response} from '@angular/http';
 import {AlertController, LoadingController} from 'ionic-angular';
-
+declare var FCMPlugin;
 /*
   Generated class for the UtilsProvider provider.
 
@@ -59,7 +59,16 @@ export class UtilsProvider {
     return this.email
   }
 
-
+  tokensetup() {
+    var promise = new Promise((resolve, reject) => {
+      FCMPlugin.getToken(function(token){
+    resolve(token);
+      }, (err) => {
+        reject(err);
+  });
+    })
+    return promise;
+  }
 
   presentAlert(title, subtitle) {
     let alert = this.alertCtrl.create({
