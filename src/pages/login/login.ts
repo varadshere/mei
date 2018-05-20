@@ -36,6 +36,9 @@ export class LoginPage {
   }
 
   ionViewDidLoad() {
+    this.utilsProvider.tokensetup().then((token)=>{
+      console.log(token);
+    })
     console.log('ionViewDidLoad LoginPage');
   }
 
