@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {GetstartedPage} from "../getstarted/getstarted";
 import {SidemenuPage} from "../sidemenu/sidemenu";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UtilsProvider} from "../../providers/utils/utils";
@@ -10,6 +9,7 @@ import {VendorSidemenuPage} from "../vendor-sidemenu/vendor-sidemenu";
 
 import { Instagram } from "ng2-cordova-oauth/core";
 import { OauthCordova } from 'ng2-cordova-oauth/platform/cordova';
+declare var google;
 /**
  * Generated class for the SignupPage page.
  *
@@ -66,7 +66,7 @@ export class SignupPage {
       { title: "MAKEUP", list: [{name: 'Up-do', selected: false, desc: 'Sweep up your hair in a range of ways including an assortment of ponytails, braids and more', cost: "0"}, {name: 'Event Trial', selected: false, desc: 'Sweep up your hair in a range of ways including an assortment of ponytails, braids and more', cost: "0"}, {name: 'Hairstyling', selected: false, desc: 'Sweep up your hair in a range of ways including an assortment of ponytails, braids and more', cost: "0"}, {name: 'Blow Wave', selected: false, desc: 'Test-run a hair look and style before your big event', cost: "0"}]  },
       { title: "NAILS", list: [{name: 'Up-do', selected: false, desc: 'Sweep up', cost: "0"}, {name: 'Event Trial', selected: false, desc: 'braids and more', cost: "0"}, {name: 'Hairstyling', selected: false, desc: 'abcd', cost: "0"}, {name: 'Blow Wave', selected: false, desc: 'Hair straightening', cost: "0"}] },
     ];
-
+    place: any;
     shownGroup = null;
 
     private oauth: OauthCordova = new OauthCordova();
@@ -97,7 +97,7 @@ export class SignupPage {
         lname: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
         exp: ['', SignupPage.isValid],
         pwd: ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(12), Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,12}$')])],
-        addr: ['', Validators.required],
+        // addr: ['', Validators.required],
         lic: ['', Validators.required],
         cnfPwd: ['', Validators.required]
       },{validator: this.matchingPasswords('pwd', 'cnfPwd')});
@@ -108,7 +108,7 @@ export class SignupPage {
         lname: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
         pwd: ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(12), Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,12}$')])],
         cnfPwd: ['', Validators.required],
-        addr: ['', Validators.required]
+        // addr: ['', Validators.required]
       },{validator: this.matchingPasswords('pwd', 'cnfPwd')});
 
       this.instaApiResp = [];
@@ -131,6 +131,50 @@ export class SignupPage {
       });
     }
 
+    initMapClient(){
+      let bool = false;
+      let ref = this;
+      function init(){
+        if(!bool){
+          var nativePlacesInputBox = document.getElementById('places').getElementsByTagName('input')[0];
+          let autocomplete = new google.maps.places.Autocomplete(nativePlacesInputBox);
+          google.maps.event.addListener(autocomplete, 'place_changed', () => {
+            ref.place = autocomplete.getPlace();
+            console.log(ref.place);
+            console.log("Client place");
+          });
+          bool = true;
+        }
+      }
+      return init;
+   }
+   initMapVendor(){
+      let bool = false;
+      let ref = this;
+      function init(){
+        if(!bool){
+          var nativePlacesInputBox = document.getElementById('placesVendor').getElementsByTagName('input')[0];
+          let autocomplete = new google.maps.places.Autocomplete(nativePlacesInputBox);
+          google.maps.event.addListener(autocomplete, 'place_changed', () => {
+            ref.place = autocomplete.getPlace();
+            console.log(ref.place);
+            console.log("Vendor Place ");
+          });
+          bool = true;
+        }
+      }
+      return init;
+   }
+  placeInputFocus(){
+      this.place = undefined;
+  }
+
+  initMap = this.initMapVendor();
+  placeVendorInputFocus(){
+      this.place = undefined;
+      this.initMap();
+  }
+
     toggleGroup(group) {
       if (this.isGroupShown(group)) {
         this.shownGroup = null;
@@ -149,8 +193,6 @@ export class SignupPage {
         l.selected = true;
       }
     }
-
-
     static isValid(control: FormControl): any {
 
       if(isNaN(control.value)){
@@ -172,9 +214,6 @@ export class SignupPage {
         let confirmPassword = group.controls[confirmPasswordKey];
 
         if (password.value !== confirmPassword.value) {
-          // return {
-          // mismatchedPasswords: true
-          // };
           return confirmPassword.setErrors({notEquivalent: true});
         }
       }
@@ -182,6 +221,8 @@ export class SignupPage {
 
     ionViewDidLoad() {
       console.log('ionViewDidLoad SignupPage');
+      let mapclient = this.initMapClient();
+      mapclient();
     }
 
     navigateToGst(){
@@ -205,7 +246,7 @@ export class SignupPage {
 
       this.submitAttempt = true;
       let selectedServices = this.getSelectedServices();
-      if(!(this.slideOneForm.valid && selectedServices.length > 0)){
+      if(!(this.slideOneForm.valid && selectedServices.length > 0 && this.place)){
           //this.signupSlider.slideTo(0);
         console.log("validation FAIL!");
         console.log("selectedServices= "+selectedServices.length);
@@ -221,16 +262,6 @@ export class SignupPage {
       else {
           console.log("success!");
           console.log(this.slideOneForm.value);
-          // console.log(this.slideTwoForm.value);
-        // let serviceObj = {};
-        // this.services.forEach(function (service) {
-        //   if(service.title == 'HAIR'){
-        //     serviceObj.HAIR = service.list;
-        //   }
-        //   service.list.forEach(function (l) {
-        //
-        //   });
-        // });
 
         let dataToSend = {
           "username":this.slideOneForm.value.email,
@@ -239,7 +270,9 @@ export class SignupPage {
           "first_name": this.slideOneForm.value.fname,
           "last_name": this.slideOneForm.value.lname,
           "experience": this.slideOneForm.value.exp,
-          "address": this.slideOneForm.value.addr,
+          "address": this.place.formatted_address,
+          "lat": this.place.geometry.location.lat(),
+          "lng": this.place.geometry.location.lng(),
           "licenses": this.slideOneForm.value.lic,
           "available": this.getDaysArr(),
           "services": this.services,
@@ -322,7 +355,7 @@ export class SignupPage {
   signUpClient(){
     this.submitTwoAttempt = true;
 
-    if(!this.slideTwoForm.valid){
+    if(!this.slideTwoForm.valid || !this.place){
       //this.signupSlider.slideTo(0);
       this.utils.presentAlert("Signup Failed", "Please Fill all the details!");
       console.log("Validation FAIL!")
@@ -333,7 +366,9 @@ export class SignupPage {
         "password": this.slideTwoForm.value.pwd,
         "first_name": this.slideTwoForm.value.fname,
         "last_name": this.slideTwoForm.value.lname,
-        "address": this.slideTwoForm.value.addr,
+        "address": this.place.formatted_address,
+        "lat": this.place.geometry.location.lat(),
+        "lng": this.place.geometry.location.lng(),
         "type": "client"
       };
       let dataToSendEditClient = {

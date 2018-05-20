@@ -5,13 +5,10 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar mode="ios">
     <ion-title text-center>Sign up</ion-title>
   </ion-navbar>
-
 </ion-header>
-
 
 <ion-content>
   <div padding>
@@ -50,10 +47,13 @@
                 <ion-input type="text" placeholder="Last Name" formControlName="lname" [class.invalid]="!slideTwoForm.controls.lname.valid && (slideTwoForm.controls.lname.dirty || submitTwoAttempt)" name="lname" required></ion-input>
               </ion-item>
               <p class="form-error-text" *ngIf="!slideTwoForm.controls.lname.valid && (slideTwoForm.controls.lname.dirty || submitTwoAttempt)">Last Name can not have numbers or special characters.</p>
+              <!--<ion-item mode="ios">-->
+                <!--<ion-input type="text" placeholder="Address" formControlName="addr" [class.invalid]="!slideTwoForm.controls.addr.valid && (slideTwoForm.controls.addr.dirty || submitTwoAttempt)" name="addr" required></ion-input>-->
+              <!--</ion-item>-->
               <ion-item mode="ios">
-                <ion-input type="text" placeholder="Address" formControlName="addr" [class.invalid]="!slideTwoForm.controls.addr.valid && (slideTwoForm.controls.addr.dirty || submitTwoAttempt)" name="addr" required></ion-input>
+                <ion-input id="places" (focus)="placeInputFocus()" type="text" value="" placeholder="Address"></ion-input>
               </ion-item>
-              <p class="form-error-text" *ngIf="!slideTwoForm.controls.addr.valid && (slideTwoForm.controls.addr.dirty || submitTwoAttempt)">Please enter a valid address.</p>
+              <p class="form-error-text" *ngIf="!place && (submitTwoAttempt)">Please select a valid address.</p>
 
 
               <div style="text-align: center; margin-top: 20px">
@@ -96,22 +96,19 @@
                 <ion-input type="text" formControlName="exp" [class.invalid]="!slideOneForm.controls.exp.valid && (slideOneForm.controls.exp.dirty || submitAttempt)"  placeholder="Years Experience" name="ye" required></ion-input>
               </ion-item>
               <p class="form-error-text" *ngIf="!slideOneForm.controls.exp.valid && (slideOneForm.controls.exp.dirty || submitAttempt)">Experice only accepts numbers.</p>
+              <!--<ion-item mode="ios">-->
+                <!--<ion-input type="text" formControlName="addr" [class.invalid]="!slideOneForm.controls.addr.valid && (slideOneForm.controls.addr.dirty || submitAttempt)" placeholder="Address" name="addr" required></ion-input>-->
+              <!--</ion-item>-->
+              <!--<p class="form-error-text" *ngIf="!slideOneForm.controls.addr.valid && (slideOneForm.controls.addr.dirty || submitAttempt)">Please enter a valid address.</p>-->
               <ion-item mode="ios">
-                <ion-input type="text" formControlName="addr" [class.invalid]="!slideOneForm.controls.addr.valid && (slideOneForm.controls.addr.dirty || submitAttempt)" placeholder="Address" name="addr" required></ion-input>
+                <ion-input id="placesVendor" (focus)="placeVendorInputFocus()" type="text" value="" placeholder="Address"></ion-input>
               </ion-item>
-              <p class="form-error-text" *ngIf="!slideOneForm.controls.addr.valid && (slideOneForm.controls.addr.dirty || submitAttempt)">Please enter a valid address.</p>
+              <p class="form-error-text" *ngIf="!place && (submitAttempt)">Please select a valid address.</p>
               <ion-item mode="ios">
                 <ion-input type="text" formControlName="lic" [class.invalid]="!slideOneForm.controls.lic.valid && (slideOneForm.controls.lic.dirty || submitAttempt)" placeholder="Licenses" name="licesses" required></ion-input>
               </ion-item>
               <p class="form-error-text" *ngIf="!slideOneForm.controls.lic.valid && (slideOneForm.controls.lic.dirty || submitAttempt)">Licenses can not be empty.</p>
             </form>
-            <!-- <div class="weekday-badge">MON</div>
-            <div class="weekday-badge">TUES</div>
-            <div class="weekday-badge">WED</div>
-            <div class="weekday-badge">THURS</div>
-            <div class="weekday-badge">FRI</div>
-            <div class="weekday-badge">SAT</div>
-            <div class="weekday-badge">SUN</div> -->
             <div class="q-text">When you are usually available? Select all that apply</div>
             <div>
               <button class="day-button" [class.mon-select]="day.mon.selected" ion-button (click)="day.mon.selected ? (day.mon.selected = false) : (day.mon.selected = true)" mode="md">MON</button>
@@ -122,8 +119,6 @@
               <button class="day-button" [class.mon-select]="day.sat.selected" ion-button (click)="day.sat.selected ? (day.sat.selected = false) : (day.sat.selected = true)" mode="md">SAT</button>
               <button class="day-button" [class.mon-select]="day.sun.selected" ion-button (click)="day.sun.selected ? (day.sun.selected = false) : (day.sun.selected = true)" mode="md">SUN</button>
             </div>
-
-
             <div class="q-text">
               What Services are you able to provide?
             </div>
