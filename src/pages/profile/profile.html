@@ -112,6 +112,6 @@
     <!--<button ion-button class="book-button">Book Now</button>-->
   <!--</ion-fab>-->
   <div style="text-align: center; margin-top: 20px">
-    <button ion-button class="book-button" (click)="navigate()">Book Now</button>
+    <button mode="md" [disabled]="!bServices.length > 0" ion-button class="book-button" (click)="navigate()">Book Now</button>
   </div>
 </ion-content>

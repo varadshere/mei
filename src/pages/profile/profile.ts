@@ -56,6 +56,7 @@ export class ProfilePage {
     }else{
       l.booked = true;
     }
+    this.getBookedServices();
   }
 
   navigate(){
@@ -66,22 +67,23 @@ export class ProfilePage {
         profile: this.profileData
       });
     }else {
-      this.utils.presentAlert("Booking Failed", "Please select at least One Service!");
+      this.utils.presentAlert("Uh oh! Booking failed", "Please select at least One Service!");
     }
 
   }
 
+  bServices = [];
   getBookedServices(){
-    let bServices = [];
+    this.bServices = [];
     this.profileData.services.forEach(d=>{
       d.list.forEach(l=>{
         if(l.booked){
-          bServices.push(l);
+          this.bServices.push(l);
         }
       });
     });
 
-    return bServices;
+    return this.bServices;
   }
 
 

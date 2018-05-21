@@ -144,7 +144,7 @@
                             <ion-col col-8>
                               <div class="service-title">{{l.name}}</div>
                             </ion-col>
-                            <ion-col col-4>
+                            <ion-col col-4 [class.service-selected]="l.selected">
                               <ion-row align-items-center>$<ion-input type="text" [(ngModel)]="l.cost" placeholder="Cost" required></ion-input></ion-row>
                             </ion-col>
                           </ion-row>

@@ -256,7 +256,7 @@ export class MyBookingPage {
         selectedDate: this.selectedDate
       });
     }else {
-      this.utilsProvider.presentAlert("Booking Failed", "Please select Time!");
+      this.utilsProvider.presentAlert("Uh oh! Booking failed", "Please select Time!");
     }
   }
   getSlots(){
