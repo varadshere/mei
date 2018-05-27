@@ -495,5 +495,34 @@ export class UtilsProvider {
       });
     });
   }
+  getCheck(){
+    let data = {email: "varad@gmail.com"};
+    let ref = this;
+    let loading = this.getloadingAlert();
+    loading.present();
+    return new Promise((resolve, reject) => {
+      // let location = this.utils.getMapCenter();
+      let headers = new Headers();
+      headers.append('Content-Type','application/json');
+      headers.append('Access-Control-Allow-Origin' , '*');
+      headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+      let url = this.serverUrl + 'getBookings';
+      let body = JSON.stringify(data);
+      this.http.post("http://18.188.167.167:5000/api/checkUser", body, {headers: headers}).map(res => res.json()).timeout(3000).subscribe(data => {
+        console.log("got Bookings");
+        console.log(data);
+        ref.profile = (data.result);
+        loading.dismissAll();
+        resolve(data.result);
+        // resolve(data);
+      }, error => {
+        console.log("ERROR");
+        console.log(error);
+        //reject("false");
+        loading.dismissAll();
+        resolve(false);
+      });
+    });
+  }
 
 }
