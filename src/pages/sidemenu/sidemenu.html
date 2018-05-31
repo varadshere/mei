@@ -4,7 +4,7 @@
   <ion-content class="sidemenu">
     <div class="profile">
       <ion-avatar item-start class="avatar">
-        <img  style="margin: auto; width: 100%;" src="assets/imgs/profile.png">
+        <img  style="margin: auto; width: 100%;" menuClose src="assets/imgs/user.png" (click)="openPage('PROFILE', 10)">
       </ion-avatar>
       <div class="profile-text">{{utilsProvider.profile.first_name }} {{utilsProvider.profile.last_name }}</div>
     </div>

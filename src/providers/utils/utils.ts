@@ -61,12 +61,15 @@ export class UtilsProvider {
 
   tokensetup() {
     var promise = new Promise((resolve, reject) => {
-      FCMPlugin.getToken(function(token){
-    resolve(token);
-      }, (err) => {
-        reject(err);
-  });
-    })
+      if (typeof FCMPlugin != 'undefined'){
+        FCMPlugin.getToken(function(token){
+          resolve(token);
+        }, (err) => {
+          reject(err);
+        });
+      }
+
+    });
     return promise;
   }
 
@@ -227,7 +230,8 @@ export class UtilsProvider {
   vendorListService(){
    // let ref = this;
     let dataToSend = {
-      "service": this.getServiceSelection()
+      "service": this.getServiceSelection(),
+      "email": this.getUserEmail()
     };
     let loading = this.getloadingAlert();
     loading.present();
@@ -480,35 +484,6 @@ export class UtilsProvider {
       let url = this.serverUrl + 'getBookings';
       let body = JSON.stringify(dataToSend);
       this.http.post(url, body, {headers: headers}).map(res => res.json()).timeout(3000).subscribe(data => {
-        console.log("got Bookings");
-        console.log(data);
-        ref.profile = (data.result);
-        loading.dismissAll();
-        resolve(data.result);
-        // resolve(data);
-      }, error => {
-        console.log("ERROR");
-        console.log(error);
-        //reject("false");
-        loading.dismissAll();
-        resolve(false);
-      });
-    });
-  }
-  getCheck(){
-    let data = {email: "varad@gmail.com"};
-    let ref = this;
-    let loading = this.getloadingAlert();
-    loading.present();
-    return new Promise((resolve, reject) => {
-      // let location = this.utils.getMapCenter();
-      let headers = new Headers();
-      headers.append('Content-Type','application/json');
-      headers.append('Access-Control-Allow-Origin' , '*');
-      headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
-      let url = this.serverUrl + 'getBookings';
-      let body = JSON.stringify(data);
-      this.http.post("http://18.188.167.167:5000/api/checkUser", body, {headers: headers}).map(res => res.json()).timeout(3000).subscribe(data => {
         console.log("got Bookings");
         console.log(data);
         ref.profile = (data.result);

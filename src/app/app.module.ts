@@ -32,6 +32,7 @@ import {VendorCalendarPage} from "../pages/vendor-calendar/vendor-calendar";
 import { ChartPage } from '../pages/chart/chart';
 import {VendorSettingsPage} from "../pages/vendor-settings/vendor-settings";
 import {ClientBookingsPage} from "../pages/client-bookings/client-bookings";
+import {ClientProfilePage} from "../pages/client-profile/client-profile";
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import {ClientBookingsPage} from "../pages/client-bookings/client-bookings";
     VendorCalendarPage,
     ChartPage,
     VendorSettingsPage,
-    ClientBookingsPage
+    ClientBookingsPage,
+    ClientProfilePage
 
   ],
   imports: [
@@ -92,7 +94,8 @@ import {ClientBookingsPage} from "../pages/client-bookings/client-bookings";
     VendorCalendarPage,
     ChartPage,
     VendorSettingsPage,
-    ClientBookingsPage
+    ClientBookingsPage,
+    ClientProfilePage
 
   ],
   providers: [

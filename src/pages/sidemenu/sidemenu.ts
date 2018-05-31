@@ -10,6 +10,7 @@ import {SelectionHomePage} from "../selection-home/selection-home";
 import {ClientSettingsPage} from "../client-settings/client-settings";
 import { BookingDetailsPage } from '../booking-details/booking-details';
 import {ClientBookingsPage} from "../client-bookings/client-bookings";
+import {ClientProfilePage} from "../client-profile/client-profile";
 
 /**
  * Generated class for the SidemenuPage page.
@@ -59,7 +60,7 @@ export class SidemenuPage {
     }else if(param == 'BOOKINGS'){
       this.rootPage = ClientBookingsPage;
     }else if(param == 'PROFILE'){
-      this.rootPage = ProfilePage;
+      this.rootPage = ClientProfilePage;
     }else if(param == 'SETTINGS'){
       this.rootPage = ClientSettingsPage;
     }else if(param == 'MAP'){

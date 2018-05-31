@@ -33,6 +33,8 @@ export class SignupPage {
     exp = '';
     addr = '';
     lic = '';
+    bio = '';
+    fav: '';
     day = {
       mon: {
         selected : false
@@ -240,6 +242,8 @@ export class SignupPage {
         this.exp = '';
         this.addr = '';
         this.lic = '';
+        this.bio = '';
+        this.fav = '';
     }
 
     signUpVendor(){
@@ -276,6 +280,8 @@ export class SignupPage {
           "licenses": this.slideOneForm.value.lic,
           "available": this.getDaysArr(),
           "services": this.services,
+          "bio":"",
+          "fav": "",
           "type": "vendor"
         };
 

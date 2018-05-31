@@ -33,7 +33,6 @@ export class LoginPage {
   };
 
   constructor(public navCtrl: NavController, public navParams: NavParams,  private utilsProvider: UtilsProvider) {
-    this.utilsProvider.getCheck();
   }
 
   ionViewDidLoad() {

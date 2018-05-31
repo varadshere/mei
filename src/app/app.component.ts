@@ -19,31 +19,32 @@ export class MyApp {
       splashScreen.hide();
 
 
-      FCMPlugin.onNotification((data)=>{
-        if(data.wasTapped){
-          let toast = this.toastCtrl.create({
-            message: data.sendername+'\n'+ data.message,
-            duration: 3000,
-            position: 'top'
-          });
-      
-          toast.present();
-      
-          //Notification was received on device tray and tapped by the user.
-          //alert( JSON.stringify(data) );
-        }else{
-          let toast = this.toastCtrl.create({
-            message: data.sendername+'\n'+ data.message,
-            duration: 3000,
-            position: 'top'
-          });
-      
-          toast.present();
-      
-        }
-      
-      })
+      if (typeof FCMPlugin != 'undefined'){
+        FCMPlugin.onNotification((data)=>{
+          if(data.wasTapped){
+            let toast = this.toastCtrl.create({
+              message: data.sendername+'\n'+ data.message,
+              duration: 3000,
+              position: 'top'
+            });
 
+            toast.present();
+
+            //Notification was received on device tray and tapped by the user.
+            //alert( JSON.stringify(data) );
+          }else{
+            let toast = this.toastCtrl.create({
+              message: data.sendername+'\n'+ data.message,
+              duration: 3000,
+              position: 'top'
+            });
+
+            toast.present();
+
+          }
+
+        })
+      }
 
 
     });
