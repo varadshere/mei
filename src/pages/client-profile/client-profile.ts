@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {UtilsProvider} from "../../providers/utils/utils";
 
 /**
  * Generated class for the ClientProfilePage page.
@@ -12,12 +13,17 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'client-profile.html',
 })
 export class ClientProfilePage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  rate= 3.5;
+  profile: string = "ABOUT";
+  profileData:any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private utils: UtilsProvider) {
+    this.profileData = utils.profile;
   }
-
   ionViewDidLoad() {
     console.log('ionViewDidLoad ClientProfilePage');
   }
 
+  onModelChange(data){
+
+  }
 }

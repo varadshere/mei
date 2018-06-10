@@ -33,6 +33,7 @@ import { ChartPage } from '../pages/chart/chart';
 import {VendorSettingsPage} from "../pages/vendor-settings/vendor-settings";
 import {ClientBookingsPage} from "../pages/client-bookings/client-bookings";
 import {ClientProfilePage} from "../pages/client-profile/client-profile";
+import {Ionic2RatingModule} from "ionic2-rating";
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import {ClientProfilePage} from "../pages/client-profile/client-profile";
     NgCalendarModule,
     BrowserModule,
     HttpModule,
+    Ionic2RatingModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

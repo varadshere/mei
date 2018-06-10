@@ -39,7 +39,7 @@ export class ProfilePage {
   }
   toggleGroup(group) {
     if (this.isGroupShown(group)) {
-      this.shownGroup = null;
+       this.shownGroup = null;
     } else {
       this.shownGroup = group;
     }

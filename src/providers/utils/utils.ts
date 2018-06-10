@@ -12,6 +12,7 @@ declare var FCMPlugin;
 @Injectable()
 export class UtilsProvider {
   private notify = new Subject<any>();
+
   notifyObservable$: any =  this.notify.asObservable();
   serverUrl  = 'http://18.216.123.109:5000/api/';
   page = '';

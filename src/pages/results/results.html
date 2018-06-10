@@ -16,9 +16,9 @@
 
 <ion-content>
 
-  <ion-card *ngFor="let profile of vendorList">
+  <ion-card *ngFor="let profile of vendorList" (click)="openProfile(profile)" tappable>
 
-    <ion-item (click)="openProfile(profile)" tappable>
+    <ion-item>
       <ion-avatar item-start>
         <img src="{{profile.profile_pic ? profile.profile_pic : 'assets/imgs/user.png'}}">
       </ion-avatar>
