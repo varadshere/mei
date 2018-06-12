@@ -13,15 +13,17 @@
       Profile
     </ion-title>
     <ion-buttons end>
-      <ion-icon align-self-end ios="md-create" md="md-create"></ion-icon>
+      <button ion-button icon-only (click)="openSettings()">
+        <ion-icon align-self-end ios="md-create" md="md-create" style="color: #F9748F; font-size: 20px;"></ion-icon>
+      </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <ion-row>
+  <ion-row style="padding-top: 5PX;">
     <ion-col col-3>
       <!--<img  class="profile-img" src="{{profileData.profile_pic ? profileData.profile_pic : 'assets/imgs/user.png'}}">-->
-      <img  class="profile-img" src="assets/imgs/user.png">
+      <img  class="profile-img" src="{{utils.profile.profile_pic ? utils.profile.profile_pic : 'assets/imgs/user.png'}}">
     </ion-col>
     <ion-col col-9>
       <ion-row>

@@ -39,7 +39,6 @@ export class SidemenuPage {
 
     console.log('ionViewDidLoad SidemenuPage ');
     // console.log(this.profile);
-
     this.subscription = ref.utilsProvider.notifyObservable$.subscribe((res) => {
       console.log(res);
 

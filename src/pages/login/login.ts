@@ -55,9 +55,10 @@ export class LoginPage {
     loginPromise.then(function (result: any) {
       if(result){
         ref.utilsProvider.setUserEmail(ref.client.email);
-        ref.utilsProvider.getProfile();
-        ref.utilsProvider.setPage(SelectionHomePage);
-        ref.navCtrl.push(SidemenuPage);
+        ref.utilsProvider.getProfile().then(function (d) {
+          ref.utilsProvider.setPage(SelectionHomePage);
+          ref.navCtrl.push(SidemenuPage);
+        });
       }else{
         console.log("Wrong Creds");
       }
@@ -72,9 +73,11 @@ export class LoginPage {
     loginPromise.then(function (result: any) {
       if(result){
         ref.utilsProvider.setUserEmail(ref.vendor.email);
-        ref.utilsProvider.getProfile();
-        ref.utilsProvider.setPage(VendorHomePage);
-        ref.navCtrl.push(VendorSidemenuPage);
+        ref.utilsProvider.getProfile().then(function (d) {
+          ref.utilsProvider.setPage(VendorHomePage);
+          ref.navCtrl.push(VendorSidemenuPage);
+        });
+
       }else{
         console.log("Wrong Creds");
       }

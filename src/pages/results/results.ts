@@ -5,13 +5,6 @@ import {CalendarPage} from "../calendar/calendar";
 import {MyBookingPage} from "../my-booking/my-booking";
 import {UtilsProvider} from "../../providers/utils/utils";
 
-/**
- * Generated class for the ResultsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @Component({
   selector: 'page-results',
   templateUrl: 'results.html',

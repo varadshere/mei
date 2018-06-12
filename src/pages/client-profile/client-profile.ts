@@ -1,13 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {UtilsProvider} from "../../providers/utils/utils";
+import {SelectionHomePage} from "../selection-home/selection-home";
+import {ClientSettingsPage} from "../client-settings/client-settings";
 
-/**
- * Generated class for the ClientProfilePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 @Component({
   selector: 'page-client-profile',
   templateUrl: 'client-profile.html',
@@ -25,5 +21,9 @@ export class ClientProfilePage {
 
   onModelChange(data){
 
+  }
+  openSettings(){
+    this.utils.setPage(ClientSettingsPage);
+    this.utils.notifyOther('data');
   }
 }

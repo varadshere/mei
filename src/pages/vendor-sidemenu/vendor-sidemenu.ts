@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {ChangeDetectorRef, Component} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {GetstartedPage} from "../getstarted/getstarted";
 import {UtilsProvider} from "../../providers/utils/utils";
@@ -20,7 +20,9 @@ import {ChartPage} from "../chart/chart";
   templateUrl: 'vendor-sidemenu.html',
 })
 export class VendorSidemenuPage {
-
+  fname:string;
+  lname:string;
+  profile_pic:string;
   public rootPage: any = VendorHomePage;
   private selectedItem: number = 0;
   private menuItems = [
@@ -32,6 +34,9 @@ export class VendorSidemenuPage {
     // {name:'SETTINGS', active:false},
   ];
   constructor(public navCtrl: NavController, public navParams: NavParams, public utilsProvider: UtilsProvider) {
+    this.fname = this.utilsProvider.profile.first_name;
+    this.lname = this.utilsProvider.profile.last_name;
+    this.profile_pic = this.utilsProvider.profile.profile_pic;
   }
 
   ionViewDidLoad() {

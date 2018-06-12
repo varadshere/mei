@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import {Subject} from "rxjs";
 import {Http, Headers, Response} from '@angular/http';
 import {AlertController, LoadingController} from 'ionic-angular';
+import {ImagePicker} from "@ionic-native/image-picker";
+import {Base64} from "@ionic-native/base64";
+import {Camera, CameraOptions} from "@ionic-native/camera";
+import {Observable} from "rxjs/Observable";
+import {Crop} from "@ionic-native/crop";
 declare var FCMPlugin;
-/*
-  Generated class for the UtilsProvider provider.
 
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class UtilsProvider {
   private notify = new Subject<any>();
@@ -18,6 +18,7 @@ export class UtilsProvider {
   page = '';
   serviceSelected = '';
   email = '';
+  headers = new Headers();
   private _profile: any = {};
   public notifyOther(data: any) {
     if (data) {
@@ -25,8 +26,17 @@ export class UtilsProvider {
     }
   }
 
-  constructor(public http: Http, private alertCtrl: AlertController, private loadingCtrl: LoadingController) {
+  constructor(public http: Http,
+              private alertCtrl: AlertController,
+              private loadingCtrl: LoadingController,
+              private imagePicker: ImagePicker,
+              private base64: Base64,
+              private camera: Camera,
+              private crop: Crop) {
     console.log('Hello UtilsProvider Provider');
+    this.headers.append('Content-Type','application/json');
+    this.headers.append('Access-Control-Allow-Origin' , '*');
+    this.headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
   }
 
   get profile(): any {
@@ -97,6 +107,43 @@ export class UtilsProvider {
       .map((res:Response) => res.json());
   }
 
+  uploadPhoto(){
+    return new Promise((resolve, reject) => {
+      let options: CameraOptions = {
+        quality: 70,
+        destinationType: this.camera.DestinationType.FILE_URI,
+        // encodingType: this.camera.EncodingType.JPEG,
+        // mediaType: this.camera.MediaType.PICTURE
+        sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+        saveToPhotoAlbum: false
+      };
+
+      this.camera.getPicture(options).then((imageData) => {
+        // imageData is either a base64 encoded string or a file URI
+        // If it's base64:
+        // let base64Image = 'data:image/jpeg;base64,' + imageData;
+        this.cropImg(imageData).then(
+          //this.base64.encodeFile(filePath).then((base64File: string) => {
+          newImage => {
+            console.log('new image path is: ' + newImage);
+            this.base64.encodeFile(newImage).then((base64File: string) => {
+                resolve(base64File);
+            });
+          },
+          error => console.error('Error cropping image', error)
+        );
+        // resolve(base64Image);
+      }, (err) => {
+        // Handle error
+        resolve(false);
+      });
+    });
+  }
+
+  cropImg(path){
+    return this.crop.crop(path, {quality: 75});
+  }
+
   createInstaImgs(data, username){
     let dataToSend = {
       "method": "create",
@@ -106,25 +153,16 @@ export class UtilsProvider {
     let loading = this.getloadingAlert();
     loading.present();
     return new Promise((resolve, reject) => {
-      // let location = this.utils.getMapCenter();
-      let headers = new Headers();
-      headers.append('Content-Type','application/json');
-      headers.append('Access-Control-Allow-Origin' , '*');
-      headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
       let url = this.serverUrl + 'getInsta';
       let body = JSON.stringify(dataToSend);
-      this.http.post(url, body, {headers: headers}).map(res => res.json()).timeout(3000).subscribe(data => {
+      this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(3000).subscribe(data => {
         console.log("insta create");
         console.log(data);
         loading.dismissAll();
         resolve(data.result);
-        // ref.applyHaversine(data, 'hp');
-        // this.setDataToShow(data.outlets);
-        // resolve(data);
       }, error => {
         console.log("ERROR");
         console.log(error);
-        //reject("false");
         loading.dismissAll();
         resolve(false);
       });
@@ -138,14 +176,10 @@ export class UtilsProvider {
     let loading = this.getloadingAlert();
     loading.present();
     return new Promise((resolve, reject) => {
-      // let location = this.utils.getMapCenter();
-      let headers = new Headers();
-      headers.append('Content-Type','application/json');
-      headers.append('Access-Control-Allow-Origin' , '*');
-      headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+
       let url = this.serverUrl + 'getInsta';
       let body = JSON.stringify(dataToSend);
-      this.http.post(url, body, {headers: headers}).map(res => res.json()).timeout(3000).subscribe(data => {
+      this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(3000).subscribe(data => {
         console.log("insta create");
         console.log(data);
         loading.dismissAll();
@@ -163,6 +197,45 @@ export class UtilsProvider {
     });
   }
 
+  getPicturesFromGallery(): Subject<any>{
+    let loading = this.getloadingAlert();
+    loading.present();
+    let img$ = new Subject<any>();
+
+    // let images$: any =  imgsSub.asObservable();
+    let imgBase64Arr = [];
+    let options =
+      {
+        maximumImagesCount: 3,
+        quality: 90,
+        outputType: 0
+      };
+    this.imagePicker.getPictures(options).then((results) =>
+    {
+      for (var i = 0; i < results.length; i++){
+        let filePath = results[i];
+        this.base64.encodeFile(filePath).then((base64File: string) => {
+          console.log(base64File);
+          imgBase64Arr.push(base64File);
+          img$.next(base64File);
+          if(imgBase64Arr.length == options.maximumImagesCount){
+            loading.dismissAll();
+            img$.complete();
+          }
+        }, (err) => {
+          loading.dismissAll();
+          console.log(err);
+          console.log("errir in file path");
+        });
+        // this.photos.push(this.base64Image);
+      }
+    }, (err) => {
+      loading.dismissAll();
+      console.log(err);
+    });
+    return img$;
+  }
+
   loginService(email, pwd, type){
    // let ref = this;
    console.log(email);
@@ -170,30 +243,24 @@ export class UtilsProvider {
    let loading = this.getloadingAlert();
    loading.present();
     return new Promise((resolve, reject) => {
-     // let location = this.utils.getMapCenter();
-      let headers = new Headers();
-      headers.append('Content-Type','application/json');
-      headers.append('Access-Control-Allow-Origin' , '*');
-      headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+
       let url = this.serverUrl + 'loginCheck';
       let body = JSON.stringify({
         user_email: email,
         password: pwd,
         type: type
       });
-      this.http.post(url, body, {headers: headers}).map(res => res.json()).timeout(3000).subscribe(data => {
+      this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(3000).subscribe(data => {
         console.log("login rep");
         console.log(data);
         loading.dismissAll();
         resolve(data.result);
-        // ref.applyHaversine(data, 'hp');
-        // this.setDataToShow(data.outlets);
-        // resolve(data);
       }, error => {
         console.log("ERROR");
         console.log(error);
         //reject("false");
         loading.dismissAll();
+        this.presentAlert('Login Failed', 'Invalid username or password');
         resolve(false);
       });
     });
@@ -203,21 +270,13 @@ export class UtilsProvider {
     let loading = this.getloadingAlert();
     loading.present();
     return new Promise((resolve, reject) => {
-     // let location = this.utils.getMapCenter();
-      let headers = new Headers();
-      headers.append('Content-Type','application/json');
-      headers.append('Access-Control-Allow-Origin' , '*');
-      headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
       let url = this.serverUrl + 'signup';
       let body = JSON.stringify(dataToSend);
-      this.http.post(url, body, {headers: headers}).map(res => res.json()).timeout(3000).subscribe(data => {
+      this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(3000).subscribe(data => {
         console.log("signUp rep");
         console.log(data);
         loading.dismissAll();
         resolve(data.result);
-        // ref.applyHaversine(data, 'hp');
-        // this.setDataToShow(data.outlets);
-        // resolve(data);
       }, error => {
         console.log("ERROR");
         console.log(error);
@@ -237,21 +296,13 @@ export class UtilsProvider {
     let loading = this.getloadingAlert();
     loading.present();
     return new Promise((resolve, reject) => {
-     // let location = this.utils.getMapCenter();
-      let headers = new Headers();
-      headers.append('Content-Type','application/json');
-      headers.append('Access-Control-Allow-Origin' , '*');
-      headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
       let url = this.serverUrl + 'getVendorList';
       let body = JSON.stringify(dataToSend);
-      this.http.post(url, body, {headers: headers}).map(res => res.json()).timeout(3000).subscribe(data => {
+      this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(3000).subscribe(data => {
         console.log("signUp rep");
         console.log(data);
         loading.dismissAll();
         resolve(data.result);
-        // ref.applyHaversine(data, 'hp');
-        // this.setDataToShow(data.outlets);
-        // resolve(data);
       }, error => {
         console.log("ERROR");
         console.log(error);
@@ -266,21 +317,13 @@ export class UtilsProvider {
     let loading = this.getloadingAlert();
     loading.present();
     return new Promise((resolve, reject) => {
-      // let location = this.utils.getMapCenter();
-      let headers = new Headers();
-      headers.append('Content-Type','application/json');
-      headers.append('Access-Control-Allow-Origin' , '*');
-      headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
       let url = this.serverUrl + 'editClientSettings';
       let body = JSON.stringify(dataToSend);
-      this.http.post(url, body, {headers: headers}).map(res => res.json()).timeout(3000).subscribe(data => {
+      this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(3000).subscribe(data => {
         console.log("Save Settings");
         console.log(data);
         resolve(data.result);
         loading.dismissAll();
-        // ref.applyHaversine(data, 'hp');
-        // this.setDataToShow(data.outlets);
-        // resolve(data);
       }, error => {
         console.log("ERROR");
         console.log(error);
@@ -295,14 +338,9 @@ export class UtilsProvider {
     let loading = this.getloadingAlert();
     loading.present();
     return new Promise((resolve, reject) => {
-      // let location = this.utils.getMapCenter();
-      let headers = new Headers();
-      headers.append('Content-Type','application/json');
-      headers.append('Access-Control-Allow-Origin' , '*');
-      headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
       let url = this.serverUrl + 'getSettings';
       let body = JSON.stringify(dataToSend);
-      this.http.post(url, body, {headers: headers}).map(res => res.json()).timeout(3000).subscribe(data => {
+      this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(3000).subscribe(data => {
         console.log("Got Settings");
         console.log(data);
         loading.dismissAll();
@@ -327,21 +365,14 @@ export class UtilsProvider {
     let loading = this.getloadingAlert();
     loading.present();
     return new Promise((resolve, reject) => {
-      // let location = this.utils.getMapCenter();
-      let headers = new Headers();
-      headers.append('Content-Type','application/json');
-      headers.append('Access-Control-Allow-Origin' , '*');
-      headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
       let url = this.serverUrl + 'getProfile';
       let body = JSON.stringify(dataToSend);
-      this.http.post(url, body, {headers: headers}).map(res => res.json()).timeout(3000).subscribe(data => {
+      this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(3000).subscribe(data => {
         console.log("Got Profile");
         console.log(data);
         ref.profile = (data.result);
         loading.dismissAll();
         resolve(data.result);
-
-        // resolve(data);
       }, error => {
         console.log("ERROR");
         console.log(error);
@@ -360,21 +391,14 @@ export class UtilsProvider {
     let loading = this.getloadingAlert();
     loading.present();
     return new Promise((resolve, reject) => {
-      // let location = this.utils.getMapCenter();
-      let headers = new Headers();
-      headers.append('Content-Type','application/json');
-      headers.append('Access-Control-Allow-Origin' , '*');
-      headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
       let url = this.serverUrl + 'getSlots';
       let body = JSON.stringify(dataToSend);
-      this.http.post(url, body, {headers: headers}).map(res => res.json()).timeout(3000).subscribe(data => {
+      this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(3000).subscribe(data => {
         console.log("Got Slots");
         console.log(data);
         ref.profile = (data.result);
         loading.dismissAll();
         resolve(data.result);
-
-        // resolve(data);
       }, error => {
         console.log("ERROR");
         console.log(error);
@@ -390,21 +414,14 @@ export class UtilsProvider {
     let loading = this.getloadingAlert();
     loading.present();
     return new Promise((resolve, reject) => {
-      // let location = this.utils.getMapCenter();
-      let headers = new Headers();
-      headers.append('Content-Type','application/json');
-      headers.append('Access-Control-Allow-Origin' , '*');
-      headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
       let url = this.serverUrl + 'getSlotsByDay';
       let body = JSON.stringify(dataToSend);
-      this.http.post(url, body, {headers: headers}).map(res => res.json()).timeout(3000).subscribe(data => {
+      this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(3000).subscribe(data => {
         console.log("Got SlotsByDay");
         console.log(data);
         ref.profile = (data.result);
         loading.dismissAll();
         resolve(data.result);
-
-        // resolve(data);
       }, error => {
         console.log("ERROR");
         console.log(error);
@@ -419,21 +436,14 @@ export class UtilsProvider {
     let loading = this.getloadingAlert();
     loading.present();
     return new Promise((resolve, reject) => {
-      // let location = this.utils.getMapCenter();
-      let headers = new Headers();
-      headers.append('Content-Type','application/json');
-      headers.append('Access-Control-Allow-Origin' , '*');
-      headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
       let url = this.serverUrl + 'bookVendor';
       let body = JSON.stringify(dataToSend);
-      this.http.post(url, body, {headers: headers}).map(res => res.json()).timeout(3000).subscribe(data => {
+      this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(3000).subscribe(data => {
         console.log("Booked Vendor");
         console.log(data);
         ref.profile = (data.result);
         loading.dismissAll();
         resolve(data.result);
-
-        // resolve(data);
       }, error => {
         console.log("ERROR");
         console.log(error);
@@ -448,25 +458,18 @@ export class UtilsProvider {
     let loading = this.getloadingAlert();
     loading.present();
     return new Promise((resolve, reject) => {
-      // let location = this.utils.getMapCenter();
-      let headers = new Headers();
-      headers.append('Content-Type','application/json');
-      headers.append('Access-Control-Allow-Origin' , '*');
-      headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
       let url = this.serverUrl + 'getBookingsSummery';
       let body = JSON.stringify(dataToSend);
-      this.http.post(url, body, {headers: headers}).map(res => res.json()).timeout(3000).subscribe(data => {
+      this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(3000).subscribe(data => {
         console.log("got BookingsSummery");
         console.log(data);
         ref.profile = (data.result);
         loading.dismissAll();
         resolve(data.result);
-
-        // resolve(data);
       }, error => {
         console.log("ERROR");
         console.log(error);
-        //reject("false");
+        loading.dismissAll();
         resolve(false);
       });
     });
@@ -477,24 +480,17 @@ export class UtilsProvider {
     let loading = this.getloadingAlert();
     loading.present();
     return new Promise((resolve, reject) => {
-      // let location = this.utils.getMapCenter();
-      let headers = new Headers();
-      headers.append('Content-Type','application/json');
-      headers.append('Access-Control-Allow-Origin' , '*');
-      headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
       let url = this.serverUrl + 'getBookings';
       let body = JSON.stringify(dataToSend);
-      this.http.post(url, body, {headers: headers}).map(res => res.json()).timeout(3000).subscribe(data => {
+      this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(3000).subscribe(data => {
         console.log("got Bookings");
         console.log(data);
         ref.profile = (data.result);
         loading.dismissAll();
         resolve(data.result);
-        // resolve(data);
       }, error => {
         console.log("ERROR");
         console.log(error);
-        //reject("false");
         loading.dismissAll();
         resolve(false);
       });

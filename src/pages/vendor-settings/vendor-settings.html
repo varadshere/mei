@@ -43,24 +43,27 @@
         <ion-row><ion-col class="">Address</ion-col> <ion-col class="info-text">{{settings.address}}</ion-col></ion-row>
       </ion-item>
     </div>
-    <div *ngIf="editMode">
-      <ion-item mode="ios">
-        <ion-input type="text" placeholder="First Name" [(ngModel)]="settings.first_name"></ion-input>
-      </ion-item>
-      <ion-item mode="ios">
-        <ion-input type="text" placeholder="Last Name" [(ngModel)]="settings.last_name"></ion-input>
-      </ion-item>
-      <ion-item mode="ios">
-        <ion-input type="text" placeholder="phone" [(ngModel)]="settings.phone"></ion-input>
-      </ion-item>
-      <ion-item mode="ios">
-        <ion-input type="text" placeholder="Address" [(ngModel)]="settings.address"></ion-input>
-      </ion-item>
-      <div style="text-align: center">
-        <button ion-button class="save-button" (click)="saveProfile()">Save</button>
-      </div>
+    <div #placesParent>
+      <div *ngIf="editMode">
+        <ion-item mode="ios">
+          <ion-input type="text" placeholder="First Name" [(ngModel)]="settings.first_name"></ion-input>
+        </ion-item>
+        <ion-item mode="ios">
+          <ion-input type="text" placeholder="Last Name" [(ngModel)]="settings.last_name"></ion-input>
+        </ion-item>
+        <ion-item mode="ios">
+          <ion-input type="text" placeholder="phone" [(ngModel)]="settings.phone"></ion-input>
+        </ion-item>
+        <ion-item mode="ios">
+          <ion-input id='places' type="text" (focus)="placeInputFocus()" placeholder="Address"></ion-input>
+        </ion-item>
+        <div style="text-align: center">
+          <button ion-button class="save-button" (click)="saveProfile()">Save</button>
+        </div>
 
+      </div>
     </div>
+
     <button ion-item mode="ios">
       Bank Info:
       <div>

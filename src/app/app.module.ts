@@ -34,6 +34,11 @@ import {VendorSettingsPage} from "../pages/vendor-settings/vendor-settings";
 import {ClientBookingsPage} from "../pages/client-bookings/client-bookings";
 import {ClientProfilePage} from "../pages/client-profile/client-profile";
 import {Ionic2RatingModule} from "ionic2-rating";
+import {Camera} from "@ionic-native/camera";
+import { ImagePicker } from '@ionic-native/image-picker';
+import { Base64 } from '@ionic-native/base64';
+import {ProfilePicModalPage} from "../pages/profile-pic-modal/profile-pic-modal";
+import {Crop} from "@ionic-native/crop";
 
 @NgModule({
   declarations: [
@@ -61,7 +66,8 @@ import {Ionic2RatingModule} from "ionic2-rating";
     ChartPage,
     VendorSettingsPage,
     ClientBookingsPage,
-    ClientProfilePage
+    ClientProfilePage,
+    ProfilePicModalPage
 
   ],
   imports: [
@@ -97,12 +103,17 @@ import {Ionic2RatingModule} from "ionic2-rating";
     ChartPage,
     VendorSettingsPage,
     ClientBookingsPage,
-    ClientProfilePage
+    ClientProfilePage,
+    ProfilePicModalPage
 
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    Camera,
+    ImagePicker,
+    Base64,
+    Crop,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UtilsProvider
   ]

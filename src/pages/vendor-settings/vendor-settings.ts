@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import {Component, ViewChildren} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {UtilsProvider} from "../../providers/utils/utils";
-
+import {Observable} from "rxjs/Observable";
+import {Subscription} from "rxjs/Subscription";
+declare var google;
 /**
  * Generated class for the VendorSettingsPage page.
  *
@@ -14,7 +16,9 @@ import {UtilsProvider} from "../../providers/utils/utils";
   templateUrl: 'vendor-settings.html',
 })
 export class VendorSettingsPage {
-
+  @ViewChildren('placesParent') placesParentEl;
+  place:any;
+  placeSubscription: Subscription;
   editMode: boolean = false;
   settings: any = {
     "email": this.utilsProvider.getUserEmail(),
@@ -39,14 +43,41 @@ export class VendorSettingsPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ClientSettingsPage');
     this.getSettings();
+    this.placeSubscription = this.placesParentEl.changes.subscribe((r) =>{
+      this.initMapClient()
+      // console.log(document.getElementById('places').getElementsByTagName('input')[0])
+    });
 
   }
 
+  initMapClient(){
+    let elem = document.getElementById('places');
+    if(elem !== null){
+      let nativePlacesInputBox = elem.getElementsByTagName('input')[0];
+      nativePlacesInputBox.value = this.settings.address ? this.settings.address : '';
+      let autocomplete = new google.maps.places.Autocomplete(nativePlacesInputBox);
+      google.maps.event.addListener(autocomplete, 'place_changed', () => {
+        this.place = autocomplete.getPlace();
+        console.log(this.place);
+        console.log("Client place");
+      });
+    }
+  }
+
+  placeInputFocus(){
+    this.place = undefined;
+  }
   editToggle(){
     this.editMode = true;
   }
   saveProfile(){
+    if(!this.place){
+      return;
+    }
     let ref = this;
+    this.settings.address = this.place.formatted_address;
+    this.settings.lat = this.place.geometry.location.lat();
+    this.settings.lng = this.place.geometry.location.lng();
     this.utilsProvider.editClientSettings(this.settings).then(function (data) {
       console.log(data);
       ref.editMode = false;
@@ -63,9 +94,13 @@ export class VendorSettingsPage {
     let getSettings = this.utilsProvider.getSettings(dts);
 
     getSettings.then(function (data:any) {
-      if(data)
+      if(typeof data !== 'string')
         ref.settings = data;
     });
+  }
+
+  ionViewDidLeave(){
+    this.placeSubscription.unsubscribe()
   }
 
 }

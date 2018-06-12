@@ -109,7 +109,7 @@
               </ion-item>
               <p class="form-error-text" *ngIf="!slideOneForm.controls.lic.valid && (slideOneForm.controls.lic.dirty || submitAttempt)">Licenses can not be empty.</p>
             </form>
-            <div class="q-text">When you are usually available? Select all that apply</div>
+            <!--<div class="q-text">When you are usually available? Select all that apply</div>-->
             <div>
               <button class="day-button" [class.mon-select]="day.mon.selected" ion-button (click)="day.mon.selected ? (day.mon.selected = false) : (day.mon.selected = true)" mode="md">MON</button>
               <button class="day-button" [class.mon-select]="day.tue.selected" ion-button (click)="day.tue.selected ? (day.tue.selected = false) : (day.tue.selected = true)" mode="md">TUE</button>
@@ -120,7 +120,7 @@
               <button class="day-button" [class.mon-select]="day.sun.selected" ion-button (click)="day.sun.selected ? (day.sun.selected = false) : (day.sun.selected = true)" mode="md">SUN</button>
             </div>
             <div class="q-text">
-              What Services are you able to provide?
+              What services are you able to provide?
             </div>
             <ion-list>
               <div *ngFor="let d of services; let i=index" text-wrap [ngClass]="{active: isGroupShown(i)}" style="padding-bottom: 20px;">
@@ -160,15 +160,15 @@
 
             </ion-list>
 
-            <ion-item mode="ios">
-              <ion-input type="text" placeholder="Products" [(ngModel)]="fav" name="Products"></ion-input>
-            </ion-item>
+            <!--<ion-item mode="ios">-->
+              <!--<ion-input type="text" placeholder="Products" [(ngModel)]="fav" name="Products"></ion-input>-->
+            <!--</ion-item>-->
 
-            <ion-item mode="ios">
-              <ion-input type="text" placeholder="Bio" [(ngModel)]="bio" name="bio"></ion-input>
-            </ion-item>
+            <!--<ion-item mode="ios">-->
+              <!--<ion-input type="text" placeholder="Bio" [(ngModel)]="bio" name="bio"></ion-input>-->
+            <!--</ion-item>-->
 
-            <ion-list>
+            <ion-list *ngIf="instaApiResp && instaApiResp.length">
               <ion-row>
                 <ion-col col-4 class="img-col" *ngFor="let data of instaApiResp;">
                   <img src="{{data.images.low_resolution.url}}">
@@ -176,7 +176,7 @@
               </ion-row>
             </ion-list>
             <div style="text-align: center; margin-top: 20px">
-              <button ion-button icon-start class="insta-button" (click)="instainit()">
+              <button ion-button icon-start class="insta-button" (click)="getPicturesFromGal()">
                 <ion-icon name="logo-instagram"></ion-icon>
                 Connect to Instagram
               </button>

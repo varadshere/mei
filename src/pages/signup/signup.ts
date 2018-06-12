@@ -9,13 +9,11 @@ import {VendorSidemenuPage} from "../vendor-sidemenu/vendor-sidemenu";
 
 import { Instagram } from "ng2-cordova-oauth/core";
 import { OauthCordova } from 'ng2-cordova-oauth/platform/cordova';
+
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
+import {Subject} from "rxjs/Subject";
 declare var google;
-/**
- * Generated class for the SignupPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @Component({
   selector: 'page-signup',
@@ -66,11 +64,12 @@ export class SignupPage {
     services = [
       { title: "HAIR", list: [{name: 'Up-do', selected: false, desc: 'Sweep up your hair in a range of ways including an assortment of ponytails, braids and more', cost: "0"}, {name: 'Event Trial', selected: false, desc: 'Sweep up your hair in a range of ways including an assortment of ponytails, braids and more', cost: "0"}, {name: 'Hairstyling', selected: false, desc: 'Test-run a hair look and style before your big event', cost: "0"}, {name: 'Blow Wave', selected: false, desc: 'Hair straightening, waving, crimping and more', cost: "0"}] },
       { title: "MAKEUP", list: [{name: 'Up-do', selected: false, desc: 'Sweep up your hair in a range of ways including an assortment of ponytails, braids and more', cost: "0"}, {name: 'Event Trial', selected: false, desc: 'Sweep up your hair in a range of ways including an assortment of ponytails, braids and more', cost: "0"}, {name: 'Hairstyling', selected: false, desc: 'Sweep up your hair in a range of ways including an assortment of ponytails, braids and more', cost: "0"}, {name: 'Blow Wave', selected: false, desc: 'Test-run a hair look and style before your big event', cost: "0"}]  },
-      { title: "NAILS", list: [{name: 'Up-do', selected: false, desc: 'Sweep up', cost: "0"}, {name: 'Event Trial', selected: false, desc: 'braids and more', cost: "0"}, {name: 'Hairstyling', selected: false, desc: 'abcd', cost: "0"}, {name: 'Blow Wave', selected: false, desc: 'Hair straightening', cost: "0"}] },
+      { title: "BODY", list: [{name: 'Up-do', selected: false, desc: 'Sweep up', cost: "0"}, {name: 'Event Trial', selected: false, desc: 'braids and more', cost: "0"}, {name: 'Hairstyling', selected: false, desc: 'abcd', cost: "0"}, {name: 'Blow Wave', selected: false, desc: 'Hair straightening', cost: "0"}] },
     ];
     place: any;
     shownGroup = null;
-
+    img$: Subject<any>;
+    sdCardImages:any[];
     private oauth: OauthCordova = new OauthCordova();
     private instaApiResp;
     private instagramProvider: Instagram = new Instagram({
@@ -91,8 +90,11 @@ export class SignupPage {
 
       */
     });
-
-    constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, private utils: UtilsProvider) {
+    constructor(public navCtrl: NavController,
+                public navParams: NavParams,
+                public formBuilder: FormBuilder,
+                private utils: UtilsProvider
+                ) {
       this.slideOneForm = formBuilder.group({
         email: ['', Validators.compose([Validators.maxLength(30), Validators.pattern(SignupPage.EMAIL_REGEX), Validators.required])],
         fname: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
@@ -116,6 +118,18 @@ export class SignupPage {
       this.instaApiResp = [];
     }
 
+    getPicturesFromGal(){
+      this.sdCardImages = [];
+      this.img$ = this.utils.getPicturesFromGallery();
+      this.img$.subscribe((imgBase64)=>{
+          this.sdCardImages.push(imgBase64);
+      }, (err)=>{
+
+      }, ()=>{
+
+      });
+    }
+
     instainit(){
       this.hideInsta = false;
       this.oauth.logInVia(this.instagramProvider).then((success) => {
@@ -132,7 +146,6 @@ export class SignupPage {
         console.log(JSON.stringify(error));
       });
     }
-
     initMapClient(){
       let bool = false;
       let ref = this;
@@ -150,7 +163,7 @@ export class SignupPage {
       }
       return init;
    }
-   initMapVendor(){
+    initMapVendor(){
       let bool = false;
       let ref = this;
       function init(){
@@ -167,12 +180,12 @@ export class SignupPage {
       }
       return init;
    }
-  placeInputFocus(){
+    placeInputFocus(){
       this.place = undefined;
   }
 
-  initMap = this.initMapVendor();
-  placeVendorInputFocus(){
+    initMap = this.initMapVendor();
+    placeVendorInputFocus(){
       this.place = undefined;
       this.initMap();
   }
@@ -416,5 +429,8 @@ export class SignupPage {
         }
       });
     }
+  }
+  ionViewDidLeave(){
+      this.img$.unsubscribe();
   }
 }
