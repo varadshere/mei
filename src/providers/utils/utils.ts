@@ -101,6 +101,13 @@ export class UtilsProvider {
     return loading;
   }
 
+  sanitizeData(data){
+    if(data.result && typeof data.result !== 'string'){
+      return data.result;
+    }else {
+      return false;
+    }
+  }
   getInstagramUserInfo(response) {
     //GET USER PHOTOS
     return this.http.get('https://api.instagram.com/v1/users/self/media/recent?access_token=' + response.access_token + '&count=12')
@@ -112,17 +119,18 @@ export class UtilsProvider {
       let options: CameraOptions = {
         quality: 70,
         destinationType: this.camera.DestinationType.FILE_URI,
-        // encodingType: this.camera.EncodingType.JPEG,
-        // mediaType: this.camera.MediaType.PICTURE
+        encodingType: this.camera.EncodingType.JPEG,
+        mediaType: this.camera.MediaType.PICTURE,
+        correctOrientation: true,
         sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
         saveToPhotoAlbum: false
       };
 
-      this.camera.getPicture(options).then((imageData) => {
+      this.camera.getPicture(options).then((imagePath) => {
         // imageData is either a base64 encoded string or a file URI
         // If it's base64:
         // let base64Image = 'data:image/jpeg;base64,' + imageData;
-        this.cropImg(imageData).then(
+        this.cropImg(imagePath).then(
           //this.base64.encodeFile(filePath).then((base64File: string) => {
           newImage => {
             console.log('new image path is: ' + newImage);
@@ -183,7 +191,7 @@ export class UtilsProvider {
         console.log("insta create");
         console.log(data);
         loading.dismissAll();
-        resolve(data.result);
+        resolve(this.sanitizeData(data));
         // ref.applyHaversine(data, 'hp');
         // this.setDataToShow(data.outlets);
         // resolve(data);
@@ -276,7 +284,7 @@ export class UtilsProvider {
         console.log("signUp rep");
         console.log(data);
         loading.dismissAll();
-        resolve(data.result);
+        resolve(this.sanitizeData(data));
       }, error => {
         console.log("ERROR");
         console.log(error);
@@ -302,7 +310,7 @@ export class UtilsProvider {
         console.log("signUp rep");
         console.log(data);
         loading.dismissAll();
-        resolve(data.result);
+        resolve(this.sanitizeData(data));
       }, error => {
         console.log("ERROR");
         console.log(error);
@@ -322,7 +330,7 @@ export class UtilsProvider {
       this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(3000).subscribe(data => {
         console.log("Save Settings");
         console.log(data);
-        resolve(data.result);
+        resolve(this.sanitizeData(data));
         loading.dismissAll();
       }, error => {
         console.log("ERROR");
@@ -344,7 +352,7 @@ export class UtilsProvider {
         console.log("Got Settings");
         console.log(data);
         loading.dismissAll();
-        resolve(data.result);
+        resolve(this.sanitizeData(data));
         // resolve(data);
       }, error => {
         console.log("ERROR");
@@ -370,9 +378,9 @@ export class UtilsProvider {
       this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(3000).subscribe(data => {
         console.log("Got Profile");
         console.log(data);
-        ref.profile = (data.result);
+        ref.profile = (this.sanitizeData(data));
         loading.dismissAll();
-        resolve(data.result);
+        resolve(this.sanitizeData(data));
       }, error => {
         console.log("ERROR");
         console.log(error);
@@ -396,9 +404,8 @@ export class UtilsProvider {
       this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(3000).subscribe(data => {
         console.log("Got Slots");
         console.log(data);
-        ref.profile = (data.result);
         loading.dismissAll();
-        resolve(data.result);
+        resolve(this.sanitizeData(data));
       }, error => {
         console.log("ERROR");
         console.log(error);
@@ -419,9 +426,8 @@ export class UtilsProvider {
       this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(3000).subscribe(data => {
         console.log("Got SlotsByDay");
         console.log(data);
-        ref.profile = (data.result);
         loading.dismissAll();
-        resolve(data.result);
+        resolve(this.sanitizeData(data));
       }, error => {
         console.log("ERROR");
         console.log(error);
@@ -441,9 +447,8 @@ export class UtilsProvider {
       this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(3000).subscribe(data => {
         console.log("Booked Vendor");
         console.log(data);
-        ref.profile = (data.result);
         loading.dismissAll();
-        resolve(data.result);
+        resolve(this.sanitizeData(data));
       }, error => {
         console.log("ERROR");
         console.log(error);
@@ -463,9 +468,8 @@ export class UtilsProvider {
       this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(3000).subscribe(data => {
         console.log("got BookingsSummery");
         console.log(data);
-        ref.profile = (data.result);
         loading.dismissAll();
-        resolve(data.result);
+        resolve(this.sanitizeData(data));
       }, error => {
         console.log("ERROR");
         console.log(error);
@@ -485,9 +489,8 @@ export class UtilsProvider {
       this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(3000).subscribe(data => {
         console.log("got Bookings");
         console.log(data);
-        ref.profile = (data.result);
         loading.dismissAll();
-        resolve(data.result);
+        resolve(this.sanitizeData(data));
       }, error => {
         console.log("ERROR");
         console.log(error);

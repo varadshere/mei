@@ -3,13 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {UtilsProvider} from "../../providers/utils/utils";
 import {Observable} from "rxjs/Observable";
 import {Subscription} from "rxjs/Subscription";
+import {DomSanitizer} from '@angular/platform-browser';
 declare var google;
-/**
- * Generated class for the VendorSettingsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @Component({
   selector: 'page-vendor-settings',
@@ -35,8 +30,11 @@ export class VendorSettingsPage {
   };
 
 
-  email: string
-  constructor(public navCtrl: NavController, public navParams: NavParams, public utilsProvider: UtilsProvider) {
+  email: string;
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public utilsProvider: UtilsProvider,
+              public _DomSanitizer: DomSanitizer) {
     this.email = utilsProvider.getUserEmail();
   }
 
@@ -96,6 +94,15 @@ export class VendorSettingsPage {
     getSettings.then(function (data:any) {
       if(typeof data !== 'string')
         ref.settings = data;
+    });
+  }
+
+  uploadPhoto(){
+    this.utilsProvider.uploadPhoto().then((data)=>{
+      if(data){
+        console.log(data);
+        this.utilsProvider.profile.profile_pic = data;
+      }
     });
   }
 

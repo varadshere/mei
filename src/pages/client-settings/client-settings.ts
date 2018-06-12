@@ -2,6 +2,7 @@ import {Component, ViewChild, ViewChildren} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {UtilsProvider} from "../../providers/utils/utils";
 import {Subscription} from "rxjs/Subscription";
+import {DomSanitizer} from '@angular/platform-browser';
 declare var google;
 
 /**
@@ -36,7 +37,10 @@ export class ClientSettingsPage {
 
 
   email: string;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public utilsProvider: UtilsProvider) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public utilsProvider: UtilsProvider,
+              public _DomSanitizer: DomSanitizer) {
     this.email = utilsProvider.getUserEmail();
   }
 

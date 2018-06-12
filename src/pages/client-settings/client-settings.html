@@ -18,7 +18,8 @@
 <ion-content padding>
   <ion-list mode="ios">
     <ion-item style="text-align: center" (click)="uploadPhoto()">
-      <img  class="profile-img-settings" src="{{utilsProvider.profile.profile_pic ? utilsProvider.profile.profile_pic : 'assets/imgs/user.png'}}">
+      <img  class="profile-img-settings" [src]="_DomSanitizer.bypassSecurityTrustUrl(utilsProvider.profile.profile_pic ? utilsProvider.profile.profile_pic : 'assets/imgs/user.png')">
+            <!--src="{{utilsProvider.profile.profile_pic ? utilsProvider.profile.profile_pic : 'assets/imgs/user.png'}}">-->
     </ion-item>
     <ion-item>
       <ion-label>Notifications</ion-label>
@@ -38,7 +39,6 @@
         <ion-row><ion-col class="">Info</ion-col> <ion-col class="info-text pink-text" (click)="editToggle()">Edit</ion-col></ion-row>
         <ion-row><ion-col class="">Name</ion-col> <ion-col class="info-text">{{settings.first_name}} {{settings.last_name}}</ion-col></ion-row>
         <ion-row><ion-col class="">Email</ion-col> <ion-col class="info-text">{{email}}</ion-col></ion-row>
-        <!--<ion-row><ion-col class="">Password</ion-col> <ion-col class="info-text">asdfghjhgfd</ion-col></ion-row>-->
         <ion-row><ion-col class="">Phone</ion-col> <ion-col class="info-text">{{settings.phone}}</ion-col></ion-row>
         <ion-row><ion-col class="">Address</ion-col> <ion-col col-4 class="info-text">{{settings.address}}</ion-col></ion-row>
       </ion-item>
