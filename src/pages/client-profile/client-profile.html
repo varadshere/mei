@@ -28,11 +28,11 @@
     <ion-col col-9>
       <ion-row>
         <!--<div class="profile-text-main">{{profileData.first_name}} {{profileData.last_name}}</div>-->
-        <div class="profile-text-main">{{profileData.first_name}} {{profileData.last_name}}</div>
+        <div class="profile-text-main">{{utils.profile.first_name}} {{utils.profile.last_name}}</div>
       </ion-row>
       <ion-row>
         <!--<div class="location-text-main">{{profileData.address}}</div>-->
-        <div class="location-text-main">{{profileData.address}}</div>
+        <div class="location-text-main">{{utils.profile.address}}</div>
       </ion-row>
     </ion-col>
   </ion-row>
@@ -52,37 +52,36 @@
     <ion-list *ngSwitchCase="'ABOUT'">
       <div class="bio-head">Bio</div>
       <div class="bio-text">
-        {{profileData.bio}}
+        {{utils.profile.bio}}
         <!--Hi, I'm Cerelia, I am a Studnt at Sydney University staying at home in Adelaide-->
       </div>
       <hr>
       <div class="bio-head">Favorite Products</div>
       <div class="bio-text">
-        {{profileData.fav}}
+        {{utils.profile.fav}}
       </div>
     </ion-list>
     <ion-list *ngSwitchCase="'REVIEWS'">
-      <ion-card>
+      <ion-card *ngFor="let reviewObj of utils.profile.reviews">
         <ion-item>
           <ion-avatar item-start>
-            <img src="assets/imgs/user.png">
+            <img [src]="reviewObj.vendor_image ? reviewObj.vendor_image : 'assets/imgs/user.png'">
           </ion-avatar>
-          <h3 class="vendor-name">Marty McFly</h3>
-          <!--<p>60 Wright Ave</p>-->
+          <h3 class="vendor-name">{{reviewObj.vendor_name}}</h3>
           <span class="rating">
-        <rating [(ngModel)]="rate"
-                readOnly="false"
-                max="5"
-                emptyStarIconName="star-outline"
-                halfStarIconName="star-half"
-                starIconName="star"
-                nullable="false"
-                (ngModelChange)="onModelChange($event)">
-        </rating>
+          <rating [(ngModel)]="reviewObj.rating"
+                  readOnly="true"
+                  max="5"
+                  emptyStarIconName="star-outline"
+                  halfStarIconName="star-half"
+                  starIconName="star"
+                  nullable="false">
+                  <!--(ngModelChange)="onModelChange($event)">-->
+          </rating>
       </span>
         </ion-item>
         <ion-card-content>
-          <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+          <p>{{reviewObj.review}}</p>
         </ion-card-content>
       </ion-card>
     </ion-list>

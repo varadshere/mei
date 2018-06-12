@@ -11,9 +11,7 @@ import {ClientSettingsPage} from "../client-settings/client-settings";
 export class ClientProfilePage {
   rate= 3.5;
   profile: string = "ABOUT";
-  profileData:any;
   constructor(public navCtrl: NavController, public navParams: NavParams, private utils: UtilsProvider) {
-    this.profileData = utils.profile;
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad ClientProfilePage');
