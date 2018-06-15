@@ -8,6 +8,23 @@ ADD THIS TO INDEX.HTML:
 
 PAYMENT FUNCTION:
 
+declare var Stripe;
+
+
+var stripe1 = Stripe('pk_test_bwrO9Y04SX335bjByq2M11jK');
+var elements = stripe1.elements();
+var style = {
+  base: {
+    // Add your base input styles here. For example:
+    fontSize: '16px',
+    color: "#32325d",
+  }
+};
+
+// Create an instance of the card Element.
+var card = elements.create('card', {style: style});
+
+
 
  paymentButton2(){
     var form = document.getElementById('payment-form');
