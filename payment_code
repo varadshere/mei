@@ -1,0 +1,62 @@
+
+ADD THIS TO INDEX.HTML:
+
+<script src="https://js.stripe.com/v3/"></script>
+  
+
+
+
+PAYMENT FUNCTION:
+
+
+ paymentButton2(){
+    var form = document.getElementById('payment-form');
+var ownerInfo = {
+  owner: {
+    name: 'Jenny Rosen',
+    address: {
+      line1: 'Nollendorfstraße 27',
+      city: 'Berlin',
+      postal_code: '10777',
+      country: 'DE',
+    },
+    email: 'jenny.rosen@example.com'
+  },
+};
+form.addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  stripe1.createSource(card, ownerInfo).then(function(result) {
+    if (result.error) {
+      // Inform the user if there was an error
+      var errorElement = document.getElementById('card-errors');
+      errorElement.textContent = result.error.message;
+    } else {
+      // Send the source to your server
+     console.log(JSON.stringify(result.source));
+    }
+  });
+});
+
+   
+  }
+
+
+PAYMENT UI:
+
+ <form action="/charge" method="post" id="payment-form" style="padding:100px; color: white;">
+      <div class="form-row">
+        <label for="card-element">
+          Credit or debit card
+        </label>
+        
+        <div id="card-element">
+          <!-- A Stripe Element will be inserted here. -->
+        </div>
+    
+        <!-- Used to display Element errors. -->
+        <div id="card-errors" role="alert"></div>
+      </div>
+    
+      <button ion-button color="primary" (click)="paymentButton2()">Submit Payment</button>
+    </form>
