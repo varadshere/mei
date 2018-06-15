@@ -1,0 +1,60 @@
+page-vendor-profile {
+  .bio-head{
+    color: #615f5f;
+    font-weight: bold;
+    font-size: 15px;
+    padding-left: 10px;
+    padding-top: 10px;
+  }
+  .bio-text{
+    padding: 10px;
+  }
+  .profile-text-main{
+    padding-top: 10px;
+    color: #615f5f;
+    font-weight: bold;
+    font-size: 17px;
+    font-family: 'San Francisco',Helvetica,Arial,serif;
+    //color: #FFFFFF;
+    //text-align: center;
+  }
+  .location-text-main{
+    //padding-top: 10px;
+    font-size: 12px;
+    font-family: 'San Francisco',Helvetica,Arial,serif;
+    //color: #FFFFFF;
+    //text-align: center;
+  }
+
+  .profile-img{
+    border-radius: 40px;
+  }
+
+  .img-col{
+    padding: 0;
+  }
+  .img-col img{
+    height: 125px;
+  }
+
+  .vendor-name{
+    color: #615f5f;
+    font-weight: bold;
+  }
+
+  rating{
+    ul {
+      padding: 0px;
+      margin: 0;
+      &.rating li {
+        padding: 0 !important;
+        background: none;
+        color: #ffb400;
+
+        ion-icon {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}

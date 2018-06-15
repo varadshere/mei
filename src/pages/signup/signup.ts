@@ -431,6 +431,8 @@ export class SignupPage {
     }
   }
   ionViewDidLeave(){
-      this.img$.unsubscribe();
+      if (this.img$){
+        this.img$.unsubscribe();
+      }
   }
 }

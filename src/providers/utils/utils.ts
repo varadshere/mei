@@ -12,13 +12,13 @@ declare var FCMPlugin;
 @Injectable()
 export class UtilsProvider {
   private notify = new Subject<any>();
-
   notifyObservable$: any =  this.notify.asObservable();
   serverUrl  = 'http://18.216.123.109:5000/api/';
   page = '';
   serviceSelected = '';
   email = '';
   headers = new Headers();
+  private _type: string;
   private _profile: any = {};
   public notifyOther(data: any) {
     if (data) {
@@ -45,6 +45,14 @@ export class UtilsProvider {
 
   set profile(value: any) {
     this._profile = value;
+  }
+
+  get type(): string {
+    return this._type;
+  }
+
+  set type(value: string) {
+    this._type = value;
   }
 
   getPage(){
@@ -246,6 +254,7 @@ export class UtilsProvider {
 
   loginService(email, pwd, type){
    // let ref = this;
+    this.type = type;
    console.log(email);
    console.log(pwd);
    let loading = this.getloadingAlert();
@@ -275,6 +284,7 @@ export class UtilsProvider {
   }
   signUpService(dataToSend){
    // let ref = this;
+    this.type = dataToSend.type;
     let loading = this.getloadingAlert();
     loading.present();
     return new Promise((resolve, reject) => {
@@ -368,7 +378,8 @@ export class UtilsProvider {
     let ref = this;
     let dataToSend = {
       "username":this.getUserEmail(),
-      "email": this.getUserEmail()
+      "email": this.getUserEmail(),
+      "type": this.type
     };
     let loading = this.getloadingAlert();
     loading.present();

@@ -67,4 +67,8 @@ export class SidemenuPage {
     }
   }
 
+  ionViewDidLeave(){
+    this.subscription.unsubscribe();
+  }
+
 }

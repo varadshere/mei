@@ -39,6 +39,7 @@ import { ImagePicker } from '@ionic-native/image-picker';
 import { Base64 } from '@ionic-native/base64';
 import {ProfilePicModalPage} from "../pages/profile-pic-modal/profile-pic-modal";
 import {Crop} from "@ionic-native/crop";
+import {VendorProfilePage} from "../pages/vendor-profile/vendor-profile";
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import {Crop} from "@ionic-native/crop";
     VendorSettingsPage,
     ClientBookingsPage,
     ClientProfilePage,
-    ProfilePicModalPage
+    ProfilePicModalPage,
+    VendorProfilePage
 
   ],
   imports: [
@@ -104,7 +106,8 @@ import {Crop} from "@ionic-native/crop";
     VendorSettingsPage,
     ClientBookingsPage,
     ClientProfilePage,
-    ProfilePicModalPage
+    ProfilePicModalPage,
+    VendorProfilePage
 
   ],
   providers: [
