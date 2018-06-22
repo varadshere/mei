@@ -15,7 +15,7 @@ declare var FCMPlugin;
 export class UtilsProvider {
   private notify = new Subject<any>();
   notifyObservable$: any =  this.notify.asObservable();
-  serverUrl  = 'http://372460c3.ngrok.io/api/'; //http://18.216.123.109:5000/api/';
+  serverUrl  =  'http://18.216.123.109:5000/api/'; //'http://372460c3.ngrok.io/api/';
   page = '';
   serviceSelected = '';
   email = '';
