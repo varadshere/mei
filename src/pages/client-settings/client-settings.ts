@@ -106,9 +106,20 @@ export class ClientSettingsPage {
   }
 
   uploadPhoto(){
-    this.utilsProvider.uploadPhoto().then((data)=>{
+    // let url = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=="
+    // fetch(url)
+    //   .then(res => res.blob())
+    //   .then(blob => {
+    //       console.log(blob);
+    //       this.utilsProvider.uploadmageToServer(blob).map(res => res.json()).subscribe(data => {
+    //         console.log('resp uploadImg');
+    //         console.log(data);
+    //       });
+    //   });
+    this.utilsProvider.getImgFromDevice().then((data)=>{
       if(data){
         console.log(data);
+        this.utilsProvider.uploadmageToServer(data);
         this.utilsProvider.profile.profile_pic = data;
       }
     });

@@ -9,7 +9,6 @@ page-my-booking2 {
     //color: #FFFFFF;
     //text-align: center;
   }
-
   .location-text-main {
     //padding-top: 10px;
     font-size: 12px;
@@ -17,7 +16,10 @@ page-my-booking2 {
     //text-align: center;
   }
 
-  .card-title {
+  .card-title{
+    .profile-img{
+    border-radius: 40px;
+  }
     line-height: 41px;
     border-radius: 20px;
     height: 40px;
@@ -95,4 +97,14 @@ page-my-booking2 {
     text-align: center;
     color: #ffffff;
   }
+
+  #payment-form{
+    color: white;
+    padding: 10px;
+  }
+  #card-element{
+    padding-top: 10px;
+    padding-bottom: 5px;
+  }
+
 }

@@ -10,7 +10,7 @@ page-my-booking {
     //text-align: center;
   }
 
-  .location-text-main {
+  .location-text-main{
     //padding-top: 10px;
     font-size: 12px;
     //color: #FFFFFF;
@@ -166,5 +166,8 @@ page-my-booking {
   .button-md.activated {
     background-color: #f9748f;
     color: white;
+  }
+  .profile-img{
+    border-radius: 40px;
   }
 }

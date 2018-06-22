@@ -7,13 +7,15 @@ import {Base64} from "@ionic-native/base64";
 import {Camera, CameraOptions} from "@ionic-native/camera";
 import {Observable} from "rxjs/Observable";
 import {Crop} from "@ionic-native/crop";
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
 declare var FCMPlugin;
 
 @Injectable()
 export class UtilsProvider {
   private notify = new Subject<any>();
   notifyObservable$: any =  this.notify.asObservable();
-  serverUrl  = 'http://18.216.123.109:5000/api/';
+  serverUrl  =  'http://18.216.123.109:5000/api/'; //'http://372460c3.ngrok.io/api/';
   page = '';
   serviceSelected = '';
   email = '';
@@ -32,11 +34,13 @@ export class UtilsProvider {
               private imagePicker: ImagePicker,
               private base64: Base64,
               private camera: Camera,
-              private crop: Crop) {
+              private crop: Crop,
+              private transfer: FileTransfer,
+              private file: File) {
     console.log('Hello UtilsProvider Provider');
     this.headers.append('Content-Type','application/json');
-    this.headers.append('Access-Control-Allow-Origin' , '*');
-    this.headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+    // this.headers.append('Access-Control-Allow-Origin' , '*');
+    // this.headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
   }
 
   get profile(): any {
@@ -122,7 +126,7 @@ export class UtilsProvider {
       .map((res:Response) => res.json());
   }
 
-  uploadPhoto(){
+  getImgFromDevice(){
     return new Promise((resolve, reject) => {
       let options: CameraOptions = {
         quality: 70,
@@ -142,9 +146,10 @@ export class UtilsProvider {
           //this.base64.encodeFile(filePath).then((base64File: string) => {
           newImage => {
             console.log('new image path is: ' + newImage);
-            this.base64.encodeFile(newImage).then((base64File: string) => {
-                resolve(base64File);
-            });
+            resolve(newImage);
+            // this.base64.encodeFile(newImage).then((base64File: string) => {
+            //     resolve(base64File);
+            // });
           },
           error => console.error('Error cropping image', error)
         );
@@ -511,4 +516,21 @@ export class UtilsProvider {
     });
   }
 
+  uploadmageToServer(fileUrl){
+    const fileTransfer: FileTransferObject = this.transfer.create();
+    let url =  this.serverUrl + 'uploader';
+    let options: FileUploadOptions = {
+      fileKey: 'file',
+      fileName: this.profile.user_id + '_profile-picture.jpg',
+      headers: {}
+    };
+
+    fileTransfer.upload(fileUrl, url, options)
+      .then((data) => {
+        // success
+        console.log(data);
+      }, (err) => {
+        // error
+      })
+  }
 }
