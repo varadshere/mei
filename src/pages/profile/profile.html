@@ -16,19 +16,20 @@
 <ion-content padding>
   <ion-row>
     <ion-col col-3>
-      <img  class="profile-img" src="{{profileData.profile_pic ? profileData.profile_pic : 'assets/imgs/user.png'}}">
+      <img class="profile-img" src="{{profileData.profile_pic ? profileData.profile_pic : 'assets/imgs/user.png'}}">
     </ion-col>
     <ion-col col-9>
       <ion-row>
         <div class="profile-text-main">{{profileData.first_name}} {{profileData.last_name}}</div>
       </ion-row>
       <ion-row>
-        <div class="location-text-main">{{profileData.address}}</div>
+        <div class="location-text-main">
+          <ion-icon style="color:#DEDEDE" name="pin"></ion-icon> {{profileData.address}}</div>
       </ion-row>
     </ion-col>
   </ion-row>
   <div>
-    <ion-segment [(ngModel)]="profile"  mode="md">
+    <ion-segment [(ngModel)]="profile" mode="md">
       <ion-segment-button value="SERVICES">
         SERVICES
       </ion-segment-button>
@@ -98,18 +99,18 @@
           <img src="{{instaObj.low_resolution}}">
         </ion-col>
         <!--<ion-col class="img-col">-->
-          <!--<img src="assets/imgs/results2.png">-->
+        <!--<img src="assets/imgs/results2.png">-->
         <!--</ion-col>-->
         <!--<ion-col class="img-col">-->
-          <!--<img src="assets/imgs/results3.png">-->
+        <!--<img src="assets/imgs/results3.png">-->
         <!--</ion-col>-->
       </ion-row>
     </ion-list>
   </div>
 
   <!--<ion-fab bottom center mode="md">-->
-    <!--&lt;!&ndash;<button ion-fab mode="md">Book Now</button>&ndash;&gt;-->
-    <!--<button ion-button class="book-button">Book Now</button>-->
+  <!--&lt;!&ndash;<button ion-fab mode="md">Book Now</button>&ndash;&gt;-->
+  <!--<button ion-button class="book-button">Book Now</button>-->
   <!--</ion-fab>-->
   <div style="text-align: center; margin-top: 20px">
     <button mode="md" [disabled]="!bServices.length > 0" ion-button class="book-button" (click)="navigate()">Book Now</button>

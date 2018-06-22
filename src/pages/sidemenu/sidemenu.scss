@@ -1,37 +1,35 @@
 page-sidemenu {
-  .sidemenu{
+  .sidemenu {
     //background-color: #F9748F;
     //background-image: url("../../assets/imgs/sidemenu_lines.png");
     background: url(../assets/imgs/sidemenu_bg.png);
     background-size: cover;
-
   }
-  .profile{
+  .profile {
     padding-top: 30px;
     margin: auto;
-    width: 50%;
+    // width: 50%;
   }
 
-  .avatar{
+  .avatar {
     margin: auto;
     width: 75%;
   }
 
-  .profile-text{
+  .profile-text {
     padding-top: 10px;
     font-size: 15px;
-    font-family: 'San Francisco',Helvetica,Arial,serif;
-    color: #FFFFFF;
+    color: #ffffff;
     text-align: center;
   }
 
-  .profile-img{
+  .profile-img {
     margin: auto;
     width: 100%;
     border-radius: 50%;
   }
 
-  .sidemenu-lines{
+  .sidemenu-lines {
     margin-left: 0;
     position: absolute;
     opacity: 0.28;
@@ -39,19 +37,19 @@ page-sidemenu {
     transform: scale(1.35);
   }
 
-  .nav{
+  .nav {
     margin: auto;
     width: 100%;
     margin-top: 60%;
   }
 
-  .nav-titles{
+  .nav-titles {
     font-style: normal;
     font-weight: normal;
     line-height: normal;
     font-size: 16px;
 
-    color: #FFFFFF;
+    color: #ffffff;
     mix-blend-mode: normal;
     //opacity: 0.45;
     text-align: center;
@@ -59,13 +57,13 @@ page-sidemenu {
     margin-top: 30px;
   }
 
-  .button-text-sidemenu{
-    color: #FFFFFF;
+  .button-text-sidemenu {
+    color: #ffffff;
     margin-bottom: 25px;
     opacity: 0.24;
   }
 
-  .button-selected{
+  .button-selected {
     opacity: 1;
   }
 }

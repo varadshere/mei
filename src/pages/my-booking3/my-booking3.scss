@@ -1,46 +1,44 @@
 page-my-booking3 {
-  .profile-frame{
+  .profile-frame {
     margin-bottom: 20px;
   }
 
-  .profile-text-main{
+  .profile-text-main {
     //padding-top: 10px;
     font-size: 17px;
-    font-family: 'San Francisco',Helvetica,Arial,serif;
-    //color: #FFFFFF;
-    //text-align: center;
-  }
-  .location-text-main{
-    //padding-top: 10px;
-    font-size: 12px;
-    font-family: 'San Francisco',Helvetica,Arial,serif;
     //color: #FFFFFF;
     //text-align: center;
   }
 
+  .location-text-main {
+
+    //padding-top: 10px;
+    font-size: 12px;
+    //color: #FFFFFF;
+    //text-align: center;
+  }
+
+  .overview {
   .profile-img{
     border-radius: 40px;
   }
-
-
-  .overview{
     text-align: left;
     color: #696f7b;
   }
-  .total-value{
+  .total-value {
     color: #f9748f;
     text-align: right;
   }
-  .checkout-text{
+  .checkout-text {
     text-align: left;
     color: #d4d4d4;
   }
-  .checkout-value{
+  .checkout-value {
     text-align: right;
     color: #696f7b;
   }
 
-  .footer-img{
+  .footer-img {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -48,7 +46,7 @@ page-my-booking3 {
     height: 100px;
   }
 
-  .next-btn{
+  .next-btn {
     padding: 15px;
     position: absolute;
     bottom: 0;
@@ -59,6 +57,6 @@ page-my-booking3 {
     line-height: 11px;
     font-size: 16px;
     text-align: center;
-    color: #FFFFFF;
+    color: #ffffff;
   }
 }

@@ -1,35 +1,33 @@
 page-my-booking {
-
-  .profile-frame{
+  .profile-frame {
     margin-bottom: 20px;
   }
 
-  .profile-text-main{
+  .profile-text-main {
     //padding-top: 10px;
     font-size: 17px;
-    font-family: 'San Francisco',Helvetica,Arial,serif;
-    //color: #FFFFFF;
-    //text-align: center;
-  }
-  .location-text-main{
-    //padding-top: 10px;
-    font-size: 12px;
-    font-family: 'San Francisco',Helvetica,Arial,serif;
     //color: #FFFFFF;
     //text-align: center;
   }
 
-  .time-select{
+  .location-text-main{
+    //padding-top: 10px;
+    font-size: 12px;
+    //color: #FFFFFF;
+    //text-align: center;
+  }
+
+  .time-select {
     display: inline-flex;
     margin-bottom: 10px;
     padding-left: 5px;
   }
-  .time-selected{
-    background-color: #F9748F !important;
+  .time-selected {
+    background-color: #f9748f !important;
     color: white !important;
   }
 
-  .time-badge{
+  .time-badge {
     //display: inline-block;
     //background-color: white;
     //border-radius: 40px;
@@ -43,10 +41,10 @@ page-my-booking {
     background-color: white;
     height: 2.5rem;
     border-radius: 15px;
-    color: rgba(253,134,140,0.35);
+    color: rgba(253, 134, 140, 0.35);
   }
 
-  .time-scrollbar{
+  .time-scrollbar {
     height: 70px;
   }
 
@@ -66,16 +64,23 @@ page-my-booking {
     text-align: center;
     padding: 5px;
   }
-  .last-month, .next-month {
+  .last-month,
+  .next-month {
     color: #999999;
     font-size: 90%;
   }
-  .currentDate, .otherDate {
+  .currentDate,
+  .otherDate {
     padding: 5px;
   }
   .currentDate {
     font-weight: bold;
-    background: linear-gradient(227.74deg, #FE9A8B 0.2%, #FD868C 40.08%, #F9748F 97.82%);
+    background: linear-gradient(
+      227.74deg,
+      #fe9a8b 0.2%,
+      #fd868c 40.08%,
+      #f9748f 97.82%
+    );
     color: white;
     border-radius: 30px;
   }
@@ -83,7 +88,7 @@ page-my-booking {
     //background-color: #1a732d;
     color: #bbbbb6;
     font-size: 16px;
-    font-family: 'AppleSystemUIFont',Helvetica,Arial,serif;
+    font-family: "AppleSystemUIFont", Helvetica, Arial, serif;
   }
 
   .event-bullet {
@@ -98,7 +103,12 @@ page-my-booking {
     //background-color: #F9748F;
     color: white;
     border-radius: 30px;
-    background: linear-gradient(227.74deg, #FE9A8B 0.2%, #FD868C 40.08%, #F9748F 97.82%);
+    background: linear-gradient(
+      227.74deg,
+      #fe9a8b 0.2%,
+      #fd868c 40.08%,
+      #f9748f 97.82%
+    );
   }
   .unselected-date {
     border: none;
@@ -110,13 +120,14 @@ page-my-booking {
     .col:last-child {
       border-right: none;
     }
-    .calendar-weekday, .calendar-date {
+    .calendar-weekday,
+    .calendar-date {
       text-align: center;
       margin: 0;
     }
     .calendar-weekday {
       font-weight: bold;
-      font-family: 'AppleSystemUIFont',Helvetica,Arial,serif;
+      font-family: "AppleSystemUIFont", Helvetica, Arial, serif;
       //border-bottom: solid 1px #1a732d;
       //background-color: #bbbbb6;
       color: #bbbbb6;
@@ -127,7 +138,7 @@ page-my-booking {
     }
   }
 
-  .footer-img{
+  .footer-img {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -135,7 +146,7 @@ page-my-booking {
     height: 100px;
   }
 
-  .next-btn{
+  .next-btn {
     padding: 15px;
     position: absolute;
     bottom: 0;
@@ -146,14 +157,14 @@ page-my-booking {
     line-height: 11px;
     font-size: 16px;
     text-align: center;
-    color: #FFFFFF;
+    color: #ffffff;
   }
 
-  .ion-selected{
-    color: #F9748F;
+  .ion-selected {
+    color: #f9748f;
   }
-  .button-md.activated{
-    background-color: #F9748F;
+  .button-md.activated {
+    background-color: #f9748f;
     color: white;
   }
   .profile-img{
