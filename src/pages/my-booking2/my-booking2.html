@@ -29,10 +29,17 @@
     </ion-col>
   </ion-row>
 
-  <div class="card-title">
+  <div class="card-title" (click)="getCard()">
     DEBIT (Saved Card)
   </div>
-
+  <div *ngIf="savedCardFlag">
+    <div class="card-details">
+      <div class="card-name">
+        {{savedCard.card_name}}
+      </div>
+      <div>{{savedCard.last4}}</div>
+    </div>
+  </div>
   <div class="card-details">
     <div class="card-name">
       {{utilsProvider.profile.first_name }} {{utilsProvider.profile.last_name }}
@@ -50,18 +57,14 @@
         <!-- Used to display Element errors. -->
         <div id="card-errors" role="alert"></div>
       </div>
+
     </form>
 
   </div>
-  <ion-row justify-content-end>
-    <button ion-button icon-end>
-      Add Card
-      <ion-icon ios="ios-add-circle"></ion-icon>
-      <!--<ion-icon name="home"></ion-icon>-->
-    </button>
+  <ion-row justify-content-end *ngIf="addCardFlag">
+    <button ion-button icon-end clear (click)="paymentButton2()" class="add-card">Add Card</button>
   </ion-row>
-  <button ion-button color="primary" (click)="paymentButton2()">Add Card</button>
   <img class="footer-img" src="assets/imgs/mybooking1.png">
   <img class="footer-img" src="assets/imgs/mybooking2.png">
-  <div class="next-btn" (click)="navigate()">NEXT</div>
+  <div class="next-btn" (click)="navigate()" *ngIf="!addCardFlag">NEXT</div>
 </ion-content>

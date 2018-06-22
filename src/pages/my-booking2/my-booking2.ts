@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {MyBooking3Page} from "../my-booking3/my-booking3";
 import {UtilsProvider} from "../../providers/utils/utils";
+import {utcHour} from "d3-time";
 declare var Stripe;
 /**
  * Generated class for the MyBooking2Page page.
@@ -23,6 +24,10 @@ export class MyBooking2Page {
   elements:any;
   card:any;
   style:any;
+  addCardFlag: boolean = true;
+  savedCardFlag: boolean = false;
+  savedCard:any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public utilsProvider: UtilsProvider){
     this.profileData = navParams.get('profile');
     this.schedule = navParams.get('schedule');
@@ -48,36 +53,56 @@ export class MyBooking2Page {
 
   }
 
+  getCard(){
+    this.utilsProvider.getCard().then(result =>{
+        if(result){
+          this.savedCardFlag = true;
+          this.savedCard = result;
+        }
+    })
+  }
+
   paymentButton2() {
     let ref = this;
     var form = document.getElementById('payment-form');
     var ownerInfo = {
       owner: {
-        name: 'Jenny Rosen',
+        name: this.utilsProvider.profile.first_name + ' ' +  this.utilsProvider.profile.last_name,
         address: {
-          line1: 'Nollendorfstraße 27',
-          city: 'Berlin',
-          postal_code: '10777',
-          country: 'DE'
+          line1: this.utilsProvider.profile.address
+          // city: 'Berlin',
+          // postal_code: '10777',
+          // country: 'DE'
         },
-        email: 'jenny.rosen@example.com'
-      },
+        email: this.utilsProvider.getUserEmail()
+      }
     };
-    form.addEventListener('submit', function(event) {
-      event.preventDefault();
+    let loading = this.utilsProvider.getloadingAlert();
+    loading.present();
+    ref.stripe1.createSource(ref.card, ownerInfo).then(function(result) {
+      var errorElement = document.getElementById('card-errors');
+      loading.dismissAll();
+      if (result.error) {
+        // Inform the user if there was an error
+        errorElement.textContent = result.error.message;
+        ref.addCardFlag = true;
+      } else {
+        // Send the source to your server
+        ref.addCardFlag = false;
+        errorElement.textContent = '';
+        console.log(JSON.stringify(result.source));
+        let dataToSend  = {
+          email: ref.utilsProvider.getUserEmail(),
+          id: ref.utilsProvider.profile.user_id,
+          source: result.source
+        };
+        ref.utilsProvider.saveCard(dataToSend).then(result =>{
 
-      ref.stripe1.createSource(ref.card, ownerInfo).then(function(result) {
-        if (result.error) {
-          // Inform the user if there was an error
-          var errorElement = document.getElementById('card-errors');
-          errorElement.textContent = result.error.message;
-        } else {
-          // Send the source to your server
-          console.log(JSON.stringify(result.source));
-        }
-      });
+        });
+      }
     });
   }
+
 
   navigate(){
     // this.navCtrl.push(MyBooking3Page);

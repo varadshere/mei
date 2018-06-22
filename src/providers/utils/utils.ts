@@ -22,6 +22,7 @@ export class UtilsProvider {
   headers = new Headers();
   private _type: string;
   private _profile: any = {};
+  private _user_id;
   public notifyOther(data: any) {
     if (data) {
       this.notify.next(data);
@@ -41,6 +42,14 @@ export class UtilsProvider {
     this.headers.append('Content-Type','application/json');
     // this.headers.append('Access-Control-Allow-Origin' , '*');
     // this.headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+  }
+
+  get user_id() {
+    return this._user_id;
+  }
+
+  set user_id(value) {
+    this._user_id = value;
   }
 
   get profile(): any {
@@ -521,7 +530,7 @@ export class UtilsProvider {
     let url =  this.serverUrl + 'uploader';
     let options: FileUploadOptions = {
       fileKey: 'file',
-      fileName: this.profile.user_id + '_profile-picture.jpg',
+      fileName: this.profile._user_id + '_profile-picture.jpg',
       headers: {}
     };
 
@@ -532,5 +541,47 @@ export class UtilsProvider {
       }, (err) => {
         // error
       })
+  }
+  saveCard(dataToSend){
+    let loading = this.getloadingAlert();
+    loading.present();
+    return new Promise((resolve, reject) => {
+      let url = this.serverUrl + 'saveCard';
+      let body = JSON.stringify(dataToSend);
+      this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(3000).subscribe(data => {
+        console.log("card saved");
+        console.log(data);
+        loading.dismissAll();
+        resolve(this.sanitizeData(data));
+      }, error => {
+        console.log("card save ERROR");
+        console.log(error);
+        loading.dismissAll();
+        resolve(false);
+      });
+    });
+  }
+
+  getCard(){
+    let dataToSend = {
+      user_id: this.profile.user_id
+    };
+    let loading = this.getloadingAlert();
+    loading.present();
+    return new Promise((resolve, reject) => {
+      let url = this.serverUrl + 'getCard';
+      let body = JSON.stringify(dataToSend);
+      this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(3000).subscribe(data => {
+        console.log("got card");
+        console.log(data);
+        loading.dismissAll();
+        resolve(this.sanitizeData(data));
+      }, error => {
+        console.log("card save ERROR");
+        console.log(error);
+        loading.dismissAll();
+        resolve(false);
+      });
+    });
   }
 }

@@ -100,11 +100,22 @@ page-my-booking2 {
 
   #payment-form{
     color: white;
-    padding: 10px;
-  }
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
   #card-element{
     padding-top: 10px;
     padding-bottom: 5px;
   }
+  .add-card{
+    color: #F9748F;
+  }
+  .ElementsApp .InputElement {
+    //font-size: 16px;
+    color: #ffffff;
+  }
+
 
 }
