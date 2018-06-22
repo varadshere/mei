@@ -314,7 +314,6 @@ export class SignupPage {
                   ref.utils.setPage(VendorHomePage);
                   ref.navCtrl.push(VendorSidemenuPage);
                 }
-
               });
             }else {
               ref.utils.setUserEmail(ref.slideOneForm.value.email);

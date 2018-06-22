@@ -98,7 +98,7 @@ export class VendorSettingsPage {
   }
 
   uploadPhoto(){
-    this.utilsProvider.uploadPhoto().then((data)=>{
+    this.utilsProvider.getImgFromDevice().then((data)=>{
       if(data){
         console.log(data);
         this.utilsProvider.profile.profile_pic = data;

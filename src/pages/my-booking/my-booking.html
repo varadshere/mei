@@ -14,26 +14,39 @@
 
 
 <ion-content padding>
-  <ion-row class="profile-frame">
-    <div>
-      <div>
-        <img  style="" src="assets/imgs/user.png">
-      </div>
-    </div>
-    <ion-col>
+  <!--<ion-row class="profile-frame">-->
+    <!--<div>-->
+      <!--<div>-->
+        <!--<img class="profile-img" src="assets/imgs/user.png">-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<ion-col>-->
+      <!--<ion-row>-->
+        <!--<div class="profile-text-main">{{profileData.first_name}} {{profileData.last_name}}</div>-->
+
+      <!--</ion-row>-->
+      <!--<ion-row>-->
+        <!--<div class="location-text-main">{{profileData.address}}</div>-->
+      <!--</ion-row>-->
+    <!--</ion-col>-->
+  <!--</ion-row>-->
+
+  <!--<ion-item>-->
+    <!--{{selectedDate}}-->
+  <!--</ion-item>-->
+  <ion-row>
+    <ion-col col-3>
+      <img  class="profile-img" src="{{profileData.profile_pic ? profileData.profile_pic : 'assets/imgs/user.png'}}">
+    </ion-col>
+    <ion-col col-9>
       <ion-row>
         <div class="profile-text-main">{{profileData.first_name}} {{profileData.last_name}}</div>
-
       </ion-row>
       <ion-row>
         <div class="location-text-main">{{profileData.address}}</div>
       </ion-row>
     </ion-col>
   </ion-row>
-
-  <!--<ion-item>-->
-    <!--{{selectedDate}}-->
-  <!--</ion-item>-->
   <div class="calendar-header">
     <ion-row class="calendar-month">
       <ion-col col-2 (click)="goToLastMonth()"><ion-icon name="arrow-back"></ion-icon></ion-col>

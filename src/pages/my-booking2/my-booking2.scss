@@ -11,13 +11,16 @@ page-my-booking2 {
     //color: #FFFFFF;
     //text-align: center;
   }
-
   .location-text-main{
     //padding-top: 10px;
     font-size: 12px;
     font-family: 'San Francisco',Helvetica,Arial,serif;
     //color: #FFFFFF;
     //text-align: center;
+  }
+
+  .profile-img{
+    border-radius: 40px;
   }
 
 
@@ -94,4 +97,14 @@ page-my-booking2 {
     text-align: center;
     color: #FFFFFF;
   }
+
+  #payment-form{
+    color: white;
+    padding: 10px;
+  }
+  #card-element{
+    padding-top: 10px;
+    padding-bottom: 5px;
+  }
+
 }

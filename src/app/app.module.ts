@@ -3,10 +3,8 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-
 import { HttpModule } from '@angular/http';
 import { NgCalendarModule  } from 'ionic2-calendar';
-
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
@@ -40,7 +38,8 @@ import { Base64 } from '@ionic-native/base64';
 import {ProfilePicModalPage} from "../pages/profile-pic-modal/profile-pic-modal";
 import {Crop} from "@ionic-native/crop";
 import {VendorProfilePage} from "../pages/vendor-profile/vendor-profile";
-
+import { FileTransfer } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
 @NgModule({
   declarations: [
     MyApp,
@@ -108,7 +107,6 @@ import {VendorProfilePage} from "../pages/vendor-profile/vendor-profile";
     ClientProfilePage,
     ProfilePicModalPage,
     VendorProfilePage
-
   ],
   providers: [
     StatusBar,
@@ -117,6 +115,8 @@ import {VendorProfilePage} from "../pages/vendor-profile/vendor-profile";
     ImagePicker,
     Base64,
     Crop,
+    FileTransfer,
+    File,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UtilsProvider
   ]

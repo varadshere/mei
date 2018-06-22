@@ -15,19 +15,16 @@
 
 <ion-content padding>
 
-  <ion-row class="profile-frame">
-    <div>
-      <div>
-        <img  style="" src="assets/imgs/user.png">
-      </div>
-    </div>
-    <ion-col>
+  <ion-row>
+    <ion-col col-3>
+      <img  class="profile-img" src="{{profileData.profile_pic ? profileData.profile_pic : 'assets/imgs/user.png'}}">
+    </ion-col>
+    <ion-col col-9>
       <ion-row>
-        <div class="profile-text-main">Marty McFly</div>
-
+        <div class="profile-text-main">{{profileData.first_name}} {{profileData.last_name}}</div>
       </ion-row>
       <ion-row>
-        <div class="location-text-main">Hope Valley, Adelaide</div>
+        <div class="location-text-main">{{profileData.address}}</div>
       </ion-row>
     </ion-col>
   </ion-row>
@@ -35,27 +32,35 @@
   <div class="card-title">
     DEBIT (Saved Card)
   </div>
+
   <div class="card-details">
     <div class="card-name">
-      Marty M.
+      {{utilsProvider.profile.first_name }} {{utilsProvider.profile.last_name }}
     </div>
-    <div class="card-number">
-      4147 1234 5678 9101
-    </div>
-    <ion-row class="cvvexp">
-      CVV
-      <div class="cvv">
-        121
-      </div>
+    <form action="/charge" method="post" id="payment-form">
+      <div class="form-row">
+        <label for="card-element">
+          Credit or debit card
+        </label>
 
-      <span style="padding-left: 10px">EXP</span>
-      <div class="exp">
-        05/20
+        <div id="card-element">
+          <!-- A Stripe Element will be inserted here. -->
+        </div>
+
+        <!-- Used to display Element errors. -->
+        <div id="card-errors" role="alert"></div>
       </div>
-    </ion-row>
+    </form>
 
   </div>
-
+  <ion-row justify-content-end>
+    <button ion-button icon-end>
+      Add Card
+      <ion-icon ios="ios-add-circle"></ion-icon>
+      <!--<ion-icon name="home"></ion-icon>-->
+    </button>
+  </ion-row>
+  <button ion-button color="primary" (click)="paymentButton2()">Add Card</button>
   <img class="footer-img" src="assets/imgs/mybooking1.png">
   <img class="footer-img" src="assets/imgs/mybooking2.png">
   <div class="next-btn" (click)="navigate()">NEXT</div>
