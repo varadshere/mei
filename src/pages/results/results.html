@@ -16,14 +16,20 @@
 
 <ion-content>
 
-  <ion-card *ngFor="let profile of vendorList" (click)="openProfile(profile)" tappable>
+  <ion-grid>
+    <ion-row class="date-row">
+      {{today | date:'LLLL dd, yyyy' | uppercase}}
+    </ion-row>
+  </ion-grid>
+  <ion-card class="mei-card" *ngFor="let profile of vendorList" (click)="openProfile(profile)" tappable>
 
     <ion-item>
       <ion-avatar item-start>
         <img src="{{profile.profile_pic ? profile.profile_pic : 'assets/imgs/user.png'}}">
       </ion-avatar>
       <h2>{{profile.first_name}} {{profile.last_name}}</h2>
-      <p>{{profile.address}}</p>
+      <p>
+        <ion-icon style="color:#DEDEDE" name="pin"></ion-icon> {{profile.address}}</p>
     </ion-item>
     <div class="time-select">
       <div class="time-badge">9:00</div>
@@ -60,18 +66,18 @@
 
 
     <!--<ion-row>-->
-      <!--<ion-col>-->
-        <!--<button class="button-color" ion-button icon-left clear small>-->
-          <!--<ion-icon name="thumbs-up"></ion-icon>-->
-          <!--<div>12 Likes</div>-->
-        <!--</button>-->
-      <!--</ion-col>-->
-      <!--<ion-col>-->
-        <!--<button (click)="navigate()" class="button-color" ion-button icon-left clear small float-right>-->
-          <!--<ion-icon name="ios-bookmark-outline"></ion-icon>-->
-          <!--<div>Book</div>-->
-        <!--</button>-->
-      <!--</ion-col>-->
+    <!--<ion-col>-->
+    <!--<button class="button-color" ion-button icon-left clear small>-->
+    <!--<ion-icon name="thumbs-up"></ion-icon>-->
+    <!--<div>12 Likes</div>-->
+    <!--</button>-->
+    <!--</ion-col>-->
+    <!--<ion-col>-->
+    <!--<button (click)="navigate()" class="button-color" ion-button icon-left clear small float-right>-->
+    <!--<ion-icon name="ios-bookmark-outline"></ion-icon>-->
+    <!--<div>Book</div>-->
+    <!--</button>-->
+    <!--</ion-col>-->
 
     <!--</ion-row>-->
 

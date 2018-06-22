@@ -1,48 +1,46 @@
 page-client-profile {
-  .bio-head{
+  .bio-head {
     color: #615f5f;
     font-weight: bold;
     font-size: 15px;
     padding-left: 10px;
     padding-top: 10px;
   }
-  .bio-text{
+  .bio-text {
     padding: 10px;
   }
-  .profile-text-main{
+  .profile-text-main {
     padding-top: 10px;
     color: #615f5f;
     font-weight: bold;
     font-size: 17px;
-    font-family: 'San Francisco',Helvetica,Arial,serif;
     //color: #FFFFFF;
     //text-align: center;
   }
-  .location-text-main{
+  .location-text-main {
     //padding-top: 10px;
     font-size: 12px;
-    font-family: 'San Francisco',Helvetica,Arial,serif;
     //color: #FFFFFF;
     //text-align: center;
   }
 
-  .profile-img{
+  .profile-img {
     border-radius: 40px;
   }
 
-  .img-col{
+  .img-col {
     padding: 0;
   }
-  .img-col img{
+  .img-col img {
     height: 125px;
   }
 
-  .vendor-name{
+  .vendor-name {
     color: #615f5f;
     font-weight: bold;
   }
 
-  rating{
+  rating {
     ul {
       padding: 0px;
       margin: 0;

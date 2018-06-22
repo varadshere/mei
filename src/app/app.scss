@@ -1,6 +1,5 @@
 // http://ionicframework.com/docs/theming/
 
-
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These
@@ -15,16 +14,14 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
-
 .segment-md .segment-button.segment-activated {
-  border-color: #F9748F;
+  border-color: #f9748f;
   opacity: 1;
 }
 
-.segment-md .segment-button{
-  color: #F9748F;
+.segment-md .segment-button {
+  color: #f9748f;
 }
-
 
 .text-input::-moz-placeholder {
   color: #696f7b;
@@ -45,17 +42,39 @@
   font-weight: bold;
 }
 
-input{
+input {
   font-size: 12px;
   font-weight: bold;
 }
 
 ion-header ion-icon.back-button-icon.icon {
-  color: #F9748F;
+  color: #f9748f;
 }
-.back-button-text{
-  color: #F9748F;
+.back-button-text {
+  color: #f9748f;
 }
-.toolbar-title{
-  color: #F9748F;
+.toolbar-title {
+  color: #f9748f;
+}
+
+.mei-card {
+  margin: 0px !important;
+  width: 100% !important;
+}
+
+.toolbar-background {
+  background-color: white;
+  border-bottom: 1px solid #dbdbdb !important;
+}
+
+.header::after {
+  background-image: unset;
+}
+
+.no-scroll .scroll-content {
+  overflow: hidden !important;
+}
+
+* {
+  font-family: Ubuntu;
 }

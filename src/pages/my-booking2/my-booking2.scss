@@ -1,42 +1,43 @@
 page-my-booking2 {
-
-  .profile-frame{
+  .profile-frame {
     margin-bottom: 20px;
   }
 
-  .profile-text-main{
+  .profile-text-main {
     //padding-top: 10px;
     font-size: 17px;
-    font-family: 'San Francisco',Helvetica,Arial,serif;
     //color: #FFFFFF;
     //text-align: center;
   }
 
-  .location-text-main{
+  .location-text-main {
     //padding-top: 10px;
     font-size: 12px;
-    font-family: 'San Francisco',Helvetica,Arial,serif;
     //color: #FFFFFF;
     //text-align: center;
   }
 
-
-  .card-title{
+  .card-title {
     line-height: 41px;
     border-radius: 20px;
     height: 40px;
     background-color: #d4d4d4;
-    color: #FFFFFF;
+    color: #ffffff;
     padding-left: 20px;
   }
 
-  .card-details{
+  .card-details {
     margin-top: 20px;
-    background: linear-gradient(227.74deg, #FE9A8B 0.2%, #FD868C 40.08%, #F9748F 97.82%);
+    background: linear-gradient(
+      227.74deg,
+      #fe9a8b 0.2%,
+      #fd868c 40.08%,
+      #f9748f 97.82%
+    );
     border-radius: 25px;
   }
 
-  .card-name{
+  .card-name {
     text-align: left;
     padding-left: 15px;
     font-size: 16px;
@@ -45,35 +46,35 @@ page-my-booking2 {
     padding-bottom: 35px;
   }
 
-  .card-number{
+  .card-number {
     font-size: 24px;
     color: white;
     padding-bottom: 20px;
     padding-left: 20px;
   }
 
-  .cvvexp{
-    color: rgba(255,255,255,0.5);
+  .cvvexp {
+    color: rgba(255, 255, 255, 0.5);
     font-size: 12px;
     //width: 50%;
     //margin: 0 auto;
     padding-left: 20px;
     padding-bottom: 20px;
   }
-  .cvv{
+  .cvv {
     //padding-left: 15%;
     font-size: 16px;
     color: white;
     padding-left: 10px;
   }
-  .exp{
+  .exp {
     //padding-left: 15%;
     font-size: 16px;
     color: white;
     padding-left: 10px;
   }
 
-  .footer-img{
+  .footer-img {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -81,7 +82,7 @@ page-my-booking2 {
     height: 100px;
   }
 
-  .next-btn{
+  .next-btn {
     padding: 15px;
     position: absolute;
     bottom: 0;
@@ -92,6 +93,6 @@ page-my-booking2 {
     line-height: 11px;
     font-size: 16px;
     text-align: center;
-    color: #FFFFFF;
+    color: #ffffff;
   }
 }

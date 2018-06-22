@@ -1,58 +1,59 @@
 page-profile {
-  .profile-text-main{
+  .profile-text-main {
     //padding-top: 10px;
     font-size: 17px;
-    font-family: 'San Francisco',Helvetica,Arial,serif;
     //color: #FFFFFF;
     //text-align: center;
   }
-  .location-text-main{
+  .location-text-main {
     //padding-top: 10px;
     font-size: 12px;
-    font-family: 'San Francisco',Helvetica,Arial,serif;
     //color: #FFFFFF;
     //text-align: center;
   }
 
-  .profile-img{
+  .profile-img {
     border-radius: 40px;
   }
 
-  .img-col{
+  .img-col {
     padding: 0;
   }
-  .img-col img{
+  .img-col img {
     height: 125px;
   }
 
-  .service-title{
-    font-size: 16.0px !important;
+  .service-title {
+    font-size: 16px !important;
     color: #696f7b;
   }
-  .service-desc{
-    font-size: 12.0px;
+  .service-desc {
+    font-size: 12px;
     color: #d4d4d4;
   }
 
-  .service-header{
+  .service-header {
     color: #696f7b;
-    font-size: 16.0px;
+    font-size: 16px;
   }
 
-  .icon-pad{
+  .icon-pad {
     padding-left: 10px;
     font-size: 25px;
   }
-  .ion-selected{
-    color: #F9748F;
+  .ion-selected {
+    color: #f9748f;
   }
 
-  .book-button{
+  .book-button {
     width: 200px;
     height: 50px;
     border-radius: 25px;
-    background: linear-gradient(257.2deg, #FE9A8B 39.32%, #FD868C 80.81%, #F9748F 140.89%);
+    background: linear-gradient(
+      257.2deg,
+      #fe9a8b 39.32%,
+      #fd868c 80.81%,
+      #f9748f 140.89%
+    );
   }
-
-
 }
