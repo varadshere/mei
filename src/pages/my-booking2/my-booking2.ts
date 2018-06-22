@@ -32,7 +32,7 @@ export class MyBooking2Page {
     this.profileData = navParams.get('profile');
     this.schedule = navParams.get('schedule');
     this.selectedDate = navParams.get('selectedDate');
-
+    this.getCard();
     this.stripe1 = Stripe('pk_test_x1LxYvNr0ewGsaPHNzX0V7Ey');
     this.elements = this.stripe1.elements();
     this.style = {
@@ -57,7 +57,10 @@ export class MyBooking2Page {
     this.utilsProvider.getCard().then(result =>{
         if(result){
           this.savedCardFlag = true;
+          this.savedCardFlag = true;
           this.savedCard = result;
+        }else {
+          this.savedCardFlag = false;
         }
     })
   }

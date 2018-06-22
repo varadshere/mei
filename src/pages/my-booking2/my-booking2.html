@@ -29,18 +29,31 @@
     </ion-col>
   </ion-row>
 
-  <div class="card-title" (click)="getCard()">
-    DEBIT (Saved Card)
+  <div class="card-title">
+    (Saved Card)
   </div>
   <div *ngIf="savedCardFlag">
     <div class="card-details">
+      <div></div>
       <div class="card-name">
         {{savedCard.card_name}}
       </div>
-      <div>{{savedCard.last4}}</div>
+      <div class="card-number">
+        xxxx xxxx xxxx {{savedCard.last4}}
+      </div>
+      <ion-row class="cvvexp">
+        CVV
+        <div class="cvv">
+          xxx
+        </div>
+        <span style="padding-left: 10px">EXP</span>
+        <div class="exp">
+          {{savedCard.exp_month}}/{{savedCard.exp_year}}
+        </div>
+      </ion-row>
     </div>
   </div>
-  <div class="card-details">
+  <div class="card-details" *ngIf="!savedCardFlag">
     <div class="card-name">
       {{utilsProvider.profile.first_name }} {{utilsProvider.profile.last_name }}
     </div>
@@ -61,10 +74,10 @@
     </form>
 
   </div>
-  <ion-row justify-content-end *ngIf="addCardFlag">
+  <ion-row justify-content-end *ngIf="addCardFlag && !savedCardFlag">
     <button ion-button icon-end clear (click)="paymentButton2()" class="add-card">Add Card</button>
   </ion-row>
   <img class="footer-img" src="assets/imgs/mybooking1.png">
   <img class="footer-img" src="assets/imgs/mybooking2.png">
-  <div class="next-btn" (click)="navigate()" *ngIf="!addCardFlag">NEXT</div>
+  <div class="next-btn" (click)="navigate()" *ngIf="!addCardFlag || savedCardFlag">NEXT</div>
 </ion-content>
