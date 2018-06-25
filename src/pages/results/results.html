@@ -25,7 +25,7 @@
 
     <ion-item>
       <ion-avatar item-start>
-        <img src="{{profile.profile_pic ? profile.profile_pic : 'assets/imgs/user.png'}}">
+        <img src="{{profile.profile_pic ? (profile.profile_pic.includes('http') ? profile.profile_pic : utilsProvider.photoUrl + profile.profile_pic) : 'assets/imgs/user.png'}}">
       </ion-avatar>
       <h2>{{profile.first_name}} {{profile.last_name}}</h2>
       <p>

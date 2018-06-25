@@ -4,6 +4,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import {LoginPage} from '../pages/login/login';
+import {utils} from "ng2-cordova-oauth/utility";
+import {UtilsProvider} from "../providers/utils/utils";
 declare var FCMPlugin;
 @Component({
   templateUrl: 'app.html'
@@ -11,13 +13,20 @@ declare var FCMPlugin;
 export class MyApp {
   rootPage:any = LoginPage;
 
-  constructor(platform: Platform,  public toastCtrl: ToastController,statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(platform: Platform,  public toastCtrl: ToastController,statusBar: StatusBar, splashScreen: SplashScreen, utils: UtilsProvider) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
 
+      if (typeof FCMPlugin != 'undefined'){
+        FCMPlugin.getToken((token) =>{
+          utils.device_token = token;
+        }, (err) => {
+
+        });
+      }
 
       if (typeof FCMPlugin != 'undefined'){
         FCMPlugin.onNotification((data)=>{

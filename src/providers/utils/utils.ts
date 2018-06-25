@@ -9,13 +9,16 @@ import {Observable} from "rxjs/Observable";
 import {Crop} from "@ionic-native/crop";
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
+import {utils} from "ng2-cordova-oauth/utility";
 declare var FCMPlugin;
 
 @Injectable()
 export class UtilsProvider {
+
   private notify = new Subject<any>();
   notifyObservable$: any =  this.notify.asObservable();
   serverUrl  =  'http://18.216.123.109:5000/api/'; //'http://372460c3.ngrok.io/api/';
+  photoUrl  =  'http://18.216.123.109:5000/api/getProfileImage/'; //'http://372460c3.ngrok.io/api/';
   page = '';
   serviceSelected = '';
   email = '';
@@ -23,6 +26,7 @@ export class UtilsProvider {
   private _type: string;
   private _profile: any = {};
   private _user_id;
+  private _device_token;
   public notifyOther(data: any) {
     if (data) {
       this.notify.next(data);
@@ -44,6 +48,13 @@ export class UtilsProvider {
     // this.headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
   }
 
+  get device_token() {
+    return this._device_token;
+  }
+
+  set device_token(value) {
+    this._device_token = value;
+  }
   get user_id() {
     return this._user_id;
   }
@@ -94,7 +105,7 @@ export class UtilsProvider {
   tokensetup() {
     var promise = new Promise((resolve, reject) => {
       if (typeof FCMPlugin != 'undefined'){
-        FCMPlugin.getToken(function(token){
+        FCMPlugin.getToken((token) =>{
           resolve(token);
         }, (err) => {
           reject(err);
@@ -279,6 +290,7 @@ export class UtilsProvider {
       let body = JSON.stringify({
         user_email: email,
         password: pwd,
+        device_token: this.device_token,
         type: type
       });
       this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(3000).subscribe(data => {
@@ -299,6 +311,7 @@ export class UtilsProvider {
   signUpService(dataToSend){
    // let ref = this;
     this.type = dataToSend.type;
+    dataToSend.device_token = this.device_token;
     let loading = this.getloadingAlert();
     loading.present();
     return new Promise((resolve, reject) => {

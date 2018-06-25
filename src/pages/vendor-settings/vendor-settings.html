@@ -17,7 +17,7 @@
 <ion-content padding>
   <ion-list mode="ios">
     <ion-item style="text-align: center" (click)="uploadPhoto()">
-      <img  class="profile-img-settings" [src]="_DomSanitizer.bypassSecurityTrustUrl(utilsProvider.profile.profile_pic ? utilsProvider.profile.profile_pic : 'assets/imgs/user.png')">
+      <img  class="profile-img-settings" [src]="_DomSanitizer.bypassSecurityTrustUrl(utilsProvider.profile.profile_pic ? (utilsProvider.profile.profile_pic.includes('http') ? utilsProvider.profile.profile_pic : utilsProvider.photoUrl + utilsProvider.profile.profile_pic) : 'assets/imgs/user.png')">
     </ion-item>
     <ion-item>
       <ion-label>Your Cancellation Policy</ion-label>
