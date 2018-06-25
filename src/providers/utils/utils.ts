@@ -597,4 +597,31 @@ export class UtilsProvider {
       });
     });
   }
+
+  sendNotification(){
+    let dataToSend = {
+      "message": "new test notification",
+      "sendername": "mei",
+      "device_token": this.device_token,
+      "action": "action",
+      "data": "{val: 'test data'}"
+    };
+    let loading = this.getloadingAlert();
+    loading.present();
+    return new Promise((resolve, reject) => {
+      let url = this.serverUrl + 'sendNotification';
+      let body = JSON.stringify(dataToSend);
+      this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(3000).subscribe(data => {
+        console.log("send Notification resp");
+        console.log(data);
+        loading.dismissAll();
+        resolve(this.sanitizeData(data));
+      }, error => {
+        console.log("card save ERROR");
+        console.log(error);
+        loading.dismissAll();
+        resolve(false);
+      });
+    });
+  }
 }

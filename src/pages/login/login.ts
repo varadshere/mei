@@ -86,4 +86,8 @@ export class LoginPage {
 
   }
 
+  sendNotifiaction(){
+    this.utilsProvider.sendNotification();
+  }
+
 }
