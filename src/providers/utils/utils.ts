@@ -530,7 +530,7 @@ export class UtilsProvider {
     let url =  this.serverUrl + 'uploader';
     let options: FileUploadOptions = {
       fileKey: 'file',
-      fileName: this.profile._user_id + '_profile-picture.jpg',
+      fileName: this.profile.user_id + '_profile-picture.jpg',
       headers: {}
     };
 
