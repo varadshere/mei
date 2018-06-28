@@ -37,7 +37,7 @@ export class MyBooking2Page {
     };
 
 // Create an instance of the card Element.
-    this.card = this.elements.create('card', {style: this.style});
+   this.card = this.elements.create('card', {style: this.style});
   }
 
   ionViewDidLoad() {

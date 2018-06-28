@@ -9,12 +9,6 @@ import {SelectionHomePage} from "../selection-home/selection-home";
 import {VendorSidemenuPage} from "../vendor-sidemenu/vendor-sidemenu";
 import {VendorHomePage} from "../vendor-home/vendor-home";
 
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
