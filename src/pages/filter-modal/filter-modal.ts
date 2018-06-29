@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
- * Generated class for the ReviewModalPage page.
+ * Generated class for the FilterModalPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -10,16 +10,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-review-modal',
-  templateUrl: 'review-modal.html',
+  selector: 'page-filter-modal',
+  templateUrl: 'filter-modal.html',
 })
-export class ReviewModalPage {
-  rating: any;
+export class FilterModalPage {
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ReviewModalPage');
+    console.log('ionViewDidLoad FilterModalPage');
   }
 
 }

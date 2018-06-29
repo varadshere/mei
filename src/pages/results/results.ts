@@ -1,8 +1,9 @@
 import { Component } from "@angular/core";
-import { NavController, NavParams } from "ionic-angular";
+import {ModalController, NavController, NavParams} from "ionic-angular";
 import { UtilsProvider } from "../../providers/utils/utils";
 import { MyBookingPage } from "../my-booking/my-booking";
 import { ProfilePage } from "../profile/profile";
+import {FilterModalPage} from "../filter-modal/filter-modal";
 
 @Component({
   selector: "page-results",
@@ -14,7 +15,8 @@ export class ResultsPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private utils: UtilsProvider
+    private utils: UtilsProvider,
+    private modalCtrl: ModalController
   ) {
     let vendorListPromise = this.utils.vendorListService();
     let ref = this;
@@ -36,6 +38,11 @@ export class ResultsPage {
     this.navCtrl.push(ProfilePage, {
       profile: profile
     });
+  }
+
+  openModal(){
+    const modal = this.modalCtrl.create('FilterModalPage');
+    modal.present();
   }
 
   navigate() {

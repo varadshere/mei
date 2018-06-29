@@ -40,7 +40,6 @@ import {Crop} from "@ionic-native/crop";
 import {VendorProfilePage} from "../pages/vendor-profile/vendor-profile";
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
-import { FCM } from '@ionic-native/fcm';
 @NgModule({
   declarations: [
     MyApp,
@@ -118,7 +117,6 @@ import { FCM } from '@ionic-native/fcm';
     Crop,
     FileTransfer,
     File,
-    FCM,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UtilsProvider
   ]

@@ -4,15 +4,34 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<!--<ion-header>-->
 
-  <ion-navbar>
-    <ion-title>reviewModal</ion-title>
-  </ion-navbar>
+  <!--<ion-navbar>-->
+    <!--<ion-title>reviewModal</ion-title>-->
+  <!--</ion-navbar>-->
 
-</ion-header>
+<!--</ion-header>-->
 
 
-<ion-content padding>
-  Im rev modal
-</ion-content>
+<div class="review-outer">
+  <div class="modal-title">
+    Rate your experience
+  </div>
+  <div class="rating-div">
+    <rating [(ngModel)]="rating"
+            readOnly="false"
+            max="5"
+            emptyStarIconName="star-outline"
+            halfStarIconName="star-half"
+            starIconName="star"
+            nullable="false">
+      <!--(ngModelChange)="onModelChange($event)">-->
+    </rating>
+  </div>
+  <div class="modal-content">
+    Tell us how Alice Lockhood did with your hair and makeup booking on 10/25/2018
+  </div>
+  <div>
+    <button ion-button full class="review-submit">Submit</button>
+  </div>
+</div>

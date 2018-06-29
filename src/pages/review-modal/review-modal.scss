@@ -1,3 +1,47 @@
 page-review-modal {
+  .review-outer{
+    border-radius: 10px;
+    margin-top: 70%;
+    margin-left: 40px;
+    margin-right: 40px;
+    background-color: #FFFFFF;
+  }
+  .modal-title{
+    color: #f9748f;
+    font-size: 20px;
+    padding: 10px;
+    text-align: center;
+  }
+  .modal-content{
+    text-align: center;
+    padding: 20px;
+  }
+  .review-submit{
+    background-color: #f9748f;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  .button-ios.activated{
+     background-color: #f0bec8;
+  }
 
+  .rating-div{
+    text-align: center;
+  }
+
+  rating {
+    ul {
+      padding: 0px;
+      margin: 0;
+      &.rating li {
+        padding: 0 !important;
+        background: none;
+        color: #f9748f;
+
+        ion-icon {
+          font-size: 35px;
+        }
+      }
+    }
+  }
 }
