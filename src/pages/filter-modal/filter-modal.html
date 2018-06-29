@@ -14,5 +14,55 @@
 
 
 <ion-content padding>
+  <ion-searchbar
+    [(ngModel)]="utils.filterKey"
+    [showCancelButton]="false">
+  </ion-searchbar>
 
+  <div class="service-seg">
+    <ion-segment [(ngModel)]="utils.serviceSelected"  mode="ios">
+      <ion-segment-button value="HAIR">
+        Hair
+      </ion-segment-button>
+      <ion-segment-button value="MAKEUP">
+        Makeup
+      </ion-segment-button>
+      <ion-segment-button value="BODY">
+        Body
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <ion-row class="rating-div">
+    <ion-col col-6>
+      <span>
+        Rating
+      </span>
+    </ion-col>
+    <ion-col col-6 style="text-align: end">
+      <rating [(ngModel)]="utils.filterRating"
+              readOnly="false"
+              max="5"
+              emptyStarIconName="star-outline"
+              halfStarIconName="star-half"
+              starIconName="star"
+              nullable="false">
+        <!--(ngModelChange)="onModelChange($event)">-->
+      </rating>
+    </ion-col>
+  </ion-row>
+
+  <div style="padding: 5px">
+    <ion-label>Distance {{utils.filterDistance}}</ion-label>
+    <ion-range min="5" max="25" step="5" snaps="true" [(ngModel)]="utils.filterDistance" color="mei"></ion-range>
+  </div>
+
+  <ion-row style="padding: 5px">
+    <ion-label>Willing to travel?</ion-label>
+    <ion-toggle [(ngModel)]="utils.filterTravelFlag" mode="ios"></ion-toggle>
+  </ion-row>
+
+  <div style="text-align: center; margin-top: 20px">
+    <button ion-button class="apply-button" (click)="dismiss()">Apply</button>
+  </div>
 </ion-content>

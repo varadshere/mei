@@ -18,6 +18,10 @@ export class ResultsPage {
     private utils: UtilsProvider,
     private modalCtrl: ModalController
   ) {
+    this.getVendorList()
+  }
+
+  getVendorList(){
     let vendorListPromise = this.utils.vendorListService();
     let ref = this;
     vendorListPromise.then(function(result: any) {
@@ -42,6 +46,10 @@ export class ResultsPage {
 
   openModal(){
     const modal = this.modalCtrl.create('FilterModalPage');
+    modal.onDidDismiss(data => {
+      console.log(data);
+      this.getVendorList();
+    });
     modal.present();
   }
 

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
+import {UtilsProvider} from "../../providers/utils/utils";
 
 /**
  * Generated class for the FilterModalPage page.
@@ -14,12 +15,20 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'filter-modal.html',
 })
 export class FilterModalPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  // searchInput: any;
+  // serviceType: any;
+  // travelFlag: boolean;
+  // rating: any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public utils: UtilsProvider, private viewCtrl: ViewController) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FilterModalPage');
+  }
+
+  dismiss() {
+    // let data = { 'foo': 'bar' };
+    this.viewCtrl.dismiss();
   }
 
 }

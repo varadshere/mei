@@ -20,13 +20,17 @@ export class UtilsProvider {
   serverUrl  =  'http://18.216.123.109:5000/api/'; //'http://372460c3.ngrok.io/api/';
   photoUrl  =  'http://18.216.123.109:5000/api/getProfileImage/'; //'http://372460c3.ngrok.io/api/';
   page = '';
-  serviceSelected = '';
+  private _serviceSelected = '';
   email = '';
   headers = new Headers();
   private _type: string;
   private _profile: any = {};
   private _user_id;
   private _device_token;
+  private _filterRating;
+  private _filterTravelFlag: boolean;
+  private _filterKey: string;
+  private _filterDistance: any = 20;
   public notifyOther(data: any) {
     if (data) {
       this.notify.next(data);
@@ -48,6 +52,54 @@ export class UtilsProvider {
     // this.headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
   }
 
+
+  get filterRating() {
+    if(this._filterRating){
+      return this._filterRating;
+    }else {
+      return '';
+    }
+  }
+
+  get filterDistance(): string {
+    if(this._filterDistance){
+      return this._filterDistance;
+    }else {
+      return '';
+    }
+  }
+
+  set filterDistance(value: string) {
+    this._filterDistance = value;
+  }
+
+  set filterRating(value) {
+    this._filterRating = value;
+  }
+
+  get filterTravelFlag() {
+    if(this._filterTravelFlag){
+      return this._filterTravelFlag;
+    }else {
+      return false;
+    }
+  }
+
+  set filterTravelFlag(value) {
+    this._filterTravelFlag = value;
+  }
+
+  get filterKey() {
+    if(this._filterKey){
+      return this._filterKey;
+    }else {
+      return '';
+    }
+  }
+
+  set filterKey(value) {
+    this._filterKey = value;
+  }
   get device_token() {
     return this._device_token;
   }
@@ -87,13 +139,21 @@ export class UtilsProvider {
     this.page = p;
   }
 
-  getServiceSelection(){
-    return this.serviceSelected;
+  get serviceSelected(): string {
+    return this._serviceSelected;
   }
 
-  setServiceSelection(s){
-    this.serviceSelected = s;
+  set serviceSelected(value: string) {
+    this._serviceSelected = value;
   }
+
+  // getServiceSelection(){
+  //   return this.serviceSelected;
+  // }
+  //
+  // setServiceSelection(s){
+  //   this.serviceSelected = s;
+  // }
 
   setUserEmail(email){
     this.email = email;
@@ -335,7 +395,14 @@ export class UtilsProvider {
   vendorListService(){
    // let ref = this;
     let dataToSend = {
-      "service": this.getServiceSelection(),
+      "filters":{
+        "type": this.serviceSelected,
+        "rating": this.filterRating,
+        "willing_to_travel":this.filterTravelFlag,
+        "distance": this.filterDistance
+      },
+
+      // "service": this.getServiceSelection(),
       "email": this.getUserEmail()
     };
     let loading = this.getloadingAlert();

@@ -25,7 +25,7 @@ export class SelectionHomePage {
   }
 
   navigate(selection){
-    this.utilsProvider.setServiceSelection(selection);
+    this.utilsProvider.serviceSelected = selection;
     this.utilsProvider.setPage(ResultsPage);
     // this.navCtrl.push(SidemenuPage);
     this.utilsProvider.notifyOther('data');
