@@ -58,7 +58,8 @@
             <div *ngFor="let l of d.list">
               <ion-row (click)="selectService(l)" tappable>
                 <ion-col>
-                  <ion-icon class="icon-pad" [class.ion-selected]="l.booked" name="{{l.booked ? 'ios-checkmark' : 'ios-add'}}"></ion-icon>
+                  <ion-icon class="icon-pad" [ngStyle]="{'color' : l.booked ? '#f9748f' : '#D8D8D8', 'font-size' : l.booked ? '45px' : '25px'}"
+                    name="{{l.booked ? 'ios-checkmark' : 'md-radio-button-off'}}"></ion-icon>
                 </ion-col>
                 <ion-col col-10>
                   <div>
