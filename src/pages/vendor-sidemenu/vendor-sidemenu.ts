@@ -1,15 +1,13 @@
-import {ChangeDetectorRef, Component} from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {GetstartedPage} from "../getstarted/getstarted";
-import {UtilsProvider} from "../../providers/utils/utils";
-import {VendorHomePage} from "../vendor-home/vendor-home";
-import {VendorBookingsPage} from "../vendor-bookings/vendor-bookings";
-import {VendorCalendarPage} from "../vendor-calendar/vendor-calendar";
-import {VendorSettingsPage} from "../vendor-settings/vendor-settings";
-import {ChartPage} from "../chart/chart";
-import {ClientProfilePage} from "../client-profile/client-profile";
-import {VendorProfilePage} from "../vendor-profile/vendor-profile";
-import {Subscription} from "rxjs/Rx";
+import { Component } from "@angular/core";
+import { NavController, NavParams } from "ionic-angular";
+import { Subscription } from "rxjs/Rx";
+import { UtilsProvider } from "../../providers/utils/utils";
+import { ChartPage } from "../chart/chart";
+import { VendorBookingsPage } from "../vendor-bookings/vendor-bookings";
+import { VendorCalendarPage } from "../vendor-calendar/vendor-calendar";
+import { VendorHomePage } from "../vendor-home/vendor-home";
+import { VendorProfilePage } from "../vendor-profile/vendor-profile";
+import { VendorSettingsPage } from "../vendor-settings/vendor-settings";
 
 /**
  * Generated class for the VendorSidemenuPage page.
@@ -19,23 +17,27 @@ import {Subscription} from "rxjs/Rx";
  */
 
 @Component({
-  selector: 'page-vendor-sidemenu',
-  templateUrl: 'vendor-sidemenu.html',
+  selector: "page-vendor-sidemenu",
+  templateUrl: "vendor-sidemenu.html"
 })
 export class VendorSidemenuPage {
   public rootPage: any = VendorHomePage;
   private subscription: Subscription;
   private selectedItem: number = 0;
   private menuItems = [
-    {name:'HOME'},
-    {name:'CALENDAR'},
-    {name:'ACTIVITY'},
-    {name:'DIGITAL WALLET'},
-    {name:'SETTINGS'}
+    { name: "HOME" },
+    { name: "CALENDAR" },
+    { name: "ACTIVITY" },
+    { name: "DASHBOARD" },
+    { name: "SETTINGS" }
     // {name:'SETTINGS', active:false},
   ];
-  constructor(public navCtrl: NavController, public navParams: NavParams, public utilsProvider: UtilsProvider) {
-    this.subscription = this.utilsProvider.notifyObservable$.subscribe((res) => {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public utilsProvider: UtilsProvider
+  ) {
+    this.subscription = this.utilsProvider.notifyObservable$.subscribe(res => {
       console.log(res);
       this.rootPage = this.utilsProvider.getPage();
     });
@@ -43,28 +45,28 @@ export class VendorSidemenuPage {
 
   ionViewDidLoad() {
     this.rootPage = this.utilsProvider.getPage();
-    console.log('ionViewDidLoad VendorSidemenuPage');
+    console.log("ionViewDidLoad VendorSidemenuPage");
   }
 
-  openPage(page, i){
+  openPage(page, i) {
     this.selectedItem = i;
-    if(page == 'HOME'){
+    if (page == "HOME") {
       this.rootPage = VendorHomePage;
-    }else if(page == 'ACTIVITY'){
+    } else if (page == "ACTIVITY") {
       this.rootPage = VendorBookingsPage;
-    }else if(page == 'CALENDAR'){
+    } else if (page == "CALENDAR") {
       this.rootPage = VendorCalendarPage;
-    }else if(page == 'SETTINGS'){
+    } else if (page == "SETTINGS") {
       this.rootPage = VendorSettingsPage;
-    }else if(page == 'DIGITAL WALLET'){
+    } else if (page == "DASHBOARD") {
       this.rootPage = ChartPage;
-    }if(page == 'PROFILE'){
+    }
+    if (page == "PROFILE") {
       this.rootPage = VendorProfilePage;
     }
   }
 
-  ionViewDidLeave(){
+  ionViewDidLeave() {
     this.subscription.unsubscribe();
   }
-
 }
