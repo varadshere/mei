@@ -23,7 +23,7 @@
           <!--</ion-item>-->
 
           <div style="text-align: center; margin-top: 20px">
-            <button ion-button class="login-button" (click)="login()">Submit</button>
+            <button ion-button class="login-button" (click)="submitEmail()">Submit</button>
             <!--<button ion-button class="login-button" (click)="sendNotifiaction()">Notification</button>-->
           </div>
 
@@ -31,7 +31,6 @@
       </ion-col>
       <div *ngIf="resultText">
         <ion-row>
-          <ion-col>
             <ion-list inset>
               <ion-item mode="ios">
                 <ion-label> <ion-icon name="ios-unlock-outline" style="color: #FFFFFF;"></ion-icon></ion-label>
@@ -46,7 +45,6 @@
                 <!--<button ion-button class="login-button" (click)="sendNotifiaction()">Notification</button>-->
               </div>
             </ion-list>
-          </ion-col>
         </ion-row>
       </div>
     </ion-row>

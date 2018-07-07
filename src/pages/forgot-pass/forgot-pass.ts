@@ -31,8 +31,8 @@ export class ForgotPassPage {
     console.log('ionViewDidLoad ForgotPassPage');
   }
 
-  login(){
-    if(this.pwd && this.email){
+  submitEmail(){
+    if(this.email){
       let dataToSend = {
         // type: this.type
         email: this.email
@@ -42,7 +42,7 @@ export class ForgotPassPage {
 
       fpPromise.then((result) =>{
         if(result){
-          this.resultText = "Please check your Email and login with temp password.";
+          this.resultText = "Please check your Email and login with temp password. ";
         }else {
           this.resultText = "Something went wrong!";
         }

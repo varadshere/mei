@@ -72,9 +72,7 @@ export class LoginPage {
         ref.utilsProvider.getProfile().then(function (d) {
           ref.utilsProvider.setPage(VendorHomePage);
           ref.navCtrl.push(VendorSidemenuPage);
-        });
-
-      }else{
+        });      }else{
         console.log("Wrong Creds");
       }
     });
