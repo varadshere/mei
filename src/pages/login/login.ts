@@ -8,6 +8,7 @@ import {SidemenuPage} from "../sidemenu/sidemenu";
 import {SelectionHomePage} from "../selection-home/selection-home";
 import {VendorSidemenuPage} from "../vendor-sidemenu/vendor-sidemenu";
 import {VendorHomePage} from "../vendor-home/vendor-home";
+import {ForgotPassPage} from "../forgot-pass/forgot-pass";
 
 @Component({
   selector: 'page-login',
@@ -77,11 +78,9 @@ export class LoginPage {
         console.log("Wrong Creds");
       }
     });
-
   }
 
-  sendNotifiaction(){
-    this.utilsProvider.sendNotification();
+  forgotPass(type){
+    this.navCtrl.push('ForgotPassPage', {type: type});
   }
-
 }

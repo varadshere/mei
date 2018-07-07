@@ -28,10 +28,15 @@
       <!--(ngModelChange)="onModelChange($event)">-->
     </rating>
   </div>
+  <div>
+    <ion-item mode="ios" style="padding-right: 16px;">
+      <ion-input id="places" type="text" value="" placeholder="Review" [(ngModel)]="reviewText"></ion-input>
+    </ion-item>
+  </div>
   <div class="modal-content">
-    Tell us how Alice Lockhood did with your hair and makeup booking on 10/25/2018
+    {{text}}
   </div>
   <div>
-    <button ion-button full class="review-submit">Submit</button>
+    <button ion-button full class="review-submit" (click)="postReview()">Submit</button>
   </div>
 </div>

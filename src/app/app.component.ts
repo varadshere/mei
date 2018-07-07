@@ -35,9 +35,35 @@ export class MyApp {
 
       if (typeof FCMPlugin != 'undefined'){
         FCMPlugin.onNotification((data)=>{
+          data.packDat = JSON.parse(data.packDat);
+          switch(data.act) {
+            case "review": {
+              console.log("Review");
+              const modal = modalCtrl.create(ReviewModalPage, { data: data});
+              modal.present();
+              break;
+            }
+            case "B": {
+              console.log("B");
+              break;
+            }
+            case "C": {
+              console.log("C");
+              break;
+            }
+            case "D": {
+              console.log("D");
+              break;
+            }
+            default: {
+              console.log("Default choice");
+              break;
+            }
+          }
+
           if(data.wasTapped){
             let toast = this.toastCtrl.create({
-              message: data.sendername+'\n'+ data.message,
+              message: data.message,
               duration: 3000,
               position: 'top'
             });
@@ -48,13 +74,11 @@ export class MyApp {
             //alert( JSON.stringify(data) );
           }else{
             let toast = this.toastCtrl.create({
-              message: data.sendername+'\n'+ data.message,
+              message: data.message,
               duration: 3000,
               position: 'top'
             });
             toast.present();
-            const modal = modalCtrl.create('ReviewModalPage');
-            modal.present();
           }
           console.log('data');
           console.log(data);

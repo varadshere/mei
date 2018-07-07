@@ -585,7 +585,6 @@ export class UtilsProvider {
   }
 
   getBookings(dataToSend){
-    let ref = this;
     let loading = this.getloadingAlert();
     loading.present();
     return new Promise((resolve, reject) => {
@@ -665,13 +664,13 @@ export class UtilsProvider {
     });
   }
 
-  sendNotification(){
+  sendNotification(action, data, msg){
     let dataToSend = {
-      "message": "new test notification",
+      "message": msg,
       "sendername": "mei",
       "device_token": this.device_token,
-      "action": "action",
-      "data": "{val: 'test data'}"
+      "action": action,
+      "data": JSON.stringify(data)
     };
     let loading = this.getloadingAlert();
     loading.present();
@@ -684,7 +683,66 @@ export class UtilsProvider {
         loading.dismissAll();
         resolve(this.sanitizeData(data));
       }, error => {
-        console.log("card save ERROR");
+        console.log("Send notification ERROR");
+        console.log(error);
+        loading.dismissAll();
+        resolve(false);
+      });
+    });
+  }
+
+  postReviews(dataToSend){
+    let loading = this.getloadingAlert();
+    loading.present();
+    return new Promise((resolve, reject) => {
+      let url = this.serverUrl + 'postReviews';
+      let body = JSON.stringify(dataToSend);
+      this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(3000).subscribe(data => {
+        console.log("postReview resp");
+        console.log(data);
+        loading.dismissAll();
+        resolve(this.sanitizeData(data));
+      }, error => {
+        console.log("Post review ERROR");
+        console.log(error);
+        loading.dismissAll();
+        resolve(false);
+      });
+    });
+  }
+
+  forgotPass(dataToSend){
+    let loading = this.getloadingAlert();
+    loading.present();
+    return new Promise((resolve, reject) => {
+      let url = this.serverUrl + 'forgotPass';
+      let body = JSON.stringify(dataToSend);
+      this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(3000).subscribe(data => {
+        console.log("forgot pass resp");
+        console.log(data);
+        loading.dismissAll();
+        resolve(this.sanitizeData(data));
+      }, error => {
+        console.log("forgot pass ERROR");
+        console.log(error);
+        loading.dismissAll();
+        resolve(false);
+      });
+    });
+  }
+  changePass(dataToSend){
+    let loading = this.getloadingAlert();
+    loading.present();
+    return new Promise((resolve, reject) => {
+      let url = this.serverUrl + 'conformPassword';
+      let body = JSON.stringify(dataToSend);
+      this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(3000).subscribe(data => {
+        console.log("forgot pass resp");
+        console.log(data);
+        loading.dismissAll();
+        resolve(this.sanitizeData(data));
+      }, error => {
+        console.log("forgot pass ERROR");
         console.log(error);
         loading.dismissAll();
         resolve(false);

@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, ModalController, NavController, NavParams} from 'ionic-angular';
 import {stringSplice} from "@ionic/app-scripts";
 import {UtilsProvider} from "../../providers/utils/utils";
 import {ResultsPage} from "../results/results";
 import {SidemenuPage} from "../sidemenu/sidemenu";
 import * as moment from "moment";
+import {ReviewModalPage} from "../review-modal/review-modal";
 
 /**
  * Generated class for the MyBooking3Page page.
@@ -26,7 +27,10 @@ export class MyBooking3Page {
   endTime:any;
   totalCost = 0;
   selectedServicesNames:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams,private utilsProvider: UtilsProvider) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              private utilsProvider: UtilsProvider,
+              private modalCtrl: ModalController) {
     this.profileData = navParams.get('profile');
     this.schedule = navParams.get('schedule');
     this.selectedDate = navParams.get('selectedDate');
@@ -73,12 +77,17 @@ export class MyBooking3Page {
       "services": this.profileData.services
     };
     let bookVendorPromise  = this.utilsProvider.boookVendor(dataToSend);
-    let ref = this;
-    bookVendorPromise.then(function (result: any) {
-      ref.utilsProvider.presentAlert("Booking Confirmed", "Thank You!");
-      ref.utilsProvider.setPage(ResultsPage);
-      ref.utilsProvider.notifyOther('data');
-      ref.navCtrl.push(SidemenuPage);
+    bookVendorPromise.then((result: any) =>{
+      let notificationData = {
+        vendor_id: this.profileData.user_id,
+        user_id: this.utilsProvider.profile.user_id,
+        text: 'Tell us how ' + this.profileData.first_name + ' ' + this.profileData.last_name + ' did with your booking on '+ moment(this.selectedDate, 'DD MMMM YYYY').format('MM/DD/YYYY')
+      };
+      this.utilsProvider.sendNotification('review', notificationData, 'Submit your Review');
+      this.utilsProvider.presentAlert("Booking Confirmed", "Thank You!");
+      this.utilsProvider.setPage(ResultsPage);
+      this.utilsProvider.notifyOther('data');
+      this.navCtrl.push(SidemenuPage);
     });
   }
 }

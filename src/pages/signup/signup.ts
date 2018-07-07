@@ -400,7 +400,9 @@ export class SignupPage {
         "phone": "",
         "address": "",
         "bankName": "",
-        "cardNumber": ""
+        "cardNumber": "",
+        "lat": this.place.geometry.location.lat(),
+        "lng": this.place.geometry.location.lng()
       };
       let signupPromise  = this.utils.signUpService(dataToSend);
 

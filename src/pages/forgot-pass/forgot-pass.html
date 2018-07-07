@@ -1,0 +1,54 @@
+<ion-header>
+
+  <ion-navbar mode="ios">
+    <ion-title text-center>Forgot Password</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content class="login-img">
+  <div style="padding-top: 70%">
+    <ion-row>
+      <ion-col *ngIf="!resultText">
+        <ion-list inset>
+
+          <ion-item mode="ios">
+            <ion-label> <ion-icon name="ios-person-outline" style="color: #FFFFFF;"></ion-icon></ion-label>
+            <ion-input [(ngModel)]="email" type="text" placeholder="Email" name="email" required style="color: #FFFFFF"></ion-input>
+          </ion-item>
+
+          <!--<ion-item mode="ios">-->
+          <!--<ion-label> <ion-icon name="ios-unlock-outline" style="color: #FFFFFF;"></ion-icon></ion-label>-->
+          <!--<ion-input [(ngModel)]="pwd" type="password" placeholder="Password" name="password" required style="color: #FFFFFF"></ion-input>-->
+          <!--</ion-item>-->
+
+          <div style="text-align: center; margin-top: 20px">
+            <button ion-button class="login-button" (click)="login()">Submit</button>
+            <!--<button ion-button class="login-button" (click)="sendNotifiaction()">Notification</button>-->
+          </div>
+
+        </ion-list>
+      </ion-col>
+      <div *ngIf="resultText">
+        <ion-row>
+          <ion-col>
+            <ion-list inset>
+              <ion-item mode="ios">
+                <ion-label> <ion-icon name="ios-unlock-outline" style="color: #FFFFFF;"></ion-icon></ion-label>
+                <ion-input [(ngModel)]="tempPwd" type="password" placeholder="Temp Password" name="password" required style="color: #FFFFFF"></ion-input>
+              </ion-item>
+              <ion-item mode="ios">
+                <ion-label> <ion-icon name="ios-unlock-outline" style="color: #FFFFFF;"></ion-icon></ion-label>
+                <ion-input [(ngModel)]="newPwd" type="password" placeholder="New Password" name="password" required style="color: #FFFFFF"></ion-input>
+              </ion-item>
+              <div style="text-align: center; margin-top: 20px">
+                <button ion-button class="login-button" (click)="changePass()">Submit</button>
+                <!--<button ion-button class="login-button" (click)="sendNotifiaction()">Notification</button>-->
+              </div>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-row>
+  </div>
+</ion-content>
