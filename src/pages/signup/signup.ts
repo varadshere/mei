@@ -299,13 +299,13 @@ export class SignupPage {
         };
 
         let dataToSendEditClient = {
-          "username":this.slideTwoForm.value.email,
-          "email": this.slideTwoForm.value.email,
+          "username":this.slideOneForm.value.email,
+          "email": this.slideOneForm.value.email,
           "notification" : true,
           "travel": false,
           "distance": 10,
-          "first_name": this.slideTwoForm.value.fname,
-          "last_name": this.slideTwoForm.value.lname,
+          "first_name": this.slideOneForm.value.fname,
+          "last_name": this.slideOneForm.value.lname,
           "phone": "",
           "address": "",
           "bankName": "",
