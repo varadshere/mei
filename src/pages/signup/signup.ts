@@ -298,6 +298,22 @@ export class SignupPage {
           "type": "vendor"
         };
 
+        let dataToSendEditClient = {
+          "username":this.slideTwoForm.value.email,
+          "email": this.slideTwoForm.value.email,
+          "notification" : true,
+          "travel": false,
+          "distance": 10,
+          "first_name": this.slideTwoForm.value.fname,
+          "last_name": this.slideTwoForm.value.lname,
+          "phone": "",
+          "address": "",
+          "bankName": "",
+          "cardNumber": "",
+          "lat": this.place.geometry.location.lat(),
+          "lng": this.place.geometry.location.lng()
+        };
+
         let signupPromise  = this.utils.signUpService(dataToSend);
 
         let ref = this;
@@ -309,10 +325,17 @@ export class SignupPage {
             if(ref.instaApiResp && ref.instaApiResp.length > 0){
               ref.utils.createInstaImgs(ref.instaApiResp, ref.slideOneForm.value.email).then(d =>{
                 if(d){
-                  ref.utils.setUserEmail(ref.slideOneForm.value.email);
-                  ref.utils.getProfile();
-                  ref.utils.setPage(VendorHomePage);
-                  ref.navCtrl.push(VendorSidemenuPage);
+                  let saveSettings = ref.utils.editClientSettings(dataToSendEditClient);
+                  saveSettings.then(function (resp) {
+                    if(resp){
+                      console.log("Settings Saved !!");
+                      console.log(resp);
+                      ref.utils.setUserEmail(ref.slideOneForm.value.email);
+                      ref.utils.getProfile();
+                      ref.utils.setPage(VendorHomePage);
+                      ref.navCtrl.push(VendorSidemenuPage);
+                    }
+                  });
                 }
               });
             }else {
