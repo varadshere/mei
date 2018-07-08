@@ -339,10 +339,18 @@ export class SignupPage {
                 }
               });
             }else {
-              ref.utils.setUserEmail(ref.slideOneForm.value.email);
-              ref.utils.getProfile();
-              ref.utils.setPage(VendorHomePage);
-              ref.navCtrl.push(VendorSidemenuPage);
+
+              let saveSettings = ref.utils.editClientSettings(dataToSendEditClient);
+              saveSettings.then(function (resp) {
+                if(resp){
+                  console.log("Settings Saved !!");
+                  console.log(resp);
+                  ref.utils.setUserEmail(ref.slideOneForm.value.email);
+                  ref.utils.getProfile();
+                  ref.utils.setPage(VendorHomePage);
+                  ref.navCtrl.push(VendorSidemenuPage);
+                }
+              });
             }
 
           }else{
