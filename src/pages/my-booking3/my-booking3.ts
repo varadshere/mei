@@ -7,13 +7,6 @@ import {SidemenuPage} from "../sidemenu/sidemenu";
 import * as moment from "moment";
 import {ReviewModalPage} from "../review-modal/review-modal";
 
-/**
- * Generated class for the MyBooking3Page page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @Component({
   selector: 'page-my-booking3',
   templateUrl: 'my-booking3.html',
@@ -83,7 +76,17 @@ export class MyBooking3Page {
         user_id: this.utilsProvider.profile.user_id,
         text: 'Tell us how ' + this.profileData.first_name + ' ' + this.profileData.last_name + ' did with your booking on '+ moment(this.selectedDate, 'DD MMMM YYYY').format('MM/DD/YYYY')
       };
-      this.utilsProvider.sendNotification('review', notificationData, 'Submit your Review');
+      let confirmNotificationData = {
+        vendor_id: this.profileData.user_id,
+        client_id: this.utilsProvider.profile.user_id,
+        date: moment(this.selectedDate, 'DD MMMM YYYY').format('MM/DD/YYYY'),
+        text: 'Would you like to confirm ' + this.profileData.first_name + ' ' + this.profileData.last_name +
+              ' on '+ moment(this.selectedDate, 'DD MMMM YYYY').format('MM/DD/YYYY') + ' ' + slots
+      };
+      this.utilsProvider.sendNotification('review', notificationData, 'Submit your Review', this.utilsProvider.device_token);
+      if(this.profileData.device_token){
+        this.utilsProvider.sendNotification('confirm', confirmNotificationData, 'You Have a new booking', this.profileData.device_token);
+      }
       this.utilsProvider.presentAlert("Booking Confirmed", "Thank You!");
       this.utilsProvider.setPage(ResultsPage);
       this.utilsProvider.notifyOther('data');

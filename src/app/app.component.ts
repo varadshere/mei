@@ -7,6 +7,7 @@ import {LoginPage} from '../pages/login/login';
 import {utils} from "ng2-cordova-oauth/utility";
 import {UtilsProvider} from "../providers/utils/utils";
 import {ReviewModalPage} from "../pages/review-modal/review-modal";
+import {ConfirmBookingPage} from "../pages/confirm-booking/confirm-booking";
 declare var FCMPlugin;
 @Component({
   templateUrl: 'app.html'
@@ -43,8 +44,10 @@ export class MyApp {
               modal.present();
               break;
             }
-            case "B": {
+            case "confirm": {
               console.log("B");
+              const modal = modalCtrl.create('ConfirmBookingPage', { data: data});
+              modal.present();
               break;
             }
             case "C": {

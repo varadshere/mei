@@ -664,11 +664,11 @@ export class UtilsProvider {
     });
   }
 
-  sendNotification(action, data, msg){
+  sendNotification(action, data, msg, token){
     let dataToSend = {
       "message": msg,
       "sendername": "mei",
-      "device_token": this.device_token,
+      "device_token": token,
       "action": action,
       "data": JSON.stringify(data)
     };
@@ -743,6 +743,25 @@ export class UtilsProvider {
         resolve(this.sanitizeData(data));
       }, error => {
         console.log("forgot pass ERROR");
+        console.log(error);
+        loading.dismissAll();
+        resolve(false);
+      });
+    });
+  }
+  confirmBooking(dataToSend){
+    let loading = this.getloadingAlert();
+    loading.present();
+    return new Promise((resolve, reject) => {
+      let url = this.serverUrl + 'conformBooking';
+      let body = JSON.stringify(dataToSend);
+      this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(3000).subscribe(data => {
+        console.log("confirmBooking resp");
+        console.log(data);
+        loading.dismissAll();
+        resolve(this.sanitizeData(data));
+      }, error => {
+        console.log("confirmBooking ERROR");
         console.log(error);
         loading.dismissAll();
         resolve(false);
