@@ -3,7 +3,7 @@
   <ion-content class="sidemenu">
     <div class="profile">
       <ion-avatar item-start class="avatar">
-        <img class="profile-img" menuClose src="{{utilsProvider.profile.profile_pic ? (utilsProvider.profile.profile_pic.includes('http') ? utilsProvider.profile.profile_pic : utilsProvider.photoUrl + utilsProvider.profile.profile_pic) : 'assets/imgs/user.png'}}" (click)="openPage('PROFILE', 10)">
+        <img class="profile-img" menuClose src="{{getImg()}}" (click)="openPage('PROFILE', 10)">
       </ion-avatar>
       <div class="profile-text">{{utilsProvider.profile.first_name }} {{utilsProvider.profile.last_name }}</div>
     </div>

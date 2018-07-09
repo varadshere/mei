@@ -129,4 +129,17 @@ export class ClientSettingsPage {
     this.placeSubscription.unsubscribe();
   }
 
+  getImg(){
+    if(this.utilsProvider.profile.profile_pic){
+      if(this.utilsProvider.profile.profile_pic.includes('http') || this.utilsProvider.profile.profile_pic.includes('file')){
+        return this.utilsProvider.profile.profile_pic
+      }else {
+        return this.utilsProvider.photoUrl + this.utilsProvider.profile.profile_pic;
+      }
+    }else {
+      return 'assets/imgs/user.png'
+    }
+    // this.utilsProvider.profile.profile_pic ? ((this.utilsProvider.profile.profile_pic.includes('http') || this.utilsProvider.profile.profile_pic.includes('ftp')) ? this.utilsProvider.profile.profile_pic : this.utilsProvider.photoUrl + this.utilsProvider.profile.profile_pic) : 'assets/imgs/user.png'
+  }
+
 }
