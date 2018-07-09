@@ -105,9 +105,29 @@
               </ion-item>
               <p class="form-error-text" *ngIf="!place && (submitAttempt)">Please select a valid address.</p>
               <ion-item mode="ios">
-                <ion-input type="text" formControlName="lic" [class.invalid]="!slideOneForm.controls.lic.valid && (slideOneForm.controls.lic.dirty || submitAttempt)" placeholder="Licenses" name="licesses" required></ion-input>
+                <ion-select formControlName="lic" placeholder="Licenses">
+                  <ion-option value="certificate-iii">Certificate III</ion-option>
+                  <ion-option value="certificate-iv">Certificate IV</ion-option>
+                  <ion-option value="diploma">Diploma</ion-option>
+                  <ion-option value="advanced-diploma">Advanced Diploma</ion-option>
+                  <ion-option value="bachelor-degree">Bachelor Degree</ion-option>
+                  <ion-option value="post-graduate">Post Graduate</ion-option>
+                  <ion-option value="graduate-diploma">Graduate Diploma</ion-option>
+                  <ion-option value="graduate-certification">Graduate Certificate</ion-option>
+                  <ion-option value="other">Other</ion-option>
+                </ion-select>
+                <!--<ion-input type="text" formControlName="lic" [class.invalid]="!slideOneForm.controls.lic.valid && (slideOneForm.controls.lic.dirty || submitAttempt)" placeholder="Licenses" name="licesses" required></ion-input>-->
               </ion-item>
               <p class="form-error-text" *ngIf="!slideOneForm.controls.lic.valid && (slideOneForm.controls.lic.dirty || submitAttempt)">Licenses can not be empty.</p>
+              <ion-item mode="ios">
+                <ion-input type="text"  formControlName="schoolInfo" [class.invalid]="!slideOneForm.controls.schoolInfo.valid && (slideOneForm.controls.schoolInfo.dirty || submitAttempt)" placeholder="Name of Beauty school/Specialisation" name="schoolInfo"></ion-input>
+              </ion-item>
+              <ion-item mode="ios">
+                <ion-input type="text"  formControlName="bookingsNum" [class.invalid]="!slideOneForm.controls.bookingsNum.valid && (slideOneForm.controls.bookingsNum.dirty || submitAttempt)" placeholder="How many bookings are you servicing per week ?" name="bookingsNum"></ion-input>
+              </ion-item>
+              <ion-item mode="ios">
+                <ion-input type="text"  formControlName="instaHandle" [class.invalid]="!slideOneForm.controls.instaHandle.valid && (slideOneForm.controls.instaHandle.dirty || submitAttempt)" placeholder="Instagram Handle" name="instaHandle"></ion-input>
+              </ion-item>
             </form>
             <!--<div class="q-text">When you are usually available? Select all that apply</div>-->
             <div>

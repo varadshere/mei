@@ -96,4 +96,22 @@ page-signup {
   .service-selected{
     color: #F9748F;
   }
+
+  .select {
+    font-size: 12px;
+    padding: 0px;
+    font-weight: bold;
+    &.select-md {
+      padding: 13px 8px;
+    }
+
+    >.select-placeholder {
+      color: #696f7b;
+    }
+  }
+
+
+  ion-select {
+    overflow: visible;
+  }
 }

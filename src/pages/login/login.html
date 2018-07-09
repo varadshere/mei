@@ -1,7 +1,7 @@
 
 <ion-header>
 </ion-header>
-<ion-content class="login-img">
+<ion-content [ngClass]="{'client-bg': login === 'CLIENT', 'freelancer-bg': login === 'FREELANCER'}">
   <div padding style="padding-top: 70%">
     <ion-segment [(ngModel)]="login" mode="md">
       <ion-segment-button value="CLIENT">
@@ -20,16 +20,17 @@
           <ion-list inset>
 
             <ion-item mode="ios">
-              <ion-label> <ion-icon name="ios-person-outline" style="color: #FFFFFF;"></ion-icon></ion-label>
-              <ion-input [(ngModel)]="client.email" type="text" placeholder="Email" name="email" required style="color: #FFFFFF"></ion-input>
+              <ion-label> <ion-icon name="ios-person-outline" [ngStyle]="{'color': login === 'CLIENT' ? '#FFFFFF' : '#696F7B'}" ></ion-icon></ion-label>
+              <ion-input [(ngModel)]="client.email" type="text" placeholder="Email" name="email" required [ngStyle]="{'color': login === 'CLIENT' ? '#FFFFFF' : '#696F7B'}"></ion-input>
             </ion-item>
 
             <ion-item mode="ios">
               <ion-label> <ion-icon name="ios-unlock-outline" style="color: #FFFFFF;"></ion-icon></ion-label>
-              <ion-input [(ngModel)]="client.pwd" type="password" placeholder="Password" name="password" required style="color: #FFFFFF"></ion-input>
-              <button clear item-right class="forgot-pass" (click)="forgotPass('client')">Forgot?</button>
+              <ion-input [(ngModel)]="client.pwd" type="password" placeholder="Password" name="password" required [ngStyle]="{'color': login === 'CLIENT' ? '#FFFFFF' : '#696F7B'}"></ion-input>
+              <!--<button clear item-right class="forgot-pass" (click)="forgotPass('client')">Forgot?</button>-->
             </ion-item>
-            <button clear item-right class="forgot-pass" (click)="forgotPass('client')">Forgot?</button>
+            <br>
+            <button clear item-right [ngStyle]="{'color': login === 'CLIENT' ? '#FFFFFF' : '#696F7B'}" class="forgot-pass" (click)="forgotPass('client')">Forgot?</button>
             <div style="text-align: center; margin-top: 20px">
               <button ion-button class="login-button" (click)="clientLogin()">Login</button>
               <!--<button ion-button class="login-button" (click)="sendNotifiaction()">Notification</button>-->
@@ -47,15 +48,17 @@
           <ion-list inset>
 
             <ion-item mode="ios">
-              <ion-label> <ion-icon name="ios-person-outline" style="color: #FFFFFF;"></ion-icon></ion-label>
-              <ion-input [(ngModel)]="vendor.email"  type="text" placeholder="Email" name="email" required style="color: #FFFFFF"></ion-input>
+              <ion-label> <ion-icon name="ios-person-outline" [ngStyle]="{'color': login === 'CLIENT' ? '#FFFFFF' : '#696F7B'}"></ion-icon></ion-label>
+              <ion-input [(ngModel)]="vendor.email"  type="text" placeholder="Email" name="email" required [ngStyle]="{'color': login === 'CLIENT' ? '#FFFFFF' : '#696F7B'}"></ion-input>
             </ion-item>
 
             <ion-item mode="ios">
-              <ion-label> <ion-icon name="ios-unlock-outline" style="color: #FFFFFF;"></ion-icon></ion-label>
-              <ion-input [(ngModel)]="vendor.pwd"  type="password" placeholder="Password" name="password" required style="color: #FFFFFF"></ion-input>
-              <button clear item-right class="forgot-pass" (click)="forgotPass('vendor')">Forgot?</button>
+              <ion-label> <ion-icon name="ios-unlock-outline" [ngStyle]="{'color': login === 'CLIENT' ? '#FFFFFF' : '#696F7B'}"></ion-icon></ion-label>
+              <ion-input [(ngModel)]="vendor.pwd"  type="password" placeholder="Password" name="password" required [ngStyle]="{'color': login === 'CLIENT' ? '#FFFFFF' : '#696F7B'}"></ion-input>
+              <!--<button clear item-right class="forgot-pass" (click)="forgotPass('vendor')">Forgot?</button>-->
             </ion-item>
+            <br>
+            <button clear item-right [ngStyle]="{'color': login === 'CLIENT' ? '#FFFFFF' : '#696F7B'}" class="forgot-pass" (click)="forgotPass('client')">Forgot?</button>
             <div style="text-align: center; margin-top: 20px">
               <button ion-button class="login-button" (click)="vendorLogin()">Login</button>
             </div>
@@ -68,7 +71,7 @@
   </div>
 
   <div class="signup-text" (click)="navigateToSignup()">
-    <span>Don’t have an account?</span>  <a style="color: #FFFFFF; opacity: 1; font-weight: bold;">Sign up here</a>
+    <span [ngStyle]="{'color': login === 'CLIENT' ? '#FFFFFF' : '#696F7B'}">Don’t have an account?</span>  <a [ngStyle]="{'color': login === 'CLIENT' ? '#FFFFFF' : '#696F7B'}" style="opacity: 1; font-weight: bold;">Sign up here</a>
   </div>
 
 </ion-content>

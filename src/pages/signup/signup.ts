@@ -104,6 +104,11 @@ export class SignupPage {
         // addr: ['', Validators.required],
         lic: ['', Validators.required],
         cnfPwd: ['', Validators.required]
+        , licenses: ['']
+        , bookingsNum: ['']
+        , instaHandle: ['']
+        , schoolInfo: ['']
+
       },{validator: this.matchingPasswords('pwd', 'cnfPwd')});
 
       this.slideTwoForm = formBuilder.group({
@@ -111,11 +116,13 @@ export class SignupPage {
         fname: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
         lname: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
         pwd: ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(12), Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,12}$')])],
-        cnfPwd: ['', Validators.required],
+        cnfPwd: ['', Validators.required]
         // addr: ['', Validators.required]
       },{validator: this.matchingPasswords('pwd', 'cnfPwd')});
 
       this.instaApiResp = [];
+
+
     }
 
     getPicturesFromGal(){
