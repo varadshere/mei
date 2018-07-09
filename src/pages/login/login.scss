@@ -71,20 +71,20 @@ page-login {
   }
 
   .freelancer-bg {
-    background: url(../assets/imgs/freelancer-bg.svg);
+    background: url(../assets/imgs/client-bg.svg.png);
     background-repeat: no-repeat;
-    //background-size: cover;
+    background-size: cover;
 
     .text-input::-moz-placeholder {
-      color: #696F7B;
+      //color: #696F7B;
     }
 
     .text-input:-ms-input-placeholder {
-      color: #696F7B;
+      //color: #696F7B;
     }
 
     .text-input::-webkit-input-placeholder {
-      color: #696F7B;
+      //color: #696F7B;
     }
   }
   .forgot-pass{
