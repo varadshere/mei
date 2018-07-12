@@ -37,6 +37,7 @@ export class ClientBookingsPage {
     bookings.then((result:any)=>{
       if(result){
         ref.bookingsData = result
+        console.log('bookings', result);
       }
     });
   }

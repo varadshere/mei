@@ -35,13 +35,18 @@
               <ion-row class="time-start">{{l.startTime}}</ion-row>
               <ion-row class="time-end">{{l.date}}</ion-row>
             </ion-col>
-            <ion-col col-9>
+            <ion-col col-7>
               <div>
                 <div class="service-title">{{l.name}}</div>
                 <div class="service-desc">
                   {{l.address}}
                 </div>
               </div>
+            </ion-col>
+            <ion-col col-2 *ngIf="l.confirm">
+            <span style="font-size: 10px;color: red;">
+              pending
+            </span>
             </ion-col>
           </ion-row>
         </div>
@@ -54,13 +59,18 @@
             <ion-row class="time-start">{{l.startTime}}</ion-row>
             <ion-row class="time-end">{{l.date}}</ion-row>
           </ion-col>
-          <ion-col col-9>
+          <ion-col col-7>
             <div>
               <div class="service-title">{{l.name}}</div>
               <div class="service-desc">
                 {{l.address}}
               </div>
             </div>
+          </ion-col>
+          <ion-col col-2 *ngIf="l.confirm">
+            <span style="font-size: 10px;color: red;">
+              pending
+            </span>
           </ion-col>
         </ion-row>
       </div>
