@@ -80,7 +80,7 @@ export class MyBooking3Page {
         vendor_id: this.profileData.user_id,
         client_id: this.utilsProvider.profile.user_id,
         date: moment(this.selectedDate, 'DD MMMM YYYY').format('MM/DD/YYYY'),
-        text: 'Would you like to confirm ' + this.profileData.first_name + ' ' + this.profileData.last_name +
+        text: 'Would you like to confirm ' + this.utilsProvider.profile.first_name + ' ' + this.utilsProvider.profile.last_name +
               ' on '+ moment(this.selectedDate, 'DD MMMM YYYY').format('MM/DD/YYYY') + ' ' + slots
       };
       this.utilsProvider.sendNotification('review', notificationData, 'Submit your Review', this.utilsProvider.device_token);
