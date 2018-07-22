@@ -9,6 +9,7 @@ import {SelectionHomePage} from "../selection-home/selection-home";
 import {VendorSidemenuPage} from "../vendor-sidemenu/vendor-sidemenu";
 import {VendorHomePage} from "../vendor-home/vendor-home";
 import {ForgotPassPage} from "../forgot-pass/forgot-pass";
+import {UserData} from "../../providers/models";
 
 @Component({
   selector: 'page-login',
@@ -52,6 +53,13 @@ export class LoginPage {
       if(result){
         ref.utilsProvider.setUserEmail(ref.client.email);
         ref.utilsProvider.getProfile().then(function (d) {
+          let userData: UserData = {
+            email: ref.client.email,
+            profile: d,
+            type: 'client',
+            device_token: ref.utilsProvider.device_token
+          };
+          ref.utilsProvider.setUserData(userData);
           ref.utilsProvider.setPage(SelectionHomePage);
           ref.navCtrl.push(SidemenuPage);
         });
@@ -70,9 +78,17 @@ export class LoginPage {
       if(result){
         ref.utilsProvider.setUserEmail(ref.vendor.email);
         ref.utilsProvider.getProfile().then(function (d) {
+          let userData: UserData = {
+            email: ref.vendor.email,
+            profile: d,
+            type: 'vendor',
+            device_token: ref.utilsProvider.device_token
+          };
+          ref.utilsProvider.setUserData(userData);
           ref.utilsProvider.setPage(VendorHomePage);
           ref.navCtrl.push(VendorSidemenuPage);
-        });      }else{
+        });
+      }else{
         console.log("Wrong Creds");
       }
     });

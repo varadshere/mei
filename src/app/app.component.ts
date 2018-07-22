@@ -4,10 +4,15 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import {LoginPage} from '../pages/login/login';
-import {utils} from "ng2-cordova-oauth/utility";
 import {UtilsProvider} from "../providers/utils/utils";
 import {ReviewModalPage} from "../pages/review-modal/review-modal";
 import {ConfirmBookingPage} from "../pages/confirm-booking/confirm-booking";
+import { Storage } from '@ionic/storage';
+import {VendorHomePage} from "../pages/vendor-home/vendor-home";
+import {SelectionHomePage} from "../pages/selection-home/selection-home";
+import {SidemenuPage} from "../pages/sidemenu/sidemenu";
+import {VendorSidemenuPage} from "../pages/vendor-sidemenu/vendor-sidemenu";
+import {UserData} from "../providers/models";
 declare var FCMPlugin;
 @Component({
   templateUrl: 'app.html'
@@ -20,10 +25,29 @@ export class MyApp {
               statusBar: StatusBar,
               splashScreen: SplashScreen,
               utils: UtilsProvider,
-              modalCtrl: ModalController) {
+              modalCtrl: ModalController,
+              private storage: Storage) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
+      storage.get('userData').then((val: UserData) => {
+        console.log('User Data', val);
+        if(val){
+          if(val.type && val.device_token && val.email && val.profile){
+            if(val.type === 'vendor'){
+              utils.setUtilsData(val);
+              utils.setPage(VendorHomePage);
+              this.rootPage = VendorSidemenuPage;
+            }else if(val.type === 'client'){
+              utils.setUtilsData(val);
+              utils.setPage(SelectionHomePage);
+              this.rootPage = SidemenuPage;
+            }
+          }else {
+            this.rootPage = LoginPage;
+          }
+        }
+      });
       statusBar.styleDefault();
       splashScreen.hide();
       if (typeof FCMPlugin != 'undefined'){

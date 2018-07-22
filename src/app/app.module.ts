@@ -41,6 +41,8 @@ import {VendorProfilePage} from "../pages/vendor-profile/vendor-profile";
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import {ReviewModalPage} from "../pages/review-modal/review-modal";
+import { IonicStorageModule } from '@ionic/storage';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -78,7 +80,8 @@ import {ReviewModalPage} from "../pages/review-modal/review-modal";
     BrowserModule,
     HttpModule,
     Ionic2RatingModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [

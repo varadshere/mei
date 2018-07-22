@@ -195,8 +195,8 @@
                 </ion-col>
               </ion-row>
             </ion-list>
-            <div style="text-align: center; margin-top: 20px">
-              <button ion-button icon-start class="insta-button" (click)="getPicturesFromGal()">
+            <div style="text-align: center; margin-top: 20px" *ngIf="!hideInsta">
+              <button ion-button icon-start class="insta-button" (click)="instainit()">
                 <ion-icon name="logo-instagram"></ion-icon>
                 Connect to Instagram
               </button>

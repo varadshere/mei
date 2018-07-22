@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Subject} from "rxjs";
 import {Http, Headers, Response} from '@angular/http';
-import {AlertController, LoadingController} from 'ionic-angular';
+import {AlertController, LoadingController, Platform} from 'ionic-angular';
 import {ImagePicker} from "@ionic-native/image-picker";
 import {Base64} from "@ionic-native/base64";
 import {Camera, CameraOptions} from "@ionic-native/camera";
@@ -10,6 +10,8 @@ import {Crop} from "@ionic-native/crop";
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import {utils} from "ng2-cordova-oauth/utility";
+import {UserData} from "../models";
+import {Storage} from "@ionic/storage";
 declare var FCMPlugin;
 
 @Injectable()
@@ -45,7 +47,9 @@ export class UtilsProvider {
               private camera: Camera,
               private crop: Crop,
               private transfer: FileTransfer,
-              private file: File) {
+              private file: File,
+              private storage: Storage,
+              private platform: Platform) {
     console.log('Hello UtilsProvider Provider');
     this.headers.append('Content-Type','application/json');
     // this.headers.append('Access-Control-Allow-Origin' , '*');
@@ -339,7 +343,7 @@ export class UtilsProvider {
 
   loginService(email, pwd, type){
    // let ref = this;
-    this.type = type;
+   this.type = type;
    console.log(email);
    console.log(pwd);
    let loading = this.getloadingAlert();
@@ -766,6 +770,28 @@ export class UtilsProvider {
         loading.dismissAll();
         resolve(false);
       });
+    });
+  }
+
+  setUtilsData(val: UserData){
+    this.setUserEmail(val.email);
+    this.profile = val.profile;
+    this.type = val.type;
+    this.device_token = val.device_token;
+    this.getProfile();
+  }
+  setUserData(val: UserData){
+    this.setUtilsData(val);
+    this.storage.set('userData', val);
+  }
+
+  logOut(){
+    let loading = this.getloadingAlert();
+    loading.present();
+    this.storage.clear().then(() => {
+      console.log('all keys cleared');
+      loading.dismissAll();
+      this.platform.exitApp();
     });
   }
 }

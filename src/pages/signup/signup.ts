@@ -13,6 +13,7 @@ import { OauthCordova } from 'ng2-cordova-oauth/platform/cordova';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import {Subject} from "rxjs/Subject";
+import {UserData} from "../../providers/models";
 declare var google;
 
 @Component({
@@ -73,7 +74,7 @@ export class SignupPage {
     private oauth: OauthCordova = new OauthCordova();
     private instaApiResp;
     private instagramProvider: Instagram = new Instagram({
-      clientId: "7bec163120c34423a9c2f4332d97e3e4",      // Register you client id from https://www.instagram.com/developer/
+      clientId: "0dfd7794e4b64da79d728825bc76a572",      // Register you client id from https://www.instagram.com/developer/
       redirectUri: 'http://localhost',  // Let is be localhost for Mobile Apps
       responseType: 'token',   // Use token only
       appScope: ['basic','public_content']
@@ -121,8 +122,6 @@ export class SignupPage {
       },{validator: this.matchingPasswords('pwd', 'cnfPwd')});
 
       this.instaApiResp = [];
-
-
     }
 
     getPicturesFromGal(){
@@ -338,9 +337,17 @@ export class SignupPage {
                       console.log("Settings Saved !!");
                       console.log(resp);
                       ref.utils.setUserEmail(ref.slideOneForm.value.email);
-                      ref.utils.getProfile();
-                      ref.utils.setPage(VendorHomePage);
-                      ref.navCtrl.push(VendorSidemenuPage);
+                      ref.utils.getProfile().then(d =>{
+                        let userData: UserData = {
+                          email: ref.slideOneForm.value.email,
+                          profile: d,
+                          type: 'vendor',
+                          device_token: ref.utils.device_token
+                        };
+                        ref.utils.setUserData(userData);
+                        ref.utils.setPage(VendorHomePage);
+                        ref.navCtrl.push(VendorSidemenuPage);
+                      });
                     }
                   });
                 }
@@ -353,9 +360,17 @@ export class SignupPage {
                   console.log("Settings Saved !!");
                   console.log(resp);
                   ref.utils.setUserEmail(ref.slideOneForm.value.email);
-                  ref.utils.getProfile();
-                  ref.utils.setPage(VendorHomePage);
-                  ref.navCtrl.push(VendorSidemenuPage);
+                  ref.utils.getProfile().then(d=>{
+                    let userData: UserData = {
+                      email: ref.slideOneForm.value.email,
+                      profile: d,
+                      type: 'vendor',
+                      device_token: ref.utils.device_token
+                    };
+                    ref.utils.setUserData(userData);
+                    ref.utils.setPage(VendorHomePage);
+                    ref.navCtrl.push(VendorSidemenuPage);
+                  });
                 }
               });
             }
@@ -456,10 +471,18 @@ export class SignupPage {
               console.log("Settings Saved !!");
               console.log(resp);
               ref.utils.setUserEmail(ref.slideTwoForm.value.email);
-              ref.utils.getProfile();
-              ref.utils.setPage(SelectionHomePage);
-              // this.navCtrl.push(SelectionHomePage);
-              ref.navCtrl.push(SidemenuPage);
+              ref.utils.getProfile().then(d=>{
+                let userData: UserData = {
+                  email: ref.slideTwoForm.value.email,
+                  profile: d,
+                  type: 'client',
+                  device_token: ref.utils.device_token
+                };
+                ref.utils.setUserData(userData);
+                ref.utils.setPage(SelectionHomePage);
+                // this.navCtrl.push(SelectionHomePage);
+                ref.navCtrl.push(SidemenuPage);
+              });
             }
           });
         }else{
