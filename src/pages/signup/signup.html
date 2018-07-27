@@ -93,17 +93,13 @@
               </ion-item>
               <p class="form-error-text" *ngIf="!slideOneForm.controls.lname.valid && (slideOneForm.controls.lname.dirty || submitAttempt)">Last Name can not have numbers or special characters.</p>
               <ion-item mode="ios">
-                <ion-input type="text" formControlName="exp" [class.invalid]="!slideOneForm.controls.exp.valid && (slideOneForm.controls.exp.dirty || submitAttempt)"  placeholder="Years Experience" name="ye" required></ion-input>
+                <ion-input id="placesVendor" (focus)="placeVendorInputFocus()" type="text" value="" placeholder="Address"></ion-input>
               </ion-item>
-              <p class="form-error-text" *ngIf="!slideOneForm.controls.exp.valid && (slideOneForm.controls.exp.dirty || submitAttempt)">Experice only accepts numbers.</p>
+              <p class="form-error-text" *ngIf="!place && (submitAttempt)">Please select a valid address.</p>
               <!--<ion-item mode="ios">-->
                 <!--<ion-input type="text" formControlName="addr" [class.invalid]="!slideOneForm.controls.addr.valid && (slideOneForm.controls.addr.dirty || submitAttempt)" placeholder="Address" name="addr" required></ion-input>-->
               <!--</ion-item>-->
               <!--<p class="form-error-text" *ngIf="!slideOneForm.controls.addr.valid && (slideOneForm.controls.addr.dirty || submitAttempt)">Please enter a valid address.</p>-->
-              <ion-item mode="ios">
-                <ion-input id="placesVendor" (focus)="placeVendorInputFocus()" type="text" value="" placeholder="Address"></ion-input>
-              </ion-item>
-              <p class="form-error-text" *ngIf="!place && (submitAttempt)">Please select a valid address.</p>
               <ion-item mode="ios">
                 <ion-select formControlName="lic" placeholder="Licenses">
                   <ion-option value="certificate-iii">Certificate III</ion-option>
@@ -119,6 +115,10 @@
                 <!--<ion-input type="text" formControlName="lic" [class.invalid]="!slideOneForm.controls.lic.valid && (slideOneForm.controls.lic.dirty || submitAttempt)" placeholder="Licenses" name="licesses" required></ion-input>-->
               </ion-item>
               <p class="form-error-text" *ngIf="!slideOneForm.controls.lic.valid && (slideOneForm.controls.lic.dirty || submitAttempt)">Licenses can not be empty.</p>
+              <ion-item mode="ios">
+                <ion-input type="text" formControlName="exp" [class.invalid]="!slideOneForm.controls.exp.valid && (slideOneForm.controls.exp.dirty || submitAttempt)"  placeholder="Years Experience" name="ye" required></ion-input>
+              </ion-item>
+              <p class="form-error-text" *ngIf="!slideOneForm.controls.exp.valid && (slideOneForm.controls.exp.dirty || submitAttempt)">Experience only accepts numbers.</p>
               <ion-item mode="ios">
                 <ion-input type="text"  formControlName="schoolInfo" [class.invalid]="!slideOneForm.controls.schoolInfo.valid && (slideOneForm.controls.schoolInfo.dirty || submitAttempt)" placeholder="Name of Beauty school/Specialisation" name="schoolInfo"></ion-input>
               </ion-item>

@@ -46,6 +46,7 @@ export class ForgotPassPage {
         }else {
           this.resultText = "Something went wrong!";
         }
+        this.utils.presentAlert("Notification", this.resultText);
       });
 
     }

@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {UtilsProvider} from "../../providers/utils/utils";
 import {Subscription} from "rxjs/Subscription";
 import {DomSanitizer} from '@angular/platform-browser';
+import {TermsAndConditionsPage} from "../terms-and-conditions/terms-and-conditions";
 declare var google;
 
 /**
@@ -21,6 +22,7 @@ export class ClientSettingsPage {
   editMode: boolean = false;
   place:any;
   placeSubscription: Subscription;
+  termsPage: any = TermsAndConditionsPage;
   settings: any = {
     "email": this.utilsProvider.getUserEmail(),
     "username": this.utilsProvider.getUserEmail(),

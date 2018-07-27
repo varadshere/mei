@@ -42,6 +42,7 @@ import { FileTransfer } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import {ReviewModalPage} from "../pages/review-modal/review-modal";
 import { IonicStorageModule } from '@ionic/storage';
+import {TermsAndConditionsPage} from "../pages/terms-and-conditions/terms-and-conditions";
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { IonicStorageModule } from '@ionic/storage';
     ClientProfilePage,
     ProfilePicModalPage,
     VendorProfilePage,
-    ReviewModalPage
+    ReviewModalPage,
+    TermsAndConditionsPage
 
   ],
   imports: [
@@ -112,7 +114,8 @@ import { IonicStorageModule } from '@ionic/storage';
     ClientProfilePage,
     ProfilePicModalPage,
     VendorProfilePage,
-    ReviewModalPage
+    ReviewModalPage,
+    TermsAndConditionsPage
   ],
   providers: [
     StatusBar,

@@ -4,6 +4,7 @@ import {UtilsProvider} from "../../providers/utils/utils";
 import {Observable} from "rxjs/Observable";
 import {Subscription} from "rxjs/Subscription";
 import {DomSanitizer} from '@angular/platform-browser';
+import {TermsAndConditionsPage} from "../terms-and-conditions/terms-and-conditions";
 declare var google;
 
 @Component({
@@ -15,6 +16,7 @@ export class VendorSettingsPage {
   place:any;
   placeSubscription: Subscription;
   editMode: boolean = false;
+  termsPage: any = TermsAndConditionsPage;
   settings: any = {
     "email": this.utilsProvider.getUserEmail(),
     "username": this.utilsProvider.getUserEmail(),
