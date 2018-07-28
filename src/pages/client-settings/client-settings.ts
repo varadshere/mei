@@ -34,7 +34,9 @@ export class ClientSettingsPage {
     "last_name": "",
     "notification": false,
     "phone": "",
-    "travel": false
+    "travel": false,
+    "lat":"",
+    "lng":""
   };
 
 
@@ -79,13 +81,18 @@ export class ClientSettingsPage {
     // mapclient();
   }
   saveProfile(){
-    if(!this.place){
-      return;
-    }
+    // if(!this.place){
+    //   return;
+    // }
     let ref = this;
-    this.settings.address = this.place.formatted_address;
-    this.settings.lat = this.place.geometry.location.lat();
-    this.settings.lng = this.place.geometry.location.lng();
+    this.settings.lat = this.utilsProvider.profile.lat;
+    this.settings.lng = this.utilsProvider.profile.lng;
+    //For saving address
+    if (this.place){
+      this.settings.address = this.place.formatted_address;
+      this.settings.lat = this.place.geometry.location.lat();
+      this.settings.lng = this.place.geometry.location.lng();
+    }
     this.utilsProvider.editClientSettings(this.settings).then(function (data) {
       console.log(data);
       ref.editMode = false;

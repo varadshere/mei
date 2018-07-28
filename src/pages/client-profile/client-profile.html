@@ -45,15 +45,31 @@
 
   <div [ngSwitch]="profile">
     <ion-list *ngSwitchCase="'ABOUT'">
-      <div class="bio-head">Bio</div>
-      <div class="bio-text">
-        {{utils.profile.bio}}
-        <!--Hi, I'm Cerelia, I am a Studnt at Sydney University staying at home in Adelaide-->
+      <div class="info-text pink-text" (click)="editToggle()" text-right padding-right>
+        <span>Edit</span>
       </div>
-      <hr>
-      <div class="bio-head">Favorite Products</div>
-      <div class="bio-text">
-        {{utils.profile.fav}}
+      <div *ngIf="!editMode">
+        <div class="bio-head">Bio</div>
+        <div class="bio-text">
+          {{utils.profile.bio}}
+          <!--Hi, I'm Cerelia, I am a Studnt at Sydney University staying at home in Adelaide-->
+        </div>
+        <hr>
+        <div class="bio-head">Favorite Products</div>
+        <div class="bio-text">
+          {{utils.profile.fav}}
+        </div>
+      </div>
+      <div *ngIf="editMode">
+        <ion-item mode="ios">
+          <ion-input type="text" class="bio-text" placeholder="Bio" [(ngModel)]="utils.profile.bio"></ion-input>
+        </ion-item>
+        <ion-item mode="ios">
+          <ion-input type="text" class="bio-text" placeholder="Favorite Products ( , separated )" [(ngModel)]="utils.profile.fav"></ion-input>
+        </ion-item>
+        <div style="text-align: center">
+          <button ion-button class="save-button" (click)="saveProfile()">Save</button>
+        </div>
       </div>
     </ion-list>
     <ion-list *ngSwitchCase="'REVIEWS'">
