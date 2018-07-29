@@ -114,7 +114,6 @@ export class ClientSettingsPage {
         ref.settings = data;
         ref.settings.bio = ref.utilsProvider.profile.bio;
         ref.settings.fav = ref.utilsProvider.profile.fav;
-        console.log(ref.settings);
       }
     });
   }
