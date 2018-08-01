@@ -5,6 +5,7 @@ import {Observable} from "rxjs/Observable";
 import {Subscription} from "rxjs/Subscription";
 import {DomSanitizer} from '@angular/platform-browser';
 import {TermsAndConditionsPage} from "../terms-and-conditions/terms-and-conditions";
+import {VendorBankDetailsPage} from "../vendor-bank-details/vendor-bank-details";
 declare var google;
 
 @Component({
@@ -17,6 +18,7 @@ export class VendorSettingsPage {
   placeSubscription: Subscription;
   editMode: boolean = false;
   termsPage: any = TermsAndConditionsPage;
+  bankDetailsPage: any = VendorBankDetailsPage;
   settings: any = {
     "email": this.utilsProvider.getUserEmail(),
     "username": this.utilsProvider.getUserEmail(),
@@ -134,5 +136,9 @@ export class VendorSettingsPage {
       return 'assets/imgs/user.png'
     }
     // this.utilsProvider.profile.profile_pic ? ((this.utilsProvider.profile.profile_pic.includes('http') || this.utilsProvider.profile.profile_pic.includes('ftp')) ? this.utilsProvider.profile.profile_pic : this.utilsProvider.photoUrl + this.utilsProvider.profile.profile_pic) : 'assets/imgs/user.png'
+  }
+
+  ionViewWillEnter(){
+    this.settings.bankDetails = this.navParams.get('bankDetails') || {};
   }
 }

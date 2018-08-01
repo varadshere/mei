@@ -75,7 +75,7 @@
       </div>
     </div>
 
-    <button ion-item mode="ios">
+    <button ion-item [navPush]="bankDetailsPage" mode="ios">
       Bank Info:
       <div>
         {{settings.bankName}} - {{settings.cardNumber}}
