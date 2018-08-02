@@ -43,7 +43,6 @@ import { File } from '@ionic-native/file';
 import {ReviewModalPage} from "../pages/review-modal/review-modal";
 import { IonicStorageModule } from '@ionic/storage';
 import {TermsAndConditionsPage} from "../pages/terms-and-conditions/terms-and-conditions";
-// import {ProfileEditModalPage} from "../pages/profile-edit-modal/profile-edit-modal";
 import {VendorBankDetailsPage} from "../pages/vendor-bank-details/vendor-bank-details";
 
 @NgModule({
@@ -77,7 +76,6 @@ import {VendorBankDetailsPage} from "../pages/vendor-bank-details/vendor-bank-de
     VendorProfilePage,
     ReviewModalPage,
     TermsAndConditionsPage,
-    // ProfileEditModalPage,
     VendorBankDetailsPage
   ],
   imports: [
@@ -119,7 +117,6 @@ import {VendorBankDetailsPage} from "../pages/vendor-bank-details/vendor-bank-de
     VendorProfilePage,
     ReviewModalPage,
     TermsAndConditionsPage,
-    // ProfileEditModalPage,
     VendorBankDetailsPage
   ],
   providers: [

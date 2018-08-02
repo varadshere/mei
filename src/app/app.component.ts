@@ -74,6 +74,11 @@ export class MyApp {
               modal.present();
               break;
             }
+            case "info":{
+              console.log("Booking Info");
+              utils.presentAlert(data.packDat.text, "Thank You!");
+              break;
+            }
             case "C": {
               console.log("C");
               break;

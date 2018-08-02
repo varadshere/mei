@@ -79,15 +79,19 @@ export class MyBooking3Page {
       let confirmNotificationData = {
         vendor_id: this.profileData.user_id,
         client_id: this.utilsProvider.profile.user_id,
+        client_username: this.utilsProvider.profile.username,
+        client_email: this.utilsProvider.profile.email,
         date: moment(this.selectedDate, 'DD MMMM YYYY').format('MM/DD/YYYY'),
         text: 'Would you like to confirm ' + this.utilsProvider.profile.first_name + ' ' + this.utilsProvider.profile.last_name +
               ' on '+ moment(this.selectedDate, 'DD MMMM YYYY').format('MM/DD/YYYY') + ' ' + slots
       };
-      this.utilsProvider.sendNotification('review', notificationData, 'Submit your Review', this.utilsProvider.device_token);
+      // this.utilsProvider.sendNotification('review', notificationData, 'Submit your Review', this.utilsProvider.device_token);
       if(this.profileData.device_token){
-        this.utilsProvider.sendNotification('confirm', confirmNotificationData, 'You Have a new booking', this.profileData.device_token);
+        this.utilsProvider.sendNotification('confirm', confirmNotificationData, 'You Have a new booking', this.profileData.device_token).then((result) => {
+          console.log(`Confirmation Result: ${result}`);
+        });
       }
-      this.utilsProvider.presentAlert("Booking Confirmed", "Thank You!");
+      // this.utilsProvider.presentAlert("Booking Confirmed", "Thank You!");
       this.utilsProvider.setPage(ResultsPage);
       this.utilsProvider.notifyOther('data');
       this.navCtrl.push(SidemenuPage);

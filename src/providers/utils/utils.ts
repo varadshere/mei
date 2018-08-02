@@ -477,13 +477,19 @@ export class UtilsProvider {
     });
   }
 
-  getProfile(){
+  getProfile(dataSend?: any){
     let ref = this;
-    let dataToSend = {
-      "username":this.getUserEmail(),
-      "email": this.getUserEmail(),
-      "type": this.type
-    };
+    let dataToSend = {};
+    if(dataSend) {
+      dataToSend = dataSend;
+    }
+    else {
+      dataToSend = {
+        "username": this.getUserEmail(),
+        "email": this.getUserEmail(),
+        "type": this.type
+      };
+    }
     let loading = this.getloadingAlert();
     loading.present();
     return new Promise((resolve, reject) => {
@@ -492,7 +498,9 @@ export class UtilsProvider {
       this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(3000).subscribe(data => {
         console.log("Got Profile");
         console.log(data);
-        ref.profile = (this.sanitizeData(data));
+        if(!dataSend){
+          ref.profile = (this.sanitizeData(data));
+        }
         loading.dismissAll();
         resolve(this.sanitizeData(data));
       }, error => {
