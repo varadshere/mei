@@ -25,17 +25,19 @@
     </ion-item>
     <ion-item>
       <ion-label>Notifications</ion-label>
-      <ion-toggle [(ngModel)]="settings.notification" mode="ios"></ion-toggle>
+      <ion-toggle [(ngModel)]="settings.notification" mode="ios" (ionChange)="saveProfile()"></ion-toggle>
     </ion-item>
     <ion-item>
       <ion-label>Are you willing to travel?</ion-label>
-      <ion-toggle [(ngModel)]="settings.travel" mode="ios"></ion-toggle>
+      <ion-toggle [(ngModel)]="settings.travel" mode="ios" (ionChange)="saveProfile()"></ion-toggle>
     </ion-item>
-    <div class="settings-text">Travel distance: {{settings.distance}} KM</div>
-    <ion-item>
-      <ion-range [(ngModel)]="settings.distance" min="0" max="50" mode="md">
-      </ion-range>
-    </ion-item>
+    <div *ngIf="settings.travel == 'True' || settings.travel == true">
+      <div class="settings-text">Travel distance: {{settings.distance}} KM</div>
+      <ion-item>
+        <ion-range [(ngModel)]="settings.distance" (ionBlur)="saveProfile()" min="0" max="50" mode="md">
+        </ion-range>
+      </ion-item>
+    </div>
     <div *ngIf="!editMode">
       <ion-item>
         <ion-row><ion-col class="">Info</ion-col> <ion-col class="info-text pink-text" (click)="editToggle()">Edit</ion-col></ion-row>
@@ -55,10 +57,16 @@
           <ion-input type="text" placeholder="Last Name" [(ngModel)]="settings.last_name"></ion-input>
         </ion-item>
         <ion-item mode="ios">
-          <ion-input type="text" placeholder="phone" [(ngModel)]="settings.phone"></ion-input>
+          <ion-input type="text" placeholder="Phone" [(ngModel)]="settings.phone"></ion-input>
         </ion-item>
         <ion-item mode="ios">
           <ion-input id='places' type="text" (focus)="placeInputFocus()" placeholder="Address"></ion-input>
+        </ion-item>
+        <ion-item mode="ios">
+          <ion-input type="text" class="bio-text" placeholder="Bio" [(ngModel)]="settings.bio"></ion-input>
+        </ion-item>
+        <ion-item mode="ios">
+          <ion-input type="text" class="bio-text" placeholder="Favorite Products ( , separated )" [(ngModel)]="settings.fav"></ion-input>
         </ion-item>
         <div style="text-align: center">
           <button ion-button class="save-button" (click)="saveProfile()">Save</button>
@@ -67,7 +75,7 @@
       </div>
     </div>
 
-    <button ion-item mode="ios">
+    <button ion-item [navPush]="bankDetailsPage" mode="ios">
       Bank Info:
       <div>
         {{settings.bankName}} - {{settings.cardNumber}}

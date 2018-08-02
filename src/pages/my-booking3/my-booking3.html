@@ -19,12 +19,9 @@
     <ion-col col-3>
       <img  class="profile-img" src="{{profileData.profile_pic ? (profileData.profile_pic.includes('http') ? profileData.profile_pic : utilsProvider.photoUrl + profileData.profile_pic) : 'assets/imgs/user.png'}}">
     </ion-col>
-    <ion-col col-9>
+    <ion-col class="margin-tb-auto" col-9>
       <ion-row>
         <div class="profile-text-main">{{profileData.first_name}} {{profileData.last_name}}</div>
-      </ion-row>
-      <ion-row>
-        <div class="location-text-main">{{profileData.address}}</div>
       </ion-row>
     </ion-col>
   </ion-row>
@@ -62,14 +59,6 @@
       </ion-col>
     </ion-row>
 
-    <ion-row>
-      <ion-col class="checkout-text">
-        Address
-      </ion-col>
-      <ion-col class="checkout-value">
-        {{profileData.address}}
-      </ion-col>
-    </ion-row>
 
     <ion-row>
       <ion-col class="checkout-text">

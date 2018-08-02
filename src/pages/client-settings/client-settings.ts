@@ -1,4 +1,4 @@
-import {Component, ViewChild, ViewChildren} from '@angular/core';
+import {Component, Injectable, ViewChild, ViewChildren} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {UtilsProvider} from "../../providers/utils/utils";
 import {Subscription} from "rxjs/Subscription";
@@ -35,8 +35,8 @@ export class ClientSettingsPage {
     "notification": false,
     "phone": "",
     "travel": false,
-    "lat":"",
-    "lng":""
+    "bio": "",
+    "fav": ""
   };
 
 
@@ -85,16 +85,17 @@ export class ClientSettingsPage {
     //   return;
     // }
     let ref = this;
-    this.settings.lat = this.utilsProvider.profile.lat;
-    this.settings.lng = this.utilsProvider.profile.lng;
     //For saving address
     if (this.place){
       this.settings.address = this.place.formatted_address;
       this.settings.lat = this.place.geometry.location.lat();
       this.settings.lng = this.place.geometry.location.lng();
     }
+    this.settings.fav = this.settings.fav.replace(/,/g," . ");
     this.utilsProvider.editClientSettings(this.settings).then(function (data) {
       console.log(data);
+      ref.utilsProvider.profile.bio = ref.settings.bio;
+      ref.utilsProvider.profile.fav = ref.settings.fav;
       ref.editMode = false;
     });
   }
@@ -109,8 +110,11 @@ export class ClientSettingsPage {
     let getSettings = this.utilsProvider.getSettings(dts);
 
     getSettings.then(function (data:any) {
-      if(data)
-      ref.settings = data;
+      if(data){
+        ref.settings = data;
+        ref.settings.bio = ref.utilsProvider.profile.bio;
+        ref.settings.fav = ref.utilsProvider.profile.fav;
+      }
     });
   }
 

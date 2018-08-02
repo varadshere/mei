@@ -65,13 +65,12 @@
 
 </div>
 
-  <div class="floatLeft light-grey">Commision & PP Fees ({{ data.commision.percentage }}%)</div>
-  <div *ngIf="data.commision.commisionWaive"class="floatRight strike light-grey">${{data.commision.percent_amt}}</div>
-  <div *ngIf="!data.commision.commisionWaive"class="floatRight light-grey">${{data.commision.percent_amt}}</div>
+  <div class="floatLeft light-grey">Commision & PP Fees ({{ bookingData?.commision?.percentage || 0 }}%)</div>
+  <div [class.strike]="bookingData?.commision?.commisionWaive" class="floatRight light-grey">${{bookingData?.commision?.percent_amt || 0}}</div>
   <div class="fix"></div>
   <div class="bottom-spacer2"></div>
   <div class="dark-grey floatLeft">Total Earned</div>
-  <div class="dark-grey floatRight">{{data.serviceTotal}}</div>
+  <div class="dark-grey floatRight">{{bookingData.serviceTotal}}</div>
   <div class="fix"></div>
 <hr class="customhr">
 <p text-center><button ion-button round class="disp-button ub-medium"> RAISE A DISPUTE</button></p>

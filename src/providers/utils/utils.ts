@@ -38,6 +38,7 @@ export class UtilsProvider {
       this.notify.next(data);
     }
   }
+  private _stripeKey: string = 'pk_test_x1LxYvNr0ewGsaPHNzX0V7Ey';
 
   constructor(public http: Http,
               private alertCtrl: AlertController,
@@ -149,6 +150,10 @@ export class UtilsProvider {
 
   set serviceSelected(value: string) {
     this._serviceSelected = value;
+  }
+
+  get stripeKey(): string{
+    return this._stripeKey;
   }
 
   // getServiceSelection(){

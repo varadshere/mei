@@ -5,6 +5,7 @@ import {Observable} from "rxjs/Observable";
 import {Subscription} from "rxjs/Subscription";
 import {DomSanitizer} from '@angular/platform-browser';
 import {TermsAndConditionsPage} from "../terms-and-conditions/terms-and-conditions";
+import {VendorBankDetailsPage} from "../vendor-bank-details/vendor-bank-details";
 declare var google;
 
 @Component({
@@ -17,6 +18,7 @@ export class VendorSettingsPage {
   placeSubscription: Subscription;
   editMode: boolean = false;
   termsPage: any = TermsAndConditionsPage;
+  bankDetailsPage: any = VendorBankDetailsPage;
   settings: any = {
     "email": this.utilsProvider.getUserEmail(),
     "username": this.utilsProvider.getUserEmail(),
@@ -28,7 +30,9 @@ export class VendorSettingsPage {
     "last_name": "",
     "notification": false,
     "phone": "",
-    "travel": false
+    "travel": false,
+    "bio": "",
+    "fav": ""
   };
 
 
@@ -71,15 +75,21 @@ export class VendorSettingsPage {
     this.editMode = true;
   }
   saveProfile(){
-    if(!this.place){
-      return;
-    }
+    // if(!this.place){
+    //   return;
+    // }
     let ref = this;
-    this.settings.address = this.place.formatted_address;
-    this.settings.lat = this.place.geometry.location.lat();
-    this.settings.lng = this.place.geometry.location.lng();
+    //For saving address
+    if (this.place){
+      this.settings.address = this.place.formatted_address;
+      this.settings.lat = this.place.geometry.location.lat();
+      this.settings.lng = this.place.geometry.location.lng();
+    }
+    this.settings.fav = this.settings.fav.replace(/,/g," . ");
     this.utilsProvider.editClientSettings(this.settings).then(function (data) {
       console.log(data);
+      ref.utilsProvider.profile.bio = ref.settings.bio;
+      ref.utilsProvider.profile.fav = ref.settings.fav;
       ref.editMode = false;
     });
   }
@@ -94,8 +104,11 @@ export class VendorSettingsPage {
     let getSettings = this.utilsProvider.getSettings(dts);
 
     getSettings.then(function (data:any) {
-      if(typeof data !== 'string')
+      if(typeof data !== 'string'){
         ref.settings = data;
+        ref.settings.bio = ref.utilsProvider.profile.bio;
+        ref.settings.fav = ref.utilsProvider.profile.fav;
+      }
     });
   }
 
@@ -123,5 +136,9 @@ export class VendorSettingsPage {
       return 'assets/imgs/user.png'
     }
     // this.utilsProvider.profile.profile_pic ? ((this.utilsProvider.profile.profile_pic.includes('http') || this.utilsProvider.profile.profile_pic.includes('ftp')) ? this.utilsProvider.profile.profile_pic : this.utilsProvider.photoUrl + this.utilsProvider.profile.profile_pic) : 'assets/imgs/user.png'
+  }
+
+  ionViewWillEnter(){
+    this.settings.bankDetails = this.navParams.get('bankDetails') || {};
   }
 }

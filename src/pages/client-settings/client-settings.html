@@ -60,6 +60,12 @@
         <ion-item mode="ios">
           <ion-input id='places' type="text" (focus)="placeInputFocus()" placeholder="Address"></ion-input>
         </ion-item>
+        <ion-item mode="ios">
+          <ion-input type="text" class="bio-text" placeholder="Bio" [(ngModel)]="settings.bio"></ion-input>
+        </ion-item>
+        <ion-item mode="ios">
+          <ion-input type="text" class="bio-text" placeholder="Favorite Products ( , separated )" [(ngModel)]="settings.fav"></ion-input>
+        </ion-item>
         <div style="text-align: center">
           <button ion-button class="save-button" (click)="saveProfile()">Save</button>
         </div>
