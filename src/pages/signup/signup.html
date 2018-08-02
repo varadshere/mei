@@ -123,10 +123,10 @@
                 <ion-input type="text"  formControlName="schoolInfo" [class.invalid]="!slideOneForm.controls.schoolInfo.valid && (slideOneForm.controls.schoolInfo.dirty || submitAttempt)" placeholder="Name of Beauty school/Specialisation" name="schoolInfo"></ion-input>
               </ion-item>
               <ion-item mode="ios">
-                <ion-input type="text"  formControlName="bookingsNum" [class.invalid]="!slideOneForm.controls.bookingsNum.valid && (slideOneForm.controls.bookingsNum.dirty || submitAttempt)" placeholder="How many bookings are you servicing per week ?" name="bookingsNum"></ion-input>
+                <ion-textarea type="text"  formControlName="bookingsNum" [class.invalid]="!slideOneForm.controls.bookingsNum.valid && (slideOneForm.controls.bookingsNum.dirty || submitAttempt)" placeholder="How many bookings are you currently completing each week?" name="bookingsNum"></ion-textarea>
               </ion-item>
               <ion-item mode="ios">
-                <ion-input type="text"  formControlName="instaHandle" [class.invalid]="!slideOneForm.controls.instaHandle.valid && (slideOneForm.controls.instaHandle.dirty || submitAttempt)" placeholder="Instagram Handle" name="instaHandle"></ion-input>
+                <ion-input type="text"  formControlName="instaHandle" [class.invalid]="!slideOneForm.controls.instaHandle.valid && (slideOneForm.controls.instaHandle.dirty || submitAttempt)" placeholder="Instagram handle" name="instaHandle"></ion-input>
               </ion-item>
             </form>
             <!--<div class="q-text">When you are usually available? Select all that apply</div>-->

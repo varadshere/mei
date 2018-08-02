@@ -1,6 +1,7 @@
 import { Component,ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams,ModalController } from 'ionic-angular';
 import { FullmapPage } from '../fullmap/fullmap';
+import {UtilsProvider} from "../../providers/utils/utils";
 
 declare var google;
 /**
@@ -40,9 +41,15 @@ export class BookingDetailsPage {
   };
 
   bookingData: any;
+  client: boolean;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController, public utils: UtilsProvider) {
     this.bookingData = navParams.get('bookingData');
+    this.utils.getProfile().then(data => {
+      this.client = !(data["type"] == "client");
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 
   ionViewDidLoad(){

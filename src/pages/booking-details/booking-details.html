@@ -7,9 +7,9 @@
 <ion-header>
 
   <ion-navbar>
-      <!--<ion-buttons left>-->
-          <!--<ion-icon class="icon-left" color="mei" name="arrow-back"></ion-icon>-->
-        <!--</ion-buttons>-->
+    <!--<ion-buttons left>-->
+    <!--<ion-icon class="icon-left" color="mei" name="arrow-back"></ion-icon>-->
+    <!--</ion-buttons>-->
     <ion-title text-center>Booking Details</ion-title>
   </ion-navbar>
 
@@ -18,63 +18,70 @@
 
 <ion-content>
 
-<div (click)="openMap()" #map id="map"></div>
-<div padding>
+  <div (click)="openMap()" #map id="map"></div>
+  <div padding>
 
-  <div class="div1">
+    <div class="div1">
 
       <div class="ub-medium dark-grey client-name">{{bookingData.name}}</div>
 
       <div class="ub-medium light-grey client-address">{{bookingData.address}}</div>
 
-  </div>
+    </div>
 
-  <hr class="customhr">
+    <hr class="customhr">
 
 
-  <div class="div2 ub-regular">
+    <div class="div2 ub-regular">
       <div class="floatLeft">
         <img src="./assets/imgs/calendar.png" height="25px" width="25px">
       </div>
-        <div class="floatLeft marginLeft dark-grey small-padding"> {{bookingData.date}}</div>
-        <div class="fix"></div>
+      <div class="floatLeft marginLeft dark-grey small-padding"> {{bookingData.date}}</div>
+      <div class="fix"></div>
       <div class="clockDiv">
         <div class="floatLeft">
-        <img src="./assets/imgs/clock.png" height="25px" width="25px">
+          <img src="./assets/imgs/clock.png" height="25px" width="25px">
         </div>
         <div class="floatLeft marginLeft dark-grey small-padding">
-           {{bookingData.startTime}} - {{bookingData.endTime}}
+          {{bookingData.startTime}} - {{bookingData.endTime}}
         </div>
+      </div>
+      <div class="fix"></div>
     </div>
-        <div class="fix"></div>
-  </div>
 
-  <hr class="customhr">
+    <hr class="customhr">
 
-  <div class="div3 ub-medium">
+    <div class="div3 ub-medium">
       <div class="floatLeft dark-grey font1"> Services</div>
       <div class="floatRight font1 mei-color ">{{bookingData.serviceTotal}}</div>
       <div class="fix"></div>
       <div class="bottom-spacer"></div>
 
-  <div class="service-list dark-grey ub-medium" *ngFor=" let item of bookingData.services">
-  <div class="floatLeft ">{{item.quantity}} x {{item.serviceName}}</div>
-  <div class="floatRight">${{item.price}}</div>
-  <div class="fix"></div>
-  <div class="bottom-spacer2"></div>
+      <div class="service-list dark-grey ub-medium" *ngFor=" let item of bookingData.services">
+        <div class="floatLeft ">{{item.quantity}} x {{item.serviceName}}</div>
+        <div class="floatRight">${{item.price}}</div>
+        <div class="fix"></div>
+        <div class="bottom-spacer2"></div>
 
-</div>
+      </div>
 
-  <div class="floatLeft light-grey">Commision & PP Fees ({{ bookingData?.commision?.percentage || 0 }}%)</div>
-  <div [class.strike]="bookingData?.commision?.commisionWaive" class="floatRight light-grey">${{bookingData?.commision?.percent_amt || 0}}</div>
-  <div class="fix"></div>
-  <div class="bottom-spacer2"></div>
-  <div class="dark-grey floatLeft">Total Earned</div>
-  <div class="dark-grey floatRight">{{bookingData.serviceTotal}}</div>
-  <div class="fix"></div>
-<hr class="customhr">
-<p text-center><button ion-button round class="disp-button ub-medium"> RAISE A DISPUTE</button></p>
+      <div *ngIf="client">
+
+        <div class="floatLeft light-grey">Commision & PP Fees ({{ bookingData?.commision?.percentage || 0 }}%)</div>
+        <div [class.strike]="bookingData?.commision?.commisionWaive" class="floatRight light-grey">
+          ${{bookingData?.commision?.percent_amt || 0}}
+        </div>
+        <div class="fix"></div>
+        <div class="bottom-spacer2"></div>
+        <div class="dark-grey floatLeft">Total Earned</div>
+        <div class="dark-grey floatRight">{{bookingData.serviceTotal}}</div>
+        <div class="fix"></div>
+      </div>
+      <hr class="customhr">
+      <p text-center>
+        <button ion-button round class="disp-button ub-medium"> RAISE A DISPUTE</button>
+      </p>
+    </div>
+
   </div>
-
-</div>
 </ion-content>
