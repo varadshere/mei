@@ -317,7 +317,9 @@ export class SignupPage {
           "bankName": "",
           "cardNumber": "",
           "lat": this.place.geometry.location.lat(),
-          "lng": this.place.geometry.location.lng()
+          "lng": this.place.geometry.location.lng(),
+          "bio":"",
+          "fav": ""
         };
 
         let signupPromise  = this.utils.signUpService(dataToSend);
