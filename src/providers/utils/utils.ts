@@ -380,7 +380,7 @@ export class UtilsProvider {
   signUpService(dataToSend){
    // let ref = this;
     this.type = dataToSend.type;
-    dataToSend.device_token = this.device_token;
+    dataToSend.device_token = this.device_token || "";
     let loading = this.getloadingAlert();
     loading.present();
     return new Promise((resolve, reject) => {

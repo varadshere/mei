@@ -442,6 +442,8 @@ export class SignupPage {
         "address": this.place.formatted_address,
         "lat": this.place.geometry.location.lat(),
         "lng": this.place.geometry.location.lng(),
+        "bio":"",
+        "fav": "",
         "type": "client"
       };
       let dataToSendEditClient = {
@@ -457,7 +459,9 @@ export class SignupPage {
         "bankName": "",
         "cardNumber": "",
         "lat": this.place.geometry.location.lat(),
-        "lng": this.place.geometry.location.lng()
+        "lng": this.place.geometry.location.lng(),
+        "bio":"",
+        "fav": ""
       };
       let signupPromise  = this.utils.signUpService(dataToSend);
 
