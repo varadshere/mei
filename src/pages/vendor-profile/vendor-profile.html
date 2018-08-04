@@ -39,6 +39,9 @@
       <ion-segment-button value="REVIEWS">
         REVIEWS
       </ion-segment-button>
+      <ion-segment-button value="FEED">
+        FEED
+      </ion-segment-button>
     </ion-segment>
   </div>
 
@@ -78,6 +81,18 @@
           <p>{{reviewObj.review}}</p>
         </ion-card-content>
       </ion-card>
+    </ion-list>
+    <ion-list *ngSwitchCase="'FEED'">
+      <ion-row style="padding: 10px;">
+        <ion-col col-4 class="img-col">
+          <div class="img-up-div" text-center (click)="uploadGalleryPhoto()">
+            <ion-icon name="md-add"></ion-icon>
+          </div>
+        </ion-col>
+        <ion-col col-4 class="img-col" *ngFor="let img of gallery_imgs">
+          <img src="{{img}}">
+        </ion-col>
+      </ion-row>
     </ion-list>
   </div>
 

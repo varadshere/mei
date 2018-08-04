@@ -9,6 +9,7 @@ import {VendorSettingsPage} from "../vendor-settings/vendor-settings";
 })
 export class VendorProfilePage {
   profile: string = "ABOUT";
+  gallery_imgs = [];
   constructor(public navCtrl: NavController, public navParams: NavParams, public utils: UtilsProvider) {
   }
 
@@ -19,5 +20,14 @@ export class VendorProfilePage {
     console.log("Vendor Settings");
     this.utils.setPage(VendorSettingsPage);
     this.utils.notifyOther('data');
+  }
+
+  uploadGalleryPhoto(){
+    this.utils.getImgFromDevice().then((data)=>{
+      if(data){
+        console.log(data);
+        this.gallery_imgs.push(data);
+      }
+    });
   }
 }

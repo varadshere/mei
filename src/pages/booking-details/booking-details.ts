@@ -1,5 +1,5 @@
 import { Component,ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams,ModalController } from 'ionic-angular';
+import { NavController, NavParams,ModalController } from 'ionic-angular';
 import { FullmapPage } from '../fullmap/fullmap';
 import {UtilsProvider} from "../../providers/utils/utils";
 
@@ -11,7 +11,6 @@ declare var google;
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-booking-details',
   templateUrl: 'booking-details.html',
