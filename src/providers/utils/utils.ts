@@ -658,6 +658,27 @@ export class UtilsProvider {
     });
   }
 
+  saveBank(bankDataSend){
+    let loading = this.getloadingAlert();
+    loading.present();
+
+    return new Promise((resolve, reject) => {
+      let url = this.serverUrl + 'saveBank';
+      let body = JSON.stringify(bankDataSend);
+      this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(3000).subscribe(data => {
+        console.log("bank details saved");
+        console.log(data);
+        loading.dismissAll();
+        resolve(this.sanitizeData(data));
+      }, error => {
+        console.log("saving bank details ERROR");
+        console.log(error);
+        loading.dismissAll();
+        resolve(false);
+      });
+    });
+  }
+
   getCard(){
     let dataToSend = {
       user_id: this.profile.user_id

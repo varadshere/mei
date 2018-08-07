@@ -19,6 +19,10 @@ export class VendorSettingsPage {
   editMode: boolean = false;
   termsPage: any = TermsAndConditionsPage;
   bankDetailsPage: any = VendorBankDetailsPage;
+  bankDetailsParams = {
+    "username": this.utilsProvider.getUserEmail(),
+    "user_id": this.utilsProvider.profile.user_id
+  }
   settings: any = {
     "email": this.utilsProvider.getUserEmail(),
     "username": this.utilsProvider.getUserEmail(),
@@ -116,6 +120,7 @@ export class VendorSettingsPage {
     this.utilsProvider.getImgFromDevice().then((data)=>{
       if(data){
         console.log(data);
+        this.utilsProvider.uploadmageToServer(data);
         this.utilsProvider.profile.profile_pic = data;
       }
     });
@@ -139,6 +144,7 @@ export class VendorSettingsPage {
   }
 
   ionViewWillEnter(){
-    this.settings.bankDetails = this.navParams.get('bankDetails') || {};
+    // this.settings.bankDetails = this.navParams.get('bankDetails') || {};
+    this.settings.bankID = this.navParams.get('bankID') || {};
   }
 }
