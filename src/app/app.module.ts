@@ -44,6 +44,7 @@ import {ReviewModalPage} from "../pages/review-modal/review-modal";
 import { IonicStorageModule } from '@ionic/storage';
 import {TermsAndConditionsPage} from "../pages/terms-and-conditions/terms-and-conditions";
 import {VendorBankDetailsPage} from "../pages/vendor-bank-details/vendor-bank-details";
+import {LocalNotifications} from "@ionic-native/local-notifications";
 
 @NgModule({
   declarations: [
@@ -128,6 +129,7 @@ import {VendorBankDetailsPage} from "../pages/vendor-bank-details/vendor-bank-de
     Crop,
     FileTransfer,
     File,
+    LocalNotifications,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UtilsProvider
   ]

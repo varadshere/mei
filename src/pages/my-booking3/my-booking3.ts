@@ -6,6 +6,7 @@ import {ResultsPage} from "../results/results";
 import {SidemenuPage} from "../sidemenu/sidemenu";
 import * as moment from "moment";
 import {ReviewModalPage} from "../review-modal/review-modal";
+import {LocalNotifications} from "@ionic-native/local-notifications";
 
 @Component({
   selector: 'page-my-booking3',
@@ -23,7 +24,8 @@ export class MyBooking3Page {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private utilsProvider: UtilsProvider,
-              private modalCtrl: ModalController) {
+              private modalCtrl: ModalController,
+              private localNotifications: LocalNotifications) {
     this.profileData = navParams.get('profile');
     this.schedule = navParams.get('schedule');
     this.selectedDate = navParams.get('selectedDate');
@@ -85,7 +87,19 @@ export class MyBooking3Page {
         text: 'Would you like to confirm ' + this.utilsProvider.profile.first_name + ' ' + this.utilsProvider.profile.last_name +
               ' on '+ moment(this.selectedDate, 'DD MMMM YYYY').format('MM/DD/YYYY') + ' ' + slots
       };
+
+      // Send Review Notification
+      this.localNotifications.schedule({
+        title: 'Review',
+        text: 'Submit your Review',
+        data: {
+          packDat: notificationData
+        },
+        trigger: {at: new Date(Date.now() + 5 * 60000)} //now + min * (60 sec in ms)
+      });
+
       // this.utilsProvider.sendNotification('review', notificationData, 'Submit your Review', this.utilsProvider.device_token);
+
       if(this.profileData.device_token){
         this.utilsProvider.sendNotification('confirm', confirmNotificationData, 'You Have a new booking', this.profileData.device_token).then((result) => {
           console.log(`Confirmation Result: ${result}`);
@@ -94,7 +108,7 @@ export class MyBooking3Page {
       // this.utilsProvider.presentAlert("Booking Confirmed", "Thank You!");
       this.utilsProvider.setPage(ResultsPage);
       this.utilsProvider.notifyOther('data');
-      this.navCtrl.push(SidemenuPage);
+      this.navCtrl.setRoot(SidemenuPage);
     });
   }
 }

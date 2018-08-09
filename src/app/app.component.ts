@@ -13,6 +13,8 @@ import {SelectionHomePage} from "../pages/selection-home/selection-home";
 import {SidemenuPage} from "../pages/sidemenu/sidemenu";
 import {VendorSidemenuPage} from "../pages/vendor-sidemenu/vendor-sidemenu";
 import {UserData} from "../providers/models";
+import {LocalNotifications} from "@ionic-native/local-notifications";
+
 declare var FCMPlugin;
 @Component({
   templateUrl: 'app.html'
@@ -26,8 +28,10 @@ export class MyApp {
               splashScreen: SplashScreen,
               utils: UtilsProvider,
               modalCtrl: ModalController,
+              localNotifications: LocalNotifications,
               private storage: Storage) {
     platform.ready().then(() => {
+      console.log("Platform is ready");
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       storage.get('userData').then((val: UserData) => {
@@ -52,6 +56,7 @@ export class MyApp {
       splashScreen.hide();
       if (typeof FCMPlugin != 'undefined'){
         FCMPlugin.getToken((token) =>{
+          console.log("FCM token fetched");
           utils.device_token = token;
         }, (err) => {
 
@@ -101,7 +106,7 @@ export class MyApp {
             });
 
             toast.present();
-
+            alert("Notification Tapped!!");
             //Notification was received on device tray and tapped by the user.
             //alert( JSON.stringify(data) );
           }else{
@@ -111,6 +116,7 @@ export class MyApp {
               position: 'top'
             });
             toast.present();
+            alert("Notification was in foreground!!");
           }
           console.log('data');
           console.log(data);
@@ -124,6 +130,15 @@ export class MyApp {
         })
       }
 
+      if (platform.is('cordova')){
+        localNotifications.on('click').subscribe((notification) =>{
+          console.log("Local Notification clicked");
+          console.log(notification);
+          console.log("Review");
+          const modal = modalCtrl.create(ReviewModalPage, { data: notification.data});
+          modal.present();
+        });
+      }
 
     });
   }
