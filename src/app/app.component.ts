@@ -16,6 +16,8 @@ import {UserData} from "../providers/models";
 import {LocalNotifications} from "@ionic-native/local-notifications";
 
 declare var FCMPlugin;
+declare var FirebasePlugin;
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -54,82 +56,136 @@ export class MyApp {
       });
       statusBar.styleDefault();
       splashScreen.hide();
-      if (typeof FCMPlugin != 'undefined'){
-        FCMPlugin.getToken((token) =>{
+
+      //FCM Notification code
+      // if (typeof FCMPlugin != 'undefined'){
+      //   FCMPlugin.getToken((token) =>{
+      //     console.log("FCM token fetched");
+      //     utils.device_token = token;
+      //   }, (err) => {
+      //
+      //   });
+      // }
+      //
+      // if (typeof FCMPlugin != 'undefined'){
+      //   FCMPlugin.onNotification((data)=>{
+      //     data.packDat = JSON.parse(data.packDat);
+      //     switch(data.act) {
+      //       case "review": {
+      //         console.log("Review");
+      //         const modal = modalCtrl.create(ReviewModalPage, { data: data});
+      //         modal.present();
+      //         break;
+      //       }
+      //       case "confirm": {
+      //         console.log("B");
+      //         const modal = modalCtrl.create('ConfirmBookingPage', { data: data});
+      //         modal.present();
+      //         break;
+      //       }
+      //       case "info":{
+      //         console.log("Booking Info");
+      //         utils.presentAlert(data.packDat.text, "Thank You!");
+      //         break;
+      //       }
+      //       case "C": {
+      //         console.log("C");
+      //         break;
+      //       }
+      //       case "D": {
+      //         console.log("D");
+      //         break;
+      //       }
+      //       default: {
+      //         console.log("Default choice");
+      //         break;
+      //       }
+      //     }
+      //
+      //     if(data.wasTapped){
+      //       let toast = this.toastCtrl.create({
+      //         message: data.message,
+      //         duration: 3000,
+      //         position: 'top'
+      //       });
+      //
+      //       toast.present();
+      //       alert("Notification Tapped!!");
+      //       //Notification was received on device tray and tapped by the user.
+      //       //alert( JSON.stringify(data) );
+      //     }else{
+      //       let toast = this.toastCtrl.create({
+      //         message: data.message,
+      //         duration: 3000,
+      //         position: 'top'
+      //       });
+      //       toast.present();
+      //       alert("Notification was in foreground!!");
+      //     }
+      //     console.log('data');
+      //     console.log(data);
+      //
+      //   }, (msg)=>{
+      //     console.log('msg');
+      //     console.log(msg);
+      //   }, (err) =>{
+      //     console.log('err');
+      //     console.log(err);
+      //   })
+      // }
+
+      //Firebase Plugin code
+      if (typeof FirebasePlugin != "undefined"){
+        FirebasePlugin.getToken((token) => {
           console.log("FCM token fetched");
           utils.device_token = token;
         }, (err) => {
+          console.log("FCM token not generated; " + err);
+        });
 
+        FirebasePlugin.onNotificationOpen((notification) => {
+          console.log("Notification received");
+          console.log(notification);
+
+          notification.packDat = JSON.parse(notification.packDat);
+              switch(notification.act) {
+                case "review": {
+                  console.log("Review");
+                  const modal = modalCtrl.create(ReviewModalPage, { data: notification});
+                  modal.present();
+                  break;
+                }
+                case "confirm": {
+                  console.log("B");
+                  const modal = modalCtrl.create('ConfirmBookingPage', { data: notification});
+                  modal.present();
+                  break;
+                }
+                case "info":{
+                  console.log("Booking Info");
+                  utils.presentAlert(notification.packDat.text, "Thank You!");
+                  break;
+                }
+                case "C": {
+                  console.log("C");
+                  break;
+                }
+                case "D": {
+                  console.log("D");
+                  break;
+                }
+                default: {
+                  console.log("Default choice");
+                  break;
+                }
+              }
+
+        }, (err) => {
+          console.log(err);
         });
       }
 
-      if (typeof FCMPlugin != 'undefined'){
-        FCMPlugin.onNotification((data)=>{
-          data.packDat = JSON.parse(data.packDat);
-          switch(data.act) {
-            case "review": {
-              console.log("Review");
-              const modal = modalCtrl.create(ReviewModalPage, { data: data});
-              modal.present();
-              break;
-            }
-            case "confirm": {
-              console.log("B");
-              const modal = modalCtrl.create('ConfirmBookingPage', { data: data});
-              modal.present();
-              break;
-            }
-            case "info":{
-              console.log("Booking Info");
-              utils.presentAlert(data.packDat.text, "Thank You!");
-              break;
-            }
-            case "C": {
-              console.log("C");
-              break;
-            }
-            case "D": {
-              console.log("D");
-              break;
-            }
-            default: {
-              console.log("Default choice");
-              break;
-            }
-          }
-
-          if(data.wasTapped){
-            let toast = this.toastCtrl.create({
-              message: data.message,
-              duration: 3000,
-              position: 'top'
-            });
-
-            toast.present();
-            alert("Notification Tapped!!");
-            //Notification was received on device tray and tapped by the user.
-            //alert( JSON.stringify(data) );
-          }else{
-            let toast = this.toastCtrl.create({
-              message: data.message,
-              duration: 3000,
-              position: 'top'
-            });
-            toast.present();
-            alert("Notification was in foreground!!");
-          }
-          console.log('data');
-          console.log(data);
-
-        }, (msg)=>{
-          console.log('msg');
-          console.log(msg);
-        }, (err) =>{
-          console.log('err');
-          console.log(err);
-        })
-      }
-
+      //Local Notification code for Review
       if (platform.is('cordova')){
         localNotifications.on('click').subscribe((notification) =>{
           console.log("Local Notification clicked");
