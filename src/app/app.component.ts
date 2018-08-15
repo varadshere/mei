@@ -143,6 +143,13 @@ export class MyApp {
           console.log("FCM token not generated; " + err);
         });
 
+        FirebasePlugin.hasPermission(function(data){
+          if(!data.isEnabled){
+            FirebasePlugin.grantPermission();
+          }
+          console.log(data.isEnabled);
+        });
+
         FirebasePlugin.onNotificationOpen((notification) => {
           console.log("Notification received");
           console.log(notification);
@@ -180,7 +187,14 @@ export class MyApp {
                 }
               }
 
-        }, (err) => {
+        }, (msg)=>{
+          console.log('msg notif.');
+          console.log(msg);
+        }, (data)=>{
+          console.log('data notif.');
+          console.log(data);
+        }, (err) =>{
+          console.log('err');
           console.log(err);
         });
       }

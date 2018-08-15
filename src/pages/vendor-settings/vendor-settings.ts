@@ -6,6 +6,7 @@ import {Subscription} from "rxjs/Subscription";
 import {DomSanitizer} from '@angular/platform-browser';
 import {TermsAndConditionsPage} from "../terms-and-conditions/terms-and-conditions";
 import {VendorBankDetailsPage} from "../vendor-bank-details/vendor-bank-details";
+import {LoginPage} from "../login/login";
 declare var google;
 
 @Component({
@@ -147,4 +148,10 @@ export class VendorSettingsPage {
     // this.settings.bankDetails = this.navParams.get('bankDetails') || {};
     this.settings.bankID = this.navParams.get('bankID') || {};
   }
+
+  logout(){
+    this.utilsProvider.logOut();
+    this.navCtrl.setRoot(LoginPage);
+  }
+
 }
