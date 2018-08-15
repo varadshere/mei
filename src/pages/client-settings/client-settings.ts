@@ -4,6 +4,7 @@ import {UtilsProvider} from "../../providers/utils/utils";
 import {Subscription} from "rxjs/Subscription";
 import {DomSanitizer} from '@angular/platform-browser';
 import {TermsAndConditionsPage} from "../terms-and-conditions/terms-and-conditions";
+import {LoginPage} from "../login/login";
 declare var google;
 
 /**
@@ -153,6 +154,11 @@ export class ClientSettingsPage {
       return 'assets/imgs/user.png'
     }
     // this.utilsProvider.profile.profile_pic ? ((this.utilsProvider.profile.profile_pic.includes('http') || this.utilsProvider.profile.profile_pic.includes('ftp')) ? this.utilsProvider.profile.profile_pic : this.utilsProvider.photoUrl + this.utilsProvider.profile.profile_pic) : 'assets/imgs/user.png'
+  }
+
+  logout(){
+    this.utilsProvider.logOut();
+    this.navCtrl.setRoot(LoginPage);
   }
 
 }
