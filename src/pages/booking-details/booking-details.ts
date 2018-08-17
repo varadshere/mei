@@ -56,7 +56,7 @@ export class BookingDetailsPage {
   }
 
 loadLatLng(){
-  this.getlatlng(this.data.clientAddress).then((result:any)=>{
+  this.getlatlng(this.bookingData.address).then((result:any)=>{
     this.latLng=new google.maps.LatLng(result.lat,result.lng);
     this.loadMap(this.latLng);
     this.createmodalobj();

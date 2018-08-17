@@ -1,5 +1,5 @@
 import {Component, ViewChildren} from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import {UtilsProvider} from "../../providers/utils/utils";
 import {Observable} from "rxjs/Observable";
 import {Subscription} from "rxjs/Subscription";
@@ -45,7 +45,8 @@ export class VendorSettingsPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public utilsProvider: UtilsProvider,
-              public _DomSanitizer: DomSanitizer) {
+              public _DomSanitizer: DomSanitizer,
+              public alertCtrl: AlertController) {
     this.email = utilsProvider.getUserEmail();
   }
 
@@ -150,8 +151,24 @@ export class VendorSettingsPage {
   }
 
   logout(){
-    this.utilsProvider.logOut();
-    this.navCtrl.setRoot(LoginPage);
+    let confirm = this.alertCtrl.create({
+      title: 'Do you want to logout?',
+      buttons: [
+        {
+          text: 'No',
+          handler: ()=>{console.log("Clicked No");}
+        },
+        {
+          text: 'Yes',
+          handler: ()=>{
+            console.log("Clicked Yes");
+            this.utilsProvider.logOut();
+            this.navCtrl.setRoot(LoginPage);
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
 }

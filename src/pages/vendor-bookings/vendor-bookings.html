@@ -43,9 +43,19 @@
                 </div>
               </div>
             </ion-col>
-            <ion-col col-2 *ngIf="l.confirm">
+            <ion-col col-2 *ngIf="l.confirm == null">
             <span style="font-size: 10px;color: red;">
               pending
+            </span>
+            </ion-col>
+            <ion-col col-2 *ngIf="l.confirm == 'true'">
+            <span style="font-size: 10px;color: red;">
+              confirm
+            </span>
+            </ion-col>
+            <ion-col col-2 *ngIf="l.confirm == 'false'">
+            <span style="font-size: 10px;color: red;">
+              cancelled
             </span>
             </ion-col>
           </ion-row>
@@ -72,7 +82,7 @@
               pending
             </span>
           </ion-col>
-          <ion-col col-2 *ngIf="l.confirm == false">
+          <ion-col col-2 *ngIf="l.confirm == 'false'">
             <span style="font-size: 10px;color: red;">
               cancelled
             </span>
