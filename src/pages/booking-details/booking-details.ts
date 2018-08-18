@@ -41,22 +41,30 @@ export class BookingDetailsPage {
 
   bookingData: any;
   client: boolean;
+  mapAddress: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController, public utils: UtilsProvider) {
     this.bookingData = navParams.get('bookingData');
     this.utils.getProfile().then(data => {
       this.client = !(data["type"] == "client");
+      if (data['type'] == 'client'){
+        this.mapAddress = data['address'];
+      }
+      else{
+        this.mapAddress = this.bookingData.address;
+      }
+      this.loadLatLng();
     }).catch((error) => {
       console.log(error);
     });
   }
 
   ionViewDidLoad(){
-    this.loadLatLng();
+    // this.loadLatLng();
   }
 
 loadLatLng(){
-  this.getlatlng(this.bookingData.address).then((result:any)=>{
+  this.getlatlng(this.mapAddress).then((result:any)=>{
     this.latLng=new google.maps.LatLng(result.lat,result.lng);
     this.loadMap(this.latLng);
     this.createmodalobj();

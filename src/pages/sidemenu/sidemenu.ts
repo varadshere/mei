@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import {GetstartedPage} from "../getstarted/getstarted";
 import {LoginPage} from "../login/login";
 import {ResultsPage} from "../results/results";
@@ -35,21 +35,17 @@ export class SidemenuPage {
   ];
   // profile = this.utilsProvider.profile;
   ionViewDidLoad() {
-    let ref = this;
-
     console.log('ionViewDidLoad SidemenuPage ');
-    // console.log(this.profile);
-    this.subscription = ref.utilsProvider.notifyObservable$.subscribe((res) => {
-      console.log(res);
-
-      ref.rootPage = ref.utilsProvider.getPage();
-
-    });
-
-      this.rootPage = this.utilsProvider.getPage();
+    this.menuCtrl.enable(true,"clientMenu");
+    this.rootPage = this.utilsProvider.getPage();
   }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public utilsProvider: UtilsProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public utilsProvider: UtilsProvider, public menuCtrl: MenuController) {
+    let ref = this;
+    this.subscription = ref.utilsProvider.notifyObservable$.subscribe((res) => {
+      console.log(res);
+      ref.rootPage = ref.utilsProvider.getPage();
+    });
   }
 
   openPage(param, i){

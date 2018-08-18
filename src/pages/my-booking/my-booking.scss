@@ -65,7 +65,8 @@ page-my-booking {
     padding: 5px;
   }
   .last-month,
-  .next-month {
+  .next-month,
+  .previousDate {
     color: #999999;
     font-size: 90%;
   }
@@ -75,11 +76,17 @@ page-my-booking {
   }
   .currentDate {
     font-weight: bold;
+    //background: linear-gradient(
+    //  227.74deg,
+    //  #fe9a8b 0.2%,
+    //  #fd868c 40.08%,
+    //  #f9748f 97.82%
+    //);
     background: linear-gradient(
-      227.74deg,
-      #fe9a8b 0.2%,
-      #fd868c 40.08%,
-      #f9748f 97.82%
+        227.74deg,
+        #000000 0.2%,
+        #000000 40.08%,
+        #000000 97.82%
     );
     color: white;
     border-radius: 30px;

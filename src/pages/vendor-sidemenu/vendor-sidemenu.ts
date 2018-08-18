@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { NavController, NavParams } from "ionic-angular";
+import { NavController, NavParams, MenuController } from "ionic-angular";
 import { Subscription } from "rxjs/Rx";
 import { UtilsProvider } from "../../providers/utils/utils";
 import { ChartPage } from "../chart/chart";
@@ -35,7 +35,8 @@ export class VendorSidemenuPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public utilsProvider: UtilsProvider
+    public utilsProvider: UtilsProvider,
+    public menuCtrl: MenuController
   ) {
     this.subscription = this.utilsProvider.notifyObservable$.subscribe(res => {
       console.log(res);
@@ -46,6 +47,7 @@ export class VendorSidemenuPage {
   ionViewDidLoad() {
     this.rootPage = this.utilsProvider.getPage();
     console.log("ionViewDidLoad VendorSidemenuPage");
+    this.menuCtrl.enable(true,"vendorMenu");
   }
 
   openPage(page, i) {
