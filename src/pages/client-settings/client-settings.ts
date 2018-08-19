@@ -126,7 +126,7 @@ export class ClientSettingsPage {
     //   .then(res => res.blob())
     //   .then(blob => {
     //       console.log(blob);
-    //       this.utilsProvider.uploadmageToServer(blob).map(res => res.json()).subscribe(data => {
+    //       this.utilsProvider.uploadImageToServer(blob).map(res => res.json()).subscribe(data => {
     //         console.log('resp uploadImg');
     //         console.log(data);
     //       });
@@ -134,7 +134,7 @@ export class ClientSettingsPage {
     this.utilsProvider.getImgFromDevice().then((data)=>{
       if(data){
         console.log(data);
-        this.utilsProvider.uploadmageToServer(data);
+        this.utilsProvider.uploadImageToServer(data,"profile");
         this.utilsProvider.profile.profile_pic = data;
       }
     });

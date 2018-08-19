@@ -9,12 +9,13 @@ import {VendorSettingsPage} from "../vendor-settings/vendor-settings";
 })
 export class VendorProfilePage {
   profile: string = "ABOUT";
-  gallery_imgs = [];
+  gallery_imgs: any = [];
   constructor(public navCtrl: NavController, public navParams: NavParams, public utils: UtilsProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad VendorProfilePage');
+    this.getGalleryFiles();
   }
   openVendorSettings(){
     console.log("Vendor Settings");
@@ -26,8 +27,17 @@ export class VendorProfilePage {
     this.utils.getImgFromDevice().then((data)=>{
       if(data){
         console.log(data);
+        this.utils.uploadImageToServer(data,"gallery");
         this.gallery_imgs.push(data);
       }
+    });
+  }
+
+  getGalleryFiles(){
+    let imgFiles: any = null;
+    this.utils.getImageGallery().then((data) => {
+      console.log(data);
+      this.gallery_imgs = data;
     });
   }
 }

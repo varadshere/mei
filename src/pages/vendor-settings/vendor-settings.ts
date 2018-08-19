@@ -122,7 +122,7 @@ export class VendorSettingsPage {
     this.utilsProvider.getImgFromDevice().then((data)=>{
       if(data){
         console.log(data);
-        this.utilsProvider.uploadmageToServer(data);
+        this.utilsProvider.uploadImageToServer(data,"profile");
         this.utilsProvider.profile.profile_pic = data;
       }
     });

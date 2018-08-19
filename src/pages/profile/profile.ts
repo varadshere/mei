@@ -12,6 +12,7 @@ export class ProfilePage {
   shownGroup = [];
   profileData: any = {};
   instaImgs: any = [];
+  gallery_imgs: any = [];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -21,6 +22,7 @@ export class ProfilePage {
     let sLen = this.profileData.services.length;
     this.shownGroup = new Array(sLen);
     this.getInstaImgs(this.profileData.username);
+    this.getGalleryFiles();
   }
 
   ionViewDidLoad() {
@@ -34,6 +36,14 @@ export class ProfilePage {
       if (d && typeof d !== "string" && d.length) {
         this.instaImgs = d;
       }
+    });
+  }
+
+  getGalleryFiles(){
+    let imgFiles: any = null;
+    this.utils.getImageGallery(this.profileData.user_id).then((data) => {
+      console.log(data);
+      this.gallery_imgs = data;
     });
   }
 

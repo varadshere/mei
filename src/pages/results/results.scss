@@ -39,4 +39,25 @@ page-results {
     background-color: #FFFFFF;
     color: #f9748f;
   }
+
+  rating {
+    ul {
+      padding: 0px;
+      padding-left: 10px;
+      margin: 0;
+      &.rating li {
+        padding: 0 !important;
+        background: none;
+        color: #ffb400;
+
+        ion-icon {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+
+  .result-strip-info .label{
+    margin-right: 0px;
+  }
 }

@@ -90,7 +90,7 @@
           </div>
         </ion-col>
         <ion-col col-4 class="img-col" *ngFor="let img of gallery_imgs">
-          <img src="{{img}}">
+          <img [src]="(img.includes('file://'))? img : utils.galleryImgUrl + img">
         </ion-col>
       </ion-row>
     </ion-list>

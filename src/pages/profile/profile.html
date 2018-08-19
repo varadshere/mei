@@ -92,6 +92,9 @@
 
     <ion-list *ngSwitchCase="'FEED'">
       <ion-row>
+        <ion-col col-4 class="img-col" *ngFor="let img of gallery_imgs">
+          <img [src]="utils.galleryImgUrl + img">
+        </ion-col>
         <ion-col col-4 class="img-col" *ngFor="let instaObj of instaImgs">
           <img src="{{instaObj.low_resolution}}">
         </ion-col>

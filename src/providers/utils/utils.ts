@@ -21,6 +21,7 @@ export class UtilsProvider {
   notifyObservable$: any =  this.notify.asObservable();
   serverUrl  =  'http://18.216.123.109:5000/api/'; //'http://372460c3.ngrok.io/api/';
   photoUrl  =  'http://18.216.123.109:5000/api/getProfileImage/'; //'http://372460c3.ngrok.io/api/';
+  galleryImgUrl = 'http://18.216.123.109:5000/api/getUserGallery/';
   page = '';
   private _serviceSelected = '';
   email = '';
@@ -621,15 +622,27 @@ export class UtilsProvider {
     });
   }
 
-  uploadmageToServer(fileUrl){
+  /*uploadType = "profile / gallery"*/
+  uploadImageToServer(fileUrl, uploadType){
     const fileTransfer: FileTransferObject = this.transfer.create();
-    let url =  this.serverUrl + 'uploader';
-    let options: FileUploadOptions = {
-      fileKey: 'file',
-      fileName: this.profile.user_id + '_profile-picture.jpg',
-      headers: {}
-    };
-
+    let url = null;
+    let options: FileUploadOptions = null;
+    if (uploadType == "profile"){
+      url =  this.serverUrl + 'uploader';
+      options = {
+        fileKey: 'file',
+        fileName: this.profile.user_id + '_profile-picture.jpg',
+        headers: {}
+      };
+    }
+    if (uploadType == "gallery"){
+      url = this.serverUrl + 'mediaUploader';
+      options = {
+        fileKey: 'file',
+        fileName: this.profile.user_id + `_${this.randomString()}.jpg`,
+        headers: {}
+      }
+    }
     fileTransfer.upload(fileUrl, url, options)
       .then((data) => {
         // success
@@ -638,6 +651,26 @@ export class UtilsProvider {
         // error
       })
   }
+
+  getImageGallery(userId?){
+    let loading = this.getloadingAlert();
+    loading.present();
+    return new Promise((resolve, reject) => {
+      let url = this.serverUrl + 'getUserGalleryFiles/' + (userId)? userId : this.profile.user_id;
+      this.http.get(url,{headers: this.headers}).map((res) => res.json()).timeout(3000).subscribe(data => {
+        console.log("Gallery files");
+        console.log(data);
+        loading.dismissAll();
+        resolve(this.sanitizeData(data));
+      }, error => {
+        console.log("Gallery ERROR");
+        console.log(error);
+        loading.dismissAll();
+        resolve(false);
+      });
+    });
+  }
+
   saveCard(dataToSend){
     let loading = this.getloadingAlert();
     loading.present();
@@ -827,5 +860,14 @@ export class UtilsProvider {
       loading.dismissAll();
       this.platform.exitApp();
     });
+  }
+
+  randomString(length: number=32){
+    let text = "";
+    let charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    for(let i = 0; i < length; i++) {
+      text += charset.charAt(Math.floor(Math.random() * charset.length));
+    }
+    return text;
   }
 }

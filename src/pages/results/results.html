@@ -24,11 +24,27 @@
   </ion-grid>
   <ion-card class="mei-card" *ngFor="let profile of vendorList" (click)="openProfile(profile)" tappable>
 
-    <ion-item>
+    <ion-item class="result-strip-info">
       <ion-avatar item-start>
         <img src="{{profile.profile_pic ? (profile.profile_pic.includes('http') ? profile.profile_pic : utils.photoUrl + profile.profile_pic) : 'assets/imgs/user.png'}}">
       </ion-avatar>
-      <h2>{{profile.first_name}} {{profile.last_name}}</h2>
+      <ion-row>
+        <ion-col col-8>
+          <h2>{{profile.first_name}} {{profile.last_name}}</h2>
+        </ion-col>
+        <ion-col col-4>
+          <span class="rating">
+            <rating [(ngModel)]="profile['avg(rev.rating)']"
+                    readOnly="true"
+                    max="5"
+                    emptyStarIconName="star-outline"
+                    halfStarIconName="star-half"
+                    starIconName="star"
+                    nullable="false">
+            </rating>
+          </span>
+        </ion-col>
+      </ion-row>
       <p>
         <ion-icon style="color:#DEDEDE" name="pin"></ion-icon> {{profile.distance || 'x'}} km away</p>
     </ion-item>
