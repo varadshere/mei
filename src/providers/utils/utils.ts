@@ -12,7 +12,7 @@ import { File } from '@ionic-native/file';
 import {utils} from "ng2-cordova-oauth/utility";
 import {UserData} from "../models";
 import {Storage} from "@ionic/storage";
-declare var FCMPlugin;
+declare var FirebasePlugin;
 
 @Injectable()
 export class UtilsProvider {
@@ -174,8 +174,8 @@ export class UtilsProvider {
 
   tokensetup() {
     var promise = new Promise((resolve, reject) => {
-      if (typeof FCMPlugin != 'undefined'){
-        FCMPlugin.getToken((token) =>{
+      if (typeof FirebasePlugin != 'undefined'){
+        FirebasePlugin.getToken((token) =>{
           resolve(token);
         }, (err) => {
           reject(err);

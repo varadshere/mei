@@ -40,11 +40,13 @@ export class BookingDetailsPage {
   };
 
   bookingData: any;
+  bookingIndex: any;
   client: boolean;
   mapAddress: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController, public utils: UtilsProvider) {
     this.bookingData = navParams.get('bookingData');
+    this.bookingIndex = this.navParams.get('bookingIndex');
     this.utils.getProfile().then(data => {
       this.client = !(data["type"] == "client");
       if (data['type'] == 'client'){
@@ -283,6 +285,24 @@ openMap(){
 
 
 
+  }
+
+  confirmBooking(flag: String){
+    let ref = this;
+    let datatoSend = {
+      "client_id": this.bookingData.user_id,
+      "vendor_id": this.utils.profile.user_id,
+      "flag": flag,
+      "date": this.bookingData.date
+    };
+    let cb = this.utils.confirmBooking(datatoSend).then((result) => {
+      if (result) {
+        console.log(`Booking confirmed: ${result}`);
+        this.navCtrl.getPrevious().data.bookingIndex = ref.bookingIndex;
+        this.navCtrl.getPrevious().data.bookingStatus = flag;
+        this.navCtrl.pop();
+      }
+    });
   }
 
 }
