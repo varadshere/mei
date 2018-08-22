@@ -654,9 +654,15 @@ export class UtilsProvider {
 
   getImageGallery(userId?){
     let loading = this.getloadingAlert();
+    let url = "";
     loading.present();
     return new Promise((resolve, reject) => {
-      let url = this.serverUrl + 'getUserGalleryFiles/' + (userId)? userId : this.profile.user_id;
+      if(userId){
+        url = this.serverUrl + 'getUserGalleryFiles/' + userId;
+      }
+      else {
+        url = this.serverUrl + 'getUserGalleryFiles/' + this.profile.user_id;
+      }
       this.http.get(url,{headers: this.headers}).map((res) => res.json()).timeout(3000).subscribe(data => {
         console.log("Gallery files");
         console.log(data);
@@ -869,5 +875,30 @@ export class UtilsProvider {
       text += charset.charAt(Math.floor(Math.random() * charset.length));
     }
     return text;
+  }
+
+  walletTransactions(){
+    let dataToSend = {
+      username: this.profile.username,
+      email: this.profile.email,
+      filter_date: "desc"
+    };
+    let loading = this.getloadingAlert();
+    loading.present();
+    return new Promise((resolve, reject) => {
+      let url = this.serverUrl + 'getTransactions';
+      let body = JSON.stringify(dataToSend);
+      this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(3000).subscribe(data => {
+        console.log("got transactions");
+        console.log(data);
+        loading.dismissAll();
+        resolve(this.sanitizeData(data));
+      }, error => {
+        console.log("get transactions error");
+        console.log(error);
+        loading.dismissAll();
+        resolve(false);
+      });
+    });
   }
 }

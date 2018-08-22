@@ -1,5 +1,6 @@
 import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { UtilsProvider } from "../../providers/utils/utils";
 import * as d3 from 'd3-selection';
 import * as d3Scale from "d3-scale";
 import * as d3Array from "d3-array";
@@ -73,7 +74,8 @@ export class ChartPage {
       ] 
     }
     
-data:any=JSON.parse(JSON.stringify(this.data2.data));
+// data:any=JSON.parse(JSON.stringify(this.data2.data));
+  data: any = {};
   
   formatDate:any;
   formatDate3:any;
@@ -87,100 +89,52 @@ parseDate:any;
 formatDate2:any;
   activity: String = "act";
 
+  walletData: any = {};
 
-  constructor(public zone: NgZone,public navCtrl: NavController, public navParams: NavParams,public alertCtrl: AlertController) {
+  constructor(public zone: NgZone,public navCtrl: NavController, public navParams: NavParams,public alertCtrl: AlertController, private utils: UtilsProvider) {
     this.width = 900 - this.margin.left - this.margin.right ;
     this.height = 500 - this.margin.top - this.margin.bottom;
-      this.parseDate = d3Time.isoParse;
-      this.formatDate3=d3Time.timeFormat("%b")
-      this.formatDate=d3Time.timeFormat("%Y");
-      this.formatDate2=d3Time.timeFormat("%a-%d");
-      this.formatDate4=d3Time.timeFormat("%I:%M %p");
-     
-     
-     
-     
-      
+    this.parseDate = d3Time.isoParse;
+    this.formatDate3=d3Time.timeFormat("%b")
+    this.formatDate=d3Time.timeFormat("%Y");
+    this.formatDate2=d3Time.timeFormat("%a-%d");
+    this.formatDate4=d3Time.timeFormat("%I:%M %p");
+
+    this.utils.walletTransactions().then((result)=>{
+      this.walletData = result;
+      let data = [];
+      let wdata = JSON.parse(JSON.stringify(this.walletData.data));
+      wdata.forEach((d)=>{
+        d.service.forEach((o)=>{
+          o.clientName = d.client_name;
+          data.push(o);
+        })
+      });
+      this.data = JSON.parse(JSON.stringify(data));
+      this.monthChart();
+    });
   }
+
   ionViewDidLoad() {
-  
- this.monthChart();
- 
-   
+   // this.monthChart();
   }
   
   changeChart(){
     let statusalert = this.alertCtrl.create({
       buttons: ['okay']
     });
-    let alert = this.alertCtrl.create({
-      title: 'Choose Chart',
-      inputs: [{
-        type:'radio',
-        label: 'Month',
-        value:'Month',
-        checked:(this.chartType=='Month')?true:false
-      },
-      {
-        type:'radio',
-        label: 'Year',
-        value:'Year',
-        checked:(this.chartType=='Year')?true:false
-        
-      },
-      {
-        type:'radio',
-        label: 'Day',
-        value:'Day',
-        checked:(this.chartType=='Day')?true:false
-      },
-      {
-        type:'radio',
-        label: 'Overall',
-        value:'Overall',
-        checked:(this.chartType=='Overall')?true:false
-      },
-    ],
-      buttons: [{
-        text: 'Cancel',
-        role: 'cancel',
-        handler: data => {
-
-        }
-      },
-      {
-        text: 'Choose',
-        handler: data => {
-         
-         if (data=="Day") {
-          this.dayChart();
-          //this.zone.run(() => {
-    
-            this.chartType='Day';
-          //})
-           
-          
-          }
-          else if(data == "Month"){
-            this.monthChart();
-          //  this.zone.run(() => {
-           
-            this.chartType='Month';
-          //  })
-          }
-          else if(data == "Year"){
-            this.yearChart();
-            this.chartType='Year';
-          }
-          else if(data == "Overall"){
-           this.overallChart();
-            this.chartType='Overall';
-          }
-        }
-        
-      }]
-    });
-    alert.present();
+    if (this.chartType=="Day") {
+      this.dayChart();
+    }
+    else if(this.chartType == "Month"){
+      this.monthChart();
+    }
+    else if(this.chartType == "Year"){
+      this.yearChart();
+    }
+    else if(this.chartType == "Overall"){
+      this.overallChart();
+    }
   }
 sortdata(dataReq){
   var sortByYear=[];
@@ -278,13 +232,13 @@ yearChart(){
         }) */
         yearData.forEach((d)=> {
           d.date = this.formatDate3(this.parseDate(d.date))
-          d.value = +d.value;
+          d.cost = +d.cost;
          
        })
         var newdata1 = d3Collection.nest<any,any>()
     .key((d)=> { return d.date})
     .rollup(function(d) { 
-     return d3Array.sum(d, function(g) {return g.value; });
+     return d3Array.sum(d, function(g) {return g.cost; });
     }).entries(yearData);
 
       
@@ -368,12 +322,12 @@ dayChart(){
       }) */
       dayData.forEach((d)=> {
         d.date = this.formatDate4(this.parseDate(d.date))
-        d.value = +d.value;
+        d.cost = +d.cost;
           })
       var newdata2 = d3Collection.nest<any,any>()
   .key((d)=> { return d.date})
   .rollup(function(d) { 
-   return d3Array.sum(d, function(g) {return g.value; });
+   return d3Array.sum(d, function(g) {return g.cost; });
   }).entries(dayData);
 
     
@@ -460,7 +414,7 @@ overallChart(){
    
       dat.forEach((d)=> {
         d.date = this.formatDate( this.parseDate(d.date))
-        d.value = +d.value;
+        d.cost = +d.cost;
      
       
     })
@@ -468,7 +422,7 @@ overallChart(){
     var newdata3 = d3Collection.nest<any,any>()
     .key((d)=> { return d.date})
     .rollup(function(d) { 
-     return d3Array.sum(d, function(g) {return g.value; });
+     return d3Array.sum(d, function(g) {return g.cost; });
     }).entries(dat);
     x3.domain(newdata3.map(function(d) { return d.key; }));
     y3.domain([0, d3Array.max(newdata3, function(d:any) { return d.value; })]);
@@ -513,56 +467,42 @@ overallChart(){
 }
 
 monthChart(){
-
-  
   d3.select("#Chart").html("");
- 
   let monthData:any=[];
   this.sortdata('month').then((res)=>{
     monthData=res;
-   
     this.monthClient=JSON.parse(JSON.stringify(res))
- // Parse the date / time
- 
-
-this.monthClient.forEach((d) => {
-  d.date=this.formatDate7(this.parseDate(d.date));
-});
-   var x4 = d3Scale.scaleBand().rangeRound([0, this.width]).padding(0.1);
-   var y4 = d3Scale.scaleLinear().range([this.height, 0]);
-  var xAxis4 = d3Axis.axisBottom(x4)
-      .scale(x4).ticks(d3Time2.timeWeek)
-      
-     
-  var yAxis4 = d3Axis.axisLeft(y4)
+    // Parse the date / time
+    this.monthClient.forEach((d) => {
+      d.date=this.formatDate7(this.parseDate(d.date));
+    });
+    var x4 = d3Scale.scaleBand().rangeRound([0, this.width]).padding(0.1);
+    var y4 = d3Scale.scaleLinear().range([this.height, 0]);
+    var xAxis4 = d3Axis.axisBottom(x4)
+      .scale(x4).ticks(d3Time2.timeWeek);
+    var yAxis4 = d3Axis.axisLeft(y4)
       .scale(y4)
       .ticks(10);
-   var svg4 = d3.select("#Chart").append("svg")
-   .attr("width", '100%')
-   .attr("height", '100%')
-   .attr('viewBox','0 0 900 500')
+    var svg4 = d3.select("#Chart").append("svg")
+    .attr("width", '100%')
+    .attr("height", '100%')
+    .attr('viewBox','0 0 900 500')
     .append("g")
-      .attr("transform",
+    .attr("transform",
             "translate(" + this.margin.left + "," + this.margin.top + ")");
-           
-           
      /* this.data.forEach((d)=> {
           d.date = this.parseDate(d.date)
           d.value = +d.value;
       }) */
-      monthData.forEach((d)=> {
+    monthData.forEach((d)=> {
         d.date = this.formatDate2( this.parseDate(d.date))
-        d.value = +d.value;
-      
-    })
-
+        d.cost = +d.cost;
+    });
     var newdata4 = d3Collection.nest<any,any>()
     .key((d)=> { return d.date})
     .rollup(function(d) { 
-     return d3Array.sum(d, function(g) {return g.value; });
+     return d3Array.sum(d, function(g) {return g.cost; });
     }).entries(monthData);
-
-    
     x4.domain(newdata4.map(function(d) { return d.key; }));
     y4.domain([0, d3Array.max(newdata4, function(d:any) { return d.value; })]);
    
@@ -602,7 +542,6 @@ this.monthClient.forEach((d) => {
         .attr("y", (d)=>   y4(d.value) )
         .attr("height", (d)=> this.height - y4(d.value) );
       });
-
 }
 
 

@@ -30,7 +30,7 @@
   <ion-row>
     <ion-col>
       <ion-row class="row-border">
-        <div class="number-text">{{summeryData.booking_count}}</div>
+        <div class="number-text">{{summeryData.booking_count || 0}}</div>
       </ion-row>
       <ion-row>
         <div class="number-rwo">
@@ -40,7 +40,7 @@
     </ion-col>
     <ion-col>
       <ion-row class="row-border">
-        <div class="number-text">${{summeryData.earnings}}</div>
+        <div class="number-text">{{summeryData.earnings || 0 | currency}}</div>
       </ion-row>
       <ion-row>
         <div class="number-rwo">
@@ -50,7 +50,7 @@
     </ion-col>
     <ion-col>
       <ion-row>
-        <div class="number-text">{{summeryData.hours}}</div>
+        <div class="number-text">{{summeryData.hours || 0}}</div>
       </ion-row>
       <ion-row>
         <div class="number-rwo">
