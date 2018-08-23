@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import * as moment from "moment";
 import {UtilsProvider} from "../../providers/utils/utils";
+import {BookingDetailsPage} from "../booking-details/booking-details";
+import {event} from "d3-selection";
 
 @Component({
   selector: 'page-vendor-calendar',
@@ -69,6 +71,30 @@ export class VendorCalendarPage {
   onEventSelected(event) {
     let start = moment(event.startTime).format('LLLL');
     let end = moment(event.endTime).format('LLLL');
+
+    var sTime = new Date(event.startTime);
+    var sTimeHrs = sTime.getHours();
+    var sTimeMins = sTime.getMinutes();
+    var eTime = new Date(event.endTime);
+    var eTimeHrs = eTime.getHours();
+    var eTimeMins = eTime.getMinutes();
+
+    let data = {
+      confirm:"true",
+      date: sTime.toDateString(),
+      startTime: `${(sTimeHrs < 10)?'0'+sTimeHrs : sTimeHrs}:${(sTimeMins < 10)?'0'+sTimeMins : sTimeMins}`,
+      endTime: `${(eTimeHrs < 10)?'0'+eTimeHrs : eTimeHrs}:${(eTimeMins < 10)?'0'+eTimeMins : eTimeMins}`,
+      name: event.title.split("|")[0],
+      address: event.title.split("|")[2],
+      services:[{
+        quantity:1,
+        serviceName:event.title.split("|")[1]
+      }]
+    };
+
+    this.navCtrl.push(BookingDetailsPage, {
+      bookingData: data
+    });
 
     // let alert = this.alertCtrl.create({
     //   title: '' + event.title,

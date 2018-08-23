@@ -59,7 +59,7 @@
 
       <div class="service-list dark-grey ub-medium" *ngFor=" let item of bookingData.services">
         <div class="floatLeft ">{{item.quantity}} x {{item.serviceName}}</div>
-        <div class="floatRight">${{item.price}}</div>
+        <div class="floatRight">${{item.price || 0}}</div>
         <div class="fix"></div>
         <div class="bottom-spacer2"></div>
 

@@ -96,7 +96,7 @@ loadLatLng(){
 
 
   createmodalobj(){
-  this.modalObj={latlong:this.latLng, clientName:this.data.clientName, clientAddress:this.data.clientAddress};
+  this.modalObj={latlong:this.latLng, clientName:this.bookingData.name, clientAddress:this.bookingData.address};
   };
 
 openMap(){
