@@ -1,5 +1,5 @@
 import { Component,ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams,ModalController } from 'ionic-angular';
+import { NavController, NavParams,ModalController, AlertController } from 'ionic-angular';
 import { FullmapPage } from '../fullmap/fullmap';
 import {UtilsProvider} from "../../providers/utils/utils";
 
@@ -44,7 +44,7 @@ export class BookingDetailsPage {
   client: boolean;
   mapAddress: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController, public utils: UtilsProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController, public utils: UtilsProvider, private alertCtrl: AlertController) {
     this.bookingData = navParams.get('bookingData');
     this.bookingIndex = this.navParams.get('bookingIndex');
     this.utils.getProfile().then(data => {
@@ -303,6 +303,15 @@ openMap(){
         this.navCtrl.pop();
       }
     });
+  }
+
+  raiseAlert(){
+    let alert = this.alertCtrl.create({
+      title:"Raise a Dispute",
+      message:"Email us at <a href='mailto:hello@meiapp.com'>hello@meiapp.com</a>",
+      buttons:["Dismiss"]
+    });
+    alert.present();
   }
 
 }
