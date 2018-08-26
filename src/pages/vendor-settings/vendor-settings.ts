@@ -7,6 +7,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {TermsAndConditionsPage} from "../terms-and-conditions/terms-and-conditions";
 import {VendorBankDetailsPage} from "../vendor-bank-details/vendor-bank-details";
 import {LoginPage} from "../login/login";
+import {VendorEditServicesPage} from "../vendor-edit-services/vendor-edit-services";
 declare var google;
 
 @Component({
@@ -20,6 +21,7 @@ export class VendorSettingsPage {
   editMode: boolean = false;
   termsPage: any = TermsAndConditionsPage;
   bankDetailsPage: any = VendorBankDetailsPage;
+  editServicesPage: any = VendorEditServicesPage;
   bankDetailsParams = {
     "username": this.utilsProvider.getUserEmail(),
     "user_id": this.utilsProvider.profile.user_id

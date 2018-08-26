@@ -44,6 +44,7 @@ import {ReviewModalPage} from "../pages/review-modal/review-modal";
 import { IonicStorageModule } from '@ionic/storage';
 import {TermsAndConditionsPage} from "../pages/terms-and-conditions/terms-and-conditions";
 import {VendorBankDetailsPage} from "../pages/vendor-bank-details/vendor-bank-details";
+import {VendorEditServicesPage} from "../pages/vendor-edit-services/vendor-edit-services";
 import {LocalNotifications} from "@ionic-native/local-notifications";
 
 @NgModule({
@@ -77,7 +78,8 @@ import {LocalNotifications} from "@ionic-native/local-notifications";
     VendorProfilePage,
     ReviewModalPage,
     TermsAndConditionsPage,
-    VendorBankDetailsPage
+    VendorBankDetailsPage,
+    VendorEditServicesPage
   ],
   imports: [
     NgCalendarModule,
@@ -118,7 +120,8 @@ import {LocalNotifications} from "@ionic-native/local-notifications";
     VendorProfilePage,
     ReviewModalPage,
     TermsAndConditionsPage,
-    VendorBankDetailsPage
+    VendorBankDetailsPage,
+    VendorEditServicesPage
   ],
   providers: [
     StatusBar,
