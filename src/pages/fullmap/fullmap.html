@@ -14,7 +14,7 @@
     <div class="div1" padding>
         <div class="ub-medium dark-grey client-name">{{clientName}}</div> 
   
-        <div class="ub-medium mei-color client-address">{{clientAddress}}</div>
+      <div class="ub-medium mei-color client-address"><a href="{{utils.mapSearchUrl + '&query=' + jlatLng.lat+','+jlatLng.lng}}" target="_blank">{{clientAddress}}</a></div>
   
     </div>
 </ion-content>

@@ -1,5 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import {UtilsProvider} from "../../providers/utils/utils";
+
 declare var google;
 /**
  * Generated class for the FullmapPage page.
@@ -19,9 +21,10 @@ export class FullmapPage {
   map: any;
     marker='./assets/imgs/marker.png';
 latLng:any=this.navParams.get('latlong');
+jlatLng = this.navParams.get('jlatLng');
 clientName:any=this.navParams.get('clientName');
 clientAddress:any=this.navParams.get('clientAddress');
-  constructor(public navCtrl: NavController, public navParams: NavParams,public viewCtrl: ViewController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public viewCtrl: ViewController, public utils: UtilsProvider) {
   }
 
   ionViewDidLoad(){
