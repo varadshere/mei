@@ -66,8 +66,7 @@
       </div>
 
       <div *ngIf="client">
-
-        <div class="floatLeft light-grey">Commision & PP Fees ({{ bookingData?.commision?.percentage || 0 }}%)</div>
+        <div class="floatLeft light-grey">{{(bookingData?.commision?.percentage <= 2)?"Payment processing fee":"Payment processing and commission"}} ({{ bookingData?.commision?.percentage || 0 }}%)</div>
         <div [class.strike]="bookingData?.commision?.commisionWaive" class="floatRight light-grey">
           ${{bookingData?.commision?.percent_amt || 0}}
         </div>
@@ -79,7 +78,7 @@
       </div>
       <hr class="customhr">
       <p text-right *ngIf="bookingData.confirm != null">
-        <button ion-button round class="disp-button ub-medium" (click)="raiseAlert()"> RAISE A DISPUTE</button>
+        <button ion-button round class="disp-button dispute-button ub-medium" (click)="raiseAlert()"> RAISE A DISPUTE</button>
       </p>
       <div text-center *ngIf="bookingData.confirm == null && utils.profile.type != 'client'">
         <ion-row>

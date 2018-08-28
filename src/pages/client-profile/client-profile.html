@@ -60,9 +60,9 @@
       <ion-card *ngFor="let reviewObj of utils.profile.reviews">
         <ion-item>
           <ion-avatar item-start>
-            <img [src]="reviewObj.vendor_image ? reviewObj.vendor_image : 'assets/imgs/user.png'">
+            <img [src]="reviewObj.vendor_image ? (reviewObj.vendor_image.includes('http') ? reviewObj.vendor_image : utils.photoUrl + reviewObj.vendor_image) : 'assets/imgs/user.png'">
           </ion-avatar>
-          <h3 class="vendor-name">{{reviewObj.vendor_name}}</h3>
+          <h3 class="vendor-name">{{reviewObj.vendor_name.split(" ")[0] +" "+ reviewObj.vendor_name.split(" ")[1].slice(0,1) +"."}}</h3>
           <span class="rating">
           <rating [(ngModel)]="reviewObj.rating"
                   readOnly="true"
