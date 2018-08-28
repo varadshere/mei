@@ -20,6 +20,7 @@ export class BookingDetailsPage {
 
   map: any;
   latLng:any;
+  jlatLng: any;
   modalObj:any;
     marker='./assets/imgs/marker.png';
 
@@ -68,6 +69,7 @@ export class BookingDetailsPage {
 loadLatLng(){
   this.getlatlng(this.mapAddress).then((result:any)=>{
     this.latLng=new google.maps.LatLng(result.lat,result.lng);
+    this.jlatLng = JSON.parse(JSON.stringify(this.latLng));
     this.loadMap(this.latLng);
     this.createmodalobj();
   // console.log("LATLNGGGGGG",JSON.stringify(this.latLng))
@@ -96,7 +98,7 @@ loadLatLng(){
 
 
   createmodalobj(){
-  this.modalObj={latlong:this.latLng, clientName:this.bookingData.name, clientAddress:this.bookingData.address};
+  this.modalObj={latlong:this.latLng, clientName:this.bookingData.name, clientAddress:this.bookingData.address, jlatLng: this.jlatLng};
   };
 
 openMap(){

@@ -22,6 +22,7 @@ export class UtilsProvider {
   serverUrl  =  'http://18.216.123.109:5000/api/'; //'http://372460c3.ngrok.io/api/';
   photoUrl  =  'http://18.216.123.109:5000/api/getProfileImage/'; //'http://372460c3.ngrok.io/api/';
   galleryImgUrl = 'http://18.216.123.109:5000/api/getUserGallery/';
+  mapSearchUrl = 'https://www.google.com/maps/search/?api=1';
   page = '';
   private _serviceSelected = '';
   email = '';
