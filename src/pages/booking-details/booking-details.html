@@ -80,12 +80,12 @@
       <p text-right *ngIf="bookingData.confirm != null">
         <button ion-button round class="disp-button dispute-button ub-medium" (click)="raiseAlert()"> RAISE A DISPUTE</button>
       </p>
-      <div text-center *ngIf="bookingData.confirm == null && utils.profile.type != 'client'">
+      <div text-center *ngIf="bookingData.confirm == null">
         <ion-row>
           <ion-col>
             <button ion-button round class="disp-button ub-medium" (click)="confirmBooking('false')">Cancel</button>
           </ion-col>
-          <ion-col>
+          <ion-col *ngIf="utils.profile.type != 'client'">
             <button ion-button round class="disp-button ub-medium" (click)="confirmBooking('true')">Confirm</button>
           </ion-col>
         </ion-row>

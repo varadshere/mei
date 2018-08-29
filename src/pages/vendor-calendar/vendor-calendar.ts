@@ -138,9 +138,9 @@ export class VendorCalendarPage {
     this.monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
     this.getDaysOfMonth();
     this.loadEventThisMonth();
-
     // let thisDate1 = this.date.getFullYear()+"-"+(this.date.getMonth()+1)+"-"+this.date.getDay();
     this.selectedDate = moment().format('DD MMMM YYYY');
+    this.selectDate(this.daysInThisMonth[this.currentDate-1]);
   }
 
   getDaysOfMonth() {

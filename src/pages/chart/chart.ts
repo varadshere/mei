@@ -24,10 +24,11 @@ import * as d3Transition from "d3-transition";
 
 export class ChartPage {
   formatDate5:any=d3Time.timeFormat("%B-%Y");
+  formatDateMonth: any = d3Time.timeFormat("%B");
   formatDate6:any=d3Time.timeFormat("%A");
   formatDate7:any=d3Time.timeFormat("%B %d, %Y")
   currentDate=new Date();
-    currentMonth:any=this.formatDate5(this.currentDate);
+    currentMonth:any=this.formatDateMonth(this.currentDate);
     currentDay:any=this.formatDate6(this.currentDate);
     currentYear:any=this.currentDate.getFullYear();
   //newdata2:any;
@@ -80,6 +81,7 @@ export class ChartPage {
   formatDate:any;
   formatDate3:any;
   formatDate4:any;
+  formatDateDay: any;
   datYear:any;
   datMonth:any;
   datDay:any;
@@ -99,6 +101,7 @@ formatDate2:any;
     this.formatDate=d3Time.timeFormat("%Y");
     this.formatDate2=d3Time.timeFormat("%a-%d");
     this.formatDate4=d3Time.timeFormat("%I:%M %p");
+    this.formatDateDay = d3Time.timeFormat("%d");
 
     this.utils.walletTransactions().then((result)=>{
       this.walletData = result;
@@ -476,6 +479,7 @@ monthChart(){
     this.monthClient.forEach((d) => {
       d.date=this.formatDate7(this.parseDate(d.date));
     });
+    console.log(monthData);
     var x4 = d3Scale.scaleBand().rangeRound([0, this.width]).padding(0.1);
     var y4 = d3Scale.scaleLinear().range([this.height, 0]);
     var xAxis4 = d3Axis.axisBottom(x4)
@@ -495,7 +499,7 @@ monthChart(){
           d.value = +d.value;
       }) */
     monthData.forEach((d)=> {
-        d.date = this.formatDate2( this.parseDate(d.date))
+        d.date = this.formatDateDay( this.parseDate(d.date))
         d.cost = +d.cost;
     });
     var newdata4 = d3Collection.nest<any,any>()

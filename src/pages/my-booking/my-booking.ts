@@ -30,7 +30,7 @@ export class MyBookingPage {
   eventList: any;
   selectedEvent: any;
   isSelected: any;
-
+  initialDate: any;
 
   schedule = {
     sch: []
@@ -100,6 +100,7 @@ export class MyBookingPage {
 
   ionViewWillEnter() {
     this.date = new Date();
+    this.initialDate = new Date();
     this.monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
     this.getDaysOfMonth();
     this.loadEventThisMonth();

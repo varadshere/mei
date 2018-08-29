@@ -154,78 +154,78 @@
                 <div *ngSwitchCase="'Day'">
                   <ion-grid class="small-margin">
                     <ion-row text-center>
-                      <ion-col class="grey-border ub-medium mei-color font-col1">{{walletData.dayBreakup?.hair || 0 | currency}}<br>
+                      <ion-col class="grey-border ub-medium mei-color font-col1">{{(walletData.dayBreakup?.hair > 0)?(walletData.dayBreakup?.hair | currency):'$---'}}<br>
                        <span class="ub-medium light-grey font-col2">HAIR</span>
 
                      </ion-col>
-                      <ion-col class="grey-border ub-medium mei-color font-col1">{{walletData.dayBreakup?.makeup || 0 | currency}}<br>
+                      <ion-col class="grey-border ub-medium mei-color font-col1">{{(walletData.dayBreakup?.makeup > 0)?(walletData.dayBreakup?.makeup | currency):'$---'}}<br>
                        <span class="ub-medium light-grey font-col2"> MAKEUP</span>
                      </ion-col>
-                      <ion-col class="ub-medium mei-color font-col1">{{walletData.dayBreakup?.body || 0 | currency}}<br>
+                      <ion-col class="ub-medium mei-color font-col1">{{(walletData.dayBreakup?.body > 0)?(walletData.dayBreakup?.body | currency):'$---'}}<br>
                        <span class="ub-medium light-grey font-col2">BODY </span>
                      </ion-col>
                     </ion-row>
                   </ion-grid>
 
-             <p class="para-font ub-medium dark-grey">So far in {{ currentDay }}, you have earned <span class="mei-color fontwt">{{walletData.totalForDay || 0 | currency}}</span> </p>
+             <p class="para-font ub-medium dark-grey">So far on {{ currentDay }}, you have earned <span class="mei-color fontwt">{{(walletData.totalForDay > 0)?(walletData.totalForDay | currency):'$---'}}</span> </p>
 
                 </div>
                 <div *ngSwitchCase="'Month'">
                  <ion-grid class="small-margin">
                    <ion-row text-center>
-                     <ion-col class="grey-border ub-medium mei-color font-col1">{{walletData.monthBreakup.hair | currency}}<br>
+                     <ion-col class="grey-border ub-medium mei-color font-col1">{{(walletData.monthBreakup.hair > 0)?(walletData.monthBreakup.hair | currency):'$---'}}<br>
                       <span class="ub-medium light-grey font-col2">HAIR</span>
 
                     </ion-col>
-                     <ion-col class="grey-border ub-medium mei-color font-col1">{{walletData.monthBreakup.makeup | currency}}<br>
+                     <ion-col class="grey-border ub-medium mei-color font-col1">{{(walletData.monthBreakup.makeup > 0)?(walletData.monthBreakup.makeup | currency):'$---'}}<br>
                       <span class="ub-medium light-grey font-col2"> MAKEUP</span>
                     </ion-col>
-                     <ion-col class="ub-medium mei-color font-col1">{{walletData.monthBreakup.body | currency}}<br>
+                     <ion-col class="ub-medium mei-color font-col1">{{(walletData.monthBreakup.body > 0)?(walletData.monthBreakup.body | currency):'$---'}}<br>
                       <span class="ub-medium light-grey font-col2">BODY </span>
                     </ion-col>
                    </ion-row>
                  </ion-grid>
 
-            <p class="para-font ub-medium dark-grey">So far in {{ currentMonth }}, you have earned <span class="mei-color fontwt">{{walletData.totalForMonth | currency}}</span> </p>
+            <p class="para-font ub-medium dark-grey">So far in {{ currentMonth }}, you have earned <span class="mei-color fontwt">{{(walletData.totalForMonth > 0)?(walletData.totalForMonth | currency):'$---'}}</span> </p>
               </div>
               <div *ngSwitchCase="'Year'">
 
                 <ion-grid class="small-margin">
                   <ion-row text-center>
-                    <ion-col class="grey-border ub-medium mei-color font-col1">{{walletData.yearBreakup.hair | currency}}<br>
+                    <ion-col class="grey-border ub-medium mei-color font-col1">{{(walletData.yearBreakup.hair > 0)?(walletData.yearBreakup.hair | currency):'$---'}}<br>
                      <span class="ub-medium light-grey font-col2">HAIR</span>
 
                    </ion-col>
-                    <ion-col class="grey-border ub-medium mei-color font-col1">{{walletData.yearBreakup.makeup | currency}}<br>
+                    <ion-col class="grey-border ub-medium mei-color font-col1">{{(walletData.yearBreakup.makeup > 0)?(walletData.yearBreakup.makeup | currency):'$---'}}<br>
                      <span class="ub-medium light-grey font-col2"> MAKEUP</span>
                    </ion-col>
-                    <ion-col class="ub-medium mei-color font-col1">{{walletData.yearBreakup.body | currency}}<br>
+                    <ion-col class="ub-medium mei-color font-col1">{{(walletData.yearBreakup.body > 0)?(walletData.yearBreakup.body | currency):'$---'}}<br>
                      <span class="ub-medium light-grey font-col2">BODY </span>
                    </ion-col>
                   </ion-row>
                 </ion-grid>
 
-           <p class="para-font ub-medium dark-grey">So far in {{currentYear}}, you have earned <span class="mei-color fontwt">{{walletData.totalForYear | currency}}</span> </p>
+           <p class="para-font ub-medium dark-grey">So far in {{currentYear}}, you have earned <span class="mei-color fontwt">{{(walletData.totalForYear > 0)?(walletData.totalForYear | currency):'$---'}}</span> </p>
 
 
               </div>
               <div *ngSwitchCase="'Overall'">
                 <ion-grid class="small-margin">
                   <ion-row text-center>
-                    <ion-col class="grey-border ub-medium mei-color font-col1">{{walletData.overallBreakup.hair | currency}}<br>
+                    <ion-col class="grey-border ub-medium mei-color font-col1">{{(walletData.overallBreakup.hair > 0)?(walletData.overallBreakup.hair | currency):'$---'}}<br>
                      <span class="ub-medium light-grey font-col2">HAIR</span>
 
                    </ion-col>
-                    <ion-col class="grey-border ub-medium mei-color font-col1">{{walletData.overallBreakup.makeup | currency}}<br>
+                    <ion-col class="grey-border ub-medium mei-color font-col1">{{(walletData.overallBreakup.makeup > 0)?(walletData.overallBreakup.makeup | currency):'$---'}}<br>
                      <span class="ub-medium light-grey font-col2"> MAKEUP</span>
                    </ion-col>
-                    <ion-col class="ub-medium mei-color font-col1">{{walletData.overallBreakup.body | currency}}<br>
+                    <ion-col class="ub-medium mei-color font-col1">{{(walletData.overallBreakup.body > 0)?(walletData.overallBreakup.body | currency):'$---'}}<br>
                      <span class="ub-medium light-grey font-col2">BODY </span>
                    </ion-col>
                   </ion-row>
                 </ion-grid>
 
-           <p class="para-font ub-medium dark-grey">So far, you have earned <span class="mei-color fontwt">{{walletData.totalForOverall | currency}}</span> </p>
+           <p class="para-font ub-medium dark-grey">So far, you have earned <span class="mei-color fontwt">{{(walletData.totalForOverall > 0)?(walletData.totalForOverall | currency):'$---'}}</span> </p>
 
 
               </div>

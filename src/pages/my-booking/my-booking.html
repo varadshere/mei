@@ -70,7 +70,7 @@
             <!--{{day.num}}-->
             <!--<div class="event-bullet" *ngIf="checkEvent(day)"></div>-->
           <!--</span>-->
-          <span [ngClass]="{'currentDate':currentDate == day.num, 'otherDate':currentDate != day.num, 'previousDate':day.num < currentDate}" [class.selected-date]="day.isSelected">
+          <span [ngClass]="{'currentDate':currentDate == day.num, 'otherDate':currentDate != day.num, 'previousDate':day.num < currentDate && monthNames.indexOf(currentMonth) <= initialDate.getMonth()}" [class.selected-date]="day.isSelected">
             {{day.num}}
             <div class="event-bullet" *ngIf="checkEvent(day)"></div>
           </span>

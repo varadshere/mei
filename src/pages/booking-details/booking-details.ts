@@ -292,8 +292,8 @@ openMap(){
   confirmBooking(flag: String){
     let ref = this;
     let datatoSend = {
-      "client_id": this.bookingData.user_id,
-      "vendor_id": this.utils.profile.user_id,
+      "client_id": (this.utils.profile.type == 'client')?this.utils.profile.user_id:this.bookingData.user_id,
+      "vendor_id": (this.utils.profile.type == 'client')?this.bookingData.user_id:this.utils.profile.user_id,
       "flag": flag,
       "date": this.bookingData.date
     };
