@@ -255,16 +255,16 @@ yearChart(){
       //this.x.domain(this.data.map(function(d) { return d.date; }));
       //this.y.domain([0, d3Array.max(this.data, function(d) { return d.value; })]);
       svg1.append("g")
-          .attr("class", "x axis")
+          .attr("class", "x-axis")
           .attr("transform", "translate(0," + this.height + ")")
           .call(xAxis1)
         .selectAll("text")
           .style("text-anchor", "end")
           .attr("dx", "-.8em")
-          .attr("dy", "-.55em")
+          .attr("dy", "-.05em")
           .attr("transform", "translate(15,10)" );
       svg1.append("g")
-          .attr("class", "y axis")
+          .attr("class", "y-axis")
           .call(yAxis1)
         .append("text")
           .attr("transform", "rotate(-90)")
@@ -344,16 +344,16 @@ dayChart(){
     //this.x.domain(this.data.map(function(d) { return d.date; }));
     //this.y.domain([0, d3Array.max(this.data, function(d) { return d.value; })]);
     svg2.append("g")
-        .attr("class", "x axis")
+        .attr("class", "x-axis")
         .attr("transform", "translate(0," + this.height + ")")
         .call(xAxis2)
       .selectAll("text")
         .style("text-anchor", "end")
         .attr("dx", "-.8em")
-        .attr("dy", "-.55em")
+        .attr("dy", "-.05em")
         .attr("transform", "translate(15,10)" );
     svg2.append("g")
-        .attr("class", "y axis")
+        .attr("class", "y-axis")
         .call(yAxis2)
       .append("text")
         .attr("transform", "rotate(-90)")
@@ -435,16 +435,16 @@ overallChart(){
     //this.x.domain(this.data.map(function(d) { return d.date; }));
     //this.y.domain([0, d3Array.max(this.data, function(d) { return d.value; })]);
     svg3.append("g")
-        .attr("class", "x axis")
+        .attr("class", "x-axis")
         .attr("transform", "translate(0," + this.height + ")")
         .call(xAxis3)
       .selectAll("text")
         .style("text-anchor", "end")
         .attr("dx", "-.8em")
-        .attr("dy", "-.55em")
+        .attr("dy", "-.05em")
         .attr("transform", "translate(15,10)" );
     svg3.append("g")
-        .attr("class", "y axis")
+        .attr("class", "y-axis")
         .call(yAxis3)
       .append("text")
         .attr("transform", "rotate(-90)")
@@ -515,16 +515,16 @@ monthChart(){
     //this.x.domain(this.data.map(function(d) { return d.date; }));
     //this.y.domain([0, d3Array.max(this.data, function(d) { return d.value; })]);
     svg4.append("g")
-        .attr("class", "x axis")
+        .attr("class", "x-axis")
         .attr("transform", "translate(0," + this.height + ")")
         .call(xAxis4)
       .selectAll("text")
         .style("text-anchor", "end")
         .attr("dx", "-.8em")
-        .attr("dy", "-.55em")
+        .attr("dy", ".05em")
         .attr("transform", "translate(15,10)" );
     svg4.append("g")
-        .attr("class", "y axis")
+        .attr("class", "y-axis")
         .call(yAxis4)
       .append("text")
         .attr("transform", "rotate(-90)")
