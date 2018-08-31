@@ -7,7 +7,7 @@ export class UserData {
 
 export let services = [
   {
-    title: "HAIR",
+    title: "Hair",
     list: [
       {
         name: 'Up-do',
@@ -34,7 +34,7 @@ export let services = [
         cost: "0"
       },
       {
-        name: "Wedding",
+        name: "Wedding / Bridal",
         selected: false,
         desc: "",
         cost: "0"
@@ -69,13 +69,19 @@ export let services = [
         cost: "0"
       },
       {
+        name: "Basic Makeup",
+        selected: false,
+        desc: "",
+        cost: "0"
+      },
+      {
         name: "Eyes only application",
         selected: false,
         desc: "",
         cost: "0"
       },
       {
-        name: "Wedding Day",
+        name: "Wedding / Bridal",
         selected: false,
         desc: "",
         cost: "0"
@@ -119,43 +125,43 @@ export let services = [
         name: "Spray Tan",
         selected: false,
         desc: "",
-        cost: ""
+        cost: "0"
       },
       {
         name: "Manicure",
         selected: false,
         desc: "",
-        cost: ""
+        cost: "0"
       },
       {
         name: "Pedicure",
         selected: false,
         desc: "",
-        cost: ""
+        cost: "0"
       },
       {
         name: "Shellac",
         selected: false,
         desc: "",
-        cost: ""
+        cost: "0"
       },
       {
         name: "Acrylic",
         selected: false,
         desc: "",
-        cost: ""
+        cost: "0"
       },
       {
         name: "SNS",
         selected: false,
         desc: "",
-        cost: ""
+        cost: "0"
       },
       {
         name: "Massage",
         selected: false,
         desc: "",
-        cost: ""
+        cost: "0"
       },
     ]
   },

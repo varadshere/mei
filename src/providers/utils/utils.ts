@@ -198,7 +198,9 @@ export class UtilsProvider {
   }
   getloadingAlert() {
     let loading = this.loadingCtrl.create({
-      content: 'Loading, Please Wait...'
+      spinner:'hide',
+      // content: 'Loading, Please Wait...'
+      content: '<div class="lds-hourglass"></div>'
     });
     // loading.setMode("ios");
     return loading;
