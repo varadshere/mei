@@ -15,15 +15,15 @@ import {services} from "../../providers/models";
   templateUrl: 'vendor-edit-services.html',
 })
 export class VendorEditServicesPage {
-  services = services;
   shownGroup = null;
-
+  editServices: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public utils: UtilsProvider) {
+    this.editServices = Array.from(services);
     let vendorServices = this.utils.profile.services;
     vendorServices.forEach((s,sindex)=>{
       s.list.forEach((l,lindex)=>{
-        if (l.selected) this.services[sindex]['list'][lindex].selected = l.selected;
-        this.services[sindex]['list'][lindex].cost = l.cost;
+        if (l.selected) this.editServices[sindex]['list'][lindex].selected = l.selected;
+        this.editServices[sindex]['list'][lindex].cost = l.cost;
       });
     });
   }
@@ -52,8 +52,9 @@ export class VendorEditServicesPage {
   }
 
   saveServices(){
-    console.log("Services saved");
-    this.navCtrl.pop();
+    this.utils.editVendorServices(this.editServices).then(data => {
+      console.log("Services saved");
+      this.navCtrl.pop();
+    });
   }
-
 }

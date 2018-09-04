@@ -11,14 +11,14 @@ page-chart {
         float: left;
     }
     .fix{
-        clear:  !important;
+        clear: !important;
     }
 
 
     .ub-regular{
         @font-face {
             font-family: Ub-Regular;
-            src: url(./assets/fonts/Ub-Regular.ttf);
+            src: url("../../assets/fonts/Ub-Regular.ttf");
         }
         font-family: 'Ub-Regular',sans-serif;
     }
@@ -48,7 +48,7 @@ page-chart {
     .ub-medium{
         @font-face {
             font-family: Ub-Medium;
-            src: url(./assets/fonts/Ub-Medium.ttf);
+            src: url("../../assets/fonts/Ub-Medium.ttf");
         }
         font-family: 'Ub-Medium',sans-serif;
     }
@@ -97,7 +97,7 @@ page-chart {
     .toolbar-title{
         @font-face {
             font-family: Ub-Medium;
-            src: url(./assets/fonts/Ub-Medium.ttf);
+            src: url("../../assets/fonts/Ub-Medium.ttf");
         }
         font-family: 'Ub-Medium',sans-serif;
         font-size: 17px;

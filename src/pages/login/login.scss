@@ -59,20 +59,17 @@ page-login {
     font-weight: bold;
   }
   .login-img{
-    background: url(../assets/imgs/login_bg.jpg);
-    background-repeat: no-repeat;
+    background: url("../assets/imgs/login_bg.jpg") no-repeat;
     background-size: cover;
   }
 
   .client-bg {
-    background: url(../assets/imgs/client-bg.svg.png);
-    background-repeat: no-repeat;
+    background: url("../assets/imgs/client-bg.svg.png") no-repeat;
     background-size: cover;
   }
 
   .freelancer-bg {
-    background: url(../assets/imgs/client-bg.svg.png);
-    background-repeat: no-repeat;
+    background: url("../assets/imgs/client-bg.svg.png") no-repeat;
     background-size: cover;
 
     .text-input::-moz-placeholder {

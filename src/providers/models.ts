@@ -5,164 +5,133 @@ export class UserData {
   device_token: string;
 }
 
-export let services = [
-  {
-    title: "Hair",
-    list: [
-      {
-        name: 'Up-do',
-        selected: false,
-        desc: 'Sweep up your hair in a range of ways including an assortment of ponytails, braids and more',
-        cost: "0"
-      },
-      {
-        name: "Blowout",
-        selected: false,
-        desc: "",
-        cost: "0"
-      },
-      {
-        name: "Dry Styling",
-        selected: false,
-        desc: "",
-        cost: "0"
-      },
-      {
-        name: "Braid or extensions",
-        selected: false,
-        desc: "",
-        cost: "0"
-      },
-      {
-        name: "Wedding / Bridal",
-        selected: false,
-        desc: "",
-        cost: "0"
-      },
-      {
-        name: "Event trial",
-        selected: false,
-        desc: "",
-        cost: "0"
-      },
-      {
-        name: "Tutorial",
-        selected: false,
-        desc: "",
-        cost: "0"
-      },
-      {
-        name: "Organic/Specialty products",
-        selected: false,
-        desc: "",
-        cost: "0"
-      },
-    ]
-  },
-  {
-    title: "MAKEUP",
-    list: [
-      {
-        name: "Full Face Makeup",
-        selected: false,
-        desc: "",
-        cost: "0"
-      },
-      {
-        name: "Basic Makeup",
-        selected: false,
-        desc: "",
-        cost: "0"
-      },
-      {
-        name: "Eyes only application",
-        selected: false,
-        desc: "",
-        cost: "0"
-      },
-      {
-        name: "Wedding / Bridal",
-        selected: false,
-        desc: "",
-        cost: "0"
-      },
-      {
-        name: "Airbrushing",
-        selected: false,
-        desc: "",
-        cost: "0"
-      },
-      {
-        name: "Lashes",
-        selected: false,
-        desc: "",
-        cost: "0"
-      },
-      {
-        name: "Specialty products",
-        selected: false,
-        desc: "",
-        cost: "0"
-      },
-      {
-        name: "Event trial",
-        selected: false,
-        desc: "",
-        cost: "0"
-      },
-      {
-        name: "Tutorial",
-        selected: false,
-        desc: "",
-        cost: "0"
-      },
-    ]
-  },
-  {
-    title: "BODY",
-    list: [
-      {
-        name: "Spray Tan",
-        selected: false,
-        desc: "",
-        cost: "0"
-      },
-      {
-        name: "Manicure",
-        selected: false,
-        desc: "",
-        cost: "0"
-      },
-      {
-        name: "Pedicure",
-        selected: false,
-        desc: "",
-        cost: "0"
-      },
-      {
-        name: "Shellac",
-        selected: false,
-        desc: "",
-        cost: "0"
-      },
-      {
-        name: "Acrylic",
-        selected: false,
-        desc: "",
-        cost: "0"
-      },
-      {
-        name: "SNS",
-        selected: false,
-        desc: "",
-        cost: "0"
-      },
-      {
-        name: "Massage",
-        selected: false,
-        desc: "",
-        cost: "0"
-      },
-    ]
-  },
-];
+export let services = [{
+    "title": "HAIR",
+    "list": [{
+      "name": "Up-do",
+      "cost": "10",
+      "selected": false,
+      "desc": "Sweep up your hair in a range of ways including an assortment of ponytails, braids and more"
+    }, {
+      "name": "Blowout",
+      "cost": "10",
+      "selected": false,
+      "desc": "Sweep up your hair in a range of ways including an assortment of ponytails, braids and more"
+    }, {
+      "name": "Dry Styling",
+      "cost": "0",
+      "selected": false,
+      "desc": "Test-run a hair look and style before your big event"
+    }, {
+      "name": "Braid or extensions",
+      "cost": "20",
+      "selected": false,
+      "desc": "Hair straightening, waving, crimping and more"
+    }, {
+      "name": "Wedding / Bridal",
+      "cost": "20",
+      "selected": false,
+      "desc": "Hair straightening, waving, crimping and more"
+    }, {
+      "name": "Event trial",
+      "cost": "20",
+      "selected": false,
+      "desc": "Hair straightening, waving, crimping and more"
+    }, {
+      "name": "Tutorial",
+      "cost": "20",
+      "selected": false,
+      "desc": "Hair straightening, waving, crimping and more"
+    }, {
+      "name": "Organic/Specialty products",
+      "cost": "20",
+      "selected": false,
+      "desc": "Hair straightening, waving, crimping and more"
+    }]
+  }, {
+    "title": "MAKEUP",
+    "list": [{
+      "name": "Full Face Makeup",
+      "cost": "0",
+      "selected": false,
+      "desc": "Sweep up your hair in a range of ways including an assortment of ponytails, braids and more"
+    }, {
+      "name": "Basic Makeup",
+      "cost": "0",
+      "selected": false,
+      "desc": "Sweep up your hair in a range of ways including an assortment of ponytails, braids and more"
+    }, {
+      "name": "Eyes only application",
+      "cost": "100",
+      "selected": false,
+      "desc": "Sweep up your hair in a range of ways including an assortment of ponytails, braids and more"
+    }, {
+      "name": "Wedding / Bridal",
+      "cost": "80",
+      "selected": false,
+      "desc": "Test-run a hair look and style before your big event"
+    }, {
+      "name": "Airbrushing",
+      "cost": "100",
+      "selected": false,
+      "desc": "Sweep up your hair in a range of ways including an assortment of ponytails, braids and more"
+    }, {
+      "name": "Lashes",
+      "cost": "100",
+      "selected": false,
+      "desc": "Sweep up your hair in a range of ways including an assortment of ponytails, braids and more"
+    }, {
+      "name": "Specialty products",
+      "cost": "100",
+      "selected": false,
+      "desc": "Sweep up your hair in a range of ways including an assortment of ponytails, braids and more"
+    }, {
+      "name": "Event trial",
+      "cost": "100",
+      "selected": false,
+      "desc": "Sweep up your hair in a range of ways including an assortment of ponytails, braids and more"
+    }, {
+      "name": "Tutorial",
+      "cost": "100",
+      "selected": false,
+      "desc": "Sweep up your hair in a range of ways including an assortment of ponytails, braids and more"
+    }]
+  }, {
+    "title": "BODY",
+    "list": [{
+      "name": "Spray Tan",
+      "cost": "50",
+      "selected": false,
+      "desc": "Sweep up"
+    }, {
+      "name": "Manicure",
+      "cost": "0",
+      "selected": false,
+      "desc": "braids and more"
+    }, {
+      "name": "Pedicure",
+      "cost": "0",
+      "selected": false,
+      "desc": "abcd"
+    }, {
+      "name": "Shellac",
+      "cost": "0",
+      "selected": false,
+      "desc": "Hair straightening"
+    }, {
+      "name": "Acrylic",
+      "cost": "0",
+      "selected": false,
+      "desc": "Hair straightening"
+    }, {
+      "name": "SNS",
+      "cost": "0",
+      "selected": false,
+      "desc": "Hair straightening"
+    }, {
+      "name": "Massage",
+      "cost": "0",
+      "selected": false,
+      "desc": "Hair straightening"
+    }]
+  }];

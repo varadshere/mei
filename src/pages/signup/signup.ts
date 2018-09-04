@@ -67,7 +67,7 @@ export class SignupPage {
     //   { title: "MAKEUP", list: [{name: 'Up-do', selected: false, desc: 'Sweep up your hair in a range of ways including an assortment of ponytails, braids and more', cost: "0"}, {name: 'Event Trial', selected: false, desc: 'Sweep up your hair in a range of ways including an assortment of ponytails, braids and more', cost: "0"}, {name: 'Hairstyling', selected: false, desc: 'Sweep up your hair in a range of ways including an assortment of ponytails, braids and more', cost: "0"}, {name: 'Blow Wave', selected: false, desc: 'Test-run a hair look and style before your big event', cost: "0"}]  },
     //   { title: "BODY", list: [{name: 'Up-do', selected: false, desc: 'Sweep up', cost: "0"}, {name: 'Event Trial', selected: false, desc: 'braids and more', cost: "0"}, {name: 'Hairstyling', selected: false, desc: 'abcd', cost: "0"}, {name: 'Blow Wave', selected: false, desc: 'Hair straightening', cost: "0"}] },
     // ];
-    services = services;
+    signupServices: any;
     place: any;
     shownGroup = null;
     img$: Subject<any>;
@@ -97,6 +97,7 @@ export class SignupPage {
                 public formBuilder: FormBuilder,
                 private utils: UtilsProvider
                 ) {
+      this.signupServices = Array.from(services);
       this.slideOneForm = formBuilder.group({
         email: ['', Validators.compose([Validators.maxLength(30), Validators.pattern(SignupPage.EMAIL_REGEX), Validators.required])],
         fname: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
@@ -299,7 +300,7 @@ export class SignupPage {
           "lng": this.place.geometry.location.lng(),
           "licenses": this.slideOneForm.value.lic,
           "available": this.getDaysArr(),
-          "services": this.services,
+          "services": this.signupServices,
           "bio":"",
           "fav": "",
           "type": "vendor"
@@ -388,7 +389,7 @@ export class SignupPage {
 
   getSelectedServices(){
       let selServices = [];
-      this.services.forEach(d=>{
+      this.signupServices.forEach(d=>{
         d.list.forEach(l=>{
           if(l.selected){
             selServices.push(l);

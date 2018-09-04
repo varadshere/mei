@@ -15,7 +15,7 @@
 
 <ion-content padding>
   <ion-list>
-    <div *ngFor="let d of services; let i=index" text-wrap [ngClass]="{active: isGroupShown(i)}" style="padding-bottom: 20px;">
+    <div *ngFor="let d of editServices; let i=index" text-wrap [ngClass]="{active: isGroupShown(i)}" style="padding-bottom: 20px;">
       <ion-row class="service-header" (click)="toggleGroup(i)">
         <ion-col>
           {{d.title}}

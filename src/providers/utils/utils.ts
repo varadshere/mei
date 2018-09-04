@@ -904,4 +904,28 @@ export class UtilsProvider {
       });
     });
   }
+
+  editVendorServices(serviceList){
+    let dataToSend = {
+      username: this.profile.username,
+      services: serviceList
+    };
+    let loading = this.getloadingAlert();
+    loading.present();
+    return new Promise((resolve, reject) => {
+      let url = this.serverUrl + 'updateServices';
+      let body = JSON.stringify(dataToSend);
+      this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(3000).subscribe(data => {
+        console.log("Services updated");
+        console.log(data);
+        loading.dismissAll();
+        resolve(this.sanitizeData(data));
+      },error => {
+        console.log("error updating services");
+        console.log(error);
+        loading.dismissAll();
+        resolve(false);
+      });
+    });
+  }
 }
