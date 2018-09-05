@@ -22,8 +22,12 @@ export class VendorEditServicesPage {
     let vendorServices = this.utils.profile.services;
     vendorServices.forEach((s,sindex)=>{
       s.list.forEach((l,lindex)=>{
-        if (l.selected) this.editServices[sindex]['list'][lindex].selected = l.selected;
-        this.editServices[sindex]['list'][lindex].cost = l.cost;
+          for (var i=0; i < this.editServices[sindex]['list'].length; i++){
+            if (this.editServices[sindex]['list'][i].name == l.name){
+              this.editServices[sindex]['list'][i].selected = true;
+              this.editServices[sindex]['list'][i].cost = l.cost;
+            }
+          }
       });
     });
   }
