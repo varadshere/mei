@@ -114,4 +114,18 @@ page-signup {
   ion-select {
     overflow: visible;
   }
+
+  .addon-tag {
+    position: relative;
+    top: -10px;
+    left: 5px;
+    background: #f9748f;
+    color: white;
+    padding: 4px;
+  }
+
+  .addon-div {
+    border: 2px solid #F9748F;
+    border-bottom: 0px;
+  }
 }

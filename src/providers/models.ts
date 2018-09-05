@@ -26,6 +26,7 @@ export let services = [{
       "name": "Braid or extensions",
       "cost": "20",
       "selected": false,
+      "addon": true,
       "desc": "Hair straightening, waving, crimping and more"
     }, {
       "name": "Wedding / Bridal",
@@ -46,6 +47,7 @@ export let services = [{
       "name": "Organic/Specialty products",
       "cost": "20",
       "selected": false,
+      "addon": true,
       "desc": "Hair straightening, waving, crimping and more"
     }]
   }, {
@@ -74,16 +76,19 @@ export let services = [{
       "name": "Airbrushing",
       "cost": "100",
       "selected": false,
+      "addon": true,
       "desc": "Sweep up your hair in a range of ways including an assortment of ponytails, braids and more"
     }, {
       "name": "Lashes",
       "cost": "100",
       "selected": false,
+      "addon": true,
       "desc": "Sweep up your hair in a range of ways including an assortment of ponytails, braids and more"
     }, {
       "name": "Specialty products",
       "cost": "100",
       "selected": false,
+      "addon": true,
       "desc": "Sweep up your hair in a range of ways including an assortment of ponytails, braids and more"
     }, {
       "name": "Event trial",
@@ -117,21 +122,25 @@ export let services = [{
       "name": "Shellac",
       "cost": "0",
       "selected": false,
+      "addon": true,
       "desc": "Hair straightening"
     }, {
       "name": "Acrylic",
       "cost": "0",
       "selected": false,
+      "addon": true,
       "desc": "Hair straightening"
     }, {
       "name": "SNS",
       "cost": "0",
       "selected": false,
+      "addon": true,
       "desc": "Hair straightening"
     }, {
       "name": "Massage",
       "cost": "0",
       "selected": false,
+      "addon": true,
       "desc": "Hair straightening"
     }]
   }];

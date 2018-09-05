@@ -25,27 +25,56 @@
         </ion-col>
       </ion-row>
       <div *ngIf="isGroupShown(i)">
-        <div *ngFor="let l of d.list">
-          <ion-row (click)="selectService(l)" align-items-center tappable>
-            <ion-col>
-              <ion-icon  [class.ion-selected]="l.selected" name="{{l.selected ? 'ios-checkmark' : 'ios-add'}}"></ion-icon>
-            </ion-col>
-            <ion-col col-10>
-              <div>
-                <ion-row align-items-center>
-                  <ion-col col-8>
-                    <div class="service-title">{{l.name}}</div>
-                  </ion-col>
-                  <ion-col col-4 [class.service-selected]="l.selected">
-                    <ion-row align-items-center>$<ion-input type="text" [(ngModel)]="l.cost" placeholder="Cost" required></ion-input></ion-row>
-                  </ion-col>
-                </ion-row>
-                <div class="service-desc">
-                  {{l.desc}}
+        <ng-template ngFor let-l [ngForOf]="d.list">
+            <ion-row *ngIf="!l.addon" [class.addon-row]="l.addon" (click)="selectService(l)" align-items-center tappable>
+              <ion-col>
+                <ion-icon  [class.ion-selected]="l.selected" name="{{l.selected ? 'ios-checkmark' : 'ios-add'}}"></ion-icon>
+              </ion-col>
+              <ion-col col-10>
+                <div>
+                  <ion-row align-items-center>
+                    <ion-col col-8>
+                      <div class="service-title">{{l.name}}</div>
+                    </ion-col>
+                    <ion-col col-4 [class.service-selected]="l.selected">
+                      <ion-row align-items-center>$<ion-input type="text" [(ngModel)]="l.cost" placeholder="Cost" required></ion-input></ion-row>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row class="service-desc">
+                    <ion-col>
+                      <ion-row align-items-center><ion-input no-margin type="text" placeholder="Description" [(ngModel)]="l.desc"></ion-input></ion-row>
+                    </ion-col>
+                  </ion-row>
                 </div>
-              </div>
-            </ion-col>
-          </ion-row>
+              </ion-col>
+            </ion-row>
+        </ng-template>
+        <div class="addon-div">
+          <span class="addon-tag">Add-on</span>
+          <ng-template ngFor let-l [ngForOf]="d.list">
+              <ion-row *ngIf="l.addon" (click)="selectService(l)" align-items-center tappable>
+                <ion-col>
+                  <ion-icon  [class.ion-selected]="l.selected" name="{{l.selected ? 'ios-checkmark' : 'ios-add'}}"></ion-icon>
+                </ion-col>
+                <ion-col col-10>
+                  <div>
+                    <ion-row align-items-center>
+                      <ion-col col-8>
+                        <div class="service-title">{{l.name}}</div>
+                      </ion-col>
+                      <ion-col col-4 [class.service-selected]="l.selected">
+                        <ion-row align-items-center>$<ion-input type="text" [(ngModel)]="l.cost" placeholder="Cost" required></ion-input></ion-row>
+                      </ion-col>
+                    </ion-row>
+                    <ion-row class="service-desc">
+                      <ion-col>
+                        <ion-row align-items-center><ion-input no-margin type="text" placeholder="Description" [(ngModel)]="l.desc"></ion-input></ion-row>
+                      </ion-col>
+                    </ion-row>
+                  </div>
+                </ion-col>
+              </ion-row>
+          </ng-template>
         </div>
       </div>
     </div>
