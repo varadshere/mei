@@ -28,7 +28,7 @@
         <ng-template ngFor let-l [ngForOf]="d.list">
             <ion-row *ngIf="!l.addon" [class.addon-row]="l.addon" (click)="selectService(l)" align-items-center tappable>
               <ion-col>
-                <ion-icon  [class.ion-selected]="l.selected" name="{{l.selected ? 'ios-checkmark' : 'ios-add'}}"></ion-icon>
+                <ion-icon  [class.ion-selected]="l.selected" name="{{l.selected ? 'ios-checkmark' : 'md-radio-button-off'}}"></ion-icon>
               </ion-col>
               <ion-col col-10>
                 <div>
@@ -42,7 +42,7 @@
                   </ion-row>
                   <ion-row class="service-desc">
                     <ion-col>
-                      <ion-row align-items-center><ion-input no-margin type="text" placeholder="Description" [(ngModel)]="l.desc"></ion-input></ion-row>
+                      <ion-row align-items-center><ion-input no-margin type="text" placeholder="Description" [(ngModel)]="l.desc" (keyup.enter)="keyboard.close()" maxlength="140"></ion-input></ion-row>
                     </ion-col>
                   </ion-row>
                 </div>
@@ -54,7 +54,7 @@
           <ng-template ngFor let-l [ngForOf]="d.list">
               <ion-row *ngIf="l.addon" (click)="selectService(l)" align-items-center tappable>
                 <ion-col>
-                  <ion-icon  [class.ion-selected]="l.selected" name="{{l.selected ? 'ios-checkmark' : 'ios-add'}}"></ion-icon>
+                  <ion-icon  [class.ion-selected]="l.selected" name="{{l.selected ? 'ios-checkmark' : 'md-radio-button-off'}}"></ion-icon>
                 </ion-col>
                 <ion-col col-10>
                   <div>
@@ -68,7 +68,7 @@
                     </ion-row>
                     <ion-row class="service-desc">
                       <ion-col>
-                        <ion-row align-items-center><ion-input no-margin type="text" placeholder="Description" [(ngModel)]="l.desc"></ion-input></ion-row>
+                        <ion-row align-items-center><ion-input no-margin type="text" placeholder="Description" [(ngModel)]="l.desc" (keyup.enter)="keyboard.close()" maxlength="140"></ion-input></ion-row>
                       </ion-col>
                     </ion-row>
                   </div>

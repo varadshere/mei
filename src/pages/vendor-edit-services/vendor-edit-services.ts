@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, Keyboard } from 'ionic-angular';
 import { UtilsProvider} from "../../providers/utils/utils";
 import {services} from "../../providers/models";
 
@@ -17,7 +17,7 @@ import {services} from "../../providers/models";
 export class VendorEditServicesPage {
   shownGroup = null;
   editServices: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public utils: UtilsProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public utils: UtilsProvider, public keyboard: Keyboard) {
     this.editServices = Array.from(services);
     let vendorServices = this.utils.profile.services;
     vendorServices.forEach((s,sindex)=>{
