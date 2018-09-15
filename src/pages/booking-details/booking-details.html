@@ -23,9 +23,9 @@
 
     <div class="div1">
 
-      <div class="ub-medium dark-grey client-name">{{bookingData.name}}</div>
+      <div class="dark-grey client-name">{{bookingData.name}}</div>
 
-      <div class="ub-medium light-grey client-address"><a href="{{utils.mapSearchUrl + '&query=' + jlatLng?.lat+','+jlatLng?.lng}}" target="_blank">{{bookingData.address}}</a></div>
+      <div class="light-grey client-address"><a href="{{utils.mapSearchUrl + '&query=' + jlatLng?.lat+','+jlatLng?.lng}}" target="_blank">{{bookingData.address}}</a></div>
 
     </div>
 
@@ -60,13 +60,13 @@
 
     <hr class="customhr">
 
-    <div class="div3 ub-medium">
+    <div class="div3">
       <div class="floatLeft dark-grey font1"> Services</div>
       <div class="floatRight font1 mei-color ">{{bookingData.serviceTotal}}</div>
       <div class="fix"></div>
       <div class="bottom-spacer"></div>
 
-      <div class="service-list dark-grey ub-medium" *ngFor=" let item of bookingData.services">
+      <div class="service-list dark-grey" *ngFor=" let item of bookingData.services">
         <div class="floatLeft ">{{item.quantity}} x {{item.serviceName}}</div>
         <div class="floatRight">${{item.price || 0}}</div>
         <div class="fix"></div>
@@ -87,15 +87,15 @@
       </div>
       <hr class="customhr">
       <p text-right *ngIf="bookingData.confirm != null">
-        <button ion-button round class="disp-button dispute-button ub-medium" (click)="raiseAlert()"> RAISE A DISPUTE</button>
+        <button ion-button round class="disp-button dispute-button" (click)="raiseAlert()"> RAISE A DISPUTE</button>
       </p>
       <div text-center *ngIf="bookingData.confirm == null">
         <ion-row>
           <ion-col>
-            <button ion-button round class="disp-button ub-medium" (click)="confirmBooking('false')">Cancel</button>
+            <button ion-button round class="disp-button" (click)="confirmBooking('false')">Cancel</button>
           </ion-col>
           <ion-col *ngIf="utils.profile.type != 'client'">
-            <button ion-button round class="disp-button ub-medium" (click)="confirmBooking('true')">Confirm</button>
+            <button ion-button round class="disp-button" (click)="confirmBooking('true')">Confirm</button>
           </ion-col>
         </ion-row>
       </div>

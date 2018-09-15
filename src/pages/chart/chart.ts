@@ -260,8 +260,8 @@ yearChart(){
           .call(xAxis1)
         .selectAll("text")
           .style("text-anchor", "end")
-          .attr("dx", "-.8em")
-          .attr("dy", "-.05em")
+          .attr("dx", "-.25em")
+          .attr("dy", ".1em")
           .attr("transform", "translate(15,10)" );
       svg1.append("g")
           .attr("class", "y-axis")
@@ -349,8 +349,8 @@ dayChart(){
         .call(xAxis2)
       .selectAll("text")
         .style("text-anchor", "end")
-        .attr("dx", "-.8em")
-        .attr("dy", "-.05em")
+        .attr("dx", "-.25em")
+        .attr("dy", ".1em")
         .attr("transform", "translate(15,10)" );
     svg2.append("g")
         .attr("class", "y-axis")
@@ -440,8 +440,8 @@ overallChart(){
         .call(xAxis3)
       .selectAll("text")
         .style("text-anchor", "end")
-        .attr("dx", "-.8em")
-        .attr("dy", "-.05em")
+        .attr("dx", "-.25em")
+        .attr("dy", ".1em")
         .attr("transform", "translate(15,10)" );
     svg3.append("g")
         .attr("class", "y-axis")
@@ -520,8 +520,8 @@ monthChart(){
         .call(xAxis4)
       .selectAll("text")
         .style("text-anchor", "end")
-        .attr("dx", "-.8em")
-        .attr("dy", ".05em")
+        .attr("dx", "-.25em")
+        .attr("dy", ".1em")
         .attr("transform", "translate(15,10)" );
     svg4.append("g")
         .attr("class", "y-axis")

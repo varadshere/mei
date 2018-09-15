@@ -98,7 +98,7 @@ loadLatLng(){
 
 
   createmodalobj(){
-  this.modalObj={latlong:this.latLng, clientName:this.bookingData.name, clientAddress:this.bookingData.address, jlatLng: this.jlatLng};
+  this.modalObj={latlong:this.latLng, clientName:this.bookingData.name, clientAddress:this.bookingData.address, jlatLng: this.jlatLng, date: this.bookingData.date, time: `${this.bookingData.startTime}-${this.bookingData.endTime}`};
   };
 
 openMap(){

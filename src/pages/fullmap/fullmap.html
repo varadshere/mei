@@ -8,13 +8,14 @@
 
 
 <ion-content>
-    <div class="button-bg"> <ion-icon (click)="close()"class="close mei-color" name="close-circle"></ion-icon></div>
+    <div class="button-bg"> <ion-icon (click)="close()"class="close" name="md-close-circle"></ion-icon></div>
     <div #map id="map"></div> 
     <div class="fade"></div>
     <div class="div1" padding>
-        <div class="ub-medium dark-grey client-name">{{clientName}}</div> 
+        <div class="dark-grey client-name">{{clientName}}</div>
   
-      <div class="ub-medium mei-color client-address"><a href="{{utils.mapSearchUrl + '&query=' + jlatLng.lat+','+jlatLng.lng}}" target="_blank">{{clientAddress}}</a></div>
+      <div class="mei-color client-address"><a href="{{utils.mapSearchUrl + '&query=' + jlatLng.lat+','+jlatLng.lng}}" target="_blank">{{clientAddress}}</a></div>
+      <div class="date-time">{{bookingDate}} | {{bookingTime}}</div>
   
     </div>
 </ion-content>

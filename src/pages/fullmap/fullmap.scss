@@ -15,9 +15,7 @@ page-fullmap {
 
       }
       .close{
-         
-          font-weight: bold;
-          font-size: 30px;
+        font-size: 32px;
         position:absolute;
         
       }
@@ -49,15 +47,14 @@ page-fullmap {
         color:#F9748F;
     }
     .client-name{
-        font-size:14px;
-        line-height: 14px;
+        font-size:18px;
+        line-height: 18px;
         font-weight: 700;
         
     }
-    .client-address{
+    .client-address, .date-time{
         margin-top:2%;
-        font-size:10px;
+        font-size:12px;
         line-height: 12px;
-        
     }
 }

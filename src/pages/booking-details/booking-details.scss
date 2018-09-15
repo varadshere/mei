@@ -96,7 +96,7 @@ page-booking-details {
     }
     .client-address{
         margin-top:2%;
-        font-size:10px;
+        font-size:12px;
         line-height: 12px;
 
     }
@@ -111,12 +111,7 @@ page-booking-details {
     font-size:15px !important;
 }
      .toolbar-title{
-        @font-face {
-            font-family: Ub-Medium;
-            src: url("./assets/fonts/Ub-Medium.ttf");
-        }
-        font-family: 'Ub-Medium',sans-serif;
-        font-size: 17px;
+        font-size: 18px;
         font-weight: normal !important;
         color:#F9748F !important;
      }

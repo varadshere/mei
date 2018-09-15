@@ -24,6 +24,8 @@ latLng:any=this.navParams.get('latlong');
 jlatLng = this.navParams.get('jlatLng');
 clientName:any=this.navParams.get('clientName');
 clientAddress:any=this.navParams.get('clientAddress');
+bookingDate: any = this.navParams.get('date');
+bookingTime: any = this.navParams.get('time');
   constructor(public navCtrl: NavController, public navParams: NavParams,public viewCtrl: ViewController, public utils: UtilsProvider) {
   }
 
