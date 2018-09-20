@@ -915,7 +915,7 @@ export class UtilsProvider {
     return new Promise((resolve, reject) => {
       let url = this.serverUrl + 'updateServices';
       let body = JSON.stringify(dataToSend);
-      this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(3000).subscribe(data => {
+      this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(5000).subscribe(data => {
         console.log("Services updated");
         console.log(data);
         loading.dismissAll();
@@ -928,4 +928,83 @@ export class UtilsProvider {
       });
     });
   }
+
+  addVendorBankAccount(bankData){
+    let loading = this.getloadingAlert();
+    loading.present();
+    return new Promise((resolve, reject) => {
+      let url = this.serverUrl + 'addVendorBankAccount';
+      let body = JSON.stringify(bankData);
+      this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(5000).subscribe(data => {
+        console.log("Bank Account saved");
+        console.log(data);
+        loading.dismissAll();
+        resolve(data);
+      }, error => {
+        console.log("adding bank account ERROR");
+        console.log(error);
+        loading.dismissAll();
+        resolve(false);
+      });
+    });
+  }
+
+  createVendorStripeAccount(stripeAccData){
+    let loading = this.getloadingAlert();
+    loading.present();
+    return new Promise((resolve, reject) => {
+      let url = this.serverUrl + 'createVendorAccount';
+      let body = JSON.stringify(stripeAccData);
+      this.http.post(url, body, {headers: this.headers}).map(res => res.json()).subscribe(data => {
+       console.log("Vendor stripe account created");
+       console.log(data);
+       loading.dismissAll();
+       resolve(this.sanitizeData(data));
+      }, error => {
+        console.log("Error when creating stripe account for vendor");
+        console.log(error);
+        loading.dismissAll();
+        resolve(false);
+      });
+    });
+  }
+
+  checkVendorStripeAccount(vendorData){
+    let loading = this.getloadingAlert();
+    loading.present();
+    return new Promise((resolve, reject) => {
+      let url = this.serverUrl + 'createVendorAccountExist';
+      let body = JSON.stringify(vendorData);
+      this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(5000).subscribe(data => {
+        console.log(data);
+        loading.dismissAll();
+        resolve(this.sanitizeData(data));
+      }, error => {
+        console.log("Error when creating stripe account for vendor");
+        console.log(error);
+        loading.dismissAll();
+        resolve(false);
+      });
+    });
+  }
+
+  delMediaFile(fileobj){
+    let loading = this.getloadingAlert();
+    loading.present();
+    return new Promise((resolve, reject) => {
+      let url = this.serverUrl + 'deleteMedia';
+      let body = JSON.stringify(fileobj);
+      this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(5000).subscribe(data => {
+        console.log(data);
+        loading.dismissAll();
+        resolve(this.sanitizeData(data));
+      }, error => {
+        console.log("Error when creating stripe account for vendor");
+        console.log(error);
+        loading.dismissAll();
+        resolve(false);
+      });
+    });
+  }
+
 }

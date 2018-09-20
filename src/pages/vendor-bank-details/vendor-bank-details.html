@@ -14,7 +14,10 @@
 
 
 <ion-content padding>
-  <ion-list>
+  <div *ngIf="!editable" text-center>
+    <h2>Your bank details already exist!</h2>
+  </div>
+  <ion-list *ngIf="editable">
     <ion-item>
       <ion-label stacked>Country code</ion-label>
       <ion-input [readonly]="true" [value]="bankDetails.country"></ion-input>
@@ -34,6 +37,10 @@
     <ion-item>
       <ion-label stacked>Account Name</ion-label>
       <ion-input required type="text" [(ngModel)]="bankDetails.account_holder_name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Date of Birth</ion-label>
+      <ion-datetime required displayFormat="MM/DD/YYYY" pickerFormat="MMM DD YYYY" [(ngModel)]="bankDetails.dob"></ion-datetime>
     </ion-item>
     <div style="text-align: center">
       <button ion-button class="save-button" (click)="saveBank()">Save</button>

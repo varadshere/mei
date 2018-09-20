@@ -9,8 +9,9 @@ import {VendorSettingsPage} from "../vendor-settings/vendor-settings";
 })
 export class VendorProfilePage {
   profile: string = "ABOUT";
-  gallery_imgs: any = [];
+  gallery_imgs: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public utils: UtilsProvider) {
+    this.gallery_imgs = [];
   }
 
   ionViewDidLoad() {
@@ -34,10 +35,23 @@ export class VendorProfilePage {
   }
 
   getGalleryFiles(){
-    let imgFiles: any = null;
     this.utils.getImageGallery().then((data) => {
       console.log(data);
       this.gallery_imgs = data;
+    });
+  }
+
+  delMedia(file: string){
+    let fileobj = {
+      "filename":this.utils.profile.user_id+"//"+file
+    };
+    this.utils.delMediaFile(fileobj).then((result) => {
+      if (result){
+        alert("Image Deleted.");
+        let ar1 = this.gallery_imgs.slice(0,this.gallery_imgs.indexOf(file));
+        let ar2 = this.gallery_imgs.slice(this.gallery_imgs.indexOf(file)+1);
+        this.gallery_imgs = [...ar1,...ar2];
+      }
     });
   }
 }

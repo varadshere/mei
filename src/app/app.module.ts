@@ -46,6 +46,7 @@ import {TermsAndConditionsPage} from "../pages/terms-and-conditions/terms-and-co
 import {VendorBankDetailsPage} from "../pages/vendor-bank-details/vendor-bank-details";
 import {VendorEditServicesPage} from "../pages/vendor-edit-services/vendor-edit-services";
 import {LocalNotifications} from "@ionic-native/local-notifications";
+import {HTTP} from "@ionic-native/http";
 
 @NgModule({
   declarations: [
@@ -134,7 +135,8 @@ import {LocalNotifications} from "@ionic-native/local-notifications";
     File,
     LocalNotifications,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    UtilsProvider
+    UtilsProvider,
+    HTTP
   ]
 })
 export class AppModule {}

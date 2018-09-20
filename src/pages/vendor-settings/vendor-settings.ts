@@ -25,7 +25,7 @@ export class VendorSettingsPage {
   bankDetailsParams = {
     "username": this.utilsProvider.getUserEmail(),
     "user_id": this.utilsProvider.profile.user_id
-  }
+  };
   settings: any = {
     "email": this.utilsProvider.getUserEmail(),
     "username": this.utilsProvider.getUserEmail(),
@@ -59,7 +59,6 @@ export class VendorSettingsPage {
       this.initMapClient()
       // console.log(document.getElementById('places').getElementsByTagName('input')[0])
     });
-
   }
 
   initMapClient(){
