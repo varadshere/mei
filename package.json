@@ -78,7 +78,7 @@
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-inappbrowser": {},
       "cordova-plugin-local-notification": {},
-      "cordova-plugin-firebase": {}
+      "cordova-plugin-firebase": {},
       "cordova-plugin-advanced-http": {}
     }
   }
