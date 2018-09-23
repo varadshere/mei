@@ -627,6 +627,8 @@ export class UtilsProvider {
 
   /*uploadType = "profile / gallery"*/
   uploadImageToServer(fileUrl, uploadType){
+    let loading = this.getloadingAlert();
+    loading.present();
     const fileTransfer: FileTransferObject = this.transfer.create();
     let url = null;
     let options: FileUploadOptions = null;
@@ -650,9 +652,13 @@ export class UtilsProvider {
       .then((data) => {
         // success
         console.log(data);
+        loading.dismissAll();
       }, (err) => {
         // error
-      })
+        console.log("ERROR");
+        console.log(err);
+        loading.dismissAll();
+      });
   }
 
   getImageGallery(userId?){

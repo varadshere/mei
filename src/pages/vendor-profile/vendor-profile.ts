@@ -12,11 +12,11 @@ export class VendorProfilePage {
   gallery_imgs: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public utils: UtilsProvider, public alertCtrl: AlertController) {
     this.gallery_imgs = [];
+    this.getGalleryFiles();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad VendorProfilePage');
-    this.getGalleryFiles();
   }
   openVendorSettings(){
     console.log("Vendor Settings");
