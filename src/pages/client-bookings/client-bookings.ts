@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {UtilsProvider} from "../../providers/utils/utils";
 import {BookingDetailsPage} from "../booking-details/booking-details";
-import {MyBooking2Page} from "../my-booking2/my-booking2";
 
 /**
  * Generated class for the ClientBookingsPage page.

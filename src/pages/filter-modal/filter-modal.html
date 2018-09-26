@@ -20,17 +20,24 @@
   </ion-searchbar>
 
   <div class="service-seg">
-    <ion-segment [(ngModel)]="utils.serviceSelected"  mode="ios">
-      <ion-segment-button value="HAIR">
-        Hair
-      </ion-segment-button>
-      <ion-segment-button value="MAKEUP">
-        Makeup
-      </ion-segment-button>
-      <ion-segment-button value="BODY">
-        Body
-      </ion-segment-button>
-    </ion-segment>
+    <ion-row>
+      <ion-col col-4>
+        <ion-label>Type</ion-label>
+      </ion-col>
+      <ion-col col-8>
+        <ion-segment [(ngModel)]="utils.serviceSelected"  mode="ios" style="margin:5px;">
+          <ion-segment-button value="HAIR">
+            Hair
+          </ion-segment-button>
+          <ion-segment-button value="MAKEUP">
+            Makeup
+          </ion-segment-button>
+          <ion-segment-button value="BODY">
+            Body
+          </ion-segment-button>
+        </ion-segment>
+      </ion-col>
+    </ion-row>
   </div>
 
   <ion-row class="rating-div">

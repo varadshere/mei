@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import {SidemenuPage} from "../sidemenu/sidemenu";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UtilsProvider} from "../../providers/utils/utils";
@@ -10,8 +10,6 @@ import {VendorSidemenuPage} from "../vendor-sidemenu/vendor-sidemenu";
 import { Instagram } from "ng2-cordova-oauth/core";
 import { OauthCordova } from 'ng2-cordova-oauth/platform/cordova';
 
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
-import { File } from '@ionic-native/file';
 import {Subject} from "rxjs/Subject";
 import {UserData, services} from "../../providers/models";
 declare var google;

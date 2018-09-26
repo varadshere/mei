@@ -1,7 +1,6 @@
 import {Component, ViewChildren} from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import {UtilsProvider} from "../../providers/utils/utils";
-import {Observable} from "rxjs/Observable";
 import {Subscription} from "rxjs/Subscription";
 import {DomSanitizer} from '@angular/platform-browser';
 import {TermsAndConditionsPage} from "../terms-and-conditions/terms-and-conditions";

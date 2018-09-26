@@ -144,3 +144,14 @@ export let services = [{
       "desc": "Hair straightening"
     }]
   }];
+
+export const PaymentCodes = [
+    {
+      currency:"aud",
+      country:"AU"
+    },
+    {
+      currency:"usd",
+      country:"US"
+    }
+  ];

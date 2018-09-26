@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {utils} from "ng2-cordova-oauth/utility";
 import {UtilsProvider} from "../../providers/utils/utils";
 import {LoginPage} from "../login/login";
 

@@ -40,7 +40,6 @@ export class ProfilePage {
   }
 
   getGalleryFiles(){
-    let imgFiles: any = null;
     this.utils.getImageGallery(this.profileData.user_id).then((data) => {
       console.log(data);
       this.gallery_imgs = data;

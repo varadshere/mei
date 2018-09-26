@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import * as moment from "moment";
 import {UtilsProvider} from "../../providers/utils/utils";
 import {BookingDetailsPage} from "../booking-details/booking-details";
-import {event} from "d3-selection";
 
 @Component({
   selector: 'page-vendor-calendar',
@@ -246,7 +245,6 @@ export class VendorCalendarPage {
       "filter": moment(date, 'YYYY-MM-DD').format('MM/DD/YYYY'),//"04/28/2018",
       "vendor_username": this.utilsProvider.getUserEmail()
     };
-    let ref = this;
     let eventsPromise = this.utilsProvider.getSummery(dataToSend);
     eventsPromise.then((results:any)=>{
       if(results.bookings){

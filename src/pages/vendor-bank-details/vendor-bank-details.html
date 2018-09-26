@@ -20,7 +20,11 @@
   <ion-list *ngIf="editable">
     <ion-item>
       <ion-label stacked>Country code</ion-label>
-      <ion-input [readonly]="true" [value]="bankDetails.country"></ion-input>
+      <ion-select required [(ngModel)]="bankDetails.country" (ionChange)="payCodeChange($event)" placeholder="Select country code">
+        <ion-option *ngFor="let paycode of payCodes; let i=index" [value]="paycode.country" (ionSelect)="payIndex=i">
+          {{paycode.country}}
+        </ion-option>
+      </ion-select>
     </ion-item>
     <ion-item>
       <ion-label stacked>Currency code</ion-label>
@@ -28,7 +32,7 @@
     </ion-item>
     <ion-item>
       <ion-label stacked>Routing Number</ion-label>
-      <ion-input type="number" [(ngModel)]="bankDetails.routing_number"></ion-input>
+      <ion-input required type="number" [(ngModel)]="bankDetails.routing_number"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>Account Number</ion-label>
@@ -40,7 +44,7 @@
     </ion-item>
     <ion-item>
       <ion-label stacked>Date of Birth</ion-label>
-      <ion-datetime required displayFormat="MM/DD/YYYY" pickerFormat="MMM DD YYYY" [(ngModel)]="bankDetails.dob"></ion-datetime>
+      <ion-datetime placeholder="Select your date of birth" required displayFormat="MM/DD/YYYY" pickerFormat="MMM DD YYYY" [(ngModel)]="bankDetails.dob"></ion-datetime>
     </ion-item>
     <div style="text-align: center">
       <button ion-button class="save-button" (click)="saveBank()">Save</button>

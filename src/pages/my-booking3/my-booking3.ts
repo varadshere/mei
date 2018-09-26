@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
-import {IonicPage, ModalController, NavController, NavParams} from 'ionic-angular';
-import {stringSplice} from "@ionic/app-scripts";
+import { ModalController, NavController, NavParams} from 'ionic-angular';
 import {UtilsProvider} from "../../providers/utils/utils";
 import {ResultsPage} from "../results/results";
 import {SidemenuPage} from "../sidemenu/sidemenu";
 import * as moment from "moment";
-import {ReviewModalPage} from "../review-modal/review-modal";
 import {LocalNotifications} from "@ionic-native/local-notifications";
 
 @Component({

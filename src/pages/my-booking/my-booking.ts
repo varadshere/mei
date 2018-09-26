@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import * as moment from "moment";
-import {SidemenuPage} from "../sidemenu/sidemenu";
 import {MyBooking2Page} from "../my-booking2/my-booking2";
 import {UtilsProvider} from "../../providers/utils/utils";
 

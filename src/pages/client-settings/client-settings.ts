@@ -1,5 +1,5 @@
-import {Component, Injectable, ViewChild, ViewChildren} from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import {Component, ViewChildren} from '@angular/core';
+import {NavController, NavParams, AlertController } from 'ionic-angular';
 import {UtilsProvider} from "../../providers/utils/utils";
 import {Subscription} from "rxjs/Subscription";
 import {DomSanitizer} from '@angular/platform-browser';

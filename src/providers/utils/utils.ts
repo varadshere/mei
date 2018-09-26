@@ -5,11 +5,9 @@ import {AlertController, LoadingController, Platform} from 'ionic-angular';
 import {ImagePicker} from "@ionic-native/image-picker";
 import {Base64} from "@ionic-native/base64";
 import {Camera, CameraOptions} from "@ionic-native/camera";
-import {Observable} from "rxjs/Observable";
 import {Crop} from "@ionic-native/crop";
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
-import {utils} from "ng2-cordova-oauth/utility";
 import {UserData} from "../models";
 import {Storage} from "@ionic/storage";
 declare var FirebasePlugin;
@@ -518,7 +516,6 @@ export class UtilsProvider {
   }
 
   getSlots(vendor){
-    let ref = this;
     let dataToSend = {
       "username": vendor
     };
@@ -543,7 +540,6 @@ export class UtilsProvider {
   }
 
   getSlotsByDay(dataToSend){
-    let ref = this;
     let loading = this.getloadingAlert();
     loading.present();
     return new Promise((resolve, reject) => {
@@ -564,7 +560,6 @@ export class UtilsProvider {
     });
   }
   boookVendor(dataToSend){
-    let ref = this;
     let loading = this.getloadingAlert();
     loading.present();
     return new Promise((resolve, reject) => {
@@ -585,7 +580,6 @@ export class UtilsProvider {
     });
   }
   getSummery(dataToSend){
-    let ref = this;
     let loading = this.getloadingAlert();
     loading.present();
     return new Promise((resolve, reject) => {

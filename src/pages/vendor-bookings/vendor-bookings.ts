@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {SidemenuPage} from "../sidemenu/sidemenu";
+import { NavController, NavParams } from 'ionic-angular';
 import {BookingDetailsPage} from "../booking-details/booking-details";
 import {UtilsProvider} from "../../providers/utils/utils";
 

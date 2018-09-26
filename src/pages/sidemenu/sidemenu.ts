@@ -1,9 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
-import {GetstartedPage} from "../getstarted/getstarted";
-import {LoginPage} from "../login/login";
-import {ResultsPage} from "../results/results";
-import {ProfilePage} from "../profile/profile";
+import { NavController, NavParams, MenuController } from 'ionic-angular';
 import {Subscription} from "rxjs";
 import {UtilsProvider} from "../../providers/utils/utils";
 import {SelectionHomePage} from "../selection-home/selection-home";

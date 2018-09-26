@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {UtilsProvider} from "../../providers/utils/utils";
 import {HTTP} from "@ionic-native/http";
+import {PaymentCodes} from "../../providers/models";
 
 declare var Stripe;
 /**
@@ -17,8 +18,8 @@ declare var Stripe;
 })
 export class VendorBankDetailsPage {
   bankDetails: any = {
-    'country':'AU',
-    'currency':'aud',
+    'country':'',
+    'currency':'',
     'routing_number':'',
     'account_number':'',
     'account_holder_name':'',
@@ -48,6 +49,8 @@ export class VendorBankDetailsPage {
   vendorData = {
     "vendor_id":this.utils.profile.user_id
   };
+  payCodes = JSON.parse(JSON.stringify(PaymentCodes));
+  payIndex: number = 0;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private utils: UtilsProvider, private http: HTTP) {
     this.stripe = Stripe(utils.stripeKey);
@@ -87,6 +90,10 @@ export class VendorBankDetailsPage {
 
   }
 
+  payCodeChange(value: any){
+    this.bankDetails.currency = this.payCodes[this.payIndex]['currency'];
+  }
+
   saveBank(){
     let ref = this;
     let s_dob = this.bankDetails.dob.split('-');
@@ -98,14 +105,22 @@ export class VendorBankDetailsPage {
       ref.stripeAccData.btok_id = result['bank_token'];
       // console.log(ref.stripeAccData);
     })
-      .then(() => {
-        ref.utils.createVendorStripeAccount(ref.stripeAccData).then((result)=>{
-          if (result){
-            alert("Bank Account added successfully.");
-          }
-          ref.navCtrl.pop();
-        });
+    .then(() => {
+      ref.utils.createVendorStripeAccount(ref.stripeAccData).then((result)=>{
+        if (result){
+          alert("Bank Account added successfully.");
+        }
+        ref.navCtrl.pop();
+      },
+      (error) => {
+          console.log(error);
+          alert("Error while saving bank account details! Please try again.");
       });
+    },
+    (error) => {
+      console.log(error);
+      alert("Error while saving bank account details! Please try again.");
+    });
   }
 
   ionViewWillLeave(){
