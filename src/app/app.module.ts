@@ -47,6 +47,7 @@ import {VendorBankDetailsPage} from "../pages/vendor-bank-details/vendor-bank-de
 import {VendorEditServicesPage} from "../pages/vendor-edit-services/vendor-edit-services";
 import {LocalNotifications} from "@ionic-native/local-notifications";
 import {HTTP} from "@ionic-native/http";
+import {ProfileEditPage} from "../pages/profile-edit/profile-edit";
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import {HTTP} from "@ionic-native/http";
     ReviewModalPage,
     TermsAndConditionsPage,
     VendorBankDetailsPage,
-    VendorEditServicesPage
+    VendorEditServicesPage,
+    ProfileEditPage
   ],
   imports: [
     NgCalendarModule,
@@ -122,7 +124,8 @@ import {HTTP} from "@ionic-native/http";
     ReviewModalPage,
     TermsAndConditionsPage,
     VendorBankDetailsPage,
-    VendorEditServicesPage
+    VendorEditServicesPage,
+    ProfileEditPage
   ],
   providers: [
     StatusBar,

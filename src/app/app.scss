@@ -88,6 +88,10 @@ ion-header ion-icon.back-button-icon.icon {
   margin-left: -50px;
 }
 
+.back-button {
+  z-index: 1;
+}
+
 //css hourglass loader - start
 .loading-md .loading-wrapper {
   background-color: transparent;

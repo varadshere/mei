@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {UtilsProvider} from "../../providers/utils/utils";
 import {ClientSettingsPage} from "../client-settings/client-settings";
+import {ProfileEditPage} from "../profile-edit/profile-edit";
 
 @Component({
   selector: 'page-client-profile',
@@ -10,6 +11,7 @@ import {ClientSettingsPage} from "../client-settings/client-settings";
 export class ClientProfilePage {
   rate= 3.5;
   profile: string = "ABOUT";
+  profileEditPage = ProfileEditPage;
   constructor(public navCtrl: NavController, public navParams: NavParams, private utils: UtilsProvider) {
   }
   ionViewDidLoad() {

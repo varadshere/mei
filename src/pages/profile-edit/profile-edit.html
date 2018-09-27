@@ -1,0 +1,46 @@
+<!--
+  Generated template for the ProfileEditPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Edit Profile</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list>
+      <ion-item mode="ios">
+        <ion-label stacked>First Name</ion-label>
+        <ion-input type="text" placeholder="First Name" [(ngModel)]="settings.first_name"></ion-input>
+      </ion-item>
+      <ion-item mode="ios">
+        <ion-label stacked>Last Name</ion-label>
+        <ion-input type="text" placeholder="Last Name" [(ngModel)]="settings.last_name"></ion-input>
+      </ion-item>
+      <ion-item mode="ios">
+        <ion-label stacked>Phone</ion-label>
+        <ion-input type="text" placeholder="Phone" [(ngModel)]="settings.phone"></ion-input>
+      </ion-item>
+      <ion-item mode="ios">
+        <ion-label stacked>Address</ion-label>
+        <ion-input id="places" type="text" (focus)="placeInputFocus()" placeholder="Address" [value]="settings.address"></ion-input>
+      </ion-item>
+      <ion-item mode="ios">
+        <ion-label stacked>Bio</ion-label>
+        <ion-input type="text" class="bio-text" placeholder="Bio" [(ngModel)]="settings.bio"></ion-input>
+      </ion-item>
+      <ion-item mode="ios">
+        <ion-label stacked>Favorite Products</ion-label>
+        <ion-input type="text" class="bio-text" placeholder="Favorite Products ( , separated )" [(ngModel)]="settings.fav"></ion-input>
+      </ion-item>
+      <div style="text-align: center">
+        <button ion-button class="save-button" (click)="saveProfile()">Save</button>
+      </div>
+    </ion-list>
+</ion-content>

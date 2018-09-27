@@ -7,7 +7,7 @@
       Profile
     </ion-title>
     <ion-buttons end>
-      <button ion-button icon-only (click)="openVendorSettings()">
+      <button ion-button icon-only [navPush]="profileEditPage">
         <ion-icon align-self-end ios="md-create" md="md-create" style="color: #F9748F; font-size: 20px;"></ion-icon>
       </button>
     </ion-buttons>

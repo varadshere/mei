@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import {UtilsProvider} from "../../providers/utils/utils";
 import {VendorSettingsPage} from "../vendor-settings/vendor-settings";
+import {ProfileEditPage} from "../profile-edit/profile-edit";
 
 @Component({
   selector: 'page-vendor-profile',
@@ -10,6 +11,7 @@ import {VendorSettingsPage} from "../vendor-settings/vendor-settings";
 export class VendorProfilePage {
   profile: string = "ABOUT";
   gallery_imgs: any;
+  profileEditPage = ProfileEditPage;
   constructor(public navCtrl: NavController, public navParams: NavParams, public utils: UtilsProvider, public alertCtrl: AlertController) {
     this.gallery_imgs = [];
     this.getGalleryFiles();
