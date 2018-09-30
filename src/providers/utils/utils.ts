@@ -863,7 +863,6 @@ export class UtilsProvider {
     this.profile = val.profile;
     this.type = val.type;
     this.device_token = val.device_token;
-    this.getProfile();
   }
   setUserData(val: UserData){
     this.setUtilsData(val);
