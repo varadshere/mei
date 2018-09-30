@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
 import {UtilsProvider} from "../../providers/utils/utils";
+import {services} from "../../providers/models";
 
 /**
  * Generated class for the FilterModalPage page.
@@ -19,6 +20,9 @@ export class FilterModalPage {
   // serviceType: any;
   // travelFlag: boolean;
   // rating: any;
+  public freelancerServ = services;
+  serviceIndex = 0;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public utils: UtilsProvider, private viewCtrl: ViewController) {
   }
 

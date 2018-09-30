@@ -23,6 +23,7 @@ export class UtilsProvider {
   mapSearchUrl = 'https://www.google.com/maps/search/?api=1';
   page = '';
   private _serviceSelected = '';
+  private _subServiceSelected = '';
   email = '';
   headers = new Headers();
   private _type: string;
@@ -150,6 +151,14 @@ export class UtilsProvider {
 
   set serviceSelected(value: string) {
     this._serviceSelected = value;
+  }
+
+  get subServiceSelected(): string {
+    return this._subServiceSelected;
+  }
+
+  set subServiceSelected(value: string) {
+    this._subServiceSelected = value;
   }
 
   get stripeKey(): string{

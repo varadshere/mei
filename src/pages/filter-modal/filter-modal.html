@@ -26,16 +26,23 @@
       </ion-col>
       <ion-col col-8>
         <ion-segment [(ngModel)]="utils.serviceSelected"  mode="ios" style="margin:5px;">
-          <ion-segment-button value="HAIR">
-            Hair
-          </ion-segment-button>
-          <ion-segment-button value="MAKEUP">
-            Makeup
-          </ion-segment-button>
-          <ion-segment-button value="BODY">
-            Body
+          <ion-segment-button *ngFor="let service of freelancerServ; let i=index" [value]="service.title" (ionSelect)="serviceIndex=i;utils.subServiceSelected='';">
+            {{service.title}}
           </ion-segment-button>
         </ion-segment>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="utils.serviceSelected">
+      <ion-col col-4>
+        <ion-label>Sub Type</ion-label>
+      </ion-col>
+      <ion-col col-8>
+        <ion-select interface="popover" text-center placeholder="Select Service Sub Type" [(ngModel)]="utils.subServiceSelected"  mode="ios" style="margin:5px;">
+          <ion-option *ngFor="let list of freelancerServ[serviceIndex].list" [value]="list.name">
+            {{list.name}}
+          </ion-option>
+        </ion-select>
       </ion-col>
     </ion-row>
   </div>

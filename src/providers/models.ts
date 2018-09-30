@@ -5,7 +5,7 @@ export class UserData {
   device_token: string;
 }
 
-export let services = [{
+export const services = [{
     "title": "HAIR",
     "list": [{
       "name": "Up-do",
