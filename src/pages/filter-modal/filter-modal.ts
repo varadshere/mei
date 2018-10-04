@@ -21,6 +21,7 @@ export class FilterModalPage {
   // travelFlag: boolean;
   // rating: any;
   public freelancerServ = services;
+  public days = ['mon', 'tue', 'wed', 'thurs', 'sat', 'sun'];
   serviceIndex = 0;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public utils: UtilsProvider, private viewCtrl: ViewController) {

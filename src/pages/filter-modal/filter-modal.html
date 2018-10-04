@@ -47,6 +47,15 @@
     </ion-row>
   </div>
 
+  <ion-row class="days-seg">
+    <ion-col><span>Days</span></ion-col>
+    <ion-col>
+      <ion-select interface="popover" multiple="true" text-center placeholder="Select Days" [(ngModel)]="utils.filterDays" mode="ios">
+        <ion-option *ngFor="let day of days" [value]="day">{{day.toUpperCase()}}</ion-option>
+      </ion-select>
+    </ion-col>
+  </ion-row>
+
   <ion-row class="rating-div">
     <ion-col col-6>
       <span>

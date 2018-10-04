@@ -34,6 +34,7 @@ export class UtilsProvider {
   private _filterTravelFlag: boolean;
   private _filterKey: string;
   private _filterDistance: any = 20;
+  private _filterDays: any = '';
   public notifyOther(data: any) {
     if (data) {
       this.notify.next(data);
@@ -159,6 +160,14 @@ export class UtilsProvider {
 
   set subServiceSelected(value: string) {
     this._subServiceSelected = value;
+  }
+
+  get filterDays(): any {
+    return this._filterDays;
+  }
+
+  set filterDays(value: any) {
+    this._filterDays = value;
   }
 
   get stripeKey(): string{
@@ -419,7 +428,9 @@ export class UtilsProvider {
         "type": this.serviceSelected,
         "rating": this.filterRating,
         "willing_to_travel":this.filterTravelFlag,
-        "distance": this.filterDistance
+        "distance": this.filterDistance,
+        "vendor_services": this.subServiceSelected,
+        "available_days": this.filterDays
       },
 
       // "service": this.getServiceSelection(),

@@ -16,6 +16,7 @@ declare var google;
 })
 export class ProfileEditPage {
   place: any;
+  profileType = this.utils.profile.type;
   settings: any = {
     "email": this.utils.getUserEmail(),
     "username": this.utils.getUserEmail(),
@@ -29,7 +30,31 @@ export class ProfileEditPage {
     "phone": "",
     "travel": false,
     "bio": "",
-    "fav": ""
+    "fav": "",
+    "available_days":[]
+  };
+  day = {
+    mon: {
+      selected : false
+    },
+    tue: {
+      selected : false
+    },
+    wed: {
+      selected : false
+    },
+    thu: {
+      selected : false
+    },
+    fri: {
+      selected : false
+    },
+    sat: {
+      selected : false
+    },
+    sun: {
+      selected : false
+    }
   };
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private utils: UtilsProvider) {
@@ -71,10 +96,12 @@ export class ProfileEditPage {
       this.settings.lng = this.place.geometry.location.lng();
     }
     this.settings.fav = this.settings.fav.replace(/,/g," . ");
+    this.settings.available_days = this.getDaysArr();
     this.utils.editClientSettings(this.settings).then(function (data) {
       console.log(data);
       ref.utils.profile.bio = ref.settings.bio;
       ref.utils.profile.fav = ref.settings.fav;
+      ref.utils.profile.available = "["+ref.settings.available_days+"]";
       ref.navCtrl.pop();
     });
   }
@@ -84,7 +111,7 @@ export class ProfileEditPage {
     let dts = {
       "username": this.utils.getUserEmail(),
       "email": this.utils.getUserEmail(),
-      "type": this.utils.profile.type
+      "type": this.profileType
     };
     let getSettings = this.utils.getSettings(dts);
 
@@ -93,8 +120,71 @@ export class ProfileEditPage {
         ref.settings = data;
         ref.settings.bio = ref.utils.profile.bio;
         ref.settings.fav = ref.utils.profile.fav;
+        if (ref.profileType == "vendor"){
+          ref.setAvailableDays();
+        }
       }
     });
+  }
+
+  setAvailableDays(){
+    this.settings.available_days = this.utils.profile.available.toString()
+      .replace(/u'/g,"")
+      .replace(/[\[\]' ]+/g,"")
+      .split(",");
+    console.log(this.settings);
+    for (let index in this.settings.available_days){
+      switch (this.settings.available_days[index]) {
+        case "mon":
+          this.day.mon.selected = true;
+          break;
+        case "tue":
+          this.day.tue.selected = true;
+          break;
+        case "wed":
+          this.day.wed.selected = true;
+          break;
+        case "thurs":
+          this.day.thu.selected = true;
+          break;
+        case "fri":
+          this.day.fri.selected = true;
+          break;
+        case "sat":
+          this.day.sat.selected = true;
+          break;
+        case "sun":
+          this.day.sun.selected = true;
+          break;
+      }
+    }
+  }
+
+  getDaysArr(){
+    let daysArr = [];
+    if(this.day.mon.selected){
+      daysArr.push('mon');
+    }
+    if(this.day.tue.selected){
+      daysArr.push('tue');
+    }
+    if(this.day.wed.selected){
+      daysArr.push('wed');
+    }
+    if(this.day.thu.selected){
+      daysArr.push('thurs');
+    }
+    if(this.day.fri.selected){
+      daysArr.push('fri');
+    }
+    if(this.day.sat.selected){
+      daysArr.push('sat');
+    }
+    if(this.day.sun.selected){
+      daysArr.push('sun');
+    }
+
+    return daysArr;
   }
 
 }

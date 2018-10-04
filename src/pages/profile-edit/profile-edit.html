@@ -39,6 +39,18 @@
         <ion-label stacked>Favorite Products</ion-label>
         <ion-input type="text" class="bio-text" placeholder="Favorite Products ( , separated )" [(ngModel)]="settings.fav"></ion-input>
       </ion-item>
+      <ion-item mode="ios" *ngIf="profileType=='vendor'">
+        <div style="padding: 5px 0px;font-size: 12px;">Available Days</div>
+        <div>
+          <button class="day-button" [class.mon-select]="day.mon.selected" ion-button (click)="day.mon.selected ? (day.mon.selected = false) : (day.mon.selected = true)" mode="md">MON</button>
+          <button class="day-button" [class.mon-select]="day.tue.selected" ion-button (click)="day.tue.selected ? (day.tue.selected = false) : (day.tue.selected = true)" mode="md">TUE</button>
+          <button class="day-button" [class.mon-select]="day.wed.selected" ion-button (click)="day.wed.selected ? (day.wed.selected = false) : (day.wed.selected = true)" mode="md">WED</button>
+          <button class="day-button" [class.mon-select]="day.thu.selected" ion-button (click)="day.thu.selected ? (day.thu.selected = false) : (day.thu.selected = true)" mode="md">THU</button>
+          <button class="day-button" [class.mon-select]="day.fri.selected" ion-button (click)="day.fri.selected ? (day.fri.selected = false) : (day.fri.selected = true)" mode="md">FRI</button>
+          <button class="day-button" [class.mon-select]="day.sat.selected" ion-button (click)="day.sat.selected ? (day.sat.selected = false) : (day.sat.selected = true)" mode="md">SAT</button>
+          <button class="day-button" [class.mon-select]="day.sun.selected" ion-button (click)="day.sun.selected ? (day.sun.selected = false) : (day.sun.selected = true)" mode="md">SUN</button>
+        </div>
+      </ion-item>
       <div style="text-align: center">
         <button ion-button class="save-button" (click)="saveProfile()">Save</button>
       </div>
