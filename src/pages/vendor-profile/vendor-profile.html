@@ -91,7 +91,7 @@
         </ion-col>
         <ion-col col-4 class="img-col" *ngFor="let img of gallery_imgs">
           <ion-icon name="md-close" class="img-del-cross" (click)="delMedia(img)"></ion-icon>
-          <img src="{{(img.includes('file://'))? img : utils.galleryImgUrl + img}}">
+          <img [src]="(img.includes('file://'))? img : utils.galleryImgUrl + img">
         </ion-col>
       </ion-row>
     </ion-list>

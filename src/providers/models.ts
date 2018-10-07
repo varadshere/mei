@@ -9,12 +9,12 @@ export const services = [{
     "title": "HAIR",
     "list": [{
       "name": "Up-do",
-      "cost": "10",
+      "cost": "0",
       "selected": false,
       "desc": "Sweep up your hair in a range of ways including an assortment of ponytails, braids and more"
     }, {
       "name": "Blowout",
-      "cost": "10",
+      "cost": "0",
       "selected": false,
       "desc": "Sweep up your hair in a range of ways including an assortment of ponytails, braids and more"
     }, {
@@ -24,28 +24,28 @@ export const services = [{
       "desc": "Test-run a hair look and style before your big event"
     }, {
       "name": "Braid or extensions",
-      "cost": "20",
+      "cost": "0",
       "selected": false,
       "addon": true,
       "desc": "Hair straightening, waving, crimping and more"
     }, {
       "name": "Wedding / Bridal",
-      "cost": "20",
+      "cost": "0",
       "selected": false,
       "desc": "Hair straightening, waving, crimping and more"
     }, {
       "name": "Event trial",
-      "cost": "20",
+      "cost": "0",
       "selected": false,
       "desc": "Hair straightening, waving, crimping and more"
     }, {
       "name": "Tutorial",
-      "cost": "20",
+      "cost": "0",
       "selected": false,
       "desc": "Hair straightening, waving, crimping and more"
     }, {
       "name": "Organic/Specialty products",
-      "cost": "20",
+      "cost": "0",
       "selected": false,
       "addon": true,
       "desc": "Hair straightening, waving, crimping and more"
@@ -64,40 +64,40 @@ export const services = [{
       "desc": "Sweep up your hair in a range of ways including an assortment of ponytails, braids and more"
     }, {
       "name": "Eyes only application",
-      "cost": "100",
+      "cost": "0",
       "selected": false,
       "desc": "Sweep up your hair in a range of ways including an assortment of ponytails, braids and more"
     }, {
       "name": "Wedding / Bridal",
-      "cost": "80",
+      "cost": "0",
       "selected": false,
       "desc": "Test-run a hair look and style before your big event"
     }, {
       "name": "Airbrushing",
-      "cost": "100",
+      "cost": "0",
       "selected": false,
       "addon": true,
       "desc": "Sweep up your hair in a range of ways including an assortment of ponytails, braids and more"
     }, {
       "name": "Lashes",
-      "cost": "100",
+      "cost": "0",
       "selected": false,
       "addon": true,
       "desc": "Sweep up your hair in a range of ways including an assortment of ponytails, braids and more"
     }, {
       "name": "Specialty products",
-      "cost": "100",
+      "cost": "0",
       "selected": false,
       "addon": true,
       "desc": "Sweep up your hair in a range of ways including an assortment of ponytails, braids and more"
     }, {
       "name": "Event trial",
-      "cost": "100",
+      "cost": "0",
       "selected": false,
       "desc": "Sweep up your hair in a range of ways including an assortment of ponytails, braids and more"
     }, {
       "name": "Tutorial",
-      "cost": "100",
+      "cost": "0",
       "selected": false,
       "desc": "Sweep up your hair in a range of ways including an assortment of ponytails, braids and more"
     }]
@@ -105,7 +105,7 @@ export const services = [{
     "title": "BODY",
     "list": [{
       "name": "Spray Tan",
-      "cost": "50",
+      "cost": "0",
       "selected": false,
       "desc": "Sweep up"
     }, {

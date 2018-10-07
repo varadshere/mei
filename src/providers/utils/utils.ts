@@ -700,6 +700,16 @@ export class UtilsProvider {
     });
   }
 
+  getMediaImage(fileName){
+    let url = this.serverUrl + "getUserGallery/" + fileName;
+    this.http.get(url,{headers: this.headers}).timeout(3000).subscribe(data => {
+      console.log("Media image received");
+    }, error => {
+      console.log("Media image fetch ERROR");
+      console.log(error);
+    });
+  }
+
   saveCard(dataToSend){
     let loading = this.getloadingAlert();
     loading.present();
