@@ -5,6 +5,7 @@ import {Subscription} from "rxjs/Subscription";
 import {DomSanitizer} from '@angular/platform-browser';
 import {TermsAndConditionsPage} from "../terms-and-conditions/terms-and-conditions";
 import {LoginPage} from "../login/login";
+import {ClientCardDetailsPage} from "../client-card-details/client-card-details";
 declare var google;
 
 /**
@@ -24,6 +25,7 @@ export class ClientSettingsPage {
   place:any;
   placeSubscription: Subscription;
   termsPage: any = TermsAndConditionsPage;
+  cardDetailsPge = ClientCardDetailsPage;
   settings: any = {
     "email": this.utilsProvider.getUserEmail(),
     "username": this.utilsProvider.getUserEmail(),

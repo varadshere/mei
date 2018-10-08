@@ -40,6 +40,9 @@ export class VendorProfilePage {
     this.utils.getImageGallery().then((data) => {
       console.log(data);
       this.gallery_imgs = data;
+      for(let img in data){
+        this.utils.getMediaImage(data[img]);
+      }
     });
   }
 

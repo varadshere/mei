@@ -23,7 +23,10 @@
 
     <div class="div1">
 
-      <div class="dark-grey client-name">{{bookingData.name}}</div>
+      <div class="dark-grey client-name">
+        <a (click)="openProfile(vendorProfile)" *ngIf="utils.profile.type == 'client'">{{bookingData.name}}</a>
+        <span *ngIf="utils.profile.type != 'client'">{{bookingData.name}}</span>
+      </div>
 
       <div class="light-grey client-address"><a href="{{utils.mapSearchUrl + '&query=' + jlatLng?.lat+','+jlatLng?.lng}}" target="_blank">{{bookingData.address}}</a></div>
 
