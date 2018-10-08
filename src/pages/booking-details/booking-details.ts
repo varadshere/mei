@@ -63,7 +63,6 @@ export class BookingDetailsPage {
     }).catch((error) => {
       console.log(error);
     });
-    console.log("Type:"+ this.utils.profile.type);
     if (this.utils.profile.type == "client"){
       this.vendorData = {
           "username": this.bookingData.username,
@@ -71,7 +70,6 @@ export class BookingDetailsPage {
           "type": "vendor"
         };
       this.utils.getProfile(this.vendorData).then(data => {
-        console.log(data);
         this.vendorProfile = data;
       }).catch((error) => {
         console.log(error);

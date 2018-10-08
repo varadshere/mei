@@ -301,7 +301,8 @@ export class SignupPage {
           "services": this.signupServices,
           "bio":"",
           "fav": "",
-          "type": "vendor"
+          "type": "vendor",
+          "time_slot":["0", "0", "0", "0", "0", "0", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"]
         };
 
         let dataToSendEditClient = {
@@ -462,8 +463,7 @@ export class SignupPage {
         "lat": this.place.geometry.location.lat(),
         "lng": this.place.geometry.location.lng(),
         "bio":"",
-        "fav": "",
-        "available_days": ""
+        "fav": ""
       };
       let signupPromise  = this.utils.signUpService(dataToSend);
 
