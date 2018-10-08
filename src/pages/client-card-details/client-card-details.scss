@@ -1,0 +1,59 @@
+page-client-card-details {
+  .card-title{
+    line-height: 41px;
+    border-radius: 20px;
+    height: 40px;
+    background-color: #d4d4d4;
+    color: #ffffff;
+    padding-left: 20px;
+    font-weight: bold;
+  }
+
+  .card-details {
+    margin-top: 20px;
+    background: linear-gradient(
+        227.74deg,
+        #fe9a8b 0.2%,
+        #fd868c 40.08%,
+        #f9748f 97.82%
+    );
+    border-radius: 25px;
+  }
+
+  .card-name {
+    text-align: left;
+    padding-left: 15px;
+    font-size: 16px;
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 35px;
+  }
+
+  .card-number {
+    font-size: 24px;
+    color: white;
+    padding-bottom: 20px;
+    padding-left: 20px;
+  }
+
+  .cvvexp {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 12px;
+    //width: 50%;
+    //margin: 0 auto;
+    padding-left: 20px;
+    padding-bottom: 20px;
+  }
+  .cvv {
+    //padding-left: 15%;
+    font-size: 16px;
+    color: white;
+    padding-left: 10px;
+  }
+  .exp {
+    //padding-left: 15%;
+    font-size: 16px;
+    color: white;
+    padding-left: 10px;
+  }
+}

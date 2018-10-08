@@ -2,6 +2,7 @@ import { Component,ViewChild, ElementRef } from '@angular/core';
 import { NavController, NavParams,ModalController, AlertController } from 'ionic-angular';
 import { FullmapPage } from '../fullmap/fullmap';
 import {UtilsProvider} from "../../providers/utils/utils";
+import {ProfilePage} from "../profile/profile";
 
 declare var google;
 /**
@@ -44,6 +45,8 @@ export class BookingDetailsPage {
   bookingIndex: any;
   client: boolean;
   mapAddress: string;
+  vendorProfile: any;
+  vendorData = {};
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController, public utils: UtilsProvider, private alertCtrl: AlertController) {
     this.bookingData = navParams.get('bookingData');
@@ -60,6 +63,20 @@ export class BookingDetailsPage {
     }).catch((error) => {
       console.log(error);
     });
+    console.log("Type:"+ this.utils.profile.type);
+    if (this.utils.profile.type == "client"){
+      this.vendorData = {
+          "username": this.bookingData.username,
+          "email": this.bookingData.email,
+          "type": "vendor"
+        };
+      this.utils.getProfile(this.vendorData).then(data => {
+        console.log(data);
+        this.vendorProfile = data;
+      }).catch((error) => {
+        console.log(error);
+      });
+    }
   }
 
   ionViewDidLoad(){
@@ -314,6 +331,12 @@ openMap(){
       buttons:["Dismiss"]
     });
     alert.present();
+  }
+
+  openProfile(profile) {
+    this.navCtrl.push(ProfilePage, {
+      profile: profile
+    });
   }
 
 }

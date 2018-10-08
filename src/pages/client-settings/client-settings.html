@@ -37,11 +37,8 @@
         </ion-range>
       </ion-item>
     </div>
-    <button ion-item mode="ios">
-      Bank Info:
-      <div>
-        {{settings.bankName}} - {{settings.cardNumber}}
-      </div>
+    <button ion-item mode="ios" [navPush]="cardDetailsPge">
+      Card Details
     </button>
     <button ion-item mode="ios">Customer Service</button>
     <button ion-item [navPush]="termsPage" mode="ios">Terms & Conditions</button>
