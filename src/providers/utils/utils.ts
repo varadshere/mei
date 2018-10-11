@@ -414,9 +414,8 @@ export class UtilsProvider {
       }, error => {
         console.log("ERROR");
         console.log(error);
-        //reject("false");
         loading.dismissAll();
-        resolve(false);
+        reject(error);
       });
     });
   }

@@ -383,6 +383,10 @@ export class SignupPage {
             console.log(result);
             console.log("Signup Failed!!");
           }
+        }, (error) => {
+          console.log("Error in signup.");
+          console.log(error);
+          this.utils.presentAlert("Signup Failed!!",JSON.parse(error._body)["Error"]);
         });
       }
   }
@@ -497,6 +501,10 @@ export class SignupPage {
           console.log(result);
           console.log("Signup Failed!!");
         }
+      }, (error) => {
+        console.log("Error in signup.");
+        console.log(error);
+        this.utils.presentAlert("Signup Failed!!",JSON.parse(error._body)["Error"]);
       });
     }
   }
