@@ -90,7 +90,8 @@
       </div>
       <hr class="customhr">
       <p text-right *ngIf="bookingData.confirm != null">
-        <button ion-button round class="disp-button dispute-button" (click)="raiseAlert()"> RAISE A DISPUTE</button>
+        <button *ngIf="client" ion-button round class="disp-button dispute-button" (click)="raiseAlert()"> RAISE A DISPUTE</button>
+        <button *ngIf="!client" ion-button round class="disp-button" (click)="openProfile(vendorProfile)"> BOOK AGAIN </button>
       </p>
       <div text-center *ngIf="bookingData.confirm == null">
         <ion-row>

@@ -604,7 +604,7 @@ export class UtilsProvider {
     return new Promise((resolve, reject) => {
       let url = this.serverUrl + 'getBookingsSummery';
       let body = JSON.stringify(dataToSend);
-      this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(3000).subscribe(data => {
+      this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(10000).subscribe(data => {
         console.log("got BookingsSummery");
         console.log(data);
         loading.dismissAll();
@@ -638,7 +638,9 @@ export class UtilsProvider {
     });
   }
 
-  /*uploadType = "profile / gallery"*/
+  /**
+    uploadType = "profile / gallery"
+  **/
   uploadImageToServer(fileUrl, uploadType){
     let loading = this.getloadingAlert();
     loading.present();

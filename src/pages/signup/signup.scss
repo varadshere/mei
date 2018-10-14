@@ -129,4 +129,12 @@ page-signup {
     border: 2px solid #F9748F;
     border-bottom: 0px;
   }
+
+  ion-input[required]:after, ion-select[required]:after{
+    content: " *";
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: red;
+  }
 }

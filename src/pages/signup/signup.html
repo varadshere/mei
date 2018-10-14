@@ -22,6 +22,7 @@
     </ion-segment>
   </div>
   <div [ngSwitch]="signup">
+    <span padding-left class="small"><span style="color: red;">*</span> - Require Field.</span>
     <ion-list *ngSwitchCase="'CLIENT'">
       <ion-row>
         <ion-col>
@@ -51,13 +52,17 @@
                 <!--<ion-input type="text" placeholder="Address" formControlName="addr" [class.invalid]="!slideTwoForm.controls.addr.valid && (slideTwoForm.controls.addr.dirty || submitTwoAttempt)" name="addr" required></ion-input>-->
               <!--</ion-item>-->
               <ion-item mode="ios">
-                <ion-input id="places" (focus)="placeInputFocus()" type="text" value="" placeholder="Address"></ion-input>
+                <ion-input id="places" required (ionFocus)="placeInputFocus()" type="text" value="" placeholder="Address"></ion-input>
               </ion-item>
               <p class="form-error-text" *ngIf="!place && (submitTwoAttempt)">Please select a valid address.</p>
 
 
               <div style="text-align: center; margin-top: 20px">
                 <button ion-button class="signup-button" (click)="signUpClient()">Sign up</button>
+              </div>
+
+              <div class="rgstr-note">
+                <p class="small" text-center>By tapping Sign Up, you agree to <span style="color: deepskyblue;text-decoration: underline;" (click)="showEULAPage()">our EULA Terms</span></p>
               </div>
             </form>
           </ion-list>
@@ -93,7 +98,7 @@
               </ion-item>
               <p class="form-error-text" *ngIf="!slideOneForm.controls.lname.valid && (slideOneForm.controls.lname.dirty || submitAttempt)">Last Name can not have numbers or special characters.</p>
               <ion-item mode="ios">
-                <ion-input id="placesVendor" (focus)="placeVendorInputFocus()" type="text" value="" placeholder="Address"></ion-input>
+                <ion-input id="placesVendor" required (ionFocus)="placeVendorInputFocus()" type="text" value="" placeholder="Address"></ion-input>
               </ion-item>
               <p class="form-error-text" *ngIf="!place && (submitAttempt)">Please select a valid address.</p>
               <!--<ion-item mode="ios">-->
@@ -101,7 +106,7 @@
               <!--</ion-item>-->
               <!--<p class="form-error-text" *ngIf="!slideOneForm.controls.addr.valid && (slideOneForm.controls.addr.dirty || submitAttempt)">Please enter a valid address.</p>-->
               <ion-item mode="ios">
-                <ion-select formControlName="lic" placeholder="Licenses">
+                <ion-select formControlName="lic" placeholder="Licenses" required>
                   <ion-option value="certificate-iii">Certificate III</ion-option>
                   <ion-option value="certificate-iv">Certificate IV</ion-option>
                   <ion-option value="diploma">Diploma</ion-option>
@@ -116,7 +121,7 @@
               </ion-item>
               <p class="form-error-text" *ngIf="!slideOneForm.controls.lic.valid && (slideOneForm.controls.lic.dirty || submitAttempt)">Licenses can not be empty.</p>
               <ion-item mode="ios">
-                <ion-input type="text" formControlName="exp" [class.invalid]="!slideOneForm.controls.exp.valid && (slideOneForm.controls.exp.dirty || submitAttempt)"  placeholder="Years Experience" name="ye" required></ion-input>
+                <ion-input type="number" formControlName="exp" [class.invalid]="!slideOneForm.controls.exp.valid && (slideOneForm.controls.exp.dirty || submitAttempt)"  placeholder="Years Experience" name="ye" required></ion-input>
               </ion-item>
               <p class="form-error-text" *ngIf="!slideOneForm.controls.exp.valid && (slideOneForm.controls.exp.dirty || submitAttempt)">Experience only accepts numbers.</p>
               <ion-item mode="ios">
@@ -129,7 +134,6 @@
                 <ion-input type="text"  formControlName="instaHandle" [class.invalid]="!slideOneForm.controls.instaHandle.valid && (slideOneForm.controls.instaHandle.dirty || submitAttempt)" placeholder="Instagram handle" name="instaHandle"></ion-input>
               </ion-item>
             </form>
-            <!--<div class="q-text">When you are usually available? Select all that apply</div>-->
             <div>
               <div class="q-text">Select which days you are available</div>
               <button class="day-button" [class.mon-select]="day.mon.selected" ion-button (click)="day.mon.selected ? (day.mon.selected = false) : (day.mon.selected = true)" mode="md">MON</button>
@@ -141,7 +145,7 @@
               <button class="day-button" [class.mon-select]="day.sun.selected" ion-button (click)="day.sun.selected ? (day.sun.selected = false) : (day.sun.selected = true)" mode="md">SUN</button>
             </div>
             <div class="q-text">
-              What services are you able to provide?
+              What services are you able to provide? <span style="color: red;float:right;font-size: 15px;padding-right: 10px;">*</span>
             </div>
             <ion-list>
               <div *ngFor="let d of signupServices; let i=index" text-wrap [ngClass]="{active: isGroupShown(i)}" style="padding-bottom: 20px;">
@@ -221,13 +225,17 @@
                 </ion-col>
               </ion-row>
             </ion-list>
-            <div style="text-align: center; margin-top: 20px" *ngIf="!hideInsta">
-              <button ion-button icon-start class="insta-button" (click)="instainit()">
+            <div style="text-align: center; margin-top: 20px">
+              <button ion-button icon-start class="insta-button" (click)="uploadGalleryPhoto()">
                 Upload from camera roll
               </button>
             </div>
             <div style="text-align: center; margin-top: 20px">
               <button ion-button class="signup-button" (click)="signUpVendor()">Sign up</button>
+            </div>
+
+            <div class="rgstr-note">
+              <p class="small" text-center>By tapping Sign Up, you agree to <span style="color: deepskyblue;text-decoration: underline;" (click)="showEULAPage()">our EULA Terms</span></p>
             </div>
 
           </ion-list>

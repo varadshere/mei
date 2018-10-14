@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {ModalController, NavController, NavParams} from 'ionic-angular';
 import {SidemenuPage} from "../sidemenu/sidemenu";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UtilsProvider} from "../../providers/utils/utils";
@@ -12,6 +12,7 @@ import { OauthCordova } from 'ng2-cordova-oauth/platform/cordova';
 
 import {Subject} from "rxjs/Subject";
 import {UserData, services} from "../../providers/models";
+import {EulaPage} from "../eula/eula";
 declare var google;
 
 @Component({
@@ -90,10 +91,15 @@ export class SignupPage {
 
       */
     });
+
+    eulaPage:any = EulaPage;
+    gallery_imgs = [];
+
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
                 public formBuilder: FormBuilder,
-                private utils: UtilsProvider
+                private utils: UtilsProvider,
+                public modalCtrl: ModalController
                 ) {
       this.signupServices = Array.from(services);
       this.slideOneForm = formBuilder.group({
@@ -176,7 +182,7 @@ export class SignupPage {
         if(!bool){
           var nativePlacesInputBox = document.getElementById('placesVendor').getElementsByTagName('input')[0];
           let autocomplete = new google.maps.places.Autocomplete(nativePlacesInputBox);
-          google.maps.event.addListener(autocomplete, 'place_changed', () => {
+          autocomplete.addListener('place_changed', () => {
             ref.place = autocomplete.getPlace();
             console.log(ref.place);
             console.log("Vendor Place ");
@@ -186,14 +192,17 @@ export class SignupPage {
       }
       return init;
    }
-    placeInputFocus(){
+
+  mapClient = this.initMapClient();
+  placeInputFocus(){
       this.place = undefined;
+      this.mapClient();
   }
 
-    initMap = this.initMapVendor();
-    placeVendorInputFocus(){
-      this.place = undefined;
-      this.initMap();
+  mapVendor = this.initMapVendor();
+  placeVendorInputFocus(){
+    this.place = undefined;
+    this.mapVendor();
   }
 
     toggleGroup(group) {
@@ -242,8 +251,8 @@ export class SignupPage {
 
     ionViewDidLoad() {
       console.log('ionViewDidLoad SignupPage');
-      let mapclient = this.initMapClient();
-      mapclient();
+      // let mapclient = this.initMapClient();
+      // mapclient();
     }
 
     navigateToGst(){
@@ -275,6 +284,10 @@ export class SignupPage {
         console.log("selectedServices= "+selectedServices.length);
         if(!this.slideOneForm.valid){
           this.utils.presentAlert("Signup Failed", "Please Fill all the details!");
+          return;
+        }
+        if (!this.place){
+          this.utils.presentAlert("Signup Failed", "Please Fill Address!!");
           return;
         }
         if(selectedServices.length == 0){
@@ -372,6 +385,11 @@ export class SignupPage {
                       device_token: ref.utils.device_token
                     };
                     ref.utils.setUserData(userData);
+                    if (ref.gallery_imgs.length > 0){
+                      ref.gallery_imgs.forEach(img => {
+                        ref.utils.uploadImageToServer(img,"gallery");
+                      });
+                    }
                     ref.utils.setPage(VendorHomePage);
                     ref.navCtrl.push(VendorSidemenuPage);
                   });
@@ -508,9 +526,25 @@ export class SignupPage {
       });
     }
   }
+
   ionViewDidLeave(){
       if (this.img$){
         this.img$.unsubscribe();
       }
+  }
+
+  showEULAPage(){
+    let eulaModal = this.modalCtrl.create(this.eulaPage);
+    eulaModal.present();
+  }
+
+  uploadGalleryPhoto(){
+    this.utils.getImgFromDevice().then((data)=>{
+      if(data){
+        console.log(data);
+        this.gallery_imgs.push(data);
+        this.utils.presentAlert("Success!!","Image added successfully. It will be available in profile after successful sign up.");
+      }
+    });
   }
 }
