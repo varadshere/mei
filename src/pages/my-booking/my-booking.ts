@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import * as moment from "moment";
 import {MyBooking2Page} from "../my-booking2/my-booking2";
 import {UtilsProvider} from "../../providers/utils/utils";
@@ -80,9 +80,16 @@ export class MyBookingPage {
     }
   };
   totalCost = 0;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private utilsProvider: UtilsProvider) {
+  vendorSettings:any;
+  clientSettings:any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private utilsProvider: UtilsProvider, private alertCtrl: AlertController) {
     this.profileData = navParams.get('profile');
     this.getSlots();
+    console.log("Vendor Profile");
+    console.log(this.profileData);
+    this.getFreelancerSettings();
+    this.getClientSettings();
     this.profileData.services.forEach(s => {
         s.list.forEach(d => {
           if(d.booked){
@@ -95,6 +102,73 @@ export class MyBookingPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MyBookingPage');
+  }
+
+  getFreelancerSettings(){
+    let ref = this;
+    let dts = {
+      "username": this.profileData.username,
+      "email": this.profileData.email,
+      "type": "vendor"
+    };
+    let getSettings = this.utilsProvider.getSettings(dts);
+
+    getSettings.then(function (data:any) {
+      console.log("Vendor Settings");
+      console.log(data);
+      ref.vendorSettings = data;
+    });
+  }
+
+  getClientSettings(){
+    let ref = this;
+    let dts = {
+      "username": this.utilsProvider.getUserEmail(),
+      "email": this.utilsProvider.getUserEmail(),
+      "type": "client"
+    };
+    let getSettings = this.utilsProvider.getSettings(dts);
+
+    getSettings.then(function (data:any) {
+      if(data){
+        console.log("Client Settings");
+        console.log(data);
+        ref.clientSettings = data;
+      }
+    });
+  }
+
+  showAddressAlert(){
+    let msg = "";
+    if (this.vendorSettings.travel == "False" && this.clientSettings.travel == "True"){
+      msg = "Booking will take place at Freelancer's location!!";
+    }
+    else {
+      msg = "Booking will take place at Your location!!";
+    }
+    let alert = this.alertCtrl.create({
+      title: "Confirm Location",
+      message: msg,
+      buttons: [
+        {
+          text: 'Disagree',
+          role: 'disagree',
+          handler: () => {
+            console.log("Location denied.");
+            this.utilsProvider.presentAlert("Uh oh! Booking failed", "Location denied!");
+          }
+        },
+        {
+          text: 'Agree',
+          role: 'agree',
+          handler: () => {
+            console.log("Location accepted.");
+            this.navigate();
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
   ionViewWillEnter() {
