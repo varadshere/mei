@@ -36,4 +36,14 @@ export class FilterModalPage {
     this.viewCtrl.dismiss();
   }
 
+  reset(){
+    this.utils.subServiceSelected = '';
+    this.utils.filterDays = '';
+    this.utils.filterRating = '';
+    this.utils.filterDistance = 20;
+    this.utils.filterTravelFlag = false;
+    console.log("Filters Reset!!");
+    this.viewCtrl.dismiss();
+  }
+
 }

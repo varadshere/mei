@@ -68,15 +68,15 @@ export class UtilsProvider {
     }
   }
 
-  get filterDistance(): string {
+  get filterDistance(): number {
     if(this._filterDistance){
       return this._filterDistance;
     }else {
-      return '';
+      return 5;
     }
   }
 
-  set filterDistance(value: string) {
+  set filterDistance(value: number) {
     this._filterDistance = value;
   }
 
