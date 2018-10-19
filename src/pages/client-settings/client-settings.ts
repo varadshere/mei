@@ -1,5 +1,5 @@
 import {Component, ViewChildren} from '@angular/core';
-import {NavController, NavParams, AlertController } from 'ionic-angular';
+import {NavController, NavParams, AlertController, normalizeURL } from 'ionic-angular';
 import {UtilsProvider} from "../../providers/utils/utils";
 import {Subscription} from "rxjs/Subscription";
 import {DomSanitizer} from '@angular/platform-browser';
@@ -148,9 +148,12 @@ export class ClientSettingsPage {
 
   getImg(){
     if(this.utilsProvider.profile.profile_pic){
-      if(this.utilsProvider.profile.profile_pic.includes('http') || this.utilsProvider.profile.profile_pic.includes('file')){
-        return this.utilsProvider.profile.profile_pic
-      }else {
+      if(this.utilsProvider.profile.profile_pic.includes('http')){
+        return this.utilsProvider.profile.profile_pic;
+      }
+      else if (this.utilsProvider.profile.profile_pic.includes('file')){
+        return normalizeURL(this.utilsProvider.profile.profile_pic);
+      } else {
         return this.utilsProvider.photoUrl + this.utilsProvider.profile.profile_pic;
       }
     }else {
