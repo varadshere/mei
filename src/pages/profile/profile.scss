@@ -56,4 +56,14 @@ page-profile {
       #f9748f 140.89%
     );
   }
+
+  .flncr-flag, .flncr-report-flag{
+    font-weight: bold;
+    font-size: 21px;
+    padding-right: 10px;
+  }
+
+  .flncr-report-flag {
+    color: red;
+  }
 }

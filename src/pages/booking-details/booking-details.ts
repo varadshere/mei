@@ -47,10 +47,13 @@ export class BookingDetailsPage {
   mapAddress: string;
   vendorProfile: any;
   vendorData = {};
+  todayDate = new Date();
+  date_diff;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController, public utils: UtilsProvider, private alertCtrl: AlertController) {
     this.bookingData = navParams.get('bookingData');
     this.bookingIndex = this.navParams.get('bookingIndex');
+    this.date_diff = Math.round((this.todayDate.getTime() - new Date(this.bookingData.date).getTime())/(60*60*1000));
     this.utils.getProfile().then(data => {
       this.client = !(data["type"] == "client");
       if (data['type'] == 'client'){

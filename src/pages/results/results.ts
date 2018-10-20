@@ -12,6 +12,7 @@ import {FilterModalPage} from "../filter-modal/filter-modal";
 export class ResultsPage {
   vendorList = [];
   today = new Date();
+  Math: any = Math;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,

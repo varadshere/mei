@@ -46,7 +46,7 @@
         </ion-col>
       </ion-row>
       <p>
-        <ion-icon style="color:#DEDEDE" name="pin"></ion-icon> {{profile.distance || 'x'}} km away</p>
+        <ion-icon style="color:#DEDEDE" name="pin"></ion-icon> {{this.Math.floor(profile.distance) || 'x'}} miles away</p>
     </ion-item>
     <div class="time-select">
       <div class="time-badge">9:00</div>

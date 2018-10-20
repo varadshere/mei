@@ -426,21 +426,20 @@ export class UtilsProvider {
       "filters":{
         "type": this.serviceSelected,
         "rating": this.filterRating,
-        "willing_to_travel":this.filterTravelFlag,
-        "distance": this.filterDistance,
+        "client_willing_to_travel":this.filterTravelFlag,
+        "client_distance": this.filterDistance.toString(),
         "vendor_services": this.subServiceSelected,
         "available_days": this.filterDays
       },
-
-      // "service": this.getServiceSelection(),
-      "email": this.getUserEmail()
+      "email": this.getUserEmail(),
+      "username": this.profile.username
     };
     let loading = this.getloadingAlert();
     loading.present();
     return new Promise((resolve, reject) => {
       let url = this.serverUrl + 'getVendorList';
       let body = JSON.stringify(dataToSend);
-      this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(3000).subscribe(data => {
+      this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(10000).subscribe(data => {
         console.log("signUp rep");
         console.log(data);
         loading.dismissAll();

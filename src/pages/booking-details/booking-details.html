@@ -89,16 +89,16 @@
         <div class="fix"></div>
       </div>
       <hr class="customhr">
-      <p text-right *ngIf="bookingData.confirm != null">
+      <p text-right *ngIf="bookingData.confirm == false || date_diff >= 1">
         <button *ngIf="client" ion-button round class="disp-button dispute-button" (click)="raiseAlert()"> RAISE A DISPUTE</button>
         <button *ngIf="!client" ion-button round class="disp-button" (click)="openProfile(vendorProfile)"> BOOK AGAIN </button>
       </p>
-      <div text-center *ngIf="bookingData.confirm == null">
+      <div text-center *ngIf="date_diff < 1">
         <ion-row>
           <ion-col>
             <button ion-button round class="disp-button" (click)="confirmBooking('false')">Cancel</button>
           </ion-col>
-          <ion-col *ngIf="utils.profile.type != 'client'">
+          <ion-col *ngIf="utils.profile.type != 'client' && bookingData.confirm == null">
             <button ion-button round class="disp-button" (click)="confirmBooking('true')">Confirm</button>
           </ion-col>
         </ion-row>

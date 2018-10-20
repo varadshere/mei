@@ -485,7 +485,8 @@ export class SignupPage {
         "lat": this.place.geometry.location.lat(),
         "lng": this.place.geometry.location.lng(),
         "bio":"",
-        "fav": ""
+        "fav": "",
+        "available_days": ""
       };
       let signupPromise  = this.utils.signUpService(dataToSend);
 
