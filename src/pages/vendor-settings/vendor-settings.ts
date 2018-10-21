@@ -174,4 +174,8 @@ export class VendorSettingsPage {
     confirm.present();
   }
 
+  custServiceAlert(){
+    this.utilsProvider.presentAlert("Customer Service","Email us at <a href='mailto:hello@meiapp.com'>hello@meiapp.com</a>")
+  }
+
 }

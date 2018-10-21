@@ -17,11 +17,11 @@
     <ion-list>
       <ion-item mode="ios">
         <ion-label stacked>First Name</ion-label>
-        <ion-input type="text" placeholder="First Name" [(ngModel)]="settings.first_name"></ion-input>
+        <ion-input type="text" required placeholder="First Name" [(ngModel)]="settings.first_name"></ion-input>
       </ion-item>
       <ion-item mode="ios">
         <ion-label stacked>Last Name</ion-label>
-        <ion-input type="text" placeholder="Last Name" [(ngModel)]="settings.last_name"></ion-input>
+        <ion-input type="text" required placeholder="Last Name" [(ngModel)]="settings.last_name"></ion-input>
       </ion-item>
       <ion-item mode="ios">
         <ion-label stacked>Phone</ion-label>
@@ -29,7 +29,7 @@
       </ion-item>
       <ion-item mode="ios">
         <ion-label stacked>Address</ion-label>
-        <ion-input id="places" type="text" (focus)="placeInputFocus()" placeholder="Address" [value]="settings.address"></ion-input>
+        <ion-input id="places" required type="text" (focus)="placeInputFocus()" placeholder="Address" [value]="settings.address"></ion-input>
       </ion-item>
       <ion-item mode="ios">
         <ion-label stacked>Bio</ion-label>

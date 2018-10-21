@@ -99,6 +99,9 @@ export class ProfileEditPage {
     this.settings.available_days = this.getDaysArr();
     this.utils.editClientSettings(this.settings).then(function (data) {
       console.log(data);
+      ref.utils.profile.first_name = ref.settings.first_name;
+      ref.utils.profile.last_name = ref.settings.last_name;
+      ref.utils.profile.address = ref.settings.address;
       ref.utils.profile.bio = ref.settings.bio;
       ref.utils.profile.fav = ref.settings.fav;
       ref.utils.profile.available = "["+ref.settings.available_days+"]";

@@ -91,7 +91,27 @@ parseDate:any;
 formatDate2:any;
   activity: String = "act";
 
-  walletData: any = {};
+  walletData: any = {
+    "totalForMonth": 0,
+    "totalForOverall": 0,
+    "totalForYear": 0,
+    "monthBreakup": {
+      "body": 0,
+      "hair": 0,
+      "makeup": 0
+    },
+    "overallBreakup": {
+      "body": 0,
+      "hair": 0,
+      "makeup": 0
+    },
+    "yearBreakup": {
+      "body": 0,
+      "hair": 0,
+      "makeup": 0
+    },
+    "data": []
+  };
 
   constructor(public zone: NgZone,public navCtrl: NavController, public navParams: NavParams,public alertCtrl: AlertController, private utils: UtilsProvider) {
     this.width = 900 - this.margin.left - this.margin.right ;
@@ -104,17 +124,19 @@ formatDate2:any;
     this.formatDateDay = d3Time.timeFormat("%d");
 
     this.utils.walletTransactions().then((result)=>{
-      this.walletData = result;
-      let data = [];
-      let wdata = JSON.parse(JSON.stringify(this.walletData.data));
-      wdata.forEach((d)=>{
-        d.service.forEach((o)=>{
-          o.clientName = d.client_name;
-          data.push(o);
-        })
-      });
-      this.data = JSON.parse(JSON.stringify(data));
-      this.monthChart();
+      if (result){
+        this.walletData = result;
+        let data = [];
+        let wdata = JSON.parse(JSON.stringify(this.walletData.data));
+        wdata.forEach((d)=>{
+          d.service.forEach((o)=>{
+            o.clientName = d.client_name;
+            data.push(o);
+          })
+        });
+        this.data = JSON.parse(JSON.stringify(data));
+        this.monthChart();
+      }
     });
   }
 
@@ -203,180 +225,184 @@ yearChart(){
   
     // Parse the date / time
     let yearData:any=[];
+  if(Object.keys(this.data).length > 0){
     this.sortdata('year').then((res)=>{
       yearData=res;
-    
+
       this.yearClient=JSON.parse(JSON.stringify(res))
-     this.yearClient.forEach((d) => {
-       d.date=this.formatDate7(this.parseDate(d.date));
-     });
-   
-     var x1 = d3Scale.scaleBand().rangeRound([0, this.width]).padding(0.1);
-     var y1 = d3Scale.scaleLinear().range([this.height, 0]);
-    var xAxis1 = d3Axis.axisBottom(x1)
+      this.yearClient.forEach((d) => {
+        d.date=this.formatDate7(this.parseDate(d.date));
+      });
+
+      var x1 = d3Scale.scaleBand().rangeRound([0, this.width]).padding(0.1);
+      var y1 = d3Scale.scaleLinear().range([this.height, 0]);
+      var xAxis1 = d3Axis.axisBottom(x1)
         .scale(x1)
         .ticks(d3Time2.timeMonth)
-       
-    var yAxis1 = d3Axis.axisLeft(y1)
+
+      var yAxis1 = d3Axis.axisLeft(y1)
         .scale(y1)
         .ticks(10);
-     var svg1 = d3.select("#Chart").append("svg")
-     .attr("width", '100%')
-     .attr("height", '100%')
-     .attr('viewBox','0 0 900 500')
-      .append("g")
+      var svg1 = d3.select("#Chart").append("svg")
+        .attr("width", '100%')
+        .attr("height", '100%')
+        .attr('viewBox','0 0 900 500')
+        .append("g")
         .attr("transform",
-              "translate(" + this.margin.left + "," + this.margin.top + ")");
-             
-             
-       /* this.data.forEach((d)=> {
-            d.date = this.parseDate(d.date)
-            d.value = +d.value;
-        }) */
-        yearData.forEach((d)=> {
-          d.date = this.formatDate3(this.parseDate(d.date))
-          d.cost = +d.cost;
-         
-       })
-        var newdata1 = d3Collection.nest<any,any>()
-    .key((d)=> { return d.date})
-    .rollup(function(d) { 
-     return d3Array.sum(d, function(g) {return g.cost; });
-    }).entries(yearData);
+          "translate(" + this.margin.left + "," + this.margin.top + ")");
 
-      
+
+      /* this.data.forEach((d)=> {
+           d.date = this.parseDate(d.date)
+           d.value = +d.value;
+       }) */
+      yearData.forEach((d)=> {
+        d.date = this.formatDate3(this.parseDate(d.date))
+        d.cost = +d.cost;
+
+      })
+      var newdata1 = d3Collection.nest<any,any>()
+        .key((d)=> { return d.date})
+        .rollup(function(d) {
+          return d3Array.sum(d, function(g) {return g.cost; });
+        }).entries(yearData);
+
+
 
 
       x1.domain(newdata1.map(function(d) { return d.key; }));
       y1.domain([0, d3Array.max(newdata1, function(d:any) { return d.value; })]);
-     
-        var t1=d3Transition.transition().duration(400)
+
+      var t1=d3Transition.transition().duration(400)
         .delay(function (d, i) { return i*50; })
       //this.x.domain(this.data.map(function(d) { return d.date; }));
       //this.y.domain([0, d3Array.max(this.data, function(d) { return d.value; })]);
       svg1.append("g")
-          .attr("class", "x-axis")
-          .attr("transform", "translate(0," + this.height + ")")
-          .call(xAxis1)
+        .attr("class", "x-axis")
+        .attr("transform", "translate(0," + this.height + ")")
+        .call(xAxis1)
         .selectAll("text")
-          .style("text-anchor", "end")
-          .attr("dx", "-.25em")
-          .attr("dy", ".1em")
-          .attr("transform", "translate(15,10)" );
+        .style("text-anchor", "end")
+        .attr("dx", "-.25em")
+        .attr("dy", ".1em")
+        .attr("transform", "translate(15,10)" );
       svg1.append("g")
-          .attr("class", "y-axis")
-          .call(yAxis1)
+        .attr("class", "y-axis")
+        .call(yAxis1)
         .append("text")
-          .attr("transform", "rotate(-90)")
-          .attr("y", 6)
-          .attr("dy", ".71em")
-          .style("text-anchor", "end")
-          .text("Value");
+        .attr("transform", "rotate(-90)")
+        .attr("y", 6)
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .text("Value");
       svg1.selectAll("bar")
-          .data(newdata1)
+        .data(newdata1)
         .enter().append("rect")
-        
-       
-          .style("fill", "#F9748F")
-          .attr("x", (d) =>  x1(d.key) )
-         
-          .attr("width", x1.bandwidth()/4)
+
+
+        .style("fill", "#F9748F")
+        .attr("x", (d) =>  x1(d.key) )
+
+        .attr("width", x1.bandwidth()/4)
         .attr("transform","translate("+ x1.bandwidth()/2.8+",0)")
         .attr("y", this.height )
         .attr("height", 0)
         .transition(t1)
-          .attr("y", (d)=>   y1(d.value) )
-          .attr("height", (d)=> this.height - y1(d.value) );
-    
-        });
+        .attr("y", (d)=>   y1(d.value) )
+        .attr("height", (d)=> this.height - y1(d.value) );
+
+    });
+  }
 }
 
 
 dayChart(){
   d3.select("#Chart").html("");
   let dayData:any=[];
-  this.sortdata('day').then((res)=>{
-    dayData=res;
-    this.dayClient=JSON.parse(JSON.stringify(res))
-  this.dayClient.forEach((d) => {
-    d.date=this.formatDate7(this.parseDate(d.date));
-  });
-   var x2 = d3Scale.scaleBand().rangeRound([0, this.width]).padding(0.1);
-   var y2 = d3Scale.scaleLinear().range([this.height, 0]);
-  var xAxis2 = d3Axis.axisBottom(x2)
-      .scale(x2)
-      .ticks(d3Time2.timeHour)
-     
-  var yAxis2 = d3Axis.axisLeft(y2)
-      .scale(y2)
-      .ticks(10);
-   var svg2 = d3.select("#Chart").append("svg")
-   .attr("width", '100%')
-   .attr("height", '100%')
-   .attr('viewBox','0 0 900 500')
-    .append("g")
-      .attr("transform",
-            "translate(" + this.margin.left + "," + this.margin.top + ")");
-           
-           
-     /* this.data.forEach((d)=> {
-          d.date = this.parseDate(d.date)
-          d.value = +d.value;
-      }) */
+  if(Object.keys(this.data).length > 0){
+    this.sortdata('day').then((res)=>{
+      dayData=res;
+      this.dayClient=JSON.parse(JSON.stringify(res))
+      this.dayClient.forEach((d) => {
+        d.date=this.formatDate7(this.parseDate(d.date));
+      });
+      var x2 = d3Scale.scaleBand().rangeRound([0, this.width]).padding(0.1);
+      var y2 = d3Scale.scaleLinear().range([this.height, 0]);
+      var xAxis2 = d3Axis.axisBottom(x2)
+        .scale(x2)
+        .ticks(d3Time2.timeHour)
+
+      var yAxis2 = d3Axis.axisLeft(y2)
+        .scale(y2)
+        .ticks(10);
+      var svg2 = d3.select("#Chart").append("svg")
+        .attr("width", '100%')
+        .attr("height", '100%')
+        .attr('viewBox','0 0 900 500')
+        .append("g")
+        .attr("transform",
+          "translate(" + this.margin.left + "," + this.margin.top + ")");
+
+
+      /* this.data.forEach((d)=> {
+           d.date = this.parseDate(d.date)
+           d.value = +d.value;
+       }) */
       dayData.forEach((d)=> {
         d.date = this.formatDate4(this.parseDate(d.date))
         d.cost = +d.cost;
-          })
+      })
       var newdata2 = d3Collection.nest<any,any>()
-  .key((d)=> { return d.date})
-  .rollup(function(d) { 
-   return d3Array.sum(d, function(g) {return g.cost; });
-  }).entries(dayData);
-
-    
+        .key((d)=> { return d.date})
+        .rollup(function(d) {
+          return d3Array.sum(d, function(g) {return g.cost; });
+        }).entries(dayData);
 
 
-    x2.domain(newdata2.map(function(d) { return d.key; }));
-    y2.domain([0, d3Array.max(newdata2, function(d:any) { return d.value; })]);
-   
-    var t1=d3Transition.transition().duration(400)
-    .delay(function (d, i) { return i*50; })
-    //this.x.domain(this.data.map(function(d) { return d.date; }));
-    //this.y.domain([0, d3Array.max(this.data, function(d) { return d.value; })]);
-    svg2.append("g")
+
+
+      x2.domain(newdata2.map(function(d) { return d.key; }));
+      y2.domain([0, d3Array.max(newdata2, function(d:any) { return d.value; })]);
+
+      var t1=d3Transition.transition().duration(400)
+        .delay(function (d, i) { return i*50; })
+      //this.x.domain(this.data.map(function(d) { return d.date; }));
+      //this.y.domain([0, d3Array.max(this.data, function(d) { return d.value; })]);
+      svg2.append("g")
         .attr("class", "x-axis")
         .attr("transform", "translate(0," + this.height + ")")
         .call(xAxis2)
-      .selectAll("text")
+        .selectAll("text")
         .style("text-anchor", "end")
         .attr("dx", "-.25em")
         .attr("dy", ".1em")
         .attr("transform", "translate(15,10)" );
-    svg2.append("g")
+      svg2.append("g")
         .attr("class", "y-axis")
         .call(yAxis2)
-      .append("text")
+        .append("text")
         .attr("transform", "rotate(-90)")
         .attr("y", 6)
         .attr("dy", ".71em")
         .style("text-anchor", "end")
         .text("Value");
-    svg2.selectAll("bar")
+      svg2.selectAll("bar")
         .data(newdata2)
-      .enter().append("rect")
-      
-       
+        .enter().append("rect")
+
+
         .style("fill", "#F9748F")
         .attr("x", (d) =>  x2(d.key) )
         .attr("width", x2.bandwidth()/4)
-      .attr("transform","translate("+x2.bandwidth()/2.8+",0)")
-      .attr("y", this.height )
-      .attr("height", 0)
+        .attr("transform","translate("+x2.bandwidth()/2.8+",0)")
+        .attr("y", this.height )
+        .attr("height", 0)
         .transition(t1)
         .attr("y", (d)=>   y2(d.value) )
         .attr("height", (d)=> this.height - y2(d.value) );
-  
-      });
+
+    });
+  }
 }
 
 overallChart(){
@@ -385,167 +411,171 @@ overallChart(){
 
   d3.select("#Chart").html("");
   let dat:any=[];
-  this.sortdata('overall').then((res)=>{
-    dat=res;
+  if(Object.keys(this.data).length > 0){
+    this.sortdata('overall').then((res)=>{
+      dat=res;
 
-    this.overallClient=JSON.parse(JSON.stringify(res))
-    this.overallClient.forEach((d) => {
-      d.date=this.formatDate7(this.parseDate(d.date));
-    });
-   var x3 = d3Scale.scaleBand().rangeRound([0, this.width]).padding(0.1);
-   var y3 = d3Scale.scaleLinear().range([this.height, 0]);
-  var xAxis3 = d3Axis.axisBottom(x3)
-      .scale(x3).ticks(d3Time2.timeYear)
-      
-     
-  var yAxis3 = d3Axis.axisLeft(y3)
-      .scale(y3)
-      .ticks(10);
-   var svg3 = d3.select("#Chart").append("svg")
-   .attr("width", '100%')
-   .attr("height", '100%')
-   .attr('viewBox','0 0 900 500')
-    .append("g")
-      .attr("transform",
-            "translate(" + this.margin.left + "," + this.margin.top + ")");
-           
-           
-     /* this.data.forEach((d)=> {
-          d.date = this.parseDate(d.date)
-          d.value = +d.value;
-      }) */
-   
+      this.overallClient=JSON.parse(JSON.stringify(res))
+      this.overallClient.forEach((d) => {
+        d.date=this.formatDate7(this.parseDate(d.date));
+      });
+      var x3 = d3Scale.scaleBand().rangeRound([0, this.width]).padding(0.1);
+      var y3 = d3Scale.scaleLinear().range([this.height, 0]);
+      var xAxis3 = d3Axis.axisBottom(x3)
+        .scale(x3).ticks(d3Time2.timeYear)
+
+
+      var yAxis3 = d3Axis.axisLeft(y3)
+        .scale(y3)
+        .ticks(10);
+      var svg3 = d3.select("#Chart").append("svg")
+        .attr("width", '100%')
+        .attr("height", '100%')
+        .attr('viewBox','0 0 900 500')
+        .append("g")
+        .attr("transform",
+          "translate(" + this.margin.left + "," + this.margin.top + ")");
+
+
+      /* this.data.forEach((d)=> {
+           d.date = this.parseDate(d.date)
+           d.value = +d.value;
+       }) */
+
       dat.forEach((d)=> {
         d.date = this.formatDate( this.parseDate(d.date))
         d.cost = +d.cost;
-     
-      
-    })
 
-    var newdata3 = d3Collection.nest<any,any>()
-    .key((d)=> { return d.date})
-    .rollup(function(d) { 
-     return d3Array.sum(d, function(g) {return g.cost; });
-    }).entries(dat);
-    x3.domain(newdata3.map(function(d) { return d.key; }));
-    y3.domain([0, d3Array.max(newdata3, function(d:any) { return d.value; })]);
-   
-    var t1=d3Transition.transition().duration(400)
-    .delay(function (d, i) { return i*50; })
-    //this.x.domain(this.data.map(function(d) { return d.date; }));
-    //this.y.domain([0, d3Array.max(this.data, function(d) { return d.value; })]);
-    svg3.append("g")
+
+      })
+
+      var newdata3 = d3Collection.nest<any,any>()
+        .key((d)=> { return d.date})
+        .rollup(function(d) {
+          return d3Array.sum(d, function(g) {return g.cost; });
+        }).entries(dat);
+      x3.domain(newdata3.map(function(d) { return d.key; }));
+      y3.domain([0, d3Array.max(newdata3, function(d:any) { return d.value; })]);
+
+      var t1=d3Transition.transition().duration(400)
+        .delay(function (d, i) { return i*50; })
+      //this.x.domain(this.data.map(function(d) { return d.date; }));
+      //this.y.domain([0, d3Array.max(this.data, function(d) { return d.value; })]);
+      svg3.append("g")
         .attr("class", "x-axis")
         .attr("transform", "translate(0," + this.height + ")")
         .call(xAxis3)
-      .selectAll("text")
+        .selectAll("text")
         .style("text-anchor", "end")
         .attr("dx", "-.25em")
         .attr("dy", ".1em")
         .attr("transform", "translate(15,10)" );
-    svg3.append("g")
+      svg3.append("g")
         .attr("class", "y-axis")
         .call(yAxis3)
-      .append("text")
+        .append("text")
         .attr("transform", "rotate(-90)")
         .attr("y", 6)
         .attr("dy", ".71em")
         .style("text-anchor", "end")
         .text("Value");
-    svg3.selectAll("bar")
+      svg3.selectAll("bar")
         .data(newdata3)
-      .enter().append("rect")
-      
+        .enter().append("rect")
+
         .style("fill", "#F9748F")
         .attr("x", (d) =>  x3(d.key) )
         .attr("width", x3.bandwidth()/4)
-      .attr("transform","translate("+x3.bandwidth()/2.8+",0)")
-      .attr("y", this.height )
-      .attr("height", 0)
+        .attr("transform","translate("+x3.bandwidth()/2.8+",0)")
+        .attr("y", this.height )
+        .attr("height", 0)
         .transition(t1)
         .attr("y", (d)=>   y3(d.value) )
         .attr("height", (d)=> this.height - y3(d.value) );
-  
-      });
+
+    });
+  }
 }
 
 monthChart(){
   d3.select("#Chart").html("");
   let monthData:any=[];
-  this.sortdata('month').then((res)=>{
-    monthData=res;
-    this.monthClient=JSON.parse(JSON.stringify(res))
-    // Parse the date / time
-    this.monthClient.forEach((d) => {
-      d.date=this.formatDate7(this.parseDate(d.date));
-    });
-    console.log(monthData);
-    var x4 = d3Scale.scaleBand().rangeRound([0, this.width]).padding(0.1);
-    var y4 = d3Scale.scaleLinear().range([this.height, 0]);
-    var xAxis4 = d3Axis.axisBottom(x4)
-      .scale(x4).ticks(d3Time2.timeWeek);
-    var yAxis4 = d3Axis.axisLeft(y4)
-      .scale(y4)
-      .ticks(10);
-    var svg4 = d3.select("#Chart").append("svg")
-    .attr("width", '100%')
-    .attr("height", '100%')
-    .attr('viewBox','0 0 900 500')
-    .append("g")
-    .attr("transform",
-            "translate(" + this.margin.left + "," + this.margin.top + ")");
-     /* this.data.forEach((d)=> {
-          d.date = this.parseDate(d.date)
-          d.value = +d.value;
-      }) */
-    monthData.forEach((d)=> {
+  if(Object.keys(this.data).length > 0){
+    this.sortdata('month').then((res)=>{
+      monthData=res;
+      this.monthClient=JSON.parse(JSON.stringify(res))
+      // Parse the date / time
+      this.monthClient.forEach((d) => {
+        d.date=this.formatDate7(this.parseDate(d.date));
+      });
+      console.log(monthData);
+      var x4 = d3Scale.scaleBand().rangeRound([0, this.width]).padding(0.1);
+      var y4 = d3Scale.scaleLinear().range([this.height, 0]);
+      var xAxis4 = d3Axis.axisBottom(x4)
+        .scale(x4).ticks(d3Time2.timeWeek);
+      var yAxis4 = d3Axis.axisLeft(y4)
+        .scale(y4)
+        .ticks(10);
+      var svg4 = d3.select("#Chart").append("svg")
+        .attr("width", '100%')
+        .attr("height", '100%')
+        .attr('viewBox','0 0 900 500')
+        .append("g")
+        .attr("transform",
+          "translate(" + this.margin.left + "," + this.margin.top + ")");
+      /* this.data.forEach((d)=> {
+           d.date = this.parseDate(d.date)
+           d.value = +d.value;
+       }) */
+      monthData.forEach((d)=> {
         d.date = this.formatDateDay( this.parseDate(d.date))
         d.cost = +d.cost;
-    });
-    var newdata4 = d3Collection.nest<any,any>()
-    .key((d)=> { return d.date})
-    .rollup(function(d) { 
-     return d3Array.sum(d, function(g) {return g.cost; });
-    }).entries(monthData);
-    x4.domain(newdata4.map(function(d) { return d.key; }));
-    y4.domain([0, d3Array.max(newdata4, function(d:any) { return d.value; })]);
-   
-    var t1=d3Transition.transition().duration(400)
-    .delay(function (d, i) { return i*50; })
-    //this.x.domain(this.data.map(function(d) { return d.date; }));
-    //this.y.domain([0, d3Array.max(this.data, function(d) { return d.value; })]);
-    svg4.append("g")
+      });
+      var newdata4 = d3Collection.nest<any,any>()
+        .key((d)=> { return d.date})
+        .rollup(function(d) {
+          return d3Array.sum(d, function(g) {return g.cost; });
+        }).entries(monthData);
+      x4.domain(newdata4.map(function(d) { return d.key; }));
+      y4.domain([0, d3Array.max(newdata4, function(d:any) { return d.value; })]);
+
+      var t1=d3Transition.transition().duration(400)
+        .delay(function (d, i) { return i*50; })
+      //this.x.domain(this.data.map(function(d) { return d.date; }));
+      //this.y.domain([0, d3Array.max(this.data, function(d) { return d.value; })]);
+      svg4.append("g")
         .attr("class", "x-axis")
         .attr("transform", "translate(0," + this.height + ")")
         .call(xAxis4)
-      .selectAll("text")
+        .selectAll("text")
         .style("text-anchor", "end")
         .attr("dx", "-.25em")
         .attr("dy", ".1em")
         .attr("transform", "translate(15,10)" );
-    svg4.append("g")
+      svg4.append("g")
         .attr("class", "y-axis")
         .call(yAxis4)
-      .append("text")
+        .append("text")
         .attr("transform", "rotate(-90)")
         .attr("y", 6)
         .attr("dy", ".71em")
         .style("text-anchor", "end")
         .text("Value");
-    svg4.selectAll("bar")
+      svg4.selectAll("bar")
         .data(newdata4)
-      .enter().append("rect")
-      
+        .enter().append("rect")
+
         .style("fill", "#F9748F")
         .attr("x", (d) =>  x4(d.key) )
         .attr("width", x4.bandwidth()/4)
-      .attr("transform","translate("+x4.bandwidth()/2.8+",0)")
-      .attr("y", this.height )
-      .attr("height", 0)
+        .attr("transform","translate("+x4.bandwidth()/2.8+",0)")
+        .attr("y", this.height )
+        .attr("height", 0)
         .transition(t1)
         .attr("y", (d)=>   y4(d.value) )
         .attr("height", (d)=> this.height - y4(d.value) );
-      });
+    });
+  }
 }
 
 

@@ -29,17 +29,18 @@ export class ClientSettingsPage {
   settings: any = {
     "email": this.utilsProvider.getUserEmail(),
     "username": this.utilsProvider.getUserEmail(),
-    "address": "",
-    "bankName": "",
-    "cardNumber": "",
+    "notification": false,
+    "travel": false,
     "distance": 10,
     "first_name": "",
     "last_name": "",
-    "notification": false,
     "phone": "",
-    "travel": false,
+    "address": "",
+    "bankName": "",
+    "cardNumber": "",
     "bio": "",
-    "fav": ""
+    "fav": "",
+    "available_days":""
   };
 
 
@@ -118,6 +119,7 @@ export class ClientSettingsPage {
         ref.settings = data;
         ref.settings.bio = ref.utilsProvider.profile.bio;
         ref.settings.fav = ref.utilsProvider.profile.fav;
+        ref.settings.available_days = "";
       }
     });
   }
@@ -181,6 +183,10 @@ export class ClientSettingsPage {
       ]
     });
     confirm.present();
+  }
+
+  custServiceAlert(){
+    this.utilsProvider.presentAlert("Customer Service","Email us at <a href='mailto:hello@meiapp.com'>hello@meiapp.com</a>")
   }
 
 }
