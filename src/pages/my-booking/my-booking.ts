@@ -289,6 +289,17 @@ export class MyBookingPage {
       slotsbyday.then((result:any)=>{
           if(result)
           ref.schedule.sch = result;
+          let index=0;
+          for (let timeobj of ref.schedule.sch){
+            console.log(timeobj);
+            if (timeobj.time.split(':')[0] > 12){
+              ref.schedule.sch[index].time = `${timeobj.time.split(':')[0] - 12}:${timeobj.time.split(':')[1]} PM`;
+            }
+            else{
+              ref.schedule.sch[index].time = `${ref.schedule.sch[index].time} AM`;
+            }
+            index++;
+          }
       });
       // if(this.slots[weekDay]){
       //   let schedule = this.slots[weekDay];

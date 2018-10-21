@@ -58,7 +58,8 @@ export class VendorCalendarPage {
     // let events = this.eventSource;
     //
     // events.push(eventData);
-
+    console.log("Event");
+    console.log(eventData);
     return eventData;
     //this.eventSource = events;
   }
@@ -251,7 +252,34 @@ export class VendorCalendarPage {
         let events = [];
         results.bookings.forEach(bookings =>{
           bookings.list.forEach(d =>{
-            let ev = this.addEvent(d.startTime, d.endTime, d.service_name, d.client_address, date, d.name);
+            console.log(d);
+            let start24Time, end24Time;
+            let startHours = d.startTime.split(' ')[0].split(':');
+            switch (d.startTime.split(' ')[1]) {
+              case "PM":
+                start24Time = `${parseInt(startHours[0])+12}:${startHours[1]}`;
+                break;
+              case "AM":
+                start24Time = d.startTime.split(' ')[0];
+                break;
+              default:
+                start24Time = d.startTime;
+                break;
+            }
+            let endHours = d.endTime.split(' ')[0].split(':');
+            switch (d.endTime.split(' ')[1]) {
+              case "PM":
+                end24Time = `${parseInt(endHours[0])+12}:${endHours[1]}`;
+                break;
+              case "AM":
+                end24Time = d.endTime.split(' ')[0];
+                break;
+              default:
+                end24Time = d.endTime;
+                break;
+            }
+            console.log(start24Time,end24Time);
+            let ev = this.addEvent(start24Time, end24Time, d.service_name, d.client_address, date, d.name);
             events.push(ev);
           });
         });

@@ -78,4 +78,20 @@ page-profile {
   .flncr-report-flag {
     color: red;
   }
+
+  rating {
+    ul {
+      padding: 0px;
+      margin: 0;
+      &.rating li {
+        padding: 0 !important;
+        background: none;
+        color: #ffb400;
+
+        ion-icon {
+          font-size: 15px;
+        }
+      }
+    }
+  }
 }
