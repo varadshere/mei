@@ -26,6 +26,7 @@
         </ion-option>
       </ion-select>
     </ion-item>
+    <p class="form-error-text" *ngIf="bankDetails.country.length<=0">Select a country code</p>
     <ion-item>
       <ion-label stacked>Currency code</ion-label>
       <ion-input [readonly]="true" [value]="bankDetails.currency"></ion-input>
@@ -34,14 +35,18 @@
       <ion-label stacked>Routing Number</ion-label>
       <ion-input required type="number" [(ngModel)]="bankDetails.routing_number"></ion-input>
     </ion-item>
+    <p class="form-error-text" *ngIf="bankDetails.routing_number.length<=0">Routing number is required</p>
     <ion-item>
       <ion-label stacked>Account Number</ion-label>
       <ion-input required type="number" [(ngModel)]="bankDetails.account_number"></ion-input>
     </ion-item>
+    <p class="form-error-text" *ngIf="bankDetails.routing_number.length<=0">Account number is required</p>
+    <p class="form-error-text" *ngIf="!acct_flag">Account number cannot contain special characters</p>
     <ion-item>
       <ion-label stacked>Account Name</ion-label>
       <ion-input required type="text" [(ngModel)]="bankDetails.account_holder_name"></ion-input>
     </ion-item>
+    <p class="form-error-text" *ngIf="bankDetails.account_holder_name.length<=0">Account holder name is required</p>
     <ion-item>
       <ion-label stacked>Date of Birth</ion-label>
       <ion-datetime placeholder="Select your date of birth" required displayFormat="MM/DD/YYYY" pickerFormat="MMM DD YYYY" [(ngModel)]="bankDetails.dob"></ion-datetime>

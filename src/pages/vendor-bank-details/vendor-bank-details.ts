@@ -51,7 +51,7 @@ export class VendorBankDetailsPage {
   };
   payCodes = JSON.parse(JSON.stringify(PaymentCodes));
   payIndex: number = 0;
-
+  acct_flag = true;
   constructor(public navCtrl: NavController, public navParams: NavParams, private utils: UtilsProvider, private http: HTTP) {
     this.stripe = Stripe(utils.stripeKey);
     this.bankDataSend.username = navParams.get("username");
@@ -95,6 +95,15 @@ export class VendorBankDetailsPage {
   }
 
   saveBank(){
+    let reg = new RegExp('^[0-9]+$');
+    this.acct_flag =  reg.test(this.bankDetails.account_number);
+    console.log('testing regex ', this.acct_flag);
+    console.log('bank details', this.bankDetails.country.length);
+    if(this.bankDetails.account_number.length<=0 || this.bankDetails.routing_number.length<=0 ||
+      this.bankDetails.account_holder_name.length <=0 || this.bankDetails.country.length<=0 ||
+       !reg.test(this.bankDetails.account_number)){
+      return;
+    }
     let ref = this;
     let s_dob = this.bankDetails.dob.split('-');
     this.stripeAccData.year = s_dob[0];
