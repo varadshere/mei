@@ -88,6 +88,10 @@ export class ProfileEditPage {
     // if(!this.place){
     //   return;
     // }
+
+  if(this.settings.phone.length !=10){
+      return;
+  } else{
     let ref = this;
     //For saving address
     if (this.place){
@@ -107,6 +111,7 @@ export class ProfileEditPage {
       ref.utils.profile.available = "["+ref.settings.available_days+"]";
       ref.navCtrl.pop();
     });
+  }
   }
 
   getSettings(){
