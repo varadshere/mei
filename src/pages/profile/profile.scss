@@ -73,10 +73,21 @@ page-profile {
     font-weight: bold;
     font-size: 21px;
     padding-right: 10px;
+    color: black;
   }
 
   .flncr-report-flag {
     color: red;
+  }
+
+  .report-bttn, .report-bttn.activated {
+    background-color: transparent;
+    border-radius: 0px;
+    box-shadow: none;
+  }
+
+  .report-bttn[disabled] {
+    opacity: 1;
   }
 
   rating {

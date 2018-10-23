@@ -28,7 +28,11 @@
         <span *ngIf="utils.profile.type != 'client'">{{bookingData.name}}</span>
       </div>
 
-      <div class="light-grey client-address"><a href="{{utils.mapSearchUrl + '&query=' + jlatLng?.lat+','+jlatLng?.lng}}" target="_blank">{{bookingData.address}}</a></div>
+      <div class="client-address">
+        <span *ngIf="bookingData.booking_location == 'vendor'">Freelancer's address: </span>
+        <span *ngIf="bookingData.booking_location == 'client'">Client's address: </span>
+        <a href="{{utils.mapSearchUrl + '&query=' + jlatLng?.lat+','+jlatLng?.lng}}" target="_blank">{{bookingData.address}}</a>
+      </div>
 
     </div>
 

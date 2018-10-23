@@ -1036,4 +1036,23 @@ export class UtilsProvider {
     });
   }
 
+  reportUser(data){
+    let loading = this.getloadingAlert();
+    loading.present();
+    return new Promise((resolve, reject) => {
+      let url = this.serverUrl + 'report_user';
+      let body = JSON.stringify(data);
+      this.http.post(url, body, {headers: this.headers}).map(res => res.json()).timeout(3000).subscribe(data => {
+        console.log(data);
+        loading.dismissAll();
+        resolve(this.sanitizeData(data));
+      }, error => {
+        console.log("Error when reporting vendor");
+        console.log(error);
+        loading.dismissAll();
+        resolve(false);
+      });
+    });
+  }
+
 }

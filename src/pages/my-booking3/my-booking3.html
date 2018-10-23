@@ -50,6 +50,26 @@
 
     <ion-row>
       <ion-col class="checkout-text">
+        Booking Location
+      </ion-col>
+      <ion-col class="checkout-value">
+        <span *ngIf="bookingLocation == 'client'">Client's</span>
+        <span *ngIf="bookingLocation == 'vendor'">Freelancer's</span>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="checkout-text">
+        Address
+      </ion-col>
+      <ion-col class="checkout-value">
+        <span *ngIf="bookingLocation == 'client'">{{utilsProvider.profile.address}}</span>
+        <span *ngIf="bookingLocation == 'vendor'">Will be disclose after booking</span>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="checkout-text">
         Items
       </ion-col>
       <ion-col class="checkout-value">

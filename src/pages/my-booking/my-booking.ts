@@ -82,6 +82,7 @@ export class MyBookingPage {
   totalCost = 0;
   vendorSettings:any;
   clientSettings:any;
+  bookingLocation = "";
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private utilsProvider: UtilsProvider, private alertCtrl: AlertController) {
     this.profileData = navParams.get('profile');
@@ -142,9 +143,11 @@ export class MyBookingPage {
     let msg = "";
     if (this.vendorSettings.travel == "False" && this.clientSettings.travel == "True"){
       msg = "Booking will take place at Freelancer's location!!";
+      this.bookingLocation = "vendor";
     }
     else {
       msg = "Booking will take place at Your location!!";
+      this.bookingLocation = "client";
     }
     let alert = this.alertCtrl.create({
       title: "Confirm Location",
@@ -291,7 +294,6 @@ export class MyBookingPage {
           ref.schedule.sch = result;
           let index=0;
           for (let timeobj of ref.schedule.sch){
-            console.log(timeobj);
             if (timeobj.time.split(':')[0] > 12){
               ref.schedule.sch[index].time = `${timeobj.time.split(':')[0] - 12}:${timeobj.time.split(':')[1]} PM`;
             }
@@ -338,7 +340,8 @@ export class MyBookingPage {
       this.navCtrl.push(MyBooking2Page, {
         profile: this.profileData,
         schedule: this.schedule,
-        selectedDate: this.selectedDate
+        selectedDate: this.selectedDate,
+        bookingLocation: this.bookingLocation
       });
     }else {
       this.utilsProvider.presentAlert("Uh oh! Booking failed", "Please select Time!");

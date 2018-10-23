@@ -158,4 +158,23 @@ export class ProfilePage {
       ]
     }
   ];
+
+  report(){
+    let reFlag = "";
+    if (this.profileData.report == 'True')
+      reFlag = "False";
+    else
+      reFlag = "True";
+    let data = {
+      email: this.profileData.email,
+      username: this.profileData.username,
+      report: reFlag
+    }
+    this.utils.reportUser(data).then((result) => {
+      if (result){
+        this.profileData.report = reFlag;
+        this.utils.presentAlert("Feedback Submitted","This user has been flagged. To report further, send us an email at <a href='mailto:support@meiapp.com'>support@meiapp.com</a>")
+      }
+    });
+  }
 }

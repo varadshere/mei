@@ -8,9 +8,10 @@
 
   <ion-navbar mode="ios">
     <ion-title text-center>Profile</ion-title>
-    <ion-buttons float-right>
-      <ion-icon name="md-flag" class="flncr-flag"></ion-icon>
-    </ion-buttons>
+    <button (click)="report()" class="report-bttn" ion-button icon-only float-right>
+      <ion-icon *ngIf="profileData.report == 'False' || profileData.report == null" name="md-flag" class="flncr-flag"></ion-icon>
+      <ion-icon *ngIf="profileData.report == 'True'" name="md-flag" class="flncr-report-flag"></ion-icon>
+    </button>
   </ion-navbar>
 
 </ion-header>

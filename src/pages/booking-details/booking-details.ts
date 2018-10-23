@@ -47,25 +47,24 @@ export class BookingDetailsPage {
   mapAddress: string;
   vendorProfile: any;
   vendorData = {};
+  clientProfile: any;
+  clientData = {};
   todayDate = new Date();
   date_diff;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController, public utils: UtilsProvider, private alertCtrl: AlertController) {
     this.bookingData = navParams.get('bookingData');
+    console.log("Booking Data");
+    console.log(this.bookingData);
     this.bookingIndex = this.navParams.get('bookingIndex');
     this.date_diff = Math.round((this.todayDate.getTime() - new Date(this.bookingData.date).getTime())/(60*60*1000));
     this.utils.getProfile().then(data => {
       this.client = !(data["type"] == "client");
-      if (data['type'] == 'client'){
-        this.mapAddress = data['address'];
-      }
-      else{
-        this.mapAddress = this.bookingData.address;
-      }
-      this.loadLatLng();
     }).catch((error) => {
       console.log(error);
     });
+
+
     if (this.utils.profile.type == "client"){
       this.vendorData = {
           "username": this.bookingData.username,
@@ -74,6 +73,20 @@ export class BookingDetailsPage {
         };
       this.utils.getProfile(this.vendorData).then(data => {
         this.vendorProfile = data;
+        this.setAddress();
+      }).catch((error) => {
+        console.log(error);
+      });
+    }
+    if (this.utils.profile.type == "vendor"){
+      this.clientData = {
+        "username": this.bookingData.username,
+        "email": this.bookingData.email,
+        "type": "client"
+      };
+      this.utils.getProfile(this.clientData).then(data => {
+        this.clientProfile = data;
+        this.setAddress();
       }).catch((error) => {
         console.log(error);
       });
@@ -82,6 +95,23 @@ export class BookingDetailsPage {
 
   ionViewDidLoad(){
     // this.loadLatLng();
+  }
+
+  setAddress(){
+    if (this.bookingData.booking_location == 'vendor'){
+      if (this.utils.profile.type == "vendor")
+        this.bookingData.address = this.utils.profile.address;
+      else
+        this.bookingData.address = this.vendorProfile.address;
+    }
+    else {
+      if (this.utils.profile.type == "client")
+        this.bookingData.address = this.utils.profile.address;
+      else
+        this.bookingData.address = this.clientProfile.address;
+    }
+    this.mapAddress = this.bookingData.address;
+    this.loadLatLng();
   }
 
 loadLatLng(){
