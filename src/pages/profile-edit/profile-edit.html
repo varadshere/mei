@@ -17,19 +17,23 @@
         <ion-label stacked>First Name</ion-label>
         <ion-input type="text" required placeholder="First Name" [(ngModel)]="settings.first_name"></ion-input>
       </ion-item>
+      <p class="form-error-text" *ngIf="settings.first_name.length<=0">First name is required</p>
       <ion-item mode="ios">
         <ion-label stacked>Last Name</ion-label>
         <ion-input type="text" required placeholder="Last Name" [(ngModel)]="settings.last_name"></ion-input>
       </ion-item>
+      <p class="form-error-text" *ngIf="settings.last_name.length<=0">Last name is required</p>
       <ion-item mode="ios">
         <ion-label stacked>Phone</ion-label>
         <ion-input type="text" placeholder="Phone" [(ngModel)]="settings.phone"></ion-input>
       </ion-item>
-      <p class="form-error-text" *ngIf="settings.phone.length!==10">Please enter a valid phone number</p>
+      <p class="form-error-text" *ngIf="settings.phone.length!==10 && settings.phone.length!==0">Please enter a valid phone number</p>
       <ion-item mode="ios">
         <ion-label stacked>Address</ion-label>
         <ion-input id="places" required type="text" (focus)="placeInputFocus()" placeholder="Address" [value]="settings.address"></ion-input>
       </ion-item>
+      <p class="form-error-text" *ngIf="settings.address.length<=0">Please enter a address</p>
+
       <ion-item mode="ios">
         <ion-label stacked>Bio</ion-label>
         <ion-input type="text" class="bio-text" placeholder="Bio" [(ngModel)]="settings.bio"></ion-input>

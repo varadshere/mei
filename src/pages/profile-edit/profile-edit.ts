@@ -89,7 +89,8 @@ export class ProfileEditPage {
     //   return;
     // }
 
-  if(this.settings.phone.length !=10){
+  if((this.settings.phone.length !==10 && this.settings.phone.length !==0) || this.settings.first_name.length <= 0 ||
+    this.settings.last_name.length<=0 || this.settings.address.length<=0){
       return;
   } else{
     let ref = this;
