@@ -15,6 +15,7 @@ export class MyBooking3Page {
   profileData: any = {};
   schedule: any = {};
   selectedDate:any;
+  bookingLocation = "";
   startTime:any;
   endTime:any;
   totalCost = 0;
@@ -27,6 +28,7 @@ export class MyBooking3Page {
     this.profileData = navParams.get('profile');
     this.schedule = navParams.get('schedule');
     this.selectedDate = navParams.get('selectedDate');
+    this.bookingLocation = navParams.get('bookingLocation');
 
     let selectedSlots = [];
     this.schedule.sch.forEach(d=>{
@@ -67,7 +69,8 @@ export class MyBooking3Page {
       "vendor_username": this.profileData.username,
       "date": moment(this.selectedDate, 'DD MMMM YYYY').format('MM/DD/YYYY'),
       "time": slots,
-      "services": this.profileData.services
+      "services": this.profileData.services,
+      "booking_location": this.bookingLocation
     };
     let bookVendorPromise  = this.utilsProvider.boookVendor(dataToSend);
     bookVendorPromise.then((result: any) =>{

@@ -12,6 +12,7 @@ export class MyBooking2Page {
   profileData: any = {};
   schedule: any = {};
   selectedDate:any;
+  bookingLocation = "";
   stripe1:any;
   elements:any;
   card:any;
@@ -24,6 +25,7 @@ export class MyBooking2Page {
     this.profileData = navParams.get('profile');
     this.schedule = navParams.get('schedule');
     this.selectedDate = navParams.get('selectedDate');
+    this.bookingLocation = navParams.get('bookingLocation');
     this.getCard();
     this.stripe1 = Stripe('pk_test_x1LxYvNr0ewGsaPHNzX0V7Ey');
     this.elements = this.stripe1.elements();
@@ -103,7 +105,8 @@ export class MyBooking2Page {
       profile: this.profileData,
       slots: this.schedule,
       selectedDate: this.selectedDate,
-      schedule:  this.schedule
+      schedule:  this.schedule,
+      bookingLocation: this.bookingLocation
     });
   }
 }
