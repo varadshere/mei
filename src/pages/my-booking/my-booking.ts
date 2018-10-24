@@ -297,6 +297,9 @@ export class MyBookingPage {
             if (timeobj.time.split(':')[0] > 12){
               ref.schedule.sch[index].time = `${timeobj.time.split(':')[0] - 12}:${timeobj.time.split(':')[1]} PM`;
             }
+            else if(timeobj.time.split(':')[0] == 12){
+              ref.schedule.sch[index].time = `${ref.schedule.sch[index].time} PM`;
+            }
             else{
               ref.schedule.sch[index].time = `${ref.schedule.sch[index].time} AM`;
             }

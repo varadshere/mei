@@ -18,7 +18,7 @@
   <ion-row style="padding-top: 5PX;">
     <ion-col col-3>
       <!--<img  class="profile-img" src="{{profileData.profile_pic ? profileData.profile_pic : 'assets/imgs/user.png'}}">-->
-      <img  class="profile-img" src="{{utils.profile.profile_pic ? (utils.profile.profile_pic.includes('http') ? utils.profile.profile_pic : utils.photoUrl + utils.profile.profile_pic) : 'assets/imgs/user.png'}}">
+      <img  class="profile-img" [src]="utils.profile.profile_pic ? (utils.profile.profile_pic.includes('http') ? utils.profile.profile_pic : utils.photoUrl + utils.profile.profile_pic) : 'assets/imgs/user.png'">
     </ion-col>
     <ion-col col-9>
       <ion-row>
