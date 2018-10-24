@@ -61,11 +61,6 @@ export class SignupPage {
     submitAttempt = false;
     submitTwoAttempt = false;
     hideInsta: boolean = false;
-    // services = [
-    //   { title: "HAIR", list: [{name: 'Up-do', selected: false, desc: 'Sweep up your hair in a range of ways including an assortment of ponytails, braids and more', cost: "0"}, {name: 'Event Trial', selected: false, desc: 'Sweep up your hair in a range of ways including an assortment of ponytails, braids and more', cost: "0"}, {name: 'Hairstyling', selected: false, desc: 'Test-run a hair look and style before your big event', cost: "0"}, {name: 'Blow Wave', selected: false, desc: 'Hair straightening, waving, crimping and more', cost: "0"}] },
-    //   { title: "MAKEUP", list: [{name: 'Up-do', selected: false, desc: 'Sweep up your hair in a range of ways including an assortment of ponytails, braids and more', cost: "0"}, {name: 'Event Trial', selected: false, desc: 'Sweep up your hair in a range of ways including an assortment of ponytails, braids and more', cost: "0"}, {name: 'Hairstyling', selected: false, desc: 'Sweep up your hair in a range of ways including an assortment of ponytails, braids and more', cost: "0"}, {name: 'Blow Wave', selected: false, desc: 'Test-run a hair look and style before your big event', cost: "0"}]  },
-    //   { title: "BODY", list: [{name: 'Up-do', selected: false, desc: 'Sweep up', cost: "0"}, {name: 'Event Trial', selected: false, desc: 'braids and more', cost: "0"}, {name: 'Hairstyling', selected: false, desc: 'abcd', cost: "0"}, {name: 'Blow Wave', selected: false, desc: 'Hair straightening', cost: "0"}] },
-    // ];
     signupServices: any;
     place: any;
     shownGroup = null;
@@ -167,8 +162,6 @@ export class SignupPage {
           let autocomplete = new google.maps.places.Autocomplete(nativePlacesInputBox);
           google.maps.event.addListener(autocomplete, 'place_changed', () => {
             ref.place = autocomplete.getPlace();
-            console.log(ref.place);
-            console.log("Client place");
           });
           bool = true;
         }
@@ -184,8 +177,6 @@ export class SignupPage {
           let autocomplete = new google.maps.places.Autocomplete(nativePlacesInputBox);
           autocomplete.addListener('place_changed', () => {
             ref.place = autocomplete.getPlace();
-            console.log(ref.place);
-            console.log("Vendor Place ");
           });
           bool = true;
         }
@@ -251,8 +242,6 @@ export class SignupPage {
 
     ionViewDidLoad() {
       console.log('ionViewDidLoad SignupPage');
-      // let mapclient = this.initMapClient();
-      // mapclient();
     }
 
     navigateToGst(){
@@ -542,7 +531,6 @@ export class SignupPage {
   uploadGalleryPhoto(){
     this.utils.getImgFromDevice().then((data)=>{
       if(data){
-        console.log(data);
         this.gallery_imgs.push(data);
         this.utils.presentAlert("Success!!","Image added successfully. It will be available in profile after successful sign up.");
       }

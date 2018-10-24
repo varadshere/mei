@@ -158,16 +158,6 @@ export class CalendarPage {
     this.eventList = new Array();
     var startDate = new Date(this.date.getFullYear(), this.date.getMonth(), 1);
     var endDate = new Date(this.date.getFullYear(), this.date.getMonth()+1, 0);
-    // this.calendar.listEventsInRange(startDate, endDate).then(
-    //   (msg) => {
-    //     msg.forEach(item => {
-    //       this.eventList.push(item);
-    //     });
-    //   },
-    //   (err) => {
-    //     console.log(err);
-    //   }
-    // );
   }
 
   checkEvent(day) {
@@ -186,8 +176,6 @@ export class CalendarPage {
     let thisDate1 = this.date.getFullYear()+"-"+(this.date.getMonth()+1)+"-"+day.num;
     this.selectedDate = moment(thisDate1, 'YYYY-MM-DD').format('DD MMMM YYYY');
     this.calendar.currentDate = moment(thisDate1, 'YYYY-MM-DD').toDate();
-    console.log(thisDate1);
-    console.log("date");
     // this.isSelected = false;
     if(day.isSelected){
       day.isSelected = false;

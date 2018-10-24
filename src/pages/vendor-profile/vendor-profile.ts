@@ -29,7 +29,6 @@ export class VendorProfilePage {
   uploadGalleryPhoto(){
     this.utils.getImgFromDevice().then((data)=>{
       if(data){
-        console.log(data);
         this.utils.uploadImageToServer(data,"gallery");
         this.gallery_imgs.push(data);
       }
@@ -38,7 +37,6 @@ export class VendorProfilePage {
 
   getGalleryFiles(){
     this.utils.getImageGallery().then((data) => {
-      console.log(data);
       this.gallery_imgs = data;
       for(let img in data){
         this.utils.getMediaImage(data[img]);

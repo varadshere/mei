@@ -77,8 +77,6 @@ export class VendorBankDetailsPage {
     this.http.get("http://www.ip-api.com/json",{},{})
       .then(data => {
         let res_data = JSON.parse(data.data);
-        console.log('Network data',res_data); // data received by server
-        console.log('IP Address:',res_data.query);
         this.stripeAccData.ip = res_data.query;
       })
       .catch(error => {
@@ -112,7 +110,6 @@ export class VendorBankDetailsPage {
 
     this.utils.addVendorBankAccount(this.bankDetails).then((result) => {
       ref.stripeAccData.btok_id = result['bank_token'];
-      // console.log(ref.stripeAccData);
     })
     .then(() => {
       ref.utils.createVendorStripeAccount(ref.stripeAccData).then((result)=>{

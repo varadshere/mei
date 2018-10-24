@@ -35,7 +35,6 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       storage.get('userData').then((val: UserData) => {
-        console.log('User Data', val);
         if(val){
           if(val.type && val.device_token && val.email && val.profile){
             if(val.type === 'vendor'){

@@ -67,9 +67,6 @@ export class MyBooking2Page {
         name: this.utilsProvider.profile.first_name + ' ' +  this.utilsProvider.profile.last_name,
         address: {
           line1: this.utilsProvider.profile.address
-          // city: 'Berlin',
-          // postal_code: '10777',
-          // country: 'DE'
         },
         email: this.utilsProvider.getUserEmail()
       }
@@ -87,7 +84,6 @@ export class MyBooking2Page {
         // Send the source to your server
         ref.addCardFlag = false;
         errorElement.textContent = '';
-        console.log(JSON.stringify(result.source));
         let dataToSend  = {
           email: ref.utilsProvider.getUserEmail(),
           id: ref.utilsProvider.profile.user_id,

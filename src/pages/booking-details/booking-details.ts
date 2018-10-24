@@ -54,8 +54,6 @@ export class BookingDetailsPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController, public utils: UtilsProvider, private alertCtrl: AlertController) {
     this.bookingData = navParams.get('bookingData');
-    console.log("Booking Data");
-    console.log(this.bookingData);
     this.bookingIndex = this.navParams.get('bookingIndex');
     this.date_diff = Math.round((this.todayDate.getTime() - new Date(this.bookingData.date).getTime())/(60*60*1000));
     this.utils.getProfile().then(data => {
@@ -120,7 +118,6 @@ loadLatLng(){
     this.jlatLng = JSON.parse(JSON.stringify(this.latLng));
     this.loadMap(this.latLng);
     this.createmodalobj();
-  // console.log("LATLNGGGGGG",JSON.stringify(this.latLng))
  })
 
 }
@@ -134,7 +131,6 @@ loadLatLng(){
       if (status == google.maps.GeocoderStatus.OK) {
         var latitude = results[0].geometry.location.lat();
         var longitude = results[0].geometry.location.lng();
-       // console.log(JSON.stringify(results[0].geometry.location))
        resolve({lat:latitude,lng:longitude});
 
       }

@@ -39,7 +39,6 @@ export class SidemenuPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public utilsProvider: UtilsProvider, public menuCtrl: MenuController) {
     let ref = this;
     this.subscription = ref.utilsProvider.notifyObservable$.subscribe((res) => {
-      console.log(res);
       ref.rootPage = ref.utilsProvider.getPage();
     });
   }

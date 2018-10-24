@@ -50,10 +50,8 @@ export class VendorBookingsPage {
   ionViewWillEnter(){
     var bookingIndex = this.navParams.get('bookingIndex') || null;
     var bookingStatus = this.navParams.get('bookingStatus') || null;
-    // console.log(bookingIndex , bookingStatus);
     if (bookingIndex != null && bookingStatus != null){
       this.bookingsData[bookingIndex]['confirm'] = bookingStatus;
     }
-    // console.log(this.bookingsData);
   }
 }

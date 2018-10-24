@@ -10,7 +10,6 @@ import {BookingDetailsPage} from "../booking-details/booking-details";
 })
 export class VendorCalendarPage {
 
-  //////
   eventSource = [];
   viewTitle: string;
   selectedDay = new Date();
@@ -27,25 +26,6 @@ export class VendorCalendarPage {
     console.log(this.event.startTime);
   }
 
-  // addEvent() {
-  //   let eventData = {
-  //     startTime: new Date(),
-  //     endTime: new Date(),
-  //     title:'Test Title'
-  //   };
-  //   eventData.startTime = new Date(this.event.startTime);
-  //   eventData.endTime = new Date(this.event.endTime);
-  //
-  //   let events = this.eventSource;
-  //
-  //   events.push(eventData);
-  //   this.eventSource = [];
-  //   setTimeout(() => {
-  //     this.eventSource = events;
-  //   });
-  //   //this.eventSource = events;
-  // }
-
   addEvent(startTime, endTime, service_name, client_address, date, name) {
     let eventData = {
       startTime: startTime,
@@ -54,12 +34,6 @@ export class VendorCalendarPage {
     };
     eventData.startTime = moment((date + ' ' + startTime), 'YYYY-MM-DD HH:mm').toDate();//new Date(this.event.startTime);
     eventData.endTime = moment((date + ' ' + endTime), 'YYYY-MM-DD HH:mm').toDate();//new Date(this.event.endTime);
-    //
-    // let events = this.eventSource;
-    //
-    // events.push(eventData);
-    console.log("Event");
-    console.log(eventData);
     return eventData;
     //this.eventSource = events;
   }
@@ -95,21 +69,11 @@ export class VendorCalendarPage {
     this.navCtrl.push(BookingDetailsPage, {
       bookingData: data
     });
-
-    // let alert = this.alertCtrl.create({
-    //   title: '' + event.title,
-    //   subTitle: 'From: ' + start + '<br>To: ' + end,
-    //   buttons: ['OK']
-    // })
-    // alert.present();
   }
 
   onTimeSelected(ev) {
     // this.selectedDay = ev.selectedTime;
   }
-
-  //////
-
 
   //event = { title: "", location: "", message: "", startDate: "", endDate: "" };
   selectedDate: any;
@@ -212,8 +176,6 @@ export class VendorCalendarPage {
     let thisDate1 = this.date.getFullYear()+"-"+(this.date.getMonth()+1)+"-"+day.num;
     this.selectedDate = moment(thisDate1, 'YYYY-MM-DD').format('DD MMMM YYYY');
     this.calendar.currentDate = moment(thisDate1, 'YYYY-MM-DD').toDate();
-    console.log(thisDate1);
-    console.log("date");
     // this.isSelected = false;
     if(day.isSelected){
       day.isSelected = false;
@@ -252,7 +214,6 @@ export class VendorCalendarPage {
         let events = [];
         results.bookings.forEach(bookings =>{
           bookings.list.forEach(d =>{
-            console.log(d);
             let start24Time, end24Time;
             let startHours = d.startTime.split(' ')[0].split(':');
             switch (d.startTime.split(' ')[1]) {
@@ -278,7 +239,6 @@ export class VendorCalendarPage {
                 end24Time = d.endTime;
                 break;
             }
-            console.log(start24Time,end24Time);
             let ev = this.addEvent(start24Time, end24Time, d.service_name, d.client_address, date, d.name);
             events.push(ev);
           });

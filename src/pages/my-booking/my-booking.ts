@@ -87,8 +87,6 @@ export class MyBookingPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private utilsProvider: UtilsProvider, private alertCtrl: AlertController) {
     this.profileData = navParams.get('profile');
     this.getSlots();
-    console.log("Vendor Profile");
-    console.log(this.profileData);
     this.getFreelancerSettings();
     this.getClientSettings();
     this.profileData.services.forEach(s => {
@@ -115,8 +113,6 @@ export class MyBookingPage {
     let getSettings = this.utilsProvider.getSettings(dts);
 
     getSettings.then(function (data:any) {
-      console.log("Vendor Settings");
-      console.log(data);
       ref.vendorSettings = data;
     });
   }
@@ -132,8 +128,6 @@ export class MyBookingPage {
 
     getSettings.then(function (data:any) {
       if(data){
-        console.log("Client Settings");
-        console.log(data);
         ref.clientSettings = data;
       }
     });
@@ -240,16 +234,6 @@ export class MyBookingPage {
     this.eventList = new Array();
     var startDate = new Date(this.date.getFullYear(), this.date.getMonth(), 1);
     var endDate = new Date(this.date.getFullYear(), this.date.getMonth()+1, 0);
-    // this.calendar.listEventsInRange(startDate, endDate).then(
-    //   (msg) => {
-    //     msg.forEach(item => {
-    //       this.eventList.push(item);
-    //     });
-    //   },
-    //   (err) => {
-    //     console.log(err);
-    //   }
-    // );
   }
 
   checkEvent(day) {
@@ -270,8 +254,6 @@ export class MyBookingPage {
     this.selectedDate = moment(thisDate1, 'YYYY-MM-DD').format('DD MMMM YYYY');
     if(moment(thisDate1, 'YYYY-MM-DD').isSameOrAfter(moment(), 'day') ){
       //  this.calendar.currentDate = moment(thisDate1, 'YYYY-MM-DD').toDate();
-      console.log(thisDate1);
-      console.log("date");
       // this.isSelected = false;
       if(day.isSelected){
         day.isSelected = false;
@@ -306,26 +288,7 @@ export class MyBookingPage {
             index++;
           }
       });
-      // if(this.slots[weekDay]){
-      //   let schedule = this.slots[weekDay];
-      //   day.schedule = schedule;
-      //   this.schedule.sch = schedule;
-      // }else {
-      //   this.schedule.sch = [];
-      // }
     }
-
-    //this.selectedDay = day;
-    // this.selectedEvent = new Array();
-    // var thisDate1 = this.date.getFullYear()+"-"+(this.date.getMonth()+1)+"-"+day+" 00:00:00";
-    // var thisDate2 = this.date.getFullYear()+"-"+(this.date.getMonth()+1)+"-"+day+" 23:59:59";
-    // this.eventList.forEach(event => {
-    //   if(((event.startDate >= thisDate1) && (event.startDate <= thisDate2)) || ((event.endDate >= thisDate1) && (event.endDate <= thisDate2))) {
-    //     this.isSelected = true;
-    //     day.isSelected = true;
-    //     this.selectedEvent.push(event);
-    //   }
-    // });
   }
   getSlotsByDay(data){
 
